@@ -1,0 +1,68 @@
+# Quitar contenido en input/ (excepto el .keep para mantener la carpeta en el repositorio)
+input/*
+!input/.keep
+
+# Quitar contenido en output/ (excepto el .keep para mantener la carpeta en el repositorio)
+output/*
+!output/.keep
+
+# Archivos de variables de entorno y directorios de configuración
+.env
+temp/
+!temp/.keep
+
+# Archivos y directorios comunes de R y RStudio
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+.Rproj.user/
+
+# Archivos y directorios generados por Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+pip-wheel-metadata/
+pip-log.txt
+pytestdebug.log
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+celerybeat-schedule
+celerybeat.pid
+
+# Entornos virtuales de Python
+.venv/
+venv/
+env/
+ENV/
+.envrc
+
+# Distribución y empaquetado de Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Archivos generados por IDEs y herramientas
+.idea/
+.vscode/
