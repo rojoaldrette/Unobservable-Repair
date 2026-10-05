@@ -5,6 +5,44 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.3: estimación DNFXP y Monte Carlo de Gillingham (2026-10-04)
+
+### Cambios
+- **Parámetros dinámicos** (`gillingham/theta.py`): `GModel(g, th)` es un pytree, así
+  que un θ nuevo no recompila.
+  - `T`, `ccps` y `physical_matrix` tienen versiones `*_raw` sin jit.
+  - `sell_cost` usa jnp.where.
+  - Lo demás no cambia: `tests.py` da los mismos números.
+- **`equilibrium.py`:** Newton conjunto sobre (EV, P). 3 s en frío contra 26 s; mismo
+  equilibrio a 1e-10.
+- **`simulate.py`:** panel de hogares desde q, con chatarreo endógeno y accidentes
+  marcados, y agregación a celdas.
+- **`loglikelihood.py`:** verosimilitud parcial (apéndice D: sin precios ni
+  accidentes) y completa (oráculo).
+  - Gradiente por función implícita: coincide con diferencias finitas a 5e-8.
+  - Optimización: L-BFGS y luego BHHH.
+- **`montecarlo.py`, `main.py`:** MC con varios arranques. Mide sesgo, RMSE, se y
+  cobertura, más precios, chatarreo endógeno y accidentes en θ̂.
+- **Resultados:** 50 réplicas, a_max = 25, N = 20,000, K = 10, en
+  `claude/output/montecarlo/gillingham/`. Detalle en `gillingham.md`.
+
+### Resultados
+- **El estimador del paper recupera θ sin sesgo y con cobertura ~95%,** incluso sin
+  observar accidentes. La fracción de salidas por chatarreo voluntario (0.42) se
+  recupera.
+- **Sin precios, tc_buy y tc_sell casi no se identifican por separado.** Solo lo
+  rompen p_new y p_scrap.
+  - se de 3.8, correlación −1 entre réplicas;
+  - RMSE de P de 18 mil DKK, contra 0.9 si se fija tc_buy.
+  - **Relevante para modelo_fin.**
+
+### Pendientes nuevos
+1. Precios de usados como dato (o tc_buy fijo) en la estimación estructural.
+2. Pasar `GModel` + Newton conjunto + gradiente implícito a `modelo_fin` (resuelve el
+   pendiente 3 de v1.0: `g` estático en jit).
+
+---
+
 ## v1.2: corrección de la Tabla 5 en modelo_fin (2026-10-04)
 
 ### Cambios

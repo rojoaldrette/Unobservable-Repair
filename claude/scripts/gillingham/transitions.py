@@ -19,11 +19,10 @@ import jax.numpy as jnp
 
 from utils import dims
 from bellman import accident_prob
-from probabilities import ccps
+from probabilities import ccps, ccps_raw
 
 
-@partial(jax.jit, static_argnames="g")
-def physical_matrix(g):
+def physical_matrix_raw(g):
     # usado (j, d) -> act (j, d+1) con 1 - alpha, term con alpha (d = A-1: term seguro)
     # nuevo j -> act (j, 1) con 1 - alpha(j, 0), term con alpha(j, 0);  none -> none
     J, A, n_act, n = dims(g)
@@ -42,8 +41,11 @@ def physical_matrix(g):
     return jnp.concatenate([top, mid, bot], axis=0)
 
 
+physical_matrix = jax.jit(physical_matrix_raw, static_argnames="g")
+
+
 def transition_from_ccps(c, g):
-    Q = physical_matrix(g)
+    Q = physical_matrix_raw(g)
     J, A, n_act, n = dims(g)
     e_none = jnp.concatenate([jnp.zeros(n - 1), jnp.ones(1)])
     return (c.keep[:, None] * Q

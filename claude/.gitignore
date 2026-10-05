@@ -2,3 +2,4 @@
 scripts/**/output/
 scripts/**/logs/
 __pycache__/
+output/**/logs/

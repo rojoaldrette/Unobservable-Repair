@@ -31,8 +31,8 @@ class CCP(NamedTuple):
     scrap: jnp.ndarray   # (J, A-1): Pr(chatarrear | se deshace del coche activo), ec. 18
 
 
-@partial(jax.jit, static_argnames="g")
-def ccps(EV, P, g):
+def ccps_raw(EV, P, g):
+    # Sin jit: acepta g estático (GParams) o dinámico (theta.GModel)
     J, A, n_act, n = dims(g)
     v = choice_values(EV, P, g)
     p_act = choice_probs([v.keep, v.purge_act, v.trade_act], g.sigma)
@@ -47,3 +47,6 @@ def ccps(EV, P, g):
         buy=jnp.concatenate([p_buy, jnp.zeros(1)]),
         scrap=choice_probs([v.scrap, v.sell], g.sigma_sell)[0],
     )
+
+
+ccps = jax.jit(ccps_raw, static_argnames="g")

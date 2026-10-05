@@ -52,9 +52,10 @@ def accident_prob(g):
 
 def sell_cost(g):
     # Ts(a), a = 1..A-1: tc_sell_inspect en edades pares >= inspect_age_min
+    # jnp.where (no np.where): tc_sell puede ser un parámetro dinámico (estimación)
     a = np.arange(1, g.a_max)
-    inspect = (a % 2 == 0) & (a >= g.inspect_age_min)
-    return jnp.asarray(np.where(inspect, g.tc_sell_inspect, g.tc_sell))
+    inspect = jnp.asarray((a % 2 == 0) & (a >= g.inspect_age_min))
+    return jnp.where(inspect, g.tc_sell_inspect, g.tc_sell)
 
 
 def emax(values, sigma):
@@ -122,12 +123,15 @@ def choice_values(EV, P, g):
     )
 
 
-@partial(jax.jit, static_argnames="g")
-def T(EV, P, g):
+def T_raw(EV, P, g):
+    # Sin jit: acepta g estático (GParams) o dinámico (theta.GModel)
     v = choice_values(EV, P, g)
     return stack_states(emax([v.keep, v.purge_act, v.trade_act], g.sigma),
                         emax([v.purge_term, v.trade_term], g.sigma),
                         emax([v.stay_none, v.trade_none], g.sigma))
+
+
+T = jax.jit(T_raw, static_argnames="g")
 
 
 def solve_bellman(P, g, EV_init=None):

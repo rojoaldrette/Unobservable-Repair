@@ -29,7 +29,7 @@ from jax.scipy.special import logsumexp
 
 from utils import dims, split_states, initial_prices
 from bellman import T, choice_values, solve_bellman, accident_prob
-from probabilities import ccps
+from probabilities import ccps_raw
 from transitions import transition_from_ccps, stationary_distribution
 
 
@@ -50,7 +50,7 @@ class GMarket(NamedTuple):
 
 def market_components(EV, P, g):
     J, A, n_act, n = dims(g)
-    c = ccps(EV, P, g)
+    c = ccps_raw(EV, P, g)
     q = stationary_distribution(transition_from_ccps(c, g))
     qa, _, _ = split_states(q, g)
     pk, _, _ = split_states(c.keep, g)
@@ -66,7 +66,7 @@ def market_components(EV, P, g):
 
 def excess_demand_log(EV, P, g):
     J, A, n_act, n = dims(g)
-    c = ccps(EV, P, g)
+    c = ccps_raw(EV, P, g)
     q = stationary_distribution(transition_from_ccps(c, g))
     qa, _, _ = split_states(q, g)
     pk, _, _ = split_states(c.keep, g)

@@ -53,3 +53,29 @@ if __name__ == "__main__":
     print("P (j=0) por edad:", np.round(np.asarray(eq.P)[0], 1))
     print("chatarreo endógeno (j=0) por edad:", np.round(np.asarray(m.endo_scrap)[0], 3))
     print("accidente (j=0) por edad:", np.round(np.asarray(m.accident)[0, 1:], 3))
+
+    # Estimación (equilibrium.py, loglikelihood.py) ______________________________
+    from theta import model, theta_from_g, free_spec, pack
+    from equilibrium import solve, split_z
+    from simulate import equilibrium_objects, simulate_panel, to_cells
+    from loglikelihood import treat_data, LLEval
+
+    mod = model(g)
+    z, ok, _ = solve(mod)
+    EV_f, P_f = split_z(z, g)
+    print("solver conjunto == solver de ED.py:", float(jnp.max(jnp.abs(P_f - eq.P))),
+          float(jnp.max(jnp.abs(EV_f - eq.EV))))
+
+    cells = to_cells(simulate_panel(equilibrium_objects(z, mod), g, 5_000, 5, seed=0))
+    th0 = theta_from_g(g)
+    spec = free_spec(g)
+    x0 = np.asarray(pack(th0, spec))
+    for info in ("parcial", "completa"):
+        ev = LLEval(g, spec, th0, treat_data(cells, info), info, z0=z)
+        ll, gr, B, _ = ev(x0)
+        eps, fd = 1e-5, []
+        for i in range(len(x0)):
+            e = np.zeros(len(x0)); e[i] = eps
+            fd.append((ev(x0 + e)[0] - ev(x0 - e)[0]) / (2 * eps))
+        print(f"gradiente implícito vs diferencias finitas ({info}):",
+              float(np.max(np.abs(gr - np.array(fd))) / np.max(np.abs(gr))))

@@ -15,8 +15,17 @@ equilibrio con el de `modelo_fin`.
 | `probabilities.py` | CCPs, incluida la de chatarrear (ec. 18) |
 | `transitions.py` | Q, M = ΩQ, distribución estacionaria |
 | `ED.py` | ED_log = log D − log S y Newton con jacobiano denso (72 incógnitas) |
-| `tests.py` | `python tests.py [--a_max 7]` |
+| `tests.py` | `python tests.py [--a_max 7]` (incluye solver conjunto y gradiente implícito) |
 | `../comparacion/compare.py` | corre G25, G7, M7 y M7_gill y escribe `comparacion/output/*.csv` |
+| `theta.py` | `GModel(g, th)`: parámetros estructurales como pytree dinámico; vector libre x <-> th |
+| `equilibrium.py` | equilibrio rápido: Newton sobre z = (EV, P) conjunto, jiteado con th dinámico |
+| `simulate.py` | panel de hogares desde q y agregación a celdas (ec. 40) |
+| `loglikelihood.py` | verosimilitud DNFXP parcial (apéndice D) y completa; gradiente implícito; L-BFGS + BHHH |
+| `montecarlo.py`, `main.py` | Monte Carlo del estimador (ver "Estimación y Monte Carlo") |
+
+Todos los `*_raw` (`T_raw`, `ccps_raw`, `physical_matrix_raw`) son las versiones sin jit:
+aceptan un `GParams` o un `GModel`.  `T`, `ccps` y `physical_matrix` siguen siendo los
+mismos (jit con g estático).
 
 ## Modelo
 
@@ -107,3 +116,113 @@ rep: Pr(repair).
 5. **El zig-zag por inspección aparece** en keep (sube en a = 4 y 6) en G7 y M7_gill,
    por el Ts de año de inspección. En G25 aparece también en precios y en el chatarreo
    endógeno de edades altas, como en la figura 7 del paper.
+
+## Estimación y Monte Carlo (v1.3)
+
+El paper **no reporta un Monte Carlo**: estima con el registro danés. Aquí se replica su
+estimador (sec. 5.1 y apéndice D) y se aplica a datos simulados del propio modelo.
+
+### Estimador (DNFXP, como en el paper)
+
+- **Datos:** panel de N hogares y K años, con el estado inicial sacado de la distribución
+  estacionaria q. Se agrega a celdas de transiciones h_{t-1} -> (x_t, o_t, h_t) con conteos
+  (ec. 40). o en {keep, purge vende, purge chatarrea, trade vende, trade chatarrea}.
+- **Verosimilitud "parcial" (la del paper):**
+  - no se observan precios ni accidentes;
+  - un coche que sale del parque puede ser accidente (x = terminal) o chatarreo endógeno
+    (x activo y elige chatarrear): Pr(o, h' | h) = (Q C)[h, o] · buy(h')^{1(trade)}
+    (ecs. 75-77);
+  - P entra como P(θ), resuelto en cada evaluación.
+- **Verosimilitud "completa" (oráculo):** ve x, incluido el accidente:
+  Q[h, x] · C[x, o] · buy(h').
+- **Equilibrio en cada evaluación:** Newton sobre z = (EV, P) conjunto, jiteado con θ
+  dinámico (`GModel`). Tarda ~3 s en frío (contra 26 s del solver de `ED.py`, mismo
+  resultado a 1e-10) y ~6 ms en caliente.
+- **Gradiente analítico** por la función implícita, dz/dθ = −F_z⁻¹ F_θ, como en el paper.
+  Contra diferencias finitas coincide a 5e-8. Da los scores por celda, de donde salen el
+  gradiente y la matriz BHHH.
+- **Optimización:** L-BFGS con el gradiente analítico y luego BHHH (el del paper) para
+  terminar y sacar errores estándar.
+  - BHHH solo, desde arranques lejanos, avanzaba a pasos minúsculos (el producto
+    exterior de scores aproxima mal el hessiano lejos del óptimo).
+  - BHHH se detiene si la LL no sube en 3 iteraciones seguidas.
+- **18 parámetros:** mu, u0 (3), u1 (3), tc_buy, tc_buy_nocar, tc_sell, tc_sell_inspect,
+  sigma_sell, acc_int (3), acc_age (3). Normalizaciones: sigma = 1, u_none = 0. Fijos
+  (conocidos): p_new, p_scrap, beta.
+- **Arranques:** la verdad más 2 perturbados (x0 + 0.1 |x0| N(0,1)); se queda el de mayor LL.
+
+### Diseño
+
+- a_max = 25 (el del paper), N = 20,000 hogares, K = 10 años (~180,000 transiciones),
+  50 réplicas.
+- Equilibrio verdadero: 1.6% sin coche. Por coche en circulación al año: 2.4% de
+  chatarreo endógeno y 3.2% de accidentes, así que el 42% de las salidas es voluntario.
+- Dos diseños:
+  - **p18:** los 18 parámetros libres;
+  - **p17:** tc_buy fijo en la verdad.
+
+```
+cd claude/scripts/gillingham
+python main.py --reps 0:50 -v                 # p18
+python main.py --reps 0:50 --fix tc_buy -v    # p17
+python main.py --summarize [--fix tc_buy]
+```
+
+- **Salida:** `claude/output/montecarlo/gillingham/`, con los CSV por réplica y
+  `resumen_*.csv` (sesgo, RMSE, se medio contra sd del MC, cobertura al 95%).
+- **Tiempo:** ~30 s por réplica (2 estimadores x 3 arranques).
+
+### Resultados (50 réplicas)
+
+Selección. Las tablas completas están en `resumen_N20000_K10_A25_p18.csv` y `..._p17.csv`.
+
+| | verdad | p18 parcial: sesgo / se / cob. | p18 completa | p17 parcial | p17 completa |
+|---|---|---|---|---|---|
+| mu | 0.1131 | 0.004 / 0.031 / 0.98 | 0.004 / 0.020 / 0.92 | 0.001 / 0.0056 / 0.94 | 0.000 / 0.0039 / 0.94 |
+| tc_buy | 6.594 | −0.35 / 3.81 / 1.00 | −0.42 / 2.34 / 0.92 | fijo | fijo |
+| tc_sell | 0.911 | 0.35 / 3.81 / 1.00 | 0.42 / 2.34 / 0.92 | 0.001 / 0.021 / 0.98 | 0.001 / 0.020 / 0.92 |
+| sigma_sell | 0.345 | 0.005 / 0.029 / 0.96 | 0.000 / 0.021 / 0.94 | 0.006 / 0.029 / 0.92 | 0.000 / 0.021 / 0.94 |
+| acc_int_0 | −5.625 | 0.009 / 0.159 / 0.94 | −0.009 / 0.108 / 0.96 | 0.011 / 0.159 / 0.94 | −0.009 / 0.108 / 0.96 |
+| acc_age_0 | 0.180 | −0.003 / 0.019 / 0.94 | 0.001 / 0.008 / 0.96 | −0.003 / 0.019 / 0.96 | 0.001 / 0.008 / 0.96 |
+| % salidas voluntarias (0.419) | | 0.425 (RMSE 0.021) | 0.419 (0.005) | 0.425 (0.022) | 0.419 (0.005) |
+| RMSE de P (miles DKK) | | 17.9 | 9.9 | 0.93 | 0.55 |
+
+### Lectura
+
+1. **El estimador del paper funciona.** No tiene sesgo apreciable, los se por BHHH
+   coinciden con la dispersión del MC y la cobertura queda en 0.88-1.00 (casi siempre
+   0.92-0.96). Converge en el 100% de las réplicas.
+2. **El chatarreo endógeno se separa de los accidentes sin observar accidentes.** Con la
+   verosimilitud parcial, la fracción voluntaria de las salidas sale 0.425 (verdad
+   0.419), y acc_int y acc_age se recuperan. Lo que lo identifica es la forma funcional:
+   accidentes logit en la edad contra chatarreo por la comparación precio − Ts contra
+   p_scrap, con el zig-zag de inspección. Ver los observados cuesta precisión (se de
+   acc_age_0: 0.019 contra 0.008), no sesgo.
+3. **Sin precios observados, tc_buy y tc_sell casi no se identifican por separado.**
+   - Subir tc_buy en δ y bajar tc_sell (y tc_sell_inspect) en δ se compensa con P -> P − δ/mu en
+     todas las transacciones de usados.
+   - Solo lo rompen las compras de coches nuevos (p_new fijo) y el chatarreo (p_scrap
+     fijo).
+   - Resultado: se de 3.8 utils para tc_buy y tc_sell. Entre réplicas, tc_buy y tc_sell
+     tienen correlación −1.000, y |corr| = 0.98 con mu. Eso arrastra a mu (se 0.031
+     contra 0.0056) y a los precios (RMSE 18 mil DKK contra 0.9).
+   - Ver los accidentes no lo arregla (RMSE de P de 9.9). Fijar tc_buy, u observar
+     algunos precios, sí.
+   - **Para la tesis:** en el modelo con reparación el problema es el mismo. Conviene
+     fijar tc_buy (o usar la Tabla 10) o meter precios de usados como momentos.
+4. **Máximos locales.**
+   - En p17 parcial, 3 de 50 réplicas tuvieron un arranque perturbado que terminó en
+     un punto peor; en p18, ninguna.
+   - En una prueba previa con N = 50,000, un arranque perturbado se fue a una solución
+     degenerada de la marca 2 (u0_2 = −38, la marca con 1.5% del parque), con menor LL.
+   - Hay que usar varios arranques.
+5. **tc_buy_nocar** sale igual con las dos verosimilitudes: solo lo informan los hogares
+   sin coche, cuyo estado sí se observa.
+
+### Pendientes
+
+- Precios de usados como dato adicional (verosimilitud conjunta, o momentos) para
+  identificar tc_buy y tc_sell por separado.
+- Tipos de hogar (el paper tiene 8) y el dummy de edad par en la utilidad.
+- Llevar la misma maquinaria (`GModel`, Newton conjunto, gradiente implícito) a
+  `modelo_fin` para la segunda etapa estructural.
