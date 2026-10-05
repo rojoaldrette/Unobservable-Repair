@@ -19,6 +19,9 @@ Uso (desde claude/scripts/gillingham/):
   python main.py --reps 0:50 --fix tc_buy        # fija tc_buy en la verdad
   python main.py --summarize                     # junta los CSV y escribe el resumen
 
+  # Dos tipos de hogar (Tablas 7-10), mitad y mitad
+  python main.py --reps 0:50 --N 40000 --types low_couple_poor,low_single_poor -v
+
 Salida: claude/output/montecarlo/gillingham/mc_<diseño>_reps<a>-<b>.csv y
         resumen_<diseño>.csv
 '''
@@ -32,7 +35,7 @@ os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
 import pandas as pd
 
-from params import GParams
+from params import GParams, GTypes
 from theta import FIELDS
 from montecarlo import MCDesign, montecarlo, summarize
 
@@ -48,6 +51,8 @@ def parse():
     ap.add_argument("--a_max", type=int, default=25)
     ap.add_argument("--infos", default="parcial,completa")
     ap.add_argument("--fix", default="", help="parámetros fijos en la verdad, p. ej. tc_buy,mu")
+    ap.add_argument("--types", default="low_couple_poor", help="tipos de PAPER_TYPES")
+    ap.add_argument("--f", default="", help="fracciones de cada tipo (default: iguales)")
     ap.add_argument("--n_starts", type=int, default=2)
     ap.add_argument("--perturb", type=float, default=0.1)
     ap.add_argument("--outdir", default=OUTDIR)
@@ -64,9 +69,11 @@ if __name__ == "__main__":
         args.outdir = os.path.join(args.outdir, "smoke")
     g = dataclasses.replace(GParams(), a_max=args.a_max)
     fix = set(filter(None, args.fix.split(",")))
+    names = tuple(args.types.split(","))
+    f = tuple(map(float, args.f.split(","))) if args.f else tuple([1.0 / len(names)] * len(names))
     design = MCDesign(N=args.N, K=args.K, infos=tuple(args.infos.split(",")),
                       free=tuple(k for k in FIELDS if k not in fix),
-                      n_starts=args.n_starts, perturb=args.perturb)
+                      n_starts=args.n_starts, perturb=args.perturb, types=GTypes(names, f))
 
     if args.summarize:
         files = glob.glob(os.path.join(args.outdir, f"mc_{design.tag(g)}_reps*.csv"))

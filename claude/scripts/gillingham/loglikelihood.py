@@ -26,8 +26,10 @@ Q[h, x] la transición física:
   "completa" (oráculo): se ve x, incluido el accidente:
              Pr(x, o, h' | h) = Q[h, x] C[x, o] buy(h')^{1(o es trade)}
 
+Con tipos de hogar (observados), cada celda usa C, Q y buy de su tipo.
+
 Gradiente: regla de la cadena a través del equilibrio,
-    dz/dx = -F_z^{-1} F_x      (z = (EV, P), F de equilibrium.py)
+    dz/dx = -F_z^{-1} F_x      (z = (EV_0..EV_{T-1}, P), F de equilibrium.py)
     d log Pr(c)/dx = parcial_x + parcial_z dz/dx
 Se obtiene la matriz de scores por celda, así que de paso salen el gradiente y la
 matriz BHHH (el paper usa BHHH con gradientes analíticos).
@@ -50,7 +52,7 @@ from utils import dims, stack_states
 from equilibrium import split_z, residual, solve_or_restart
 from probabilities import ccps_raw
 from transitions import physical_matrix_raw
-from theta import GModel, unpack, natural, natural_jac_diag, labels
+from theta import Economy, unpack, natural, natural_jac_diag, labels
 
 
 # Datos ______________________________________________________________
@@ -58,10 +60,10 @@ from theta import GModel, unpack, natural, natural_jac_diag, labels
 def treat_data(cells, info):
     # info = "parcial": se agrega sobre x (no se observa)
     if info == "parcial":
-        cells = cells.groupby(["h_prev", "o", "h"], as_index=False)["cnt"].sum()
+        cells = cells.groupby(["tipo", "h_prev", "o", "h"], as_index=False)["cnt"].sum()
         cells["x"] = 0
     o = cells["o"].to_numpy()
-    return dict(h=jnp.asarray(cells["h_prev"].to_numpy()), x=jnp.asarray(cells["x"].to_numpy()),
+    return dict(tau=jnp.asarray(cells["tipo"].to_numpy()), h=jnp.asarray(cells["h_prev"].to_numpy()), x=jnp.asarray(cells["x"].to_numpy()),
                 o=jnp.asarray(o), hn=jnp.asarray(cells["h"].to_numpy()),
                 trade=jnp.asarray(o >= 3, dtype=float),
                 cnt=jnp.asarray(cells["cnt"].to_numpy(), dtype=float))
@@ -69,9 +71,8 @@ def treat_data(cells, info):
 
 # Probabilidades ______________________________________________________________
 
-def outcome_probs(z, m):
+def outcome_probs(EV, P, m):
     J, A, n_act, n = dims(m)
-    EV, P = split_z(z, m)
     c = ccps_raw(EV, P, m)
     sx = stack_states(c.scrap, jnp.ones(J), jnp.zeros(()))
     C = jnp.stack([c.keep, c.purge * (1 - sx), c.purge * sx,
@@ -83,22 +84,24 @@ def _log(p):
     return jnp.log(jnp.clip(p, 1e-300, None))
 
 
-def cell_logp(z, m, data, info):
-    Q, C, buy = outcome_probs(z, m)
+def cell_logp(z, eco, data, info):
+    EVs, P = split_z(z, eco)
+    Q, C, buy = map(jnp.stack, zip(*[outcome_probs(EVs[t], P, eco.type_model(t))
+                                     for t in range(eco.n_types)]))   # (T, n, n), (T, n, 5), (T, n)
+    tau = data["tau"]
     if info == "parcial":
-        lp = _log((Q @ C)[data["h"], data["o"]])
+        lp = _log(jnp.einsum("thx,txo->tho", Q, C)[tau, data["h"], data["o"]])
     else:
-        lp = _log(Q[data["h"], data["x"]]) + _log(C[data["x"], data["o"]])
-    return lp + data["trade"] * _log(buy[data["hn"]])
+        lp = _log(Q[tau, data["h"], data["x"]]) + _log(C[tau, data["x"], data["o"]])
+    return lp + data["trade"] * _log(buy[tau, data["hn"]])
 
 
 # Verosimilitud, gradiente y BHHH ______________________________________________________________
 
 @partial(jax.jit, static_argnames=("spec", "info"))
-def _score_parts(z, x, th_fixed, data, g_model, spec, info):
-    # g_model: GModel cuyo aux trae g (estático); sus hojas se ignoran
-    g = g_model.g
-    mod = lambda x_: GModel(g, unpack(x_, spec, th_fixed))
+def _score_parts(z, x, th_fixed, data, eco0, spec, info):
+    # eco0: Economy cuyo aux trae g y f (estáticos); sus hojas se ignoran
+    mod = lambda x_: Economy(eco0.g, unpack(x_, spec, th_fixed), eco0.f)
     m = mod(x)
     Fz = jax.jacfwd(residual)(z, m)
     Fx = jax.jacfwd(lambda x_: residual(z, mod(x_)))(x)
@@ -111,13 +114,14 @@ def _score_parts(z, x, th_fixed, data, g_model, spec, info):
 
 class LLEval:
     # Evalúa LL(x) resolviendo el equilibrio con arranque en caliente
-    def __init__(self, g, spec, th_fixed, data, info, z0=None):
-        self.g, self.spec, self.th_fixed, self.data, self.info = g, spec, th_fixed, data, info
+    def __init__(self, g, f, spec, th_fixed, data, info, z0=None):
+        self.g, self.f = g, tuple(f)
+        self.spec, self.th_fixed, self.data, self.info = spec, th_fixed, data, info
         self.z = z0
         self.n_solves = 0
 
     def model(self, x):
-        return GModel(self.g, unpack(jnp.asarray(x), self.spec, self.th_fixed))
+        return Economy(self.g, unpack(jnp.asarray(x), self.spec, self.th_fixed), self.f)
 
     def __call__(self, x):
         m = self.model(x)

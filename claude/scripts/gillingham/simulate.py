@@ -29,6 +29,9 @@ solo se ve que el coche salió del parque.  Desde "sin coche": purge = seguir si
 
 La tabla trae también lo que el econometrista no ve (`accidente`, `chatarreo_endogeno`,
 el estado x verdadero), para el estimador de información completa.
+
+Con T tipos de hogar: round(N f_t) hogares de cada tipo, cada uno con las CCPs de su
+tipo y los mismos precios.  El tipo se observa (como en el paper).
 '''
 
 import numpy as np
@@ -43,10 +46,14 @@ from transitions import physical_matrix_raw, transition_from_ccps, stationary_di
 O_LABELS = np.array(["keep", "purge_vende", "purge_chatarra", "trade_vende", "trade_chatarra"])
 
 
-def equilibrium_objects(z, m):
-    # Todo lo que necesita la simulación, en numpy
+def equilibrium_objects(z, eco):
+    # Lista por tipo con todo lo que necesita la simulación, en numpy
+    EVs, P = split_z(z, eco)
+    return [type_objects(EVs[t], P, eco.type_model(t)) for t in range(eco.n_types)]
+
+
+def type_objects(EV, P, m):
     J, A, n_act, n = dims(m)
-    EV, P = split_z(z, m)
     c = ccps_raw(EV, P, m)
     q = stationary_distribution(transition_from_ccps(c, m))
     scrap_x = stack_states(c.scrap, jnp.ones(J), jnp.zeros(()))
@@ -74,9 +81,22 @@ def _sample_cat(p, size, rng):
     return rng.choice(len(p), size=size, p=p / p.sum())
 
 
-def simulate_panel(eqo, g, N, K, seed):
-    J, A, n_act, n = dims(g)
+def simulate_panel(eqos, g, f, N, K, seed):
+    # eqos: lista por tipo (equilibrium_objects); f: fracciones
     rng = np.random.default_rng(seed)
+    frames, start = [], 0
+    for t, (eqo, ft) in enumerate(zip(eqos, f)):
+        Nt = int(round(N * ft))
+        d = _simulate_type(eqo, g, Nt, K, rng)
+        d["id_hogar"] += start
+        d.insert(1, "tipo", t)
+        frames.append(d)
+        start += Nt
+    return pd.concat(frames, ignore_index=True)
+
+
+def _simulate_type(eqo, g, N, K, rng):
+    J, A, n_act, n = dims(g)
     cumQ = np.cumsum(eqo["Q"], axis=1)
     keep, purge, scrap_x = eqo["keep"], eqo["purge"], eqo["scrap_x"]
 
@@ -120,5 +140,5 @@ def to_cells(df):
     d["h_prev"] = d.groupby("id_hogar")["h"].shift(1)
     d = d.dropna(subset=["h_prev"])
     d["h_prev"] = d["h_prev"].astype(np.int64)
-    cells = d.groupby(["h_prev", "x", "o", "h"]).size().rename("cnt").reset_index()
+    cells = d.groupby(["tipo", "h_prev", "x", "o", "h"]).size().rename("cnt").reset_index()
     return cells

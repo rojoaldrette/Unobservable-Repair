@@ -5,6 +5,32 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.4: tipos de hogar en la réplica de Gillingham (2026-10-05)
+
+### Cambios
+- **Tipos de hogar:**
+  - `params.PAPER_TYPES` y `GTypes` (Tablas 7-10);
+  - `theta.Economy` (mu, u0, u1, tc_buy, tc_buy_nocar por tipo; Ts, sigma_sell y
+    accidentes comunes).
+- **Equilibrio, simulación y verosimilitud para T tipos** con P común. Con T = 1
+  reproduce v1.3 exactamente.
+- `theta.free_spec` ahora recibe th (no g), y `LLEval` recibe las fracciones f.
+- MC con 3 diseños (N = 40,000, 50 réplicas). Detalle en `gillingham.md`, "Tipos de hogar".
+
+### Resultados
+- **Con dos tipos de mu distinta, tc_buy y tc_sell se identifican sin precios:** se de
+  2.69 -> 0.16 y RMSE de P de 13.3 -> 1.1 mil DKK.
+- **Con dos tipos de mu casi igual, no:** se de 1.5 y RMSE de 7.8.
+- **Conclusión:** lo que identifica es la heterogeneidad en mu. Corrige la
+  recomendación de v1.3 ("fijar tc_buy"): eso solo hace falta con un tipo.
+
+### Pendientes nuevos
+1. Guardar las estimaciones de todos los arranques para distinguir máximos locales de
+   arranques mal pulidos.
+2. Decidir si `modelo_fin` tiene tipos de hogar con mu distinta (depende de los datos).
+
+---
+
 ## v1.3: estimación DNFXP y Monte Carlo de Gillingham (2026-10-04)
 
 ### Cambios

@@ -208,8 +208,10 @@ Selección. Las tablas completas están en `resumen_N20000_K10_A25_p18.csv` y `.
      contra 0.0056) y a los precios (RMSE 18 mil DKK contra 0.9).
    - Ver los accidentes no lo arregla (RMSE de P de 9.9). Fijar tc_buy, u observar
      algunos precios, sí.
-   - **Para la tesis:** en el modelo con reparación el problema es el mismo. Conviene
-     fijar tc_buy (o usar la Tabla 10) o meter precios de usados como momentos.
+   - **Esto es un artefacto de tener un solo tipo de hogar** (ver "Tipos de hogar"
+     abajo): con dos tipos de mu distinta, como en el paper, la dirección se identifica.
+     Con un solo tipo hay que anclarla: fijar tc_buy, usar precios de usados, o meter
+     heterogeneidad en mu.
 4. **Máximos locales.**
    - En p17 parcial, 3 de 50 réplicas tuvieron un arranque perturbado que terminó en
      un punto peor; en p18, ninguna.
@@ -226,3 +228,87 @@ Selección. Las tablas completas están en `resumen_N20000_K10_A25_p18.csv` y `.
 - Tipos de hogar (el paper tiene 8) y el dummy de edad par en la utilidad.
 - Llevar la misma maquinaria (`GModel`, Newton conjunto, gradiente implícito) a
   `modelo_fin` para la segunda etapa estructural.
+
+## Tipos de hogar (v1.4)
+
+**Pregunta:** el paper estima Tb por tipo (Tabla 10) y Ts común (Tabla 5) sin precios de
+usados, con errores estándar de ~0.02. ¿Por qué con un tipo no se identifican?
+
+**Hipótesis:** subir Tb en δ, bajar Ts en δ y bajar P en δ/mu deja igual toda
+transacción de usados. P es común a todos los tipos, pero mu varía por tipo (Tabla 7):
+el ajuste δ/mu que compensa a un tipo no compensa al otro. Si mu es distinta entre tipos,
+la dirección se rompe.
+
+### Implementación
+- `params.PAPER_TYPES`: los 4 tipos "Low WD" con mu, u0, u1, Tb común y Tb "no car"
+  (Tablas 7-10). `GTypes(names, f)` elige tipos y fracciones. El paper no reporta f;
+  se usa mitad y mitad.
+- **Por tipo:** mu, u0, u1, tc_buy, tc_buy_nocar. **Comunes:** tc_sell,
+  tc_sell_inspect, sigma_sell, accidentes (como el paper).
+- `theta.Economy(g, th, f)`; `equilibrium.py` resuelve z = (EV_0, ..., EV_{T-1}, P) con
+  D y S sumados sobre tipos ponderados por f. Con T = 1 da exactamente lo mismo que
+  antes (las pruebas dan los mismos números).
+- El tipo se observa. Las celdas llevan `tipo` y cada una usa las probabilidades de su
+  tipo.
+- Gradiente implícito con 27 parámetros contra diferencias finitas: 2e-8.
+
+```
+python main.py --reps 0:50 --N 40000 --types low_couple_poor,low_single_poor -v
+python main.py --summarize --N 40000 --types low_couple_poor,low_single_poor
+```
+
+### Diseño
+Los tres diseños usan N = 40,000 hogares en total, K = 10 y a_max = 25, con 50
+réplicas y todos los parámetros libres.
+
+| diseño | tipos | mu | parámetros |
+|---|---|---|---|
+| T1 | Couple Poor | 0.1131 | 18 |
+| A | Couple Poor + Single Poor | 0.1131 / 0.0941 | 27 |
+| B (control) | Couple Poor + Couple Rich | 0.1131 / 0.1119 | 27 |
+
+T1 tiene los mismos hogares que A y B, así que separa el efecto de la heterogeneidad
+del de tener más datos.
+
+### Resultados (verosimilitud parcial, la del paper; entre paréntesis, la completa)
+
+| | T1 | A (mu distinta) | B (mu casi igual) |
+|---|---|---|---|
+| se de tc_buy (tipo 0) | 2.69 (1.65) | **0.158** (0.126) | 1.53 (1.08) |
+| se de tc_sell | 2.69 (1.65) | **0.155** (0.123) | 1.53 (1.08) |
+| se de mu (tipo 0) | 0.022 (0.014) | **0.0057** (0.0038) | 0.0125 (0.0091) |
+| corr(tc_buy_t0, tc_sell) entre réplicas | −1.000 | −0.994 | −1.000 |
+| RMSE de P (miles DKK) | 13.3 (7.0) | **1.09** (0.73) | 7.8 (4.9) |
+| cobertura al 95% de tc_buy y tc_sell | 0.92 (0.96) | 0.92 (0.94) | 0.98 (0.94) |
+
+Sesgo despreciable en los tres diseños.
+
+### Lectura
+
+1. **Se confirma la hipótesis.**
+   - Con dos tipos de mu distinta (A), el se de tc_buy y tc_sell baja 17 veces (2.69
+     -> 0.16) y el error en precios pasa de 13 a 1.1 mil DKK, sin precios observados.
+   - Con dos tipos de mu casi igual (B), casi no mejora: se de 1.5 y RMSE de P de 7.8.
+     Sigue siendo la misma dirección, con correlación −1.000.
+   - **Lo que identifica no es tener más tipos, sino que difieran en mu.** Así el
+     paper puede estimar Tb y Ts por separado: sus 8 tipos tienen mu de 0.092 a 0.116.
+2. **Sigue siendo la dirección más débil** (corr −0.99 en A), pero ya con precisión
+   útil. El paper reporta se de ~0.02 para Tb: tiene 8 tipos, 4 marcas y ~39 millones
+   de observaciones.
+3. **El chatarreo endógeno se sigue separando de los accidentes** con la verosimilitud
+   parcial: fracción voluntaria 0.352 contra 0.352 verdadera en A.
+4. **Para la tesis:** si el modelo con reparación tiene un solo tipo de hogar, hereda
+   el problema. Opciones:
+   - tipos de hogar con mu distinta (lo del paper, si los datos traen tipos);
+   - fijar tc_buy;
+   - precios de usados como dato.
+
+### Advertencias
+- **El criterio de "mismo óptimo" es estricto.** Exige |ΔLL| < 1e-4 con LL de ~2e5. En
+  ~30% de las réplicas uno de los tres arranques no lo cumple (incluido T1), en parte
+  porque L-BFGS llega al tope de 500 iteraciones en la dirección plana. No guardé las
+  estimaciones de los arranques perdedores, así que no sé si son otros máximos o el
+  mismo mal pulido.
+- **Convergencia:** B reporta convergencia de BHHH en 96-98% de las réplicas. A y T1,
+  en 100%.
+- **Las fracciones f = (0.5, 0.5) son supuesto.** El paper no las reporta.

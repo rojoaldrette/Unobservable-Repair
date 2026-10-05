@@ -93,3 +93,33 @@ class GParams:
                 raise ValueError(f"{name} debe tener longitud n_brands={J}")
         if not (0 < self.sigma_sell <= self.sigma_trade <= self.sigma):
             raise ValueError("GEV válido requiere 0 < sigma_sell <= sigma_trade <= sigma")
+
+
+# Tipos de hogar ______________________________________________________________
+# Parámetros por tipo de las Tablas 7 (mu), 8 (u0), 9 (u1) y 10 (Tb común y "no car"),
+# marcas LB, LG, HB.  Lo demás (Ts, sigma_sell, accidentes) es común a todos los tipos,
+# como en el paper.  El paper no reporta las fracciones de cada tipo en la población.
+PAPER_TYPES = {
+    "low_couple_poor": dict(mu=0.1131, u0=(3.6490, 3.1132, 5.1535), u1=(-0.1459, -0.0922, -0.2196),
+                            tc_buy=6.5944, tc_buy_nocar=1.7899),
+    "low_couple_rich": dict(mu=0.1119, u0=(4.0324, 3.4657, 5.7492), u1=(-0.1586, -0.0985, -0.2411),
+                            tc_buy=6.4425, tc_buy_nocar=1.0719),
+    "low_single_poor": dict(mu=0.0941, u0=(2.4042, 2.1504, 3.5823), u1=(-0.0984, -0.0615, -0.1600),
+                            tc_buy=6.5457, tc_buy_nocar=3.0816),
+    "low_single_rich": dict(mu=0.1077, u0=(3.2454, 2.8222, 4.6934), u1=(-0.1308, -0.0841, -0.2056),
+                            tc_buy=6.6036, tc_buy_nocar=2.5769),
+}
+
+
+@dataclass(frozen=True)
+class GTypes:
+    # Tipos (claves de PAPER_TYPES) y su fracción en la población (observada)
+    names: tuple = ("low_couple_poor",)
+    f: tuple = (1.0,)
+
+    def __post_init__(self):
+        if len(self.names) != len(self.f) or abs(sum(self.f) - 1.0) > 1e-12:
+            raise ValueError("names y f deben tener el mismo largo y f debe sumar 1")
+        for k in self.names:
+            if k not in PAPER_TYPES:
+                raise ValueError(f"tipo desconocido: {k}")
