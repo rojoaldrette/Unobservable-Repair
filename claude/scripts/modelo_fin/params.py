@@ -29,11 +29,14 @@ Valores por defecto (Gillingham, Iskhakov, Munk-Nielsen, Rust & Schjerning):
   T = Tb(j, d) + Ts(i, a), en utils.
   * Comprador (Tabla 10): "common" = tc_buy para toda compra; "no car" = tc_buy_nocar
     extra si compra desde el estado sin coche.
-  * Vendedor (Tabla 5): tc_sell en años normales y tc_sell_inspect en años de
-    inspección (edades pares >= 4; en Dinamarca la inspección es bianual desde los
-    4 años).  Leo los dos números como niveles, no como base + incremento: la tabla
-    no lo aclara.  La tercera fila de la Tabla 5 (-2.1929) no tiene etiqueta y no
-    se usa.
+  * Vendedor (Tabla 5, leída con el texto en modo raw; ver docs/gillingham.md):
+        lambda_s (escala vender/chatarrear)          0.3454  -> no se usa (no hay chatarreo)
+        sales transaction cost                       0.9106  -> tc_sell
+        sales transaction cost (inspection year)    -2.1929  -> coeficiente en la utilidad
+                                                                de vender: tc_sell_inspect = 2.1929
+    Años de inspección: edades pares >= 4 (inspección bianual en Dinamarca).
+    v1.0 usaba 0.3454 / 0.9106 (lectura con -layout, desalineada).  Por confirmar
+    con la versión publicada o el código de los autores.
 - Sin chatarreo endógeno: un coche activo solo sale de tus manos vendiéndolo (trade
   o purge), por accidente o al llegar a la edad terminal.  p_scrap solo lo cobra el
   dueño de un coche terminal.
@@ -76,8 +79,8 @@ class Params:
     # Costos de transacción (utils)
     tc_buy: float = 6.5944      # Tb: comprador, cualquier compra (Tabla 10, "common")
     tc_buy_nocar: float = 1.7899  # extra si compra desde "sin coche" (Tabla 10, "no car")
-    tc_sell: float = 0.3454     # Ts: vendedor, año sin inspección (Tabla 5)
-    tc_sell_inspect: float = 0.9106  # Ts: vendedor, año de inspección (Tabla 5)
+    tc_sell: float = 0.9106     # Ts: vendedor, año sin inspección (Tabla 5, raw)
+    tc_sell_inspect: float = 2.1929  # Ts: vendedor, año de inspección (Tabla 5, raw: -2.1929 en utilidad)
     inspect_age_min: int = 4    # inspección en edades pares >= inspect_age_min
 
     # Precios exógenos (miles de DKK)

@@ -61,7 +61,8 @@ comparar). Las marcadas con ★ son las que un evaluador probablemente pediría 
 - **a_max mayor** (Gillingham usa 25) y J = 4 (agregar heavy green). ¿Los resultados
   dependen de lo corto de la vida del coche?
 - **Costos de transacción:**
-  - 0.9106 como nivel o como incremento sobre 0.3454;
+  - lectura de la Tabla 5: 0.9106 / 2.1929 (raw, la actual) contra 0.3454 / 0.9106 (v1.0),
+    y 2.1929 como nivel o como incremento sobre 0.9106;
   - costo "no car" para dueños de terminal o no;
   - Tb = 0 y Ts = 0 (fricciones bajas, como el ejercicio de Gillingham en la sec. 4).
 - **beta** en {0.90, 0.95, 0.98}. Afecta cuánto vale la reparación preventiva.

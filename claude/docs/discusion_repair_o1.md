@@ -33,7 +33,7 @@ De la sección 6 y el apéndice F.1:
    odómetro (la regresión de manejo, Tabla 6). Si la inspección encuentra fallas, el dueño
    **tiene que repararlas** para seguir manejando. Esto produce el "zig-zag" del
    scrappage en edades pares, que modelan con un dummy de edad par en la utilidad y con un
-   costo de venta más alto en años de inspección (Tabla 5: 0.3454 vs 0.9106).
+   costo de venta más alto en años de inspección (Tabla 5: 0.9106 vs 2.1929; ver `gillingham.md`).
 
 Conclusión directa: **los datos de Gillingham no traen s ni reparaciones**. La pregunta
 real no es qué opción encaja con su base, sino qué datos tendrías que tener (o simular en

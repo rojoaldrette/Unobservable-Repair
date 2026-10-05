@@ -13,7 +13,7 @@ inspecciones.
   lo vendes.
 - **Cómo lo modelan.** Con un dummy de edad par en la utilidad (de -15% a -50% de la
   utilidad de un coche nuevo) y un costo de venta más alto en años de inspección
-  (Tabla 5: 0.9106 contra 0.3454).
+  (Tabla 5: 2.1929 contra 0.9106; ver `gillingham.md`).
 - **Su interpretación** (introducción): "most Danes prefer to scrap their vehicles
   rather than incur the time and expense to repair their vehicles to pass inspection".
 

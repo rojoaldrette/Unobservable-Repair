@@ -5,7 +5,24 @@ abierto). Lo más reciente va arriba.
 
 ---
 
-## v1.1: réplica de Gillingham (2026-10-04, sin commit)
+## v1.2: corrección de la Tabla 5 en modelo_fin (2026-10-04)
+
+### Cambios
+- `modelo_fin/params.py`: tc_sell 0.3454 -> **0.9106**, tc_sell_inspect 0.9106 ->
+  **2.1929** (lectura raw de la Tabla 5, igual que la réplica de Gillingham).
+  lambda_s = 0.3454 no se usa porque modelo_fin no tiene chatarreo.
+- Documentos que citaban la lectura vieja actualizados (`discusion_repair_o1.md`,
+  `inspeccion_zigzag.md`, `pruebas_robustes.md`).
+
+### Pendientes
+- Igual que v1.1, salvo el punto 1 (resuelto). Sigue por confirmar la Tabla 5 con la
+  versión publicada.
+- El Monte Carlo de prueba y las comparaciones de v1.0/v1.1 (fila M7) se corrieron con
+  la lectura vieja. M7_gill ya usaba la nueva.
+
+---
+
+## v1.1: réplica de Gillingham (commit 01dea15)
 
 ### Cambios
 - **Réplica de Gillingham** en `claude/scripts/gillingham/` (mismo layout que modelo_fin,
@@ -24,8 +41,7 @@ abierto). Lo más reciente va arriba.
   con a_max = 25, mismos parámetros.
 
 ### Pendientes nuevos
-1. **Pasar a modelo_fin la lectura corregida de la Tabla 5.** Hoy usa tc_sell = 0.3454
-   y tc_sell_inspect = 0.9106. Decidir antes del Monte Carlo.
+1. ~~Pasar a modelo_fin la lectura corregida de la Tabla 5.~~ Hecho en v1.2.
 2. Confirmar la Tabla 5 con la versión publicada (JPE 2022) o el código de los autores.
 3. Adoptar como defaults la calibración de s de M7_gill (o una similar) y subir a_max.
 4. **Gillingham:** u2 y el dummy de edad par no están en las tablas (hoy en 0).
