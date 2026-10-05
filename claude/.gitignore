@@ -1,0 +1,4 @@
+# Resultados y logs del Monte Carlo (pesados; se regeneran)
+scripts/**/output/
+scripts/**/logs/
+__pycache__/
