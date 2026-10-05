@@ -5,6 +5,35 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.1: réplica de Gillingham (2026-10-04, sin commit)
+
+### Cambios
+- **Réplica de Gillingham** en `claude/scripts/gillingham/` (mismo layout que modelo_fin,
+  sin s). Equilibrio por Newton con jacobiano denso: converge en 5–6 pasos, max|ED| ~
+  1e-13, y dT/dEV == βM. Detalle en `gillingham.md`.
+- **`claude/scripts/comparacion/compare.py`:** compara G25, G7, M7 y M7_gill.
+- **Corrección de la lectura de la Tabla 5** (texto raw): sigma_sell = 0.3454,
+  tc_sell = 0.9106 y tc_sell_inspect = 2.1929 (la estimación es −2.1929, leída como
+  coeficiente de utilidad). La réplica usa esta lectura.
+
+### Resultados
+- **Con s calibrada a la Tabla 4, modelo_fin reproduce a Gillingham (a_max = 7):**
+  precios a 1–2 mil DKK y keep a menos de 0.02. La reparación baja los hogares sin
+  coche de 0.73 a 0.65.
+- **a_max = 7 explica casi todo el exceso de hogares sin coche:** 0.73 contra 0.016
+  con a_max = 25, mismos parámetros.
+
+### Pendientes nuevos
+1. **Pasar a modelo_fin la lectura corregida de la Tabla 5.** Hoy usa tc_sell = 0.3454
+   y tc_sell_inspect = 0.9106. Decidir antes del Monte Carlo.
+2. Confirmar la Tabla 5 con la versión publicada (JPE 2022) o el código de los autores.
+3. Adoptar como defaults la calibración de s de M7_gill (o una similar) y subir a_max.
+4. **Gillingham:** u2 y el dummy de edad par no están en las tablas (hoy en 0).
+   p_scrap y beta tampoco se reportan.
+5. Comparar a a_max = 25 también con modelo_fin (requiere matrices dispersas).
+
+---
+
 ## v1.0: "agregar modelo 1" (2026-10-04)
 
 Primera versión completa del modelo con reparación no observada, hasta el Monte Carlo.
