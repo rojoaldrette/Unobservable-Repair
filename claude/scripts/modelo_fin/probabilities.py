@@ -12,7 +12,6 @@
 #
 # _____________________________________________________________________________
 
-from functools import partial
 from typing import NamedTuple
 
 import jax
@@ -31,8 +30,8 @@ class CCP(NamedTuple):
     repair: jnp.ndarray  # (n,) sobre H: Pr(reparar | h); 0 en nuevos y none
 
 
-@partial(jax.jit, static_argnames="g")
-def ccps(EV, P, g):
+def ccps_raw(EV, P, g):
+    # Sin jit: acepta un Params o un theta.Model.  `ccps` (abajo) es la versión jiteada.
     J, A, S, n_act, n = dims(g)
     v = choice_values(EV, P, g)
 
@@ -55,3 +54,6 @@ def ccps(EV, P, g):
         buy=jnp.concatenate([p_buy, jnp.zeros(1)]),
         repair=stack_states(p_rep, zJ, z0),
     )
+
+
+ccps = jax.jit(ccps_raw, static_argnames="g")

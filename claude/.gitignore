@@ -3,3 +3,6 @@ scripts/**/output/
 scripts/**/logs/
 __pycache__/
 output/**/logs/
+
+# Paneles simulados (pesados; se regeneran con la semilla)
+output/estimaciones/**/panel_rep*.csv.gz

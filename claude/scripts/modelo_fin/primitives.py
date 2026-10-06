@@ -44,9 +44,10 @@ def flow_utility(g):
 def sell_cost(g):
     # Ts(a) en utils para el coche que se vende, a = 1..A-1.  shape (A-1,)
     # Gillingham Tabla 5: más caro en años de inspección (pares >= inspect_age_min)
+    # jnp.where (no np.where): tc_sell puede ser dinámico (theta.Model)
     a = np.arange(1, g.a_max)
-    inspect = (a % 2 == 0) & (a >= g.inspect_age_min)
-    return jnp.asarray(np.where(inspect, g.tc_sell_inspect, g.tc_sell))
+    inspect = jnp.asarray((a % 2 == 0) & (a >= g.inspect_age_min))
+    return jnp.where(inspect, g.tc_sell_inspect, g.tc_sell)
 
 
 # Transición de s ________________________________________________________________
@@ -55,8 +56,11 @@ def s_transition_rows(mean, sd, grid):
     # Pr(s' = grid_k | media, sd) para cada media; shape mean.shape + (S,).
     # Discretización por intervalos alrededor de cada punto del grid; las colas
     # se acumulan en los extremos (ojo: ahí E[eta|s] = 0 deja de cumplirse).
+    # Bordes finitos y lejanos en vez de +-inf: con +-inf la derivada respecto a sd da
+    # 0 * inf = nan (s_sigma se estima).  A 1e3 de distancia la cdf es exactamente 0 o 1,
+    # así que los valores no cambian.
     mid = 0.5 * (grid[1:] + grid[:-1])
-    edges = jnp.concatenate([jnp.array([-jnp.inf]), mid, jnp.array([jnp.inf])])
+    edges = jnp.concatenate([grid[:1] - 1e3, mid, grid[-1:] + 1e3])
     cdf = norm.cdf((edges - mean[..., None]) / sd)
     return jnp.diff(cdf, axis=-1)
 

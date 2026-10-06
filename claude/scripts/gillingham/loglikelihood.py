@@ -173,7 +173,7 @@ def estim_bhhh(ev, x0, max_iter=200, tol=1e-9, verbose=False):
     ev.z = z
     converged, it, stall = False, 0, 0
     for it in range(max_iter):
-        d = np.linalg.solve(B, gr)
+        d = np.linalg.pinv(B) @ gr          # pinv: B singular = dirección no identificada (= inv si no)
         crit = float(gr @ d) / N
         if verbose:
             print(f"  BHHH {it:3d}: LL/N = {ll / N:.8f}, g'B^-1g/N = {crit:.2e}")
@@ -195,7 +195,7 @@ def estim_bhhh(ev, x0, max_iter=200, tol=1e-9, verbose=False):
         ev.z = z
         if stall >= 3:
             break
-    cov = np.linalg.inv(B)
+    cov = np.linalg.pinv(B)
     J = np.asarray(natural_jac_diag(jnp.asarray(x), ev.spec, ev.th_fixed))
     nat = np.asarray(natural(jnp.asarray(x), ev.spec, ev.th_fixed))
     if verbose:

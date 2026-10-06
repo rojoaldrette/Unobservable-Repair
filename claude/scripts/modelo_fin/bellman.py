@@ -152,14 +152,18 @@ def choice_values(EV, P, g):
 
 # Operador de Bellman y solver ______________________________________________________________
 
-# Operador de Bellman (Γ en Gillingham, ec. 9) sobre EV(x)
-@partial(jax.jit, static_argnames="g")
-def T(EV, P, g):
+# Operador de Bellman (Γ en Gillingham, ec. 9) sobre EV(x).
+# T_raw no está jiteada: acepta un Params o un theta.Model (parámetros dinámicos).
+# T es la versión jiteada con g estático.
+def T_raw(EV, P, g):
     v = choice_values(EV, P, g)
     ev_act = emax([v.keep, v.purge_act, v.trade_act], g.sigma)
     ev_term = emax([v.purge_term, v.trade_term], g.sigma)
     ev_none = emax([v.stay_none, v.trade_none], g.sigma)
     return stack_states(ev_act, ev_term, ev_none)
+
+
+T = jax.jit(T_raw, static_argnames="g")
 
 
 @partial(jax.jit, static_argnames="g")

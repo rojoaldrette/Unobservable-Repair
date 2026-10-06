@@ -5,6 +5,39 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.7: estimación estructural (D0, D1, Gillingham), salidas y análisis (2026-10-06)
+
+Detalle en `reporte_estimacion.md`. **No se corrió ninguna estimación real**: solo
+pruebas de juguete.
+
+### Cambios
+- **Parámetros dinámicos y tipos** (`theta.py`), **equilibrio conjunto** con Newton
+  dense o Krylov (`equilibrium.py`): buena parte de la Fase 2.
+- **Verosimilitud estructural** (`estructural.py`): D0 (r observada) y D1 (r no
+  observada, mezcla de Hu & Xin con p = CCP del modelo), gradiente implícito,
+  L-BFGS + BHHH.
+- **Corredores con salidas en CSV:** `modelo_fin/estimar.py` y `gillingham/estimar.py`
+  (este con `--panel` para estimar Gillingham sobre datos con reparación).
+- **`analisis/`:** gráficas (distribución, P(a, s) en 3D, P(a) ponderado por q, CCPs,
+  MC) y tablas tipo regresión (CSV, LaTeX, Markdown).
+- **`slurm_estimar.sh`:** plantilla para GPU con los pasos en orden.
+- **Documentos:** `reporte_estimacion.md` (estimadores, salidas, verificación) y
+  `manual.md` (cómo usar el código: comandos, opciones, supercomputadora, problemas comunes).
+- Arreglos: bordes finitos en la discretización de s (la derivada respecto a s_sigma
+  daba NaN); pseudoinversa en BHHH (modelo_fin y Gillingham).
+
+### Verificación (juguete)
+- Equilibrio con 1 tipo == ED.py (1e-13); krylov == dense (1e-13).
+- Gradiente implícito contra diferencias finitas: 2e-6 (29 parámetros, D0 y D1).
+- Los corredores y el análisis corren y escriben todo.
+
+### Pendientes
+- Fase 3 (log-odds, a_max = 25) antes de las corridas finales.
+- Chatarreo endógeno opcional (resto de la Fase 2).
+- Medir tiempos en GPU con un diseño chico antes del Monte Carlo.
+
+---
+
 ## v1.6: modelo_fin sin matrices densas (2026-10-06)
 
 Fase 1 del plan. Detalle en `modelo_fin.md`, "Sin matrices densas".

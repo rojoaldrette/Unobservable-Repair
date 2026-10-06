@@ -4,7 +4,9 @@ Todo el código de `claude/scripts/`: qué objeto hay en cada archivo, qué reci
 devuelve (con formas) y cómo se conectan. El foco es `modelo_fin/` (el modelo de la
 tesis). `gillingham/` y `comparacion/` van al final, más breves.
 
-Estado: v1.6 (sin matrices densas). Fases 2-5 del plan van a cambiar partes de esto
+Estado: v1.7 (sin matrices densas; estimación estructural en `theta.py`, `equilibrium.py`,
+`estructural.py`, `estimar.py`; análisis en `analisis/`). La sección 10 resume lo de v1.7;
+el detalle de uso y salidas está en `reporte_estimacion.md`. Fases 2-5 del plan van a cambiar partes de esto
 (parámetros dinámicos, dos tipos, chatarreo opcional, log-odds); este documento se
 actualiza con cada versión.
 
@@ -626,3 +628,43 @@ Pr(repair) por edad. Resultados en `gillingham.md`.
 10. **Imports locales en `nk_step`:** bellman necesita `ccps` y `M_apply`, pero
     probabilities y transitions importan bellman. Importarlos dentro de la función evita
     el ciclo.
+
+---
+
+## 10. Estimación estructural y análisis (v1.7)
+
+Uso, salidas y verificación en `reporte_estimacion.md`. Aquí solo los objetos.
+
+```
+ Params g ──► theta.economy(g, Types) ──► Economy(g, th, f)          th: dict de arreglos (dinámico)
+                    │                          │  .type_model(t) ──► Model(g, th_t)   (un tipo)
+                    │                          │  .with_repair_price(R_t)             (otro año)
+ x (vector libre) ◄─┴── pack / unpack ─────────┤
+                                               ▼
+                     equilibrium.solve(eco) ──► z = (EV_0, EV_1, P)     Newton conjunto
+                        newton_direction: "dense" (jacfwd + solve) | "krylov" (GMRES + jvp)
+                                               │
+ panel (gen_dataset.simulate_economy) ──► estructural.treat_data ──► celdas (τ, t, x, o, h, [r], x')
+                                               │
+                     estructural.LLEval(x) ────┤  resuelve z_t para cada año t (arranque en caliente)
+                     estructural.score_parts ──┤  LL, gradiente y BHHH:  dz_t/dx = −F_z⁻¹ F_x (solve_linear)
+                                               ▼
+                     estim_lbfgs ──► estim_bhhh ──► θ̂, se            (estimar.py escribe los CSV)
+                                                                       │
+                                analisis/main.py ◄─────────────────────┘ ──► graficas/ y tablas/
+```
+
+| archivo | objetos |
+|---|---|
+| `theta.py` | `FIELDS`, `TYPE_FIELDS`, `TRANSFORM`, `Model`, `Economy`, `theta_from_g`, `theta_types`, `economy`, `free_spec`, `pack`, `unpack`, `labels`, `natural`, `natural_jac_diag` |
+| `equilibrium.py` | `split_z`, `join_z`, `type_market`, `excess_demand_log`, `residual` (F(z)), `bellman_types`, `newton_direction`, `solve_linear`, `initial_z` (Bellman + tâtonnement), `solve`, `solve_or_restart`, `equilibrium_objects` |
+| `estructural.py` | `INFOS`, `treat_data`, `regime_ccps`, `cell_logp` (D0 y D1), `score_parts`, `loglik_only`, `LLEval`, `estim_lbfgs`, `estim_bhhh`, `estimate` |
+| `estimar.py` | `calibracion`, `repair_prices`, `regimes_R`, `verdad`, `mercado`, `precio_rmse`, `tablas_equilibrio`, `estimar_info`, `una_replica`, `main` |
+| `gillingham/estimar.py` | `cells_from_modelo_fin` (panel de modelo_fin -> celdas de Gillingham), `tablas_equilibrio`, `main` |
+| `analisis/datos.py` | `Corrida`, `leer_corrida`, `etiqueta`, `agregar_tipos`, `media_en_s`, `unir`, `mejores` |
+| `analisis/graficas.py` | `distribucion_edad`, `sin_coche`, `distribucion_s`, `precios_3d`, `precios_edad`, `ccps_edad`, `mc_sesgo` |
+| `analisis/tablas.py` | `nombre_param`, `escribir` (CSV/TeX/MD), `tabla_parametros`, `tabla_mercado`, `tabla_mc` |
+
+Diferencia clave con las funciones viejas: `T`, `ccps` (jit con g estático) siguen para el
+código de v1.0-v1.6; lo nuevo usa `T_raw`, `ccps_raw` y las funciones de `transitions`
+con un `Model`, así que un θ nuevo no recompila.

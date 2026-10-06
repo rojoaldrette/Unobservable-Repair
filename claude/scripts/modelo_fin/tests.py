@@ -130,10 +130,58 @@ def test_equilibrium(g):
     return eq
 
 
+def test_estructural():
+    # Tamaño de juguete (a_max = 7, n_s = 8, 2 regímenes, 3,000 hogares): minutos.
+    # 1) equilibrium.solve (Economy, 1 tipo) == ED.solve_equilibrium; dense == krylov con 2 tipos.
+    # 2) gradiente implícito de la verosimilitud estructural contra diferencias finitas.
+    import os, tempfile
+    from params import Types
+    from estimar import calibracion, regimes_R, verdad
+    from theta import economy, free_spec, pack, labels, FIELDS
+    from equilibrium import solve, split_z, equilibrium_objects
+    from primitives import s_transition
+    from gen_dataset import simulate_economy
+    from estructural import treat_data, LLEval, loglik_only
+
+    g = dataclasses.replace(calibracion("tesis_v0", a_max=7, n_s=8), ed_tol=1e-12, gmres_tol=1e-13)
+    eco1 = economy(g, Types(("low_couple_poor",), (1.0,)))
+    z1, ok1, _ = solve(eco1, method="dense")
+    eq = solve_equilibrium(g)
+    print("Economy 1 tipo == ED.py:", ok1, float(jnp.max(jnp.abs(split_z(z1, eco1)[1] - eq.P))))
+    types = Types()
+    eco = economy(g, types)
+    zk, okk, _ = solve(eco, method="krylov")
+    zd, okd, _ = solve(eco, method="dense")
+    print("2 tipos, krylov == dense:", okk and okd, float(jnp.max(jnp.abs(zk - zd))))
+
+    th0 = eco.th
+    spec = free_spec(th0, FIELDS)
+    labs = labels(spec)
+    zetas, Rs = regimes_R(g, 2, 0.3)
+    zs = verdad(g, types, Rs, os.path.join(tempfile.gettempdir(), "tests_verdad.npz"), "dense")
+    objs = [equilibrium_objects(z, eco.with_repair_price(R)) for z, R in zip(zs, Rs)]
+    df = simulate_economy(objs, s_transition(g), g, types.f, 3000, 2, seed=0)
+    x0 = np.asarray(pack(th0, spec)) * 1.02
+    for info in ("oraculo", "hx"):
+        data, _ = treat_data(df, g, info)
+        ev = LLEval(g, types.f, spec, th0, Rs, data, info, zs0=zs, method="dense")
+        ll, gr, _, _ = ev(x0)
+        h, err = 1e-6, 0.0
+        for k in range(len(x0)):
+            e = np.zeros_like(x0)
+            e[k] = h
+            f = lambda xx: float(loglik_only(ev.solve(xx), jnp.asarray(xx), th0, ev.Rs, data,
+                                             ev.economies(x0)[0], spec, info))
+            fd = (f(x0 + e) - f(x0 - e)) / (2 * h)
+            err = max(err, abs(gr[k] - fd) / max(abs(fd), 1e-8))
+        print(f"gradiente implícito [{info}] vs dif. finitas, error relativo máx: {err:.1e} ({len(labs)} parámetros)")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--ed", action="store_true", help="también resolver el equilibrio")
     ap.add_argument("--n_s", type=int, default=None)
+    ap.add_argument("--estructural", action="store_true", help="pruebas de equilibrium.py y estructural.py")
     args = ap.parse_args()
 
     g = Params() if args.n_s is None else dataclasses.replace(Params(), n_s=args.n_s)
@@ -142,3 +190,5 @@ if __name__ == "__main__":
     test_jacobians(g)
     if args.ed:
         test_equilibrium(g)
+    if args.estructural:
+        test_estructural()

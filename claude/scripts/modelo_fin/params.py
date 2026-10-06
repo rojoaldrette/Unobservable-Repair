@@ -178,3 +178,34 @@ class Params:
             raise ValueError("sigma_repair > 0")
         if A < 3:
             raise ValueError("a_max >= 3")
+
+
+# Tipos de hogar ______________________________________________________________
+# Copia de gillingham/params.PAPER_TYPES (Tablas 7-10, hogares "Low WD", marcas LB, LG,
+# HB).  Por tipo: mu, u0, u1, tc_buy, tc_buy_nocar.  Lo demás es común (ver theta.py).
+# El paper no reporta las fracciones de cada tipo en la población.
+PAPER_TYPES = {
+    "low_couple_poor": dict(mu=0.1131, u0=(3.6490, 3.1132, 5.1535), u1=(-0.1459, -0.0922, -0.2196),
+                            tc_buy=6.5944, tc_buy_nocar=1.7899),
+    "low_couple_rich": dict(mu=0.1119, u0=(4.0324, 3.4657, 5.7492), u1=(-0.1586, -0.0985, -0.2411),
+                            tc_buy=6.4425, tc_buy_nocar=1.0719),
+    "low_single_poor": dict(mu=0.0941, u0=(2.4042, 2.1504, 3.5823), u1=(-0.0984, -0.0615, -0.1600),
+                            tc_buy=6.5457, tc_buy_nocar=3.0816),
+    "low_single_rich": dict(mu=0.1077, u0=(3.2454, 2.8222, 4.6934), u1=(-0.1308, -0.0841, -0.2056),
+                            tc_buy=6.6036, tc_buy_nocar=2.5769),
+}
+
+
+@dataclass(frozen=True)
+class Types:
+    # Tipos (claves de PAPER_TYPES) y su fracción en la población (observada).
+    # Default de la tesis: dos tipos con mu distinta (identifican tc_buy y tc_sell; v1.4).
+    names: tuple = ("low_couple_poor", "low_single_poor")
+    f: tuple = (0.5, 0.5)
+
+    def __post_init__(self):
+        if len(self.names) != len(self.f) or abs(sum(self.f) - 1.0) > 1e-12:
+            raise ValueError("names y f deben tener el mismo largo y f debe sumar 1")
+        for k in self.names:
+            if k not in PAPER_TYPES:
+                raise ValueError(f"tipo desconocido: {k}")

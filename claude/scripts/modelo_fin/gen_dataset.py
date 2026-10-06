@@ -155,6 +155,7 @@ def simulate_panel(regs, g, N, K, seed):
 
             frames.append(pd.DataFrame({
                 "id_hogar": np.arange(N), "t": t, "k": k, "id_coche": np.where(has_car, car_id, -1),
+                "x": x, "h": h, "x_next": x_next,                # índices (layouts X, H, X)
                 "estado": np.array(["activo", "terminal", "sin_coche"])[kx],
                 "j": jx, "a": ax, "s_idx": sx,
                 "decision": np.where((kx == 2) & (dec == 1), "stay_none", DECISION[dec]),
@@ -173,6 +174,33 @@ def simulate_panel(regs, g, N, K, seed):
     df = pd.concat(frames, ignore_index=True)
     df["s_h"] = np.where(df["s_h_idx"] >= 0, grid[df["s_h_idx"].clip(0)], np.nan)
     df["s_next"] = np.where(df["s_next_idx"] >= 0, grid[df["s_next_idx"].clip(0)], np.nan)
+    return df
+
+
+def regs_from_objects(objs, F):
+    # Para simulate_panel: objs = lista por régimen de dicts de equilibrium.equilibrium_objects
+    # de UN tipo (P, q, keep, purge, trade, buy, repair).  F = s_transition(g).
+    regs = {k: np.stack([o[k] for o in objs]) for k in ("P", "q", "keep", "purge", "trade", "buy", "repair")}
+    regs["zetas"] = np.zeros(len(objs))
+    regs["F"] = np.asarray(F)
+    return regs
+
+
+def simulate_economy(objs, F, g, f, N, K, seed):
+    # Varios tipos de hogar.  objs[t][tau] = objetos del régimen t y el tipo tau.
+    # N hogares por régimen en total, repartidos según f.  Agrega la columna `tipo` e
+    # ids de hogar únicos por (régimen, hogar).
+    frames, start = [], 0
+    for tau, ft in enumerate(f):
+        Nt = int(round(N * ft))
+        regs = regs_from_objects([objs_t[tau] for objs_t in objs], F)
+        d = simulate_panel(regs, g, Nt, K, seed=1_000 * seed + tau)
+        d.insert(1, "tipo", tau)
+        d["id_hogar"] = d["id_hogar"] + start
+        start += Nt
+        frames.append(d)
+    df = pd.concat(frames, ignore_index=True)
+    df["id_hogar"] = df["t"] * start + df["id_hogar"]          # hogares distintos en cada régimen
     return df
 
 
