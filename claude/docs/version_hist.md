@@ -21,6 +21,8 @@ Fase 1 del plan. Detalle en `modelo_fin.md`, "Sin matrices densas".
 - **`gen_dataset.py`:** simula con el kernel F; los regímenes guardan F, no Q0/Q1.
 - `params.gmres_maxiter` (nuevo).
 - `tests.py`: `test_matrix_free`.
+- **`docs/codigo.md` (nuevo):** documentación de todo el código, con diagramas de cómo se
+  relacionan los objetos y los archivos.
 
 ### Resultados
 - Todo coincide con la versión densa (tag `matrices-densas`): operadores a ~1e-15,
