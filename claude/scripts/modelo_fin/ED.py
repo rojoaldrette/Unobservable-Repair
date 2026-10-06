@@ -15,7 +15,7 @@
 Equilibrio (Gillingham, sec. 3.4, adaptado a s y sin chatarreo):
 
     D(j,a,s) = trade_mass * Pr(comprar el usado (j,a,s) | trade)
-    S(j,a,s) = q(j,a,s) * (1 - Pr(keep | j,a,s))          (todo lo que se suelta se vende)
+    S(j,a,s) = q(j,a,s) * (1 - Pr(keep | j,a,s)) * (1 - Pr(chatarrear | j,a,s))
     ED(P)    = 0  para todos los (j, a, s) con a = 1..A-1
 
 Se resuelve en logs:  ED_log = log D - log max(S, ed_floor).
@@ -72,6 +72,7 @@ def market_components(EV, P, g):
     pt, _, _ = split_states(c.trade, g)
     pp, _, _ = split_states(c.purge, g)
     pr, _, _ = split_states(c.repair, g)
+    psc, _, _ = split_states(c.scrap, g)
     qa, _, _ = split_states(q, g)
     buy_used = c.buy[:n_act].reshape(J, A - 1, S)
     trade_mass = q @ c.trade
@@ -84,7 +85,7 @@ def market_components(EV, P, g):
         repair=pr,
         trade_mass=trade_mass,
         demand=trade_mass * buy_used,
-        supply=qa * (1.0 - pk),
+        supply=qa * (1.0 - pk) * (1.0 - psc),          # lo chatarreado no se ofrece
     )
 
 
@@ -101,7 +102,8 @@ def excess_demand_log(EV, P, g):
     v = choice_values(EV, P, g)
     log_buy_used = log_buy_probs(v.buy, g)[:n_act].reshape(J, A - 1, S)
     log_D = jnp.log(jnp.maximum(q @ c.trade, g.ed_floor)) + log_buy_used
-    log_S = jnp.log(jnp.maximum(qa * (1.0 - pk), g.ed_floor))
+    psc, _, _ = split_states(c.scrap, g)
+    log_S = jnp.log(jnp.maximum(qa * (1.0 - pk) * (1.0 - psc), g.ed_floor))
     return log_D - log_S
 
 

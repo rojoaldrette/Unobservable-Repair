@@ -17,6 +17,9 @@ Uso (desde claude/scripts/comparacion/):
 
 Corre estos equilibrios y escribe output/comparacion.csv (una fila por modelo x edad):
     G25      Gillingham, a_max = 25 (el del paper)
+    M25      modelo_fin con la calibración "tesis" (calibracion.py), un tipo de hogar
+    M25_sin_chatarreo  lo mismo con scrap = False
+  con --viejos, además los de v1.1:
     G7       Gillingham, a_max = 7
     M7       modelo_fin con sus defaults (salvo n_s)
     M7_gill  modelo_fin con s calibrada a la logit de accidentes de Gillingham (Tabla 4)
@@ -37,7 +40,9 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MODULES = ("params", "utils", "primitives", "bellman", "probabilities", "transitions", "ED")
+# Los dos paquetes comparten estos nombres de módulo: se limpian de sys.modules entre cargas
+MODULES = ("params", "utils", "primitives", "bellman", "probabilities", "transitions", "ED",
+           "theta", "equilibrium", "calibracion")
 
 
 def load(pkg):
@@ -105,15 +110,50 @@ def run_mine(n_s, gill_s=False):
     return pd.DataFrame(rows), agg
 
 
+def run_tesis(n_s, a_max=25, scrap=True):
+    # modelo_fin con la calibración "tesis" (log-odds, parámetros de Gillingham, chatarreo),
+    # un tipo de hogar (el de G25), equilibrio con equilibrium.solve
+    m = load("modelo_fin")
+    g = dataclasses.replace(m["calibracion"].calibracion("tesis", a_max=a_max, n_s=n_s), scrap=scrap)
+    eco = m["theta"].economy(g, m["params"].Types(("low_couple_poor",), (1.0,)))
+    z, ok, _ = m["equilibrium"].solve(eco, method="krylov")
+    o = m["equilibrium"].equilibrium_objects(z, eco)[0]
+    sp = lambda k: np.asarray(m["utils"].split_states(o[k], g)[0])
+    qa, P = sp("q"), np.asarray(o["P"])
+    grid = np.asarray(m["utils"].make_s_grid(g))
+    keep, trade, purge, scrap_, rep = sp("keep"), sp("trade"), sp("purge"), sp("scrap"), sp("repair")
+    rows = []
+    for j in range(g.n_brands):
+        for a in range(a_max - 1):
+            w = qa[j, a] / max(qa[j, a].sum(), 1e-300)
+            avg = lambda x: float(np.sum(w * x[j, a]))
+            rows.append(dict(j=j, a=a + 1, P=avg(P), q=float(qa[j, a].sum()),
+                             keep=avg(keep), trade=avg(trade), purge=avg(purge),
+                             endo_scrap=avg((1 - keep) * scrap_), accident=float(np.sum(w * grid)),
+                             repair=avg(rep)))
+    q = np.asarray(o["q"])
+    agg = dict(no_car=float(q[-1]), trade_mass=float(q @ np.asarray(o["trade"])),
+               new_share=float(np.sum(np.asarray(o["buy"])[-g.n_brands - 1:-1])), converged=ok)
+    return pd.DataFrame(rows), agg
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--n_s", type=int, default=24)
+    ap.add_argument("--n_s", type=int, default=40, help="grid de s de modelo_fin")
+    ap.add_argument("--viejos", action="store_true", help="también G7, M7 y M7_gill (v1.1)")
     ap.add_argument("--skip-mine", action="store_true")
     args = ap.parse_args()
 
-    runs = [("G25", lambda: run_gillingham(25)), ("G7", lambda: run_gillingham(7))]
+    # Default: Gillingham con a_max = 25 contra modelo_fin con la calibración "tesis"
+    # (con chatarreo, y sin chatarreo para ver su efecto)
+    runs = [("G25", lambda: run_gillingham(25))]
     if not args.skip_mine:
-        runs += [("M7", lambda: run_mine(args.n_s)), ("M7_gill", lambda: run_mine(args.n_s, True))]
+        runs += [("M25", lambda: run_tesis(args.n_s)),
+                 ("M25_sin_chatarreo", lambda: run_tesis(args.n_s, scrap=False))]
+    if args.viejos:
+        runs += [("G7", lambda: run_gillingham(7))]
+        if not args.skip_mine:
+            runs += [("M7", lambda: run_mine(args.n_s)), ("M7_gill", lambda: run_mine(args.n_s, True))]
 
     tables, summary = [], []
     for name, fn in runs:
@@ -131,6 +171,7 @@ if __name__ == "__main__":
 
     pd.set_option("display.width", 200)
     print(pd.DataFrame(summary).to_string(index=False))
-    print("\nj = 0 (light brown), edades 1..6:")
-    cols = ["modelo", "a", "P", "keep", "trade", "purge", "endo_scrap", "accident", "repair"]
-    print(full[(full["j"] == 0) & (full["a"] <= 6)][cols].round(3).to_string(index=False))
+    print("\nj = 0 (light brown), edades 1, 3, 6, 10, 15, 20, 24:")
+    cols = ["modelo", "a", "P", "q", "keep", "endo_scrap", "accident", "repair"]
+    sel = (full["j"] == 0) & full["a"].isin([1, 3, 6, 10, 15, 20, 24])
+    print(full[sel][cols].round(4).to_string(index=False))

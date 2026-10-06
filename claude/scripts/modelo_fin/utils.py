@@ -36,14 +36,22 @@ def dims(g):
     return J, A, S, n_act, n_act + J + 1
 
 
-def make_s_grid(g):
+def make_state_grid(g):
+    # El grid del estado: la variable en la que la transición es lineal (s, o ℓ = logit(s))
     return jnp.linspace(g.s_min, g.s_max, g.n_s)
 
 
+def make_s_grid(g):
+    # Probabilidad de descomponerse en cada punto del grid (= el grid si s_space = "level")
+    x = make_state_grid(g)
+    return jax.nn.sigmoid(x) if g.s_space == "logodds" else x
+
+
 def s_new_index(g):
-    # Python int (estático): índice del grid más cercano a s_new
+    # numpy (estático), forma (J,): índice del grid más cercano a s_new de cada marca
     grid = np.linspace(g.s_min, g.s_max, g.n_s)
-    return int(np.argmin(np.abs(grid - g.s_new)))
+    s_new = np.broadcast_to(np.asarray(g.s_new, dtype=float), (g.n_brands,))
+    return np.argmin(np.abs(grid[None, :] - s_new[:, None]), axis=1)
 
 
 def split_states(x, g):

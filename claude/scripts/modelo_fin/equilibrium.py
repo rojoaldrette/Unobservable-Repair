@@ -19,7 +19,7 @@ recompila) y con varios tipos de hogar (fracciones f, precios P comunes):
     z = (EV_0, ..., EV_{T-1}, P)
     F(z, θ) = [ EV_t − T_t(EV_t, P)  para cada tipo t ;  ED_log(EV, P) ] = 0
     D(h) = sum_t f_t · trade_mass_t · Pr_t(comprar h | trade)
-    S(x) = sum_t f_t · q_t(x) · (1 − keep_t(x))
+    S(x) = sum_t f_t · q_t(x) · (1 − keep_t(x)) · (1 − scrap_t(x))
     ED_log = log D − log max(S, ed_floor)
 
 Newton sobre z con búsqueda de línea en ||F||.  La dirección se resuelve de dos formas
@@ -70,10 +70,11 @@ def type_market(EV, P, m):
     q = stationary_q(c, m)
     qa, _, _ = split_states(q, m)
     pk, _, _ = split_states(c.keep, m)
+    psc, _, _ = split_states(c.scrap, m)
     v = choice_values(EV, P, m)
     log_buy = log_buy_probs(v.buy, m)[:n_act].reshape(J, A - 1, S)
     log_D = jnp.log(jnp.maximum(q @ c.trade, m.ed_floor)) + log_buy
-    return log_D, qa * (1.0 - pk)
+    return log_D, qa * (1.0 - pk) * (1.0 - psc)          # lo chatarreado no se ofrece
 
 
 def excess_demand_log(EVs, P, eco):
@@ -229,6 +230,6 @@ def equilibrium_objects(z, eco):
         c = ccps_raw(EVs[t], P, m)
         q = stationary_q(c, m)
         d = dict(P=P, EV=EVs[t], q=q, keep=c.keep, purge=c.purge, trade=c.trade, buy=c.buy,
-                 repair=c.repair)
+                 repair=c.repair, scrap=c.scrap)
         out.append({k: np.asarray(v) for k, v in d.items()})
     return out

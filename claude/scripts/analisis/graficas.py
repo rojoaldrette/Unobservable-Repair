@@ -22,7 +22,7 @@ secuencial (azules).
     distribucion_s         mapa de calor q(a, s) por marca y fuente (modelo_fin)
     precios_3d_<marca>     superficie P(a, s) por fuente (modelo_fin); celdas sin masa en blanco
     precios_edad           media de P sobre s ponderada por q, por edad y marca; con Gillingham
-    ccps_edad              Pr(reparar) y Pr(keep) por edad (ponderadas por q), por marca
+    ccps_edad              Pr(reparar), Pr(keep) y Pr(chatarrear) por edad (ponderadas por q)
     mc_sesgo               (si hay varias réplicas) estimado − verdad por parámetro y estimador
 '''
 
@@ -48,6 +48,14 @@ ESTILO = {"verdad": dict(lw=2.4, ls="-"), "verdad_gill": dict(lw=1.6, ls=":")}
 MARCADOR = {"oraculo": "o", "hx": "s", "gill_parcial": "^", "gill_completa": "v",
             "gill_parcial|modelo_fin": "^", "gill_completa|modelo_fin": "v"}
 SECUENCIAL = "Blues"
+
+
+def _eje_s(c, df):
+    # Con s en log-odds el grid es uniforme en ℓ = logit(s): se grafica contra ℓ
+    logodds = c.config.get("params", {}).get("s_space") == "logodds"
+    if logodds and "ell" in df:
+        return "ell", "ℓ = logit(s)"
+    return "s", "s (prob. de descompostura)"
 ORDEN_LEYENDA = ("verdad", "oraculo", "hx", "gill_parcial|modelo_fin", "gill_completa|modelo_fin",
                  "verdad_gill", "gill_parcial", "gill_completa")
 
@@ -149,7 +157,8 @@ def distribucion_s(mf, out):
     if mf is None or mf.distribucion is None:
         return
     d = mf.distribucion[mf.distribucion["estado"] == "activo"]
-    d = agregar_tipos(d, mf.f, claves=("fuente", "j", "a", "s"))
+    ycol, ylab = _eje_s(mf, d)
+    d = agregar_tipos(d, mf.f, claves=("fuente", "j", "a", ycol))
     fuentes = list(dict.fromkeys(d["fuente"]))
     marcas = _marcas(d)
     vmax = d["q"].max()
@@ -157,7 +166,7 @@ def distribucion_s(mf, out):
                              squeeze=False, sharex=True, sharey=True)
     for i, fuente in enumerate(fuentes):
         for k, j in enumerate(marcas):
-            dd = d[(d["fuente"] == fuente) & (d["j"] == j)].pivot(index="s", columns="a", values="q")
+            dd = d[(d["fuente"] == fuente) & (d["j"] == j)].pivot(index=ycol, columns="a", values="q")
             ax = axes[i, k]
             im = ax.pcolormesh(dd.columns, dd.index, dd.values, cmap=SECUENCIAL, vmin=0, vmax=vmax,
                                shading="nearest")
@@ -165,7 +174,7 @@ def distribucion_s(mf, out):
             if i == 0:
                 ax.set_title(MARCAS.get(j, f"marca {j}"))
             if k == 0:
-                ax.set_ylabel(f"{etiqueta(fuente)}\ns")
+                ax.set_ylabel(f"{etiqueta(fuente)}\n{ylab}")
             if i == len(fuentes) - 1:
                 ax.set_xlabel("edad")
     fig.colorbar(im, ax=axes, shrink=0.8, label="fracción de hogares (q)")
@@ -184,25 +193,26 @@ def precios_3d(mf, out, regimen=None):
     if mf is None or mf.precios is None:
         return
     d, regimen = _regimen(mf.precios, regimen)
+    ycol, ylab = _eje_s(mf, d)
     fuentes = list(dict.fromkeys(d["fuente"]))
     d = d.assign(P_plot=np.where(d["sin_masa"].astype(str).str.lower() == "true", np.nan, d["P"]))
     for j in _marcas(d):
         dj = d[d["j"] == j]
         zmin, zmax = np.nanmin(dj["P_plot"]), np.nanmax(dj["P_plot"])
         # Eje s recortado a donde hay masa en alguna fuente (el resto del grid queda vacío)
-        s_con_masa = dj.loc[dj["P_plot"].notna(), "s"]
+        s_con_masa = dj.loc[dj["P_plot"].notna(), ycol]
         s_lo, s_hi = s_con_masa.min(), s_con_masa.max()
-        dj = dj[(dj["s"] >= s_lo) & (dj["s"] <= s_hi)]
+        dj = dj[(dj[ycol] >= s_lo) & (dj[ycol] <= s_hi)]
         fig = plt.figure(figsize=(5.2 * len(fuentes), 4.8))
         for i, fuente in enumerate(fuentes):
-            p = dj[dj["fuente"] == fuente].pivot(index="s", columns="a", values="P_plot")
+            p = dj[dj["fuente"] == fuente].pivot(index=ycol, columns="a", values="P_plot")
             A, Sg = np.meshgrid(p.columns.to_numpy(float), p.index.to_numpy(float))
             ax = fig.add_subplot(1, len(fuentes), i + 1, projection="3d")
             ax.plot_surface(A, Sg, p.values, cmap=SECUENCIAL, vmin=zmin, vmax=zmax,
                             edgecolor="#ffffff", linewidth=0.2, antialiased=True)
             ax.set_zlim(zmin, zmax)
             ax.set_xlabel("edad a", labelpad=6)
-            ax.set_ylabel("s", labelpad=6)
+            ax.set_ylabel(ylab, labelpad=8)
             ax.set_zlabel("P (miles DKK)", labelpad=8)
             ax.set_title(etiqueta(fuente))
             ax.view_init(elev=25, azim=-135)
@@ -258,14 +268,15 @@ def _ccps_edad(c, cols):
 def ccps_edad(mf, gills, out):
     tablas = []
     if mf is not None and mf.ccps is not None:
-        tablas.append(_ccps_edad(mf, ("repair", "keep")))
-    tablas += [_ccps_edad(g, ("keep",)) for g in gills if g.ccps is not None]
+        tablas.append(_ccps_edad(mf, ("repair", "keep", "scrap")))
+    tablas += [_ccps_edad(g, ("keep", "scrap")) for g in gills if g.ccps is not None]
     tablas = [t for t in tablas if t is not None]
     if not tablas:
         return
     d = unir(tablas)
     marcas = _marcas(d)
-    filas = [("repair", "Pr(reparar | coche)"), ("keep", "Pr(quedarse el coche)")]
+    filas = [("repair", "Pr(reparar | coche)"), ("keep", "Pr(quedarse el coche)"),
+             ("scrap", "Pr(chatarrear | se deshace)")]
     filas = [f for f in filas if f[0] in d]
     fig, axes = plt.subplots(len(filas), len(marcas), figsize=(4 * len(marcas), 3.0 * len(filas)),
                              squeeze=False, sharex=True)

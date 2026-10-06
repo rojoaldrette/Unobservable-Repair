@@ -23,6 +23,8 @@ celdas con conteos.  Con c = CCPs del tipo τ en el equilibrio del régimen t:
     Pr(o, h | x) = keep(x)                 si o = keep   (h = x)
                  = purge(x)                si o = purge  (h = none; en none: seguir sin coche)
                  = trade(x) · buy(h)       si o = trade
+    y si x es activo y o ≠ keep, por Pr(chatarrear | x) o 1 − Pr(chatarrear | x) según se
+    observe chatarreo o venta (con g.scrap = False la probabilidad de chatarrear es 0).
 
     Pr(x' | h)  (h con coche; para h = none es 1):
        muere (x' = term):   p_term(h) = s(h)  (1 en la última edad)          [opción 2: no depende de r]
@@ -67,23 +69,26 @@ def treat_data(df, g, info):
     # Panel de gen_dataset.simulate_economy -> celdas con conteos (arreglos jnp).
     # "hx" no usa la columna r (puede venir de view(df, "ideal"), que no la trae).
     J, A, S, n_act, n = dims(g)
-    cols = ["tipo", "t", "x", "decision", "h", "x_next"] + (["r"] if info == "oraculo" else [])
+    cols = ["tipo", "t", "x", "decision", "h", "x_next", "chatarreo"] + (["r"] if info == "oraculo" else [])
     d = df[cols].copy()
     d["o"] = d["decision"].map(O_CODE)
-    keys = ["tipo", "t", "x", "o", "h", "x_next"] + (["r"] if info == "oraculo" else [])
+    keys = ["tipo", "t", "x", "o", "chatarreo", "h", "x_next"] + (["r"] if info == "oraculo" else [])
     cells = d.groupby(keys).size().rename("cnt").reset_index()
     if info != "oraculo":
         cells["r"] = 0
     kh, jh, dh, sh = decode_states(cells["h"].to_numpy(), g)
+    kx = decode_states(cells["x"].to_numpy(), g)[0]
     kn, _, _, sn = decode_states(cells["x_next"].to_numpy(), g)
     i0 = s_new_index(g)
     data = dict(
         tau=cells["tipo"].to_numpy(), t=cells["t"].to_numpy(), x=cells["x"].to_numpy(),
         o=cells["o"].to_numpy(), h=cells["h"].to_numpy(), r=cells["r"].to_numpy(),
+        dispose=(kx == 0) & (cells["o"].to_numpy() > 0),   # se deshizo de un coche activo
+        chat=cells["chatarreo"].to_numpy() == 1,           # ... y lo chatarreó (si no, lo vendió)
         cnt=cells["cnt"].to_numpy().astype(float),
         car=kh < 2,                                   # la tenencia es un coche (usado o nuevo)
         j_h=np.maximum(jh, 0), d_h=np.maximum(dh, 0),  # nuevo: d = 0
-        s_h=np.where(kh == 0, sh, i0),                 # nuevo: s_new
+        s_h=np.where(kh == 0, sh, i0[np.maximum(jh, 0)]),  # nuevo: s_new de su marca
         last=(kh == 0) & (dh == A - 1),                # usado en la última edad: muere seguro
         dead=kn == 1, s_next=np.maximum(sn, 0),
     )
@@ -97,12 +102,12 @@ def _log(p):
 
 
 def regime_ccps(z, eco):
-    # (T_tipos, 5, n): keep, purge, trade sobre X; buy, repair sobre H
+    # (T_tipos, 6, n): keep, purge, trade, scrap sobre X; buy, repair sobre H
     EVs, P = split_z(z, eco)
     out = []
     for t in range(eco.n_types):
         c = ccps_raw(EVs[t], P, eco.type_model(t))
-        out.append(jnp.stack([c.keep, c.purge, c.trade, c.buy, c.repair]))
+        out.append(jnp.stack([c.keep, c.purge, c.trade, c.buy, c.repair, c.scrap]))
     return jnp.stack(out)
 
 
@@ -115,8 +120,11 @@ def cell_logp(zs, ecos, data, info):
     trade = C[tt, tau, 2, data["x"]]
     buy = C[tt, tau, 3, data["h"]]
     p = C[tt, tau, 4, data["h"]]
+    sc = C[tt, tau, 5, data["x"]]
     o = data["o"]
     p_choice = jnp.where(o == 0, keep, jnp.where(o == 1, purge, trade * buy))
+    # vender o chatarrear el coche activo del que se deshizo (con g.scrap = False, sc = 0)
+    p_choice = p_choice * jnp.where(data["dispose"], jnp.where(data["chat"], sc, 1.0 - sc), 1.0)
 
     m0 = ecos[0].type_model(0)                  # la dinámica de s es común a tipos y regímenes
     F = s_transition(m0)                        # (2, J, A, S, S)

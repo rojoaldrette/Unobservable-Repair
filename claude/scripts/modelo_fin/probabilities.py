@@ -28,6 +28,7 @@ class CCP(NamedTuple):
     trade: jnp.ndarray   # (n,) sobre X; comprar algún coche
     buy: jnp.ndarray     # (n,) sobre H: Pr(comprar h | trade); 0 en la columna none
     repair: jnp.ndarray  # (n,) sobre H: Pr(reparar | h); 0 en nuevos y none
+    scrap: jnp.ndarray   # (n,) sobre X: Pr(chatarrear | se deshace del coche); 1 en term, 0 en none
 
 
 def ccps_raw(EV, P, g):
@@ -47,12 +48,16 @@ def ccps_raw(EV, P, g):
     # Etapa 2: solo depende de h (análogo al scrap endógeno de Gillingham, ec. 18)
     p_rep = choice_probs(v.repair, g.sigma_repair)[1]
 
+    # Chatarreo (estático, igual dentro de purge y trade; Gillingham ec. 18)
+    p_scrap = choice_probs([v.scrap, v.sell], g.sigma_sell)[0] if g.scrap else jnp.zeros_like(v.sell)
+
     return CCP(
         keep=stack_states(p_act[0], zJ, z0),
         purge=stack_states(p_act[1], p_term[0], p_none[0]),
         trade=stack_states(p_act[2], p_term[1], p_none[1]),
         buy=jnp.concatenate([p_buy, jnp.zeros(1)]),
         repair=stack_states(p_rep, zJ, z0),
+        scrap=stack_states(p_scrap, jnp.ones(J), z0),
     )
 
 

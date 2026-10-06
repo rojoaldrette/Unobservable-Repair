@@ -65,8 +65,8 @@ python main.py --mf ../../output/estimaciones/modelo_fin/<tag> \
 
 | opción | default | qué es |
 |---|---|---|
-| `--calib` | tesis_v0 | `defaults`, `gill_s` (s calibrada a la Tabla 4) o `tesis_v0` (gill_s + R realista + sigma_repair 0.3) |
-| `--a_max`, `--n_s` | 7, 100 | tamaño del modelo |
+| `--calib` | tesis | desde v1.8: `tesis` (calibracion.md); las viejas `tesis_v0`, `gill_s`, `defaults` |
+| `--a_max`, `--n_s` | 25, 100 | tamaño del modelo |
 | `--types`, `--f` | pareja pobre + soltero pobre, mitad y mitad | tipos de hogar |
 | `--T`, `--spread` | 13, 0.3 | años-régimen de R: R_t = R exp(zeta_t), zeta en [−0.3, 0.3] |
 | `--N`, `--K` | 20,000, 2 | hogares por régimen y años por hogar |
@@ -117,8 +117,8 @@ que la columna de Gillingham sobre datos con reparación **mide el sesgo de esti
 ignorando la reparación**. En las salidas aparece como `gill_parcial|modelo_fin`.
 
 Advertencias del cruce:
-- modelo_fin todavía no tiene chatarreo endógeno (Fase 2). Gillingham va a estimar
-  chatarreo cerca de cero y atribuirá todas las salidas a accidentes.
+- Desde v1.8 modelo_fin tiene chatarreo endógeno (encendido en "tesis"): el panel
+  marca las salidas por chatarreo y el cruce las pasa como "chatarra" a Gillingham.
 - La prob. de accidente de Gillingham es un logit en la edad; en modelo_fin es s, que
   depende de la historia de reparación. Los parámetros de accidente no tienen
   contraparte directa.
@@ -257,14 +257,12 @@ optimizador se cortó a propósito. Sirven solo para probar el código.
 
 ## 9. Pendientes y advertencias antes de correr en serio
 
-1. **Calibración (Fase 3).** El default es `tesis_v0` con a_max = 7 y s en niveles. Lo
-   acordado es log-odds y a_max = 25; hay que hacerlo antes de las corridas finales.
-   El código de estimación no cambia: la transición de s está encapsulada en
-   `primitives.s_transition`.
-2. **sigma_repair = 0.3 es provisional.** Revisar que Pr(repair) quede en un rango con
-   información una vez fija la calibración.
-3. **Chatarreo endógeno opcional** (resto de la Fase 2). Sin él, el cruce con Gillingham
-   compara modelos que difieren en dos cosas: reparación y chatarreo.
+1. ~~Calibración (Fase 3).~~ Hecha en v1.8: `calibracion("tesis")`, a_max = 25,
+   log-odds (`calibracion.md`).
+2. **s_repair, s_sigma y sigma_repair son propios.** Con "tesis", Pr(reparar) va de
+   ~0.33 (coches nuevos) a ~0.03 (viejos); revisar con el MC que alcance para identificar.
+3. ~~Chatarreo endógeno opcional.~~ Hecho en v1.8 y encendido en "tesis"; el cruce con
+   Gillingham ya difiere solo en la reparación.
 4. **Costo de cómputo desconocido a tamaño completo.** Cada evaluación resuelve T = 13
    equilibrios con 2 tipos (~21,600 incógnitas cada uno) y el gradiente pide ~30
    sistemas lineales por régimen. Conviene una corrida de prueba con `--T 3 --N 5000`

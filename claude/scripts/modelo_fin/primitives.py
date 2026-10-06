@@ -26,7 +26,7 @@ import jax.numpy as jnp
 from jax.scipy.special import logsumexp
 from jax.scipy.stats import norm
 
-from utils import make_s_grid
+from utils import make_s_grid, make_state_grid
 
 
 # Utilidad y costos ________________________________________________________________
@@ -67,16 +67,17 @@ def s_transition_rows(mean, sd, grid):
 
 def s_mean_next(g):
     # m(r, j, d, s): la "m(y, s)" de Hu & Xin.  shape (2, J, A, S)
+    # en la variable del grid (s o ℓ)
     r = jnp.arange(2)[:, None, None, None]
     c = jnp.asarray(g.s_const)[None, :, None, None]
     d = jnp.arange(g.a_max)[None, None, :, None]
-    s = make_s_grid(g)[None, None, None, :]
+    s = make_state_grid(g)[None, None, None, :]
     return c + g.s_age * d + g.s_persist * s - g.s_repair * r
 
 
 def s_transition(g):
     # F[r, j, d, s, s'] = Pr(s' | s, j, d, r, sobrevive).  shape (2, J, A, S, S)
-    return s_transition_rows(s_mean_next(g), g.s_sigma, make_s_grid(g))
+    return s_transition_rows(s_mean_next(g), g.s_sigma, make_state_grid(g))
 
 
 # Shocks ________________________________________________________________

@@ -5,6 +5,71 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.8: calibración de la tesis (a_max = 25, log-odds) y chatarreo endógeno (2026-10-06)
+
+Fase 3 del plan y lo que faltaba de la Fase 2.  Detalle en `calibracion.md`.
+
+### Cambios
+- **Desgaste en log-odds** (`Params.s_space = "logodds"`): el estado es ℓ = logit(s) y
+  s = sigmoid(ℓ).  `utils.make_state_grid` (grid de ℓ) y `make_s_grid` (prob. s).
+  `s_new` puede ser uno por marca (`s_new_index` devuelve un índice por marca).
+  `s_space = "level"` (default de Params) es el modelo de antes, sin cambios.
+- **Chatarreo endógeno opcional** (`Params.scrap`, `sigma_sell`): nido vender/chatarrear
+  al deshacerse de un coche activo (Gillingham ec. 18).  CCP `scrap`; la oferta excluye
+  lo chatarreado; el panel trae la columna `chatarreo`; la verosimilitud usa venta o
+  chatarreo observados; `sigma_sell` es estimable (logística).  Con `scrap = False`, el
+  modelo de antes.
+- **`calibracion.py`** con calibraciones con nombre.  **"tesis"** (default de todo):
+  a_max = 25, parámetros de Gillingham (Tablas 4-10), u_s = 0, ℓ_nuevo = acc_int_j,
+  ℓ' = ℓ + acc_age_j − 0.5 r + η (sd 0.15), R = (4, 6.5, 10) mil DKK +6%/año,
+  sigma_repair = 0.3, chatarreo con sigma_sell = 0.3454.
+- **Defaults a a_max = 25 y "tesis"** en `estimar.py`, `main.py` (MC de primera etapa),
+  `slurm_estimar.sh`, `slurm_mc.sh` y `compare.py` (ahora G25 contra M25).  Gillingham
+  ya tenía a_max = 25.
+- `verdad.npz` solo se reutiliza si Params y tipos coinciden (antes solo miraba R).
+- Análisis: superficies y mapas de calor contra ℓ cuando s está en log-odds; fila de
+  Pr(chatarrear) en `ccps_edad`; filas unificadas en `tabla_mercado`.
+- `loglikelihood.start_values` arranca de los valores de g (servían solo en niveles).
+
+### Resultados (equilibrio, n_s = 40, un tipo; `compare.py`)
+| | G25 | M25 ("tesis") | M25 sin chatarreo |
+|---|---|---|---|
+| hogares sin coche | 0.016 | 0.015 | 0.016 |
+| P light brown, edad 1 / 10 / 15 | 149.9 / 46.0 / 10.8 | 151.9 / 48.0 / 11.1 | 149.2 / 37.1 / −7.8 |
+| chatarreo endógeno, edad 20 | 0.36 | 0.36 | 0 |
+| prob. de descomponerse, edad 20 | 0.118 | 0.036 | 0.053 |
+| Pr(reparar), edad 1 / 10 / 20 | — | 0.33 / 0.12 / 0.04 | 0.27 / 0.08 / 0.03 |
+
+- **modelo_fin con la calibración "tesis" reproduce a Gillingham** en precios, hogares
+  sin coche y chatarreo; la diferencia está donde debe: poder reparar baja la
+  probabilidad de descomponerse de los coches viejos.
+- **Sin chatarreo los precios de coches viejos salen negativos** (hasta −18 mil DKK):
+  por eso "tesis" lo trae encendido.
+- Con dos tipos converge en 33 s; el tipo soltero pobre (mu menor) tiene coches más
+  viejos, más hogares sin coche (2.7%) y repara más.
+
+### Verificación
+- Modo de antes (niveles, sin chatarreo): `tests.py` da exactamente lo mismo.
+- Con "tesis" (juguete): Economy == ED.py (1e-13), krylov == dense (1e-13),
+  gradiente implícito contra diferencias finitas 1e-9 (30 parámetros, con sigma_sell).
+- Pipelines completos de juguete: estimar.py, Gillingham sobre el panel, análisis, MC
+  de primera etapa.
+
+### Pendientes
+- **Criterio de la calibración (pedido del usuario):** solo los *parámetros* deben
+  coincidir con los de Gillingham, no los resultados (precios, distribución,
+  chatarreo, etc.).  El objetivo es mostrar el sesgo que introduce la reparación en
+  sus resultados, así que las diferencias en resultados entre G25 y M25 son lo que se
+  quiere medir, no algo que calibrar para que desaparezca.  No ajustar s_repair,
+  s_sigma, sigma_repair ni R para acercar los resultados de M25 a los de G25.
+- s_repair = 0.5, s_sigma = 0.15 y sigma_repair = 0.3 son calibración propia (no hay
+  dato).  Revisar con el MC si dan suficiente información.
+- Medir tiempos en GPU con un diseño chico antes del MC completo.
+- Prueba de anidamiento exacto con Gillingham (sin reparar y η -> 0): con log-odds el
+  paso de ℓ por año (acc_age_j) no cae en el grid, así que solo anida aproximadamente.
+
+---
+
 ## v1.7: estimación estructural (D0, D1, Gillingham), salidas y análisis (2026-10-06)
 
 Detalle en `reporte_estimacion.md`. **No se corrió ninguna estimación real**: solo

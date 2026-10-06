@@ -44,7 +44,7 @@ from jax.flatten_util import ravel_pytree
 from jax.scipy.stats import norm
 from scipy.optimize import minimize
 
-from utils import make_s_grid
+from utils import make_state_grid
 
 
 # Datos ______________________________________________________________
@@ -59,12 +59,11 @@ def treat_data(df, g, R=None, with_r=False):
     keys = ["t", "j_h", "d_h", "s_h_idx", "s_next_idx"] + (["r"] if with_r else [])
     cell = d.groupby(keys).size().rename("cnt").reset_index()
 
-    grid = np.asarray(make_s_grid(g))
+    grid = np.asarray(make_state_grid(g))            # en la variable de la transición (s o ℓ)
     mid = 0.5 * (grid[1:] + grid[:-1])
     # Bordes finitos en vez de +-inf: en la derivada respecto a sd, +-inf da 0 * inf = nan.
-    # 10 está a cientos de desviaciones estándar de cualquier s en [0, 1].
-    lo = np.concatenate([[-10.0], mid])
-    hi = np.concatenate([mid, [10.0]])
+    lo = np.concatenate([[grid[0] - 1e3], mid])
+    hi = np.concatenate([mid, [grid[-1] + 1e3]])
     k = cell["s_next_idx"].to_numpy()
     out = dict(
         t=jnp.asarray(cell["t"].to_numpy()),
@@ -139,11 +138,13 @@ def ll_hx(th, data, spec):
 # Valores iniciales ______________________________________________________________
 
 def start_values(g, kind, spec="flexible", n_regimes=None):
+    # La dinámica de s arranca en los valores de g perturbados (sirve en niveles y en
+    # log-odds; antes eran números fijos pensados para niveles).
     J, A = g.n_brands, g.a_max
-    th = dict(c=jnp.full(J, 0.02), s_age=jnp.array(0.005), s_persist=jnp.array(1.0),
-              log_sd=jnp.log(jnp.array(0.02)))
+    th = dict(c=jnp.asarray(g.s_const, dtype=float) * 0.8, s_age=jnp.array(g.s_age * 0.8),
+              s_persist=jnp.array(float(g.s_persist)), log_sd=jnp.log(jnp.array(g.s_sigma * 1.3)))
     if kind in ("oracle", "hx"):
-        th["log_srep"] = jnp.log(jnp.array(0.03))
+        th["log_srep"] = jnp.log(jnp.array(g.s_repair * 0.5))
     if kind == "hx":
         th["g1"], th["g2"] = jnp.array(0.0), jnp.array(0.0)
         if spec == "flexible":

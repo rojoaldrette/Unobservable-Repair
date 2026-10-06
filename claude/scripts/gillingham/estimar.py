@@ -79,7 +79,9 @@ def cells_from_modelo_fin(df, g):
     th = df["tipo_h"].to_numpy()
     h = np.where(th == "usado", df["j_h"] * (A - 1) + df["d_h"] - 1,
                  np.where(th == "nuevo", n_act + df["j_h"], n - 1))
-    term = (est == "terminal").astype(int)
+    # chatarra: deshacerse de un terminal, o chatarreo endógeno de un activo (si modelo_fin lo tiene)
+    chat = df["chatarreo"].to_numpy() == 1 if "chatarreo" in df else np.zeros(len(df), bool)
+    term = ((est == "terminal") | chat).astype(int)
     dec = df["decision"].to_numpy()
     o = np.where(dec == "keep", 0, np.where(dec == "trade", 3 + term, 1 + term))
     d = pd.DataFrame(dict(id_hogar=df["id_hogar"].to_numpy(), tipo=df["tipo"].to_numpy(),
@@ -126,7 +128,7 @@ def parse():
     ap.add_argument("--panel", default="", help="panel de modelo_fin (csv.gz); si no, datos propios")
     ap.add_argument("--N", type=int, default=20_000)
     ap.add_argument("--K", type=int, default=10)
-    ap.add_argument("--a_max", type=int, default=25)
+    ap.add_argument("--a_max", type=int, default=25)          # el del paper
     ap.add_argument("--infos", default="parcial,completa")
     ap.add_argument("--fix", default="")
     ap.add_argument("--types", default="low_couple_poor,low_single_poor")

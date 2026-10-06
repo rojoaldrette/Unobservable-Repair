@@ -1,7 +1,10 @@
 # Chatarreo endógeno en modelo_fin: como opción
 
-Estado: **propuesta aceptada, por implementar** (Fase 2 del plan, junto con los tipos de
-hogar). Por defecto apagado: con `scrap = False` el modelo es exactamente el de hoy.
+Estado: **implementado en v1.8** (`Params.scrap`, `sigma_sell`).  Apagado en `Params()`
+(el modelo de antes); **encendido en la calibración "tesis"**, porque sin él los precios
+de coches viejos salen negativos con a_max = 25 (ver `calibracion.md`).  Pruebas: con
+`scrap = False` todo da lo mismo que antes; gradiente con chatarreo contra diferencias
+finitas 1e-9.
 
 ## Por qué se quitó (v1.0)
 

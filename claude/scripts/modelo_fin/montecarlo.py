@@ -32,7 +32,7 @@ import jax.numpy as jnp
 from gen_dataset import solve_regimes, simulate_panel, view
 from loglikelihood import (treat_data, start_values, estim_ll, summarize_theta,
                            true_theta, p_repair)
-from utils import make_s_grid
+from utils import make_state_grid
 
 
 @dataclass(frozen=True)
@@ -72,7 +72,7 @@ def _eval_points(df, g, R):
     cell = (d.groupby(["t", "j_h", "d_h", "s_h_idx"])
              .agg(cnt=("p_rep", "size"), p_true=("p_rep", "mean"), r_bar=("r", "mean"))
              .reset_index())
-    grid = np.asarray(make_s_grid(g))
+    grid = np.asarray(make_state_grid(g))
     data = dict(t=jnp.asarray(cell["t"].to_numpy()), j=jnp.asarray(cell["j_h"].to_numpy()),
                 d=jnp.asarray(cell["d_h"].to_numpy()), s=jnp.asarray(grid[cell["s_h_idx"].to_numpy()]),
                 new=jnp.zeros(len(cell), bool),

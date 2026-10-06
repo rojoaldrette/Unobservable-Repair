@@ -109,6 +109,11 @@ class Params:
     # comprador elige s casi por valor neto (precio hedónico) y la dependencia del grid
     # se va a cero (el valor inclusivo crece como sigma_s * log n_s).
     sigma_s: float = 0.1
+    # Chatarreo endógeno (opcional, docs/chatarreo_endogeno.md).  Con scrap = True, quien se
+    # deshace de un coche activo elige vender (mu P − Ts) o chatarrear (mu p_scrap) en un
+    # nido de escala sigma_sell (Gillingham ec. 18; Tabla 5: 0.3454).  Con False, solo vende.
+    scrap: bool = False
+    sigma_sell: float = 0.3454
 
 
     # State variables #####################
@@ -116,15 +121,20 @@ class Params:
     n_brands: int = 3
     a_max: int = 7              # edad terminal
 
-    # Grid de s (probabilidad de descomponerse)
+    # Grid del estado de desgaste.  s_space dice en qué variable está el grid:
+    #   "level":   el estado es s (prob. de descomponerse); grid en [s_min, s_max] ⊂ [0, 1]
+    #   "logodds": el estado es ℓ = logit(s); grid en [s_min, s_max] (en unidades de ℓ) y
+    #              s = sigmoid(ℓ).  La transición es lineal en ℓ (calibracion.tesis).
+    # s_new (en las mismas unidades que el grid): un número o uno por marca.
+    s_space: str = "level"
     s_min: float = 0.0
     s_max: float = 0.5
     n_s: int = 100
-    s_new: float = 0.03         # todos los coches nuevos empiezan aquí (se ajusta al grid)
+    s_new: object = 0.03        # los coches nuevos de la marca j empiezan aquí (se ajusta al grid)
 
-    # Transición de s  (Hu & Xin, Assumption 2):
-    #   s' = m(r, j, a, s) + eta,   eta ~ N(0, s_sigma^2), discretizado en el grid
-    #   m  = s_const_j + s_age * a + s_persist * s - s_repair * r
+    # Transición del estado (Hu & Xin, Assumption 2), en la variable del grid (s o ℓ):
+    #   x' = m(r, j, a, x) + eta,   eta ~ N(0, s_sigma^2), discretizado en el grid
+    #   m  = s_const_j + s_age * a + s_persist * x - s_repair * r
     # Solo aplica si el coche sobrevive (prob 1 - s); si se descompone va a a_max.
     s_const: tuple = (0.020, 0.015, 0.025)
     s_age: float = 0.005
@@ -170,10 +180,18 @@ class Params:
                 raise ValueError(f"{name} debe tener longitud n_brands={J}")
         if len(self.repair_price) != J or any(len(r) != A - 1 for r in self.repair_price):
             raise ValueError(f"repair_price debe ser J x (a_max-1) = {J} x {A - 1}")
-        if not (0.0 <= self.s_min < self.s_max <= 1.0):
+        if self.s_space not in ("level", "logodds"):
+            raise ValueError("s_space debe ser level o logodds")
+        if self.s_space == "level" and not (0.0 <= self.s_min < self.s_max <= 1.0):
             raise ValueError("el grid de s debe estar en [0, 1]")
+        if not self.s_min < self.s_max:
+            raise ValueError("s_min < s_max")
+        if isinstance(self.s_new, tuple) and len(self.s_new) != J:
+            raise ValueError(f"s_new debe ser un número o tener longitud n_brands={J}")
         if not (0 < self.sigma_s <= self.sigma_trade <= self.sigma):
             raise ValueError("GEV válido requiere 0 < sigma_s <= sigma_trade <= sigma")
+        if self.scrap and not (0 < self.sigma_sell <= self.sigma_trade):
+            raise ValueError("GEV válido requiere 0 < sigma_sell <= sigma_trade")
         if not self.sigma_repair > 0:
             raise ValueError("sigma_repair > 0")
         if A < 3:

@@ -23,8 +23,9 @@ Quick comments:
    etapa 2: shock nuevo, {reparar, no reparar} sobre h -> manejas h ->
    con prob s se descompone (-> term), si no s' = m(r,j,d,s) + eta, edad d+1.
 
-3. Sin chatarreo endógeno.  Un coche activo solo sale de tus manos vendiéndolo
-   (trade o purge, pagando Ts), por accidente o al llegar a la edad terminal.
+3. Chatarreo endógeno opcional (g.scrap).  Sin él, un coche activo solo sale de tus
+   manos vendiéndolo (trade o purge, pagando Ts), por accidente o al llegar a la edad
+   terminal.  Con él, al deshacerte del coche eliges vender o chatarrear.
 '''
 
 from functools import partial
@@ -56,10 +57,10 @@ def continuation_values(EV, g):
     last = jnp.broadcast_to(term[None, :, None, None], (2, J, 1, S))
     cv_used = g.beta * jnp.concatenate([survive, last], axis=2)
 
-    i0 = s_new_index(g)
+    i0 = s_new_index(g)                                    # (J,): s_new de cada marca
     s0 = grid[i0]
-    cv_new = g.beta * ((1.0 - s0) * jnp.sum(F[0, :, 0, i0, :] * act[:, 0, :], axis=-1)
-                       + s0 * term)
+    F_new = F[0, jnp.arange(J), 0, i0, :]                  # (J, S)
+    cv_new = g.beta * ((1.0 - s0) * jnp.sum(F_new * act[:, 0, :], axis=-1) + s0 * term)
     return cv_used, cv_new
 
 
@@ -106,6 +107,8 @@ class Values(NamedTuple):
     trade_none: jnp.ndarray  # ()
     buy: jnp.ndarray         # (J*(A-1)*S + J,)  valor de comprar h, sin términos del vendedor
     sell: jnp.ndarray        # (J, A-1, S)   lo que recibe quien vende su coche activo
+    scrap: jnp.ndarray       # (J, A-1, S)   lo que recibe quien lo chatarrea (mu p_scrap)
+    disposal: jnp.ndarray    # (J, A-1, S)   valor de deshacerse: vender, o emax(vender, chatarrear)
     repair: tuple            # [v_r=0, v_r=1], cada uno (J, A-1, S), sobre H
 
 
@@ -120,13 +123,16 @@ def choice_values(EV, P, g):
     p_new = jnp.asarray(g.p_new)
     p_scrap = jnp.asarray(g.p_scrap)
     u_used = u[:, 1:, :]
-    u_new = u[:, 0, i0]
+    u_new = u[jnp.arange(u.shape[0]), 0, i0]
 
     # Quedarse el coche: lo manejas y pasas a la etapa 2 con h = x
     keep = u_used + W
 
-    # Deshacerse de un coche activo = venderlo (sin chatarreo endógeno)
+    # Deshacerse de un coche activo: venderlo, o (con g.scrap) elegir entre vender y
+    # chatarrear en un nido de escala sigma_sell (estático: igual dentro de purge y trade)
     sell = g.mu * P - sell_cost(g)[None, :, None]
+    scrap = jnp.broadcast_to(g.mu * p_scrap[:, None, None], P.shape)
+    disposal = emax([scrap, sell], g.sigma_sell) if g.scrap else sell
 
     # Comprar h: común a todos los estados (salvo una constante aditiva)
     buy_used = u_used - g.mu * P - g.tc_buy + W
@@ -138,14 +144,16 @@ def choice_values(EV, P, g):
 
     return Values(
         keep=keep,
-        purge_act=sell + no_car_next,
-        trade_act=sell + iv_buy,
+        purge_act=disposal + no_car_next,
+        trade_act=disposal + iv_buy,
         purge_term=g.mu * p_scrap + no_car_next,
         trade_term=g.mu * p_scrap + iv_buy,
         stay_none=no_car_next,
         trade_none=-g.tc_buy_nocar + iv_buy,
         buy=buy,
         sell=sell,
+        scrap=scrap,
+        disposal=disposal,
         repair=rep_vals,
     )
 

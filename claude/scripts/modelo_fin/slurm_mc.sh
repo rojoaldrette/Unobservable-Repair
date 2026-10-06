@@ -17,7 +17,7 @@
 export PYTHONIOENCODING=utf-8
 export XLA_FLAGS="--xla_cpu_multi_thread_eigen=true intra_op_parallelism_threads=${SLURM_CPUS_PER_TASK}"
 
-DESIGN="--N 20000 --T 13 --spread 0.3 --spec flexible --outdir output"
+DESIGN="--calib tesis --a_max 25 --N 20000 --T 13 --spread 0.3 --spec flexible --outdir output"
 BLOCK=10
 
 cd "$(dirname "$0")"

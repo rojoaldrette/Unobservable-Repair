@@ -51,7 +51,7 @@ class Kernel(NamedTuple):
     used: jnp.ndarray     # (J, A-1, S, S): usado (j, d, s) -> act (j, d+1, s'), ya con (1 - s); 0 en d = A-1
     p_term: jnp.ndarray   # (A-1, S): Pr(usado -> term)
     new: jnp.ndarray      # (J, S): nuevo j -> act (j, 1, s'), ya con (1 - s0)
-    s0: jnp.ndarray       # (): Pr(nuevo -> term)
+    s0: jnp.ndarray       # (J,): Pr(nuevo j -> term)
 
 
 def holding_kernel(c, g):
@@ -65,8 +65,9 @@ def holding_kernel(c, g):
     used = jnp.where(alive, (1.0 - grid)[None, None, :, None] * F_mix, 0.0)
     is_last = (jnp.arange(A - 1) == A - 2)[:, None]
     p_term = jnp.where(is_last, 1.0, grid[None, :])
-    s0 = grid[i0]
-    return Kernel(used=used, p_term=p_term, new=(1.0 - s0) * F[0, :, 0, i0, :], s0=s0)
+    s0 = grid[i0]                                              # (J,)
+    F_new = F[0, jnp.arange(J), 0, i0, :]                      # (J, S)
+    return Kernel(used=used, p_term=p_term, new=(1.0 - s0)[:, None] * F_new, s0=s0)
 
 
 def holding_apply(v, K, g):
@@ -169,9 +170,9 @@ def physical_matrices(g):
 
     # nuevo j -> act (j, 1, s'), o term con prob s0
     first = (jnp.arange(A - 1) == 0).astype(grid.dtype)
-    new_to_act = jnp.einsum("jk,e,jt->jket", eyeJ, first,
-                            (1.0 - s0) * F[0, :, 0, i0, :]).reshape(J, n_act)
-    new_to_term = s0 * eyeJ
+    F_new = (1.0 - s0)[:, None] * F[0, jnp.arange(J), 0, i0, :]
+    new_to_act = jnp.einsum("jk,e,jt->jket", eyeJ, first, F_new).reshape(J, n_act)
+    new_to_term = jnp.diag(s0)
 
     def assemble(r):
         top = jnp.concatenate([act_to_act[r], act_to_term, jnp.zeros((n_act, 1))], axis=1)

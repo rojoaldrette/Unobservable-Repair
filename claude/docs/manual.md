@@ -28,11 +28,11 @@ Siempre:
 |---|---|---|
 | comprobar que todo funciona | `cd modelo_fin && python -u tests.py --n_s 12 --estructural` | pantalla |
 | resolver un equilibrio de modelo_fin | ver sección 3 (Python) | — |
-| comparar equilibrios de modelo_fin y Gillingham | `cd comparacion && python compare.py --n_s 24` | `comparacion/output/` |
+| comparar equilibrios de modelo_fin y Gillingham (G25 contra M25) | `cd comparacion && python compare.py --n_s 40` | `comparacion/output/` |
 | estimar modelo_fin con r observada y no observada | `cd modelo_fin && python -u estimar.py --reps 0:1 --guardar_panel -v` | `claude/output/estimaciones/modelo_fin/<tag>/` |
 | Monte Carlo de modelo_fin | `python -u estimar.py --reps 0:10` (y más bloques) | misma carpeta |
-| estimar Gillingham sobre sus datos | `cd gillingham && python -u estimar.py --reps 0:1 --a_max 7 -v` | `claude/output/estimaciones/gillingham/<tag>/` |
-| estimar Gillingham sobre datos con reparación (sesgo) | `cd gillingham && python -u estimar.py --panel <panel_rep0.csv.gz> --a_max 7 -v` | misma carpeta |
+| estimar Gillingham sobre sus datos | `cd gillingham && python -u estimar.py --reps 0:1 -v` | `claude/output/estimaciones/gillingham/<tag>/` |
+| estimar Gillingham sobre datos con reparación (sesgo) | `cd gillingham && python -u estimar.py --panel <panel_rep0.csv.gz> -v` | misma carpeta |
 | gráficas y tablas | `cd analisis && python main.py --mf <carpeta> --gill <carpeta> --nombre v1 --todas` | `claude/output/analisis/v1/` |
 | correr todo en la supercomputadora | `sbatch --export=ALL,STEP=<paso> slurm_estimar.sh` (sección 6) | las mismas carpetas |
 | primera etapa de Hu & Xin sola (MC viejo, v1.0) | `cd modelo_fin && python main.py --smoke` | `modelo_fin/output/` |
@@ -44,14 +44,19 @@ Todo comando acepta `--help`.
 
 ## 3. Usar el modelo desde Python
 
+**La calibración lista para correr es `calibracion("tesis")`** (a_max = 25, log-odds,
+parámetros de Gillingham, chatarreo endógeno; ver `calibracion.md`).  Es el default de
+todos los corredores.  `Params()` a secas es el modelo viejo (a_max = 7, s en niveles,
+sin chatarreo).
+
 ```python
 import dataclasses
-from params import Params, Types
-from estimar import calibracion            # calibraciones con nombre
+from params import Types
+from calibracion import calibracion        # calibraciones con nombre
 from theta import economy
 from equilibrium import solve, split_z, equilibrium_objects
 
-g = calibracion("tesis_v0", a_max=7, n_s=100)        # o Params() / dataclasses.replace(...)
+g = calibracion("tesis", a_max=25, n_s=100)          # la de la tesis
 eco = economy(g, Types())                             # dos tipos de hogar, mitad y mitad
 z, convergio, it = solve(eco, method="krylov", verbose=True)
 EVs, P = split_z(z, eco)                              # P: (J, a_max-1, n_s)
@@ -77,8 +82,8 @@ Opciones que más se usan:
 | opción | default | para qué |
 |---|---|---|
 | `--reps a:b` | 0:1 | réplicas (semillas) a:b−1 |
-| `--calib` | tesis_v0 | `defaults`, `gill_s`, `tesis_v0` |
-| `--a_max`, `--n_s` | 7, 100 | tamaño del modelo |
+| `--calib` | tesis | `tesis` (la de la tesis), o las viejas `tesis_v0`, `gill_s`, `defaults` |
+| `--a_max`, `--n_s` | 25, 100 | tamaño del modelo |
 | `--T`, `--spread` | 13, 0.3 | años de R y su dispersión |
 | `--N`, `--K` | 20000, 2 | hogares por año y años por hogar |
 | `--infos` | oraculo,hx | qué estimadores |
@@ -148,6 +153,7 @@ Recomendado antes del MC: una corrida chica para medir tiempos (editar el diseñ
 | se = NaN y `cond_B` enorme | una dirección no identificada (pocos datos o parámetro sin variación). Más datos o `--fix` |
 | `mismo_optimo` < arranques | algún arranque terminó en otro punto: revisar `parametros_*.csv` (están todos los arranques) |
 | casi todos los hogares sin coche | a_max muy chico (con a_max = 4 los coches casi no valen) |
+| precios negativos en coches viejos | chatarreo apagado (`scrap = False`) con a_max grande; "tesis" lo trae encendido |
 | memoria agotada en GPU | usar `--method krylov` (dense arma matrices de n²) |
 | .npz de regímenes viejo da error | se guardaron antes de v1.6 (Q0/Q1); regenerar con `main.py --solve-only` |
 
@@ -158,6 +164,7 @@ Recomendado antes del MC: una corrida chica para medir tiempos (editar el diseñ
 | documento | contenido |
 |---|---|
 | `manual.md` | esto |
+| `calibracion.md` | la calibración "tesis": valores, fuentes y equilibrio resultante |
 | `codigo.md` | todos los objetos del código, con diagramas |
 | `reporte_estimacion.md` | estimadores, salidas (columnas), verificación, pendientes |
 | `verosimilitud_estructural.md` | la matemática de la verosimilitud |

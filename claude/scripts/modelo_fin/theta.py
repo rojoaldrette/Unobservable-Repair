@@ -31,7 +31,9 @@ parámetro.  Va en th para que cambiar de año (régimen) no recompile.
 Vector libre x (lo que ve el optimizador) <-> th:
     mu, sigma_repair, s_repair, s_sigma = exp(x)   (positivos; s_repair > 0 ordena los
                                                     componentes de la mezcla, Hu & Xin 3(iii))
+    sigma_sell                           = sigmoid(x)  (0 < sigma_sell < sigma_trade = 1)
     lo demás                             = x
+Sin chatarreo (g.scrap = False), sigma_sell no entra al modelo: estimar.py lo deja fijo.
 '''
 
 import numpy as np
@@ -42,9 +44,10 @@ from params import PAPER_TYPES, Types
 
 # Parámetros que se pueden estimar (en este orden aparecen en x)
 FIELDS = ("mu", "u0", "u1", "u_s", "tc_buy", "tc_buy_nocar", "tc_sell", "tc_sell_inspect",
-          "sigma_repair", "s_const", "s_age", "s_persist", "s_repair", "s_sigma")
+          "sigma_sell", "sigma_repair", "s_const", "s_age", "s_persist", "s_repair", "s_sigma")
 TYPE_FIELDS = ("mu", "u0", "u1", "tc_buy", "tc_buy_nocar")     # varían por tipo de hogar
-TRANSFORM = {"mu": "log", "sigma_repair": "log", "s_repair": "log", "s_sigma": "log"}
+TRANSFORM = {"mu": "log", "sigma_repair": "log", "s_repair": "log", "s_sigma": "log",
+             "sigma_sell": "logit"}
 
 
 @jax.tree_util.register_pytree_node_class
@@ -122,11 +125,13 @@ def economy(g, types=Types(), th=None):
 # Vector libre ______________________________________________________________
 
 def _fwd(name, v):
-    return jnp.exp(v) if TRANSFORM.get(name) == "log" else v
+    t = TRANSFORM.get(name)
+    return jnp.exp(v) if t == "log" else jax.nn.sigmoid(v) if t == "logit" else v
 
 
 def _inv(name, v):
-    return jnp.log(v) if TRANSFORM.get(name) == "log" else v
+    t = TRANSFORM.get(name)
+    return jnp.log(v) if t == "log" else jnp.log(v / (1.0 - v)) if t == "logit" else v
 
 
 def free_spec(th, free=FIELDS):

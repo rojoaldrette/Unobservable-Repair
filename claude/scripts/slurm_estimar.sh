@@ -35,13 +35,13 @@ export PYTHONIOENCODING=utf-8
 export XLA_PYTHON_CLIENT_PREALLOCATE=false   # no reservar toda la memoria de la GPU de entrada
 
 # Diseño (igual en todos los pasos) ____________________________________________
-A_MAX=7            # <- 25 cuando esté la Fase 3 (log-odds)
+A_MAX=25           # el del paper; calibración "tesis" (modelo_fin/calibracion.py)
 N_S=100
 T_REG=13
 N_HOG=20000
 K_ANIOS=2
 TIPOS=low_couple_poor,low_single_poor
-TAG_MF=tesis_v0_A${A_MAX}_S${N_S}_T${T_REG}_N${N_HOG}_K${K_ANIOS}
+TAG_MF=tesis_A${A_MAX}_S${N_S}_T${T_REG}_N${N_HOG}_K${K_ANIOS}
 TAG_GILL=gill_propios_A${A_MAX}
 TAG_CRUCE=gill_cruce_A${A_MAX}
 BLOQUE=10
@@ -53,14 +53,14 @@ mkdir -p "$HERE/logs"
 case "$STEP" in
   mf)
     cd "$HERE/modelo_fin"
-    python -u estimar.py --reps 0:1 --a_max $A_MAX --n_s $N_S --T $T_REG --N $N_HOG --K $K_ANIOS \
-        --types $TIPOS --method krylov --guardar_panel --tag $TAG_MF -v
+    python -u estimar.py --reps 0:1 --calib tesis --a_max $A_MAX --n_s $N_S --T $T_REG --N $N_HOG \
+        --K $K_ANIOS --types $TIPOS --method krylov --guardar_panel --tag $TAG_MF -v
     ;;
   mf_mc)
     cd "$HERE/modelo_fin"
     A=$((SLURM_ARRAY_TASK_ID * BLOQUE)); B=$((A + BLOQUE))
-    python -u estimar.py --reps ${A}:${B} --a_max $A_MAX --n_s $N_S --T $T_REG --N $N_HOG \
-        --K $K_ANIOS --types $TIPOS --method krylov --tag $TAG_MF --rep_reporte 0
+    python -u estimar.py --reps ${A}:${B} --calib tesis --a_max $A_MAX --n_s $N_S --T $T_REG \
+        --N $N_HOG --K $K_ANIOS --types $TIPOS --method krylov --tag $TAG_MF --rep_reporte 0
     ;;
   gill)
     cd "$HERE/gillingham"

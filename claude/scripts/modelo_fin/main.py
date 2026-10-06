@@ -29,12 +29,11 @@ Cada bloque escribe output/mc_<diseño>_reps<a>-<b>.csv.  Para juntar:
 '''
 
 import argparse
-import dataclasses
 import os
 
 os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
-from params import Params
+from calibracion import calibracion, NOMBRES
 from montecarlo import MCDesign, prepare, montecarlo
 
 
@@ -47,6 +46,8 @@ def parse():
     ap.add_argument("--spread", type=float, default=0.3)
     ap.add_argument("--spec", default="flexible", choices=["flexible", "logit_R"])
     ap.add_argument("--n_s", type=int, default=None)
+    ap.add_argument("--calib", default="tesis", choices=NOMBRES)
+    ap.add_argument("--a_max", type=int, default=25)
     ap.add_argument("--se", action="store_true")
     ap.add_argument("--outdir", default="output")
     ap.add_argument("--solve-only", action="store_true")
@@ -57,12 +58,11 @@ def parse():
 
 if __name__ == "__main__":
     args = parse()
-    g = Params()
     if args.smoke:
         args.n_s, args.T, args.N, args.reps, args.verbose = 12, 2, 3_000, "0:1", True
+        args.a_max = 7
         args.outdir = os.path.join(args.outdir, "smoke")
-    if args.n_s is not None:
-        g = dataclasses.replace(g, n_s=args.n_s)
+    g = calibracion(args.calib, a_max=args.a_max, n_s=args.n_s or 100)
 
     design = MCDesign(N=args.N, K=args.K, T=args.T, spread=args.spread, spec=args.spec, se=args.se)
     if args.solve_only:

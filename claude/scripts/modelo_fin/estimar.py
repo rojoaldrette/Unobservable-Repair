@@ -40,21 +40,19 @@ Salidas (todas en formato largo, para pandas):
                      rep, estimador, arranque, mejor, parametro, verdad, estimado, se, z, p, ic95_lo, ic95_hi
   resumen_reps<a>-<b>.csv      rep, estimador, ll, n_obs, n_celdas, convergio, iters, segundos, arranques,
                      mismo_optimo, y estadísticas de mercado verdaderas y estimadas
-  precios.csv        (réplica rep_reporte) fuente, regimen, zeta, j, a, s_idx, s, P, q, sin_masa
+  precios.csv        (réplica rep_reporte) fuente, regimen, zeta, j, a, s_idx, s, ell, P, q, sin_masa
+                     (s = prob. de descomponerse; ell = variable del grid: logit(s) en log-odds)
   distribucion.csv   (réplica rep_reporte, régimen central) fuente, regimen, tipo, estado, j, a, s_idx, s, q
   ccps.csv           (réplica rep_reporte, régimen central) fuente, regimen, tipo, j, a, s_idx, s,
-                     keep, purge, trade, repair, q
+                     keep, purge, trade, repair, scrap, q
   config.json        argumentos, Params y tipos
   panel_rep<k>.csv.gz  (con --guardar_panel) el panel simulado completo, para
                      gillingham/estimar.py --panel
 fuente ∈ {verdad, oraculo, hx}.
 
-Calibración (`--calib`, provisional hasta la Fase 3: log-odds, a_max = 25):
-  defaults  Params() tal cual (s en niveles, accidentes altos)
-  gill_s    s calibrada a la logit de accidentes de Gillingham en edades bajas
-            (como comparacion/compare.py, M7_gill)
-  tesis_v0  gill_s + R(j, a) realista (4 / 6.5 / 10 mil DKK en a = 1, +6% por año)
-            y sigma_repair = 0.3 (por calibrar: que Pr(repair) tenga información)
+Calibración (`--calib`, ver calibracion.py): default "tesis" con a_max = 25 (log-odds,
+parámetros de Gillingham, chatarreo endógeno, R realista).  Las anteriores (tesis_v0,
+gill_s, defaults) quedan para reproducir resultados viejos.
 '''
 
 import argparse
@@ -69,8 +67,9 @@ import numpy as np
 import pandas as pd
 import jax.numpy as jnp
 
-from params import Params, Types
-from utils import dims, split_states, make_s_grid, s_new_index
+from params import Types
+from calibracion import calibracion, NOMBRES
+from utils import dims, split_states, make_s_grid, make_state_grid, s_new_index
 from primitives import s_transition
 from theta import FIELDS, economy, free_spec, pack, natural, labels, Economy, unpack
 from equilibrium import solve, equilibrium_objects, split_z
@@ -79,28 +78,6 @@ from estructural import INFOS, treat_data, LLEval, estimate
 
 OUTDIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                        "..", "..", "output", "estimaciones", "modelo_fin"))
-
-
-# Calibración ______________________________________________________________
-
-def repair_prices(a_max, base, growth):
-    # R(j, a) = base_j (1 + growth (a − 1)),  a = 1..a_max−1
-    return tuple(tuple(round(b * (1 + growth * (a - 1)), 4) for a in range(1, a_max)) for b in base)
-
-
-def calibracion(nombre, a_max=7, n_s=100):
-    g = dataclasses.replace(Params(), a_max=a_max, n_s=n_s,
-                            repair_price=repair_prices(a_max, (15.0, 12.5, 25.0), 0.15))
-    if nombre == "defaults":
-        return g
-    g = dataclasses.replace(g, s_max=0.1, s_new=0.004, s_const=(0.002, 0.002, 0.002),
-                            s_age=0.0003, s_sigma=0.003, s_repair=0.004)
-    if nombre == "gill_s":
-        return g
-    if nombre == "tesis_v0":
-        return dataclasses.replace(g, repair_price=repair_prices(a_max, (4.0, 6.5, 10.0), 0.06),
-                                   sigma_repair=0.3)
-    raise ValueError(nombre)
 
 
 # Verdad ______________________________________________________________
@@ -112,9 +89,12 @@ def regimes_R(g, T, spread):
 
 
 def verdad(g, types, Rs, path, method, verbose=False):
+    # Se reutiliza solo si el archivo es del mismo diseño (Params, tipos y R iguales)
+    firma = repr((g, types))
     if os.path.exists(path):
         with np.load(path) as f:
-            if f["Rs"].shape == Rs.shape and np.allclose(f["Rs"], Rs):
+            if ("firma" in f and str(f["firma"]) == firma and f["Rs"].shape == Rs.shape
+                    and np.allclose(f["Rs"], Rs)):
                 return jnp.asarray(f["zs"])
     eco = economy(g, types)
     zs, z = [], None
@@ -126,7 +106,7 @@ def verdad(g, types, Rs, path, method, verbose=False):
             raise RuntimeError(f"el equilibrio verdadero del régimen {t} no converge")
         zs.append(z)
     zs = jnp.stack(zs)
-    np.savez_compressed(path, zs=np.asarray(zs), Rs=Rs)
+    np.savez_compressed(path, zs=np.asarray(zs), Rs=Rs, firma=np.asarray(firma))
     return zs
 
 
@@ -137,13 +117,13 @@ def mercado(zs, ecos):
     g = ecos[0].g
     J, A, S, n_act, n = dims(g)
     grid = np.asarray(make_s_grid(g))
-    s0 = float(grid[s_new_index(g)])
-    stats = dict(sin_coche=0.0, tasa_reparacion=0.0, tasa_accidentes=0.0, edad_media=0.0,
-                 precio_medio=0.0)
+    s0 = grid[s_new_index(g)]                                 # (J,)
+    stats = dict(sin_coche=0.0, tasa_reparacion=0.0, tasa_accidentes=0.0, tasa_chatarreo=0.0,
+                 edad_media=0.0, precio_medio=0.0)
     for z, eco in zip(zs, ecos):
         objs = equilibrium_objects(z, eco)
         P = objs[0]["P"]
-        rep = acc = cars = age = qa_tot = pq = none = 0.0
+        rep = acc = chat = cars = age = qa_tot = pq = none = 0.0
         for o, f in zip(objs, eco.f):
             q = o["q"]
             e_none = np.zeros(n)
@@ -154,10 +134,13 @@ def mercado(zs, ecos):
             pr, _, _ = split_states(o["repair"], g)
             rep += f * float(np.sum(hu * np.asarray(pr)))
             # accidentes: usados que no están en la última edad (prob s) y nuevos (prob s_new)
-            acc += f * float(np.sum(hu[:, :A - 2] * grid) + np.sum(hn) * s0)
+            acc += f * float(np.sum(hu[:, :A - 2] * grid) + np.sum(hn * s0))
             cars += f * float(hu.sum() + hn.sum())
             qa, _, qn = split_states(q, g)
             qa = np.asarray(qa)
+            ka, _, _ = split_states(o["keep"], g)
+            sa, _, _ = split_states(o["scrap"], g)
+            chat += f * float(np.sum(qa * (1 - np.asarray(ka)) * np.asarray(sa)))   # chatarreo endógeno
             age += f * float(np.sum(qa.sum(axis=(0, 2)) * np.arange(1, A)))
             qa_tot += f * float(qa.sum())
             pq += f * float(np.sum(qa * np.asarray(P)))
@@ -166,6 +149,7 @@ def mercado(zs, ecos):
         stats["sin_coche"] += none / R_
         stats["tasa_reparacion"] += rep / cars / R_
         stats["tasa_accidentes"] += acc / cars / R_
+        stats["tasa_chatarreo"] += chat / cars / R_
         stats["edad_media"] += age / qa_tot / R_
         stats["precio_medio"] += pq / qa_tot / R_
     return stats
@@ -191,15 +175,17 @@ def tablas_equilibrio(fuente, zs, ecos, zetas, regimen_central):
     g = ecos[0].g
     J, A, S, n_act, n = dims(g)
     grid = np.asarray(make_s_grid(g))
+    estado = np.asarray(make_state_grid(g))          # ℓ = logit(s) con s_space = "logodds"; s si no
     jj, aa, ss = np.meshgrid(np.arange(J), np.arange(1, A), np.arange(S), indexing="ij")
-    base = dict(j=jj.ravel(), a=aa.ravel(), s_idx=ss.ravel(), s=grid[ss.ravel()])
+    base = dict(j=jj.ravel(), a=aa.ravel(), s_idx=ss.ravel(), s=grid[ss.ravel()],
+                ell=estado[ss.ravel()])
     precios, dist, ccp = [], [], []
     for t, (z, eco) in enumerate(zip(zs, ecos)):
         objs = equilibrium_objects(z, eco)
         P = np.asarray(objs[0]["P"])
         q_agg = sum(f * np.asarray(split_states(o["q"], g)[0]) for o, f in zip(objs, eco.f))
         oferta = sum(f * np.asarray(split_states(o["q"], g)[0]) * (1 - np.asarray(split_states(o["keep"], g)[0]))
-                     for o, f in zip(objs, eco.f))
+                     * (1 - np.asarray(split_states(o["scrap"], g)[0])) for o, f in zip(objs, eco.f))
         precios.append(pd.DataFrame(dict(fuente=fuente, regimen=t, zeta=zetas[t], **base,
                                          P=P.ravel(), q=q_agg.ravel(),
                                          sin_masa=(oferta.ravel() < g.ed_mass_tol))))
@@ -210,10 +196,13 @@ def tablas_equilibrio(fuente, zs, ecos, zetas, regimen_central):
             dist.append(pd.DataFrame(dict(fuente=fuente, regimen=t, tipo=tau, estado="activo",
                                           **base, q=np.asarray(qa).ravel())))
             dist.append(pd.DataFrame(dict(fuente=fuente, regimen=t, tipo=tau, estado="terminal",
-                                          j=np.arange(J), a=A, s_idx=-1, s=np.nan, q=np.asarray(qt))))
+                                          j=np.arange(J), a=A, s_idx=-1, s=np.nan, ell=np.nan,
+                                          q=np.asarray(qt))))
             dist.append(pd.DataFrame(dict(fuente=fuente, regimen=t, tipo=tau, estado="sin_coche",
-                                          j=[-1], a=[-1], s_idx=[-1], s=[np.nan], q=[float(qn)])))
-            cols = {k: np.asarray(split_states(o[k], g)[0]).ravel() for k in ("keep", "purge", "trade", "repair")}
+                                          j=[-1], a=[-1], s_idx=[-1], s=[np.nan], ell=[np.nan],
+                                          q=[float(qn)])))
+            cols = {k: np.asarray(split_states(o[k], g)[0]).ravel()
+                    for k in ("keep", "purge", "trade", "repair", "scrap")}
             ccp.append(pd.DataFrame(dict(fuente=fuente, regimen=t, tipo=tau, **base, **cols,
                                          q=np.asarray(qa).ravel())))
     return pd.concat(precios), pd.concat(dist), pd.concat(ccp)
@@ -295,8 +284,8 @@ def _append(df, path):
 def parse():
     ap = argparse.ArgumentParser()
     ap.add_argument("--reps", default="0:1", help="rango a:b de réplicas (semillas)")
-    ap.add_argument("--calib", default="tesis_v0", choices=["defaults", "gill_s", "tesis_v0"])
-    ap.add_argument("--a_max", type=int, default=7)
+    ap.add_argument("--calib", default="tesis", choices=NOMBRES)
+    ap.add_argument("--a_max", type=int, default=25)
     ap.add_argument("--n_s", type=int, default=100)
     ap.add_argument("--types", default="low_couple_poor,low_single_poor")
     ap.add_argument("--f", default="", help="fracciones de cada tipo (default: iguales)")
@@ -325,10 +314,10 @@ def main():
     args = parse()
     if args.smoke:
         # a_max = 7 (con a_max = 4 casi nadie tiene coche y el panel no informa)
-        args.a_max, args.n_s, args.T, args.N, args.K = 7, 8, 2, 3_000, 2
+        args.a_max, args.n_s, args.T, args.N, args.K = 7, 10, 2, 3_000, 2
         args.n_starts, args.method, args.reps, args.verbose = 1, "dense", "0:1", True
         args.lbfgs_iter, args.bhhh_iter = 15, 3
-        args.fix = "u1,u_s,tc_buy_nocar,tc_sell_inspect,s_const,s_age,s_persist"
+        args.fix = "u1,u_s,tc_buy_nocar,tc_sell_inspect,s_const,s_age,s_persist,sigma_sell"
         args.guardar_panel, args.tag = True, "smoke"
     args.infos = tuple(args.infos.split(","))
     assert all(i in INFOS for i in args.infos), args.infos
@@ -340,6 +329,8 @@ def main():
     eco0 = economy(g, types)
     th0 = eco0.th
     fix = set(filter(None, args.fix.split(",")))
+    if not g.scrap:
+        fix.add("sigma_sell")                 # sin chatarreo, sigma_sell no entra al modelo
     spec = free_spec(th0, tuple(k for k in FIELDS if k not in fix))
     zetas, Rs = regimes_R(g, args.T, args.spread)
 

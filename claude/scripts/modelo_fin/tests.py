@@ -131,19 +131,21 @@ def test_equilibrium(g):
 
 
 def test_estructural():
-    # Tamaño de juguete (a_max = 7, n_s = 8, 2 regímenes, 3,000 hogares): minutos.
+    # Tamaño de juguete (calibración "tesis" con a_max = 7, n_s = 10, 2 regímenes, 3,000
+    # hogares; log-odds y chatarreo endógeno): minutos.
     # 1) equilibrium.solve (Economy, 1 tipo) == ED.solve_equilibrium; dense == krylov con 2 tipos.
     # 2) gradiente implícito de la verosimilitud estructural contra diferencias finitas.
     import os, tempfile
     from params import Types
-    from estimar import calibracion, regimes_R, verdad
+    from calibracion import calibracion
+    from estimar import regimes_R, verdad
     from theta import economy, free_spec, pack, labels, FIELDS
     from equilibrium import solve, split_z, equilibrium_objects
     from primitives import s_transition
     from gen_dataset import simulate_economy
     from estructural import treat_data, LLEval, loglik_only
 
-    g = dataclasses.replace(calibracion("tesis_v0", a_max=7, n_s=8), ed_tol=1e-12, gmres_tol=1e-13)
+    g = dataclasses.replace(calibracion("tesis", a_max=7, n_s=10), ed_tol=1e-12, gmres_tol=1e-13)
     eco1 = economy(g, Types(("low_couple_poor",), (1.0,)))
     z1, ok1, _ = solve(eco1, method="dense")
     eq = solve_equilibrium(g)
@@ -153,6 +155,11 @@ def test_estructural():
     zk, okk, _ = solve(eco, method="krylov")
     zd, okd, _ = solve(eco, method="dense")
     print("2 tipos, krylov == dense:", okk and okd, float(jnp.max(jnp.abs(zk - zd))))
+    # sin chatarreo y sin cambiar nada más: el modelo de antes
+    g0 = dataclasses.replace(g, scrap=False)
+    z0, _, _ = solve(economy(g0, Types(("low_couple_poor",), (1.0,))), method="dense")
+    eq0 = solve_equilibrium(dataclasses.replace(g0, mu=0.1131))
+    print("scrap = False == ED.py sin chatarreo:", float(jnp.max(jnp.abs(split_z(z0, eco1)[1] - eq0.P))))
 
     th0 = eco.th
     spec = free_spec(th0, FIELDS)
@@ -161,20 +168,24 @@ def test_estructural():
     zs = verdad(g, types, Rs, os.path.join(tempfile.gettempdir(), "tests_verdad.npz"), "dense")
     objs = [equilibrium_objects(z, eco.with_repair_price(R)) for z, R in zip(zs, Rs)]
     df = simulate_economy(objs, s_transition(g), g, types.f, 3000, 2, seed=0)
+    print(f"panel: {len(df)} filas, {int(df.r.sum())} reparaciones, {int(df.chatarreo.sum())} chatarreos")
     x0 = np.asarray(pack(th0, spec)) * 1.02
     for info in ("oraculo", "hx"):
         data, _ = treat_data(df, g, info)
         ev = LLEval(g, types.f, spec, th0, Rs, data, info, zs0=zs, method="dense")
         ll, gr, _, _ = ev(x0)
-        h, err = 1e-6, 0.0
+        # error relativo a la escala del gradiente (componentes casi nulos inflan el error
+        # componente a componente por redondeo de las diferencias finitas)
+        h, fd = 1e-5, np.zeros_like(gr)
+        f = lambda xx: float(loglik_only(ev.solve(xx), jnp.asarray(xx), th0, ev.Rs, data,
+                                         ev.economies(x0)[0], spec, info))
         for k in range(len(x0)):
             e = np.zeros_like(x0)
             e[k] = h
-            f = lambda xx: float(loglik_only(ev.solve(xx), jnp.asarray(xx), th0, ev.Rs, data,
-                                             ev.economies(x0)[0], spec, info))
-            fd = (f(x0 + e) - f(x0 - e)) / (2 * h)
-            err = max(err, abs(gr[k] - fd) / max(abs(fd), 1e-8))
-        print(f"gradiente implícito [{info}] vs dif. finitas, error relativo máx: {err:.1e} ({len(labs)} parámetros)")
+            fd[k] = (f(x0 + e) - f(x0 - e)) / (2 * h)
+        err = np.max(np.abs(gr - fd)) / np.max(np.abs(fd))
+        print(f"gradiente implícito [{info}] vs dif. finitas: max|g - fd| / max|fd| = {err:.1e} "
+              f"({len(labs)} parámetros)")
 
 
 if __name__ == "__main__":

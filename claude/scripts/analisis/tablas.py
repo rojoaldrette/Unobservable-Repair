@@ -181,23 +181,23 @@ def tabla_mercado(corridas, out, rep=None):
     _, r = _juntar(corridas, rep)
     if r.empty:
         return
+    # Misma estadística con nombres distintos en cada modelo: una sola fila
     nombres = {"sin_coche": "Hogares sin coche", "tasa_reparacion": "Tasa de reparación (por coche)",
-               "tasa_accidentes": "Tasa de accidentes (por coche)", "edad_media": "Edad media del parque",
-               "precio_medio": "Precio medio de usados (miles DKK)", "endo_rate": "Chatarreo endógeno (por coche)",
-               "acc_rate": "Accidentes (por coche, Gillingham)", "share_endo": "Fracción voluntaria de las salidas"}
-    filas = []
+               "tasa_chatarreo": "Chatarreo endógeno (por coche)", "endo_rate": "Chatarreo endógeno (por coche)",
+               "tasa_accidentes": "Tasa de accidentes (por coche)", "acc_rate": "Tasa de accidentes (por coche)",
+               "share_endo": "Fracción voluntaria de las salidas", "edad_media": "Edad media del parque",
+               "precio_medio": "Precio medio de usados (miles DKK)"}
+    filas = {}
     for k, nom in nombres.items():
-        fila = {"Estadística": nom}
+        fila = filas.setdefault(nom, {"Estadística": nom})
         for col_v in (f"{k}_verdad", f"{k}_verdad_gill"):
             if col_v in r and r[col_v].notna().any():
-                fila["Verdad" if col_v.endswith("_verdad") else "Verdad (modelo de Gillingham)"] = \
-                    f"{r[col_v].dropna().iloc[0]:.4f}"
+                fila["Verdad" if col_v.endswith("_verdad") else "Verdad (modelo de Gillingham)"] =                     f"{r[col_v].dropna().iloc[0]:.4f}"
         for e in _orden_est(r["estimador"].unique()):
             de = r[r["estimador"] == e]
             if f"{k}_est" in de and de[f"{k}_est"].notna().any():
                 fila[etiqueta(e)] = f"{de[f'{k}_est'].iloc[0]:.4f}"
-        if len(fila) > 1:
-            filas.append(fila)
+    filas = [f for f in filas.values() if len(f) > 1]
     fila = {"Estadística": "RMSE de P (miles DKK, ponderado por q)"}
     for e in _orden_est(r["estimador"].unique()):
         de = r[r["estimador"] == e]

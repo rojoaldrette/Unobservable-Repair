@@ -53,7 +53,7 @@ def solve_regimes(g, zetas, path=None, verbose=False):
         return load_regimes(path)
 
     out = dict(zetas=np.asarray(zetas, float))
-    keys = ("R", "P", "EV", "q", "keep", "purge", "trade", "buy", "repair", "empty", "converged")
+    keys = ("R", "P", "EV", "q", "keep", "purge", "trade", "buy", "repair", "scrap", "empty", "converged")
     for k in keys:
         out[k] = []
     P = EV = None
@@ -65,7 +65,7 @@ def solve_regimes(g, zetas, path=None, verbose=False):
         c = ccps(eq.EV, eq.P, g_t)
         q = stationary_q(c, g_t)
         vals = dict(R=np.asarray(g_t.repair_price), P=eq.P, EV=eq.EV, q=q, keep=c.keep,
-                    purge=c.purge, trade=c.trade, buy=c.buy, repair=c.repair,
+                    purge=c.purge, trade=c.trade, buy=c.buy, repair=c.repair, scrap=c.scrap,
                     empty=eq.empty, converged=eq.converged)
         for k in keys:
             out[k].append(np.asarray(vals[k]))
@@ -93,7 +93,7 @@ def _next_state(h, r, cumF, g, rng):
     kh, jh, dh, sh = decode_states(h, g)
     x_next = np.full(len(h), n - 1, dtype=np.int64)            # none -> none
     car = kh < 2
-    s_idx = np.where(kh == 0, sh, s_new_index(g))               # nuevo: s_new
+    s_idx = np.where(kh == 0, sh, s_new_index(g)[np.maximum(jh, 0)])   # nuevo: s_new de su marca
     p_term = np.where((kh == 0) & (dh == A - 1), 1.0, grid[s_idx])
     to_term = car & (rng.random(len(h)) < p_term)
     x_next[to_term] = n_act + jh[to_term]
@@ -125,6 +125,7 @@ def simulate_panel(regs, g, N, K, seed):
     for t in range(T):
         keep, purge, trade = regs["keep"][t], regs["purge"][t], regs["trade"][t]
         buy, repair = regs["buy"][t], regs["repair"][t]
+        scrap = regs["scrap"][t] if "scrap" in regs else np.zeros_like(keep)
         P = regs["P"][t].ravel()
 
         x = _sample_cat(regs["q"][t], N, rng)
@@ -134,6 +135,8 @@ def simulate_panel(regs, g, N, K, seed):
             # Etapa 1
             u = rng.random(N)
             dec = np.where(u < keep[x], 0, np.where(u < keep[x] + purge[x], 1, 2))
+            # Chatarreo endógeno: quien se deshace de un coche activo lo chatarrea con prob scrap[x]
+            chat = (dec > 0) & (x < n_act) & (rng.random(N) < scrap[x])
             h = np.where(dec == 0, x, n - 1)
             is_trade = dec == 2
             h[is_trade] = _sample_cat(buy, is_trade.sum(), rng)
@@ -151,11 +154,12 @@ def simulate_panel(regs, g, N, K, seed):
             to_term = has_car & (kn == 1)
             end_life = to_term & (kh == 0) & (dh == A - 1)
             # s de la tenencia: usado -> su s; nuevo -> s_new en el grid
-            sh_idx = np.where(kh == 0, sh, np.where(kh == 1, int(np.argmin(np.abs(grid - g.s_new))), -1))
+            sh_idx = np.where(kh == 0, sh, np.where(kh == 1, s_new_index(g)[np.maximum(jh, 0)], -1))
 
             frames.append(pd.DataFrame({
                 "id_hogar": np.arange(N), "t": t, "k": k, "id_coche": np.where(has_car, car_id, -1),
                 "x": x, "h": h, "x_next": x_next,                # índices (layouts X, H, X)
+                "chatarreo": chat.astype(np.int8),               # se deshizo del coche activo chatarreándolo
                 "estado": np.array(["activo", "terminal", "sin_coche"])[kx],
                 "j": jx, "a": ax, "s_idx": sx,
                 "decision": np.where((kx == 2) & (dec == 1), "stay_none", DECISION[dec]),
@@ -180,7 +184,7 @@ def simulate_panel(regs, g, N, K, seed):
 def regs_from_objects(objs, F):
     # Para simulate_panel: objs = lista por régimen de dicts de equilibrium.equilibrium_objects
     # de UN tipo (P, q, keep, purge, trade, buy, repair).  F = s_transition(g).
-    regs = {k: np.stack([o[k] for o in objs]) for k in ("P", "q", "keep", "purge", "trade", "buy", "repair")}
+    regs = {k: np.stack([o[k] for o in objs]) for k in ("P", "q", "keep", "purge", "trade", "buy", "repair", "scrap")}
     regs["zetas"] = np.zeros(len(objs))
     regs["F"] = np.asarray(F)
     return regs

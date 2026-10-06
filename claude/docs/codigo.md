@@ -4,7 +4,8 @@ Todo el código de `claude/scripts/`: qué objeto hay en cada archivo, qué reci
 devuelve (con formas) y cómo se conectan. El foco es `modelo_fin/` (el modelo de la
 tesis). `gillingham/` y `comparacion/` van al final, más breves.
 
-Estado: v1.7 (sin matrices densas; estimación estructural en `theta.py`, `equilibrium.py`,
+Estado: v1.8 (calibración "tesis" en `calibracion.py`: a_max = 25, desgaste en log-odds,
+chatarreo endógeno opcional; ver sección 11).  Antes: v1.7 (sin matrices densas; estimación estructural en `theta.py`, `equilibrium.py`,
 `estructural.py`, `estimar.py`; análisis en `analisis/`). La sección 10 resume lo de v1.7;
 el detalle de uso y salidas está en `reporte_estimacion.md`. Fases 2-5 del plan van a cambiar partes de esto
 (parámetros dinámicos, dos tipos, chatarreo opcional, log-odds); este documento se
@@ -668,3 +669,39 @@ Uso, salidas y verificación en `reporte_estimacion.md`. Aquí solo los objetos.
 Diferencia clave con las funciones viejas: `T`, `ccps` (jit con g estático) siguen para el
 código de v1.0-v1.6; lo nuevo usa `T_raw`, `ccps_raw` y las funciones de `transitions`
 con un `Model`, así que un θ nuevo no recompila.
+
+---
+
+## 11. Log-odds, chatarreo y calibración (v1.8)
+
+**El estado de desgaste.** `Params.s_space` dice en qué variable está el grid:
+
+| función (`utils.py`) | devuelve | con "level" | con "logodds" |
+|---|---|---|---|
+| `make_state_grid(g)` | el grid del estado: la variable en la que la transición es lineal | s | ℓ = logit(s) |
+| `make_s_grid(g)` | la prob. de descomponerse en cada punto | s | sigmoid(ℓ) |
+| `s_new_index(g)` | índice del estado de un coche nuevo, **uno por marca** (J,) | | |
+
+Regla: la transición (`primitives.s_mean_next`, `s_transition`) y la primera etapa de Hu &
+Xin usan `make_state_grid`; todo lo que es una probabilidad (accidente, `u_s · s`,
+precio inicial) usa `make_s_grid`.
+
+**Chatarreo (`Params.scrap`, `sigma_sell`).**
+
+```
+deshacerse de un coche activo (purge o trade):
+    con scrap = False:  disposal = mu P − Ts                         (vender)
+    con scrap = True:   disposal = emax(mu p_scrap, mu P − Ts; sigma_sell)
+                        Pr(chatarrear | x) = CCP.scrap               (1 en term, 0 en none)
+oferta:   S = q (1 − keep)(1 − scrap)
+panel:    columna `chatarreo` (se deshizo del activo chatarreándolo)
+verosimilitud: si x es activo y o ≠ keep, × Pr(chatarrear) o 1 − Pr(chatarrear)
+```
+
+Cambios por objeto: `bellman.Values` (+ `scrap`, `disposal`), `probabilities.CCP`
+(+ `scrap`), `ED.py` y `equilibrium.type_market` (oferta), `gen_dataset.simulate_panel`
+(+ `chatarreo`), `estructural.treat_data`/`cell_logp` (+ `dispose`, `chat`),
+`theta.FIELDS` (+ `sigma_sell`, transformación logística).
+
+**`calibracion.py`:** `calibracion(nombre, a_max, n_s)` -> Params; `NOMBRES`;
+`repair_prices`; `ACC_INT`, `ACC_AGE` (Tabla 4).  Valores en `calibracion.md`.
