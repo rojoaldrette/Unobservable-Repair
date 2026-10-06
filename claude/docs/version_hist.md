@@ -5,6 +5,41 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.5: plan y documentos de diseño (2026-10-05)
+
+Sin cambios de código. Es el último estado de `modelo_fin` con matrices densas (tag
+`matrices-densas`).
+
+### Documentos nuevos
+- `info_asimetrica.md`: un precio por (j, a) y s descubierta al comprar. Baja los
+  precios de 7,200 a 72, pero agrega las creencias π como otro punto fijo.
+- `newton_krylov.md`: Newton con GMRES y productos jvp, sin armar el jacobiano.
+- `verosimilitud_estructural.md`: segunda etapa, con la mezcla sobre r adentro de un
+  DNFXP; gradiente implícito; qué identifica a cada parámetro.
+- `chatarreo_endogeno.md`: por qué el chatarreo puede volver como opción sin romper la
+  mezcla de Hu & Xin (ℓ' se mide antes de decidir chatarrear; s(ℓ) da la tasa de
+  accidentes), y las pruebas que lo garantizan.
+- `datos_ideales.md`: escalera de bases de datos para el MC. Seguros: D0 (r observada)
+  y D1 (r no observada, sin precios, como Gillingham + ℓ).
+
+### Decisiones
+- s en log-odds: ℓ' = ℓ + acc_age_j − s_repair r + η, ℓ_nuevo = acc_int_j (Tabla 4).
+- Mismos parámetros que Gillingham, para medir el efecto de poder reparar.
+- Dos tipos de hogar (Couple Poor y Single Poor) para identificar tc_buy y tc_sell.
+- R(j, a) bajo / medio / alto por marca (4 / 6.5 / 10 mil DKK en la edad 1, +6% por año).
+- Chatarreo endógeno como opción (apagado por defecto).
+- Reparación parcialmente observada: fuera de la tesis.
+
+### Plan
+1. Quitar las matrices densas (kernel de Q, M·v estructurado, GMRES).
+2. Parámetros dinámicos, dos tipos, chatarreo opcional, Newton-Krylov conjunto.
+3. Calibración (a_max = 25, log-odds, R).
+4. Verosimilitud estructural.
+5. Monte Carlo listo para GPU.
+6. Corridas en GPU (el usuario).
+
+---
+
 ## v1.4: tipos de hogar en la réplica de Gillingham (2026-10-05)
 
 ### Cambios
