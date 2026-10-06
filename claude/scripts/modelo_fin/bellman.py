@@ -35,7 +35,7 @@ import jax.numpy as jnp
 from jax.scipy.special import logsumexp
 from jaxopt import FixedPointIteration
 
-from utils import dims, make_s_grid, s_new_index, split_states, stack_states
+from utils import gmres, dims, make_s_grid, s_new_index, split_states, stack_states
 from primitives import flow_utility, sell_cost, s_transition, emax
 
 
@@ -162,13 +162,26 @@ def T(EV, P, g):
     return stack_states(ev_act, ev_term, ev_none)
 
 
-def solve_bellman(P, g, EV_init=None, verbose=False):
-    # Successive approximations (jaxopt) hasta sa_tol, luego Newton-Kantorovich.
+@partial(jax.jit, static_argnames="g")
+def nk_step(EV, P, g):
+    # Un paso de Newton-Kantorovich:  EV <- EV - (I - beta M)^{-1} (EV - T(EV)).
     # Jacobiano de T: dT/dEV = beta * M (Gillingham, Lema L1).  Sigue valiendo con la
     # etapa 2 porque d emax / d v son las CCPs en cada etapa, y la regla de la cadena
     # da Ω · [diag(1-p_rep) Q_0 + diag(p_rep) Q_1] = M (se verifica en tests.py).
-    from transitions import transition_matrix   # import local: transitions -> probabilities -> bellman
+    # El sistema se resuelve con GMRES y productos M v sin armar M (transitions.M_apply).
+    # Converge en pocas iteraciones: M = (keep Q, nilpotente: la edad solo sube) + rango 2.
+    from probabilities import ccps                          # imports locales: evitan el ciclo
+    from transitions import holding_kernel, M_apply
+    c = ccps(EV, P, g)
+    K = holding_kernel(c, g)
+    TEV = T(EV, P, g)
+    dx = gmres(lambda v: v - g.beta * M_apply(v, c, K, g), EV - TEV, tol=g.gmres_tol,
+               restart=g.gmres_restart, maxiter=g.gmres_maxiter)
+    return EV - dx, jnp.max(jnp.abs(TEV - EV))
 
+
+def solve_bellman(P, g, EV_init=None, verbose=False):
+    # Successive approximations (jaxopt) hasta sa_tol, luego Newton-Kantorovich (nk_step).
     J, A, S, n_act, n = dims(g)
     EV = jnp.zeros(n) if EV_init is None else EV_init
 
@@ -179,14 +192,12 @@ def solve_bellman(P, g, EV_init=None, verbose=False):
     if verbose:
         print(f"SA: {int(sol.state.iter_num)} iteraciones, error {float(sol.state.error):.2e}")
 
-    I = jnp.eye(n)
     for k in range(g.nk_max_iter):
-        TEV = T(EV, P, g)
-        err = float(jnp.max(jnp.abs(TEV - EV)))
+        EV_new, err = nk_step(EV, P, g)
+        err = float(err)
         if verbose:
             print(f"NK {k}: sup|T(EV) - EV| = {err:.2e}")
         if err < g.vfi_tol:
             break
-        M = transition_matrix(EV, P, g)
-        EV = EV - jnp.linalg.solve(I - g.beta * M, EV - TEV)
+        EV = EV_new
     return EV

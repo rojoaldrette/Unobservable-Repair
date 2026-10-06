@@ -29,19 +29,21 @@ R_t distinto por año, chatarreo endógeno encendido.
 |---|---|---|---|
 | **D0 oráculo** | propiedad por coche, ℓ cada año, R_t, **r** | precios | cota superior (no existe) |
 | **D1 base** | propiedad por coche, ℓ cada año, R_t | **r**, precios, motivo de salida (solo "salida") | como Gillingham + el estado ℓ por coche (registro + inspección anual) |
-| D2 con precios (opcional) | lo de D1 + precios de usados + motivo de salida | r | registro + inspección + anuncios de usados |
-| D3 ℓ con ruido | lo de D1 con ℓ_obs = ℓ + ν | ℓ verdadero | defectos de inspección, siniestros, odómetro como proxy |
-| D4 ℓ cada dos años | lo de D1, ℓ solo en años de inspección | ℓ en años sin inspección | inspección bianual (syn en Dinamarca desde los 4 años) |
-| D5 agregado tipo danés | celdas (tipo, j, a, t): CCPs, salidas, holdings | ℓ y r por coche | datos de Gillingham (fase 6) |
+| D2 ℓ con ruido | lo de D1 con ℓ_obs = ℓ + ν | ℓ verdadero | defectos de inspección, siniestros, odómetro como proxy |
+| D3 ℓ cada dos años | lo de D1, ℓ solo en años de inspección | ℓ en años sin inspección | inspección bianual (syn en Dinamarca desde los 4 años) |
+| D4 agregado tipo danés | celdas (tipo, j, a, t): CCPs, salidas, holdings | ℓ y r por coche | datos de Gillingham (fase 6) |
 
-**Fuera de esta tesis:** reparación observada en una submuestra (facturas de taller,
-garantías). Queda para otro paper.
+**Fuera de esta tesis:**
+- reparación observada en una submuestra (facturas de taller, garantías): otro paper;
+- precios de usados y motivo de salida como datos extra (descartado el 2026-10-06: con
+  dos tipos de mu distinta los precios aportan poco a tc, y s(ℓ) ya da la tasa de
+  accidentes).
 
 Ejes que se cruzan con cualquier diseño (los "diales" de cantidad):
 - **N** hogares (20k, 40k, 100k);
 - **K** años y **dispersión de R_t** (spread chico o grande): cuánta variación en la
   variable excluida hace falta;
-- **tipos de hogar** (1 o 2): si hay precios (D2), con 1 tipo alcanza.
+- **tipos de hogar** (1 o 2): con 1 tipo, tc_buy y tc_sell no se separan (v1.4).
 
 ## 3. Qué se mide en cada diseño
 
@@ -65,28 +67,23 @@ Ejes que se cruzan con cualquier diseño (los "diales" de cantidad):
 |---|---|---|
 | D0 | ML estructural con r observada: F_r directa en vez de la mezcla | parte (oráculo de la primera etapa en `loglikelihood.py`) |
 | D1 | ML estructural con mezcla sobre r (`verosimilitud_estructural.md`) | no (Fase 4) |
-| D2 | lo de D1 + log f(P_obs \| P(θ)) con error de medición | no |
-| D3 | ℓ latente con proxy: integrar ℓ con un filtro (forward algorithm) por coche | no; el más caro |
-| D4 | transición de dos pasos: mezcla sobre (r_t, r_t+1), cuatro componentes (o dos si la reparación solo pasa en la inspección, `idea_km.md`) | no |
-| D5 | momentos o ML por celdas integrando ℓ con q(ℓ \| j, a) (fase 6) | no |
+| D2 | ℓ latente con proxy: integrar ℓ con un filtro (forward algorithm) por coche | no; el más caro |
+| D3 | transición de dos pasos: mezcla sobre (r_t, r_t+1), cuatro componentes (o dos si la reparación solo pasa en la inspección, `idea_km.md`) | no |
+| D4 | momentos o ML por celdas integrando ℓ con q(ℓ \| j, a) (fase 6) | no |
 
 ## 5. Preguntas que contesta cada comparación
 
 - **D0 contra D1: el costo de no ver r.** Es la pregunta central de la tesis: el
   resultado de Hu & Xin aplicado a un mercado en equilibrio.
-- **D1 contra D2: el valor de los precios y del motivo de salida.** Esperado: con dos
-  tipos de mu distinta los precios aportan poco a tc (v1.4); el motivo de salida aporta
-  poco porque s(ℓ) ya da la tasa de accidentes (`chatarreo_endogeno.md`).
-- **D3 con σ_ν creciente: hasta qué ruido en la medición de ℓ sirve el método.**
-- **D4: cuánto se pierde con inspección bianual.**
-- **D5 contra D1: qué se pierde al agregar** (el experimento puente de la fase 6).
+- **D2 con σ_ν creciente: hasta qué ruido en la medición de ℓ sirve el método.**
+- **D3: cuánto se pierde con inspección bianual.**
+- **D4 contra D1: qué se pierde al agregar** (el experimento puente de la fase 6).
 
 ## 6. Orden sugerido
 
 1. D0 y D1: salen directo de la Fase 4 del plan.
-2. D2, si se decide: precios y motivo de salida.
-3. D4 y D3: requieren estimadores nuevos.
-4. D5: la fase 6.
+2. D3 y D2: requieren estimadores nuevos.
+3. D4: la fase 6.
 
 Todo esto corre en GPU. En local solo pruebas de humo (n_s chico, a_max chico, N chico).
 

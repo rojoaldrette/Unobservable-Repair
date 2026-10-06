@@ -76,3 +76,53 @@ def initial_prices(g):
     p_new = jnp.asarray(g.p_new)[:, None, None]
     p_scrap = jnp.asarray(g.p_scrap)[:, None, None]
     return jnp.maximum(p_new * g.dep_factor ** a * (1.0 - s), p_scrap)
+
+
+# GMRES ______________________________________________________________
+
+def gmres(A, b, x0=None, tol=1e-10, restart=60, maxiter=5, M=None):
+    # GMRES con reinicios, solo con productos A v.  M: precondicionador por la derecha
+    # (se resuelve A M y = b - A x0 y x = x0 + M y).  Para cuando ||b - A x|| <= tol ||b||
+    # o tras `maxiter` ciclos de `restart` iteraciones.
+    # Escrito con jnp y lax, sin custom_linear_solve, para poder anidarlo (un GMRES de la
+    # Bellman dentro del matvec de otro GMRES; el de jax.scipy no lo permite).
+    # Ortogonalización: Gram-Schmidt clásico dos veces (CGS2).
+    n = b.shape[0]
+    M = (lambda v: v) if M is None else M
+    AM = lambda v: A(M(v))
+    x0 = jnp.zeros_like(b) if x0 is None else x0
+    tol_abs = tol * jnp.linalg.norm(b)
+    rhs = b - A(x0)
+    e1 = jnp.concatenate([jnp.ones(1), jnp.zeros(restart)])
+
+    def arnoldi(i, VH):
+        V, H = VH
+        w = AM(V[i])
+        h = V @ w
+        w = w - V.T @ h
+        h2 = V @ w
+        w = w - V.T @ h2
+        h = h + h2
+        nw = jnp.linalg.norm(w)
+        ok = nw > 1e-14 * (jnp.max(jnp.abs(h)) + nw)               # "happy breakdown"
+        V = V.at[i + 1].set(jnp.where(ok, w / jnp.where(ok, nw, 1.0), 0.0))
+        H = H.at[:, i].set(h.at[i + 1].set(nw))
+        return V, H
+
+    def cycle(state):
+        y, _, k = state
+        r = rhs - AM(y)
+        beta = jnp.linalg.norm(r)
+        V = jnp.zeros((restart + 1, n)).at[0].set(r / jnp.where(beta > 0, beta, 1.0))
+        H = jnp.zeros((restart + 1, restart))
+        V, H = jax.lax.fori_loop(0, restart, arnoldi, (V, H))
+        z = jnp.linalg.lstsq(H, beta * e1)[0]
+        y = y + V[:restart].T @ z
+        return y, jnp.linalg.norm(rhs - AM(y)), k + 1
+
+    def not_done(state):
+        _, res, k = state
+        return (res > tol_abs) & (k < maxiter)
+
+    y, _, _ = jax.lax.while_loop(not_done, cycle, (jnp.zeros_like(b), jnp.linalg.norm(rhs), 0))
+    return x0 + M(y)

@@ -146,7 +146,8 @@ class Params:
     tat_damp: float = 0.5
     nk_ed_max_iter: int = 30    # pasos de Newton-Krylov sobre P
     gmres_tol: float = 1e-10
-    gmres_restart: int = 60
+    gmres_restart: int = 60     # dimensión del subespacio de Krylov antes de reiniciar
+    gmres_maxiter: int = 5      # reinicios de GMRES (también en los pasos de Newton de la Bellman)
 
 
     # Value function iteration #################################

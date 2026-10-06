@@ -29,6 +29,8 @@ Se resuelve en logs:  ED_log = log D - log max(S, ed_floor).
 Solver:
 1. Tâtonnement con jacobiano diagonal: P <- P + damp * (sigma_s/mu) * ED_log.
 2. Newton-Krylov: J v por jvp (sin armar el jacobiano de 1800 x 1800) y GMRES.
+   Tampoco se arma M (n x n): q sale de `stationary_q` y los sistemas con I - beta M
+   se resuelven con GMRES y `M_apply`.
    El efecto de P sobre EV entra por el teorema de la función implícita:
        (I - beta M) dEV = (dT/dP) dP.
 '''
@@ -38,13 +40,11 @@ from typing import NamedTuple
 import numpy as np
 import jax
 import jax.numpy as jnp
-from jax.scipy.linalg import lu_factor, lu_solve
-from jax.scipy.sparse.linalg import gmres
 
-from utils import dims, split_states
+from utils import dims, split_states, gmres
 from bellman import T, choice_values, solve_bellman, log_buy_probs
 from probabilities import ccps
-from transitions import transition_from_ccps, stationary_distribution, trade_matrices
+from transitions import stationary_q, holding_distribution, holding_kernel, M_apply
 
 
 # Componentes del mercado ______________________________________________________________
@@ -67,8 +67,7 @@ class Market(NamedTuple):
 def market_components(EV, P, g):
     J, A, S, n_act, n = dims(g)
     c = ccps(EV, P, g)
-    q = stationary_distribution(transition_from_ccps(c, g))
-    Om = sum(trade_matrices(c, g).values())
+    q = stationary_q(c, g)
     pk, _, _ = split_states(c.keep, g)
     pt, _, _ = split_states(c.trade, g)
     pp, _, _ = split_states(c.purge, g)
@@ -78,7 +77,7 @@ def market_components(EV, P, g):
     trade_mass = q @ c.trade
     return Market(
         q=q,
-        q_hold=q @ Om,
+        q_hold=holding_distribution(q, c),
         keep=pk, trade=pt, purge=pp,
         buy_used=buy_used,
         buy_new=c.buy[n_act:n_act + J],
@@ -95,7 +94,7 @@ def excess_demand_log(EV, P, g):
     # ED_log(j, a, s) = log D - log max(S, floor).  Función pura de (EV, P): jvp-able.
     J, A, S, n_act, n = dims(g)
     c = ccps(EV, P, g)
-    q = stationary_distribution(transition_from_ccps(c, g))
+    q = stationary_q(c, g)
     qa, _, _ = split_states(q, g)
     pk, _, _ = split_states(c.keep, g)
 
@@ -118,12 +117,12 @@ def excess_demand(P, g, EV_init=None):
 # Jacobiano matrix-free ______________________________________________________________
 
 def make_jvp(EV, P, g):
-    # Devuelve v -> J_ED(P) v, con v del tamaño de P aplanado.
-    from transitions import transition_matrix
-    n = EV.shape[0]
+    # Devuelve v -> J_ED(P) v, con v del tamaño de P aplanado.  Sin matrices: el sistema
+    # (I - beta M) dEV = dT/dP dP se resuelve con GMRES y productos M v.
     shp = P.shape
-    M = transition_matrix(EV, P, g)
-    lu = lu_factor(jnp.eye(n) - g.beta * M)
+    c = ccps(EV, P, g)
+    K = holding_kernel(c, g)
+    I_bM = lambda v: v - g.beta * M_apply(v, c, K, g)
 
     T_P = lambda P_: T(EV, P_, g)
     ed = lambda EV_, P_: excess_demand_log(EV_, P_, g)
@@ -132,7 +131,8 @@ def make_jvp(EV, P, g):
     def matvec(v):
         dP = v.reshape(shp)
         dT = jax.jvp(T_P, (P,), (dP,))[1]
-        dEV = lu_solve(lu, dT)                        # (I - beta M) dEV = dT/dP dP
+        dEV = gmres(I_bM, dT, tol=g.gmres_tol, restart=g.gmres_restart,
+                    maxiter=g.gmres_maxiter)            # (I - beta M) dEV = dT/dP dP
         return jax.jvp(ed, (EV, P), (dEV, dP))[1].ravel()
 
     return matvec
@@ -180,8 +180,8 @@ def solve_equilibrium(g, P_init=None, EV_init=None, verbose=False):
             break
         matvec = make_jvp(EV, P, g)
         precond = lambda v: -step_scale * v              # inversa del jacobiano diagonal
-        dP, info = gmres(matvec, -ed.ravel(), tol=g.gmres_tol,
-                         restart=g.gmres_restart, M=precond)
+        dP = gmres(matvec, -ed.ravel(), tol=g.gmres_tol, restart=g.gmres_restart,
+                   maxiter=4 * g.gmres_maxiter, M=precond)    # el de P (7,200 incógnitas) necesita más ciclos
         dP = dP.reshape(P.shape)
         lam = 1.0
         for _ in range(12):

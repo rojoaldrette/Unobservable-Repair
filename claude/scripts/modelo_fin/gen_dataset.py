@@ -32,9 +32,10 @@ from dataclasses import replace
 import numpy as np
 import pandas as pd
 
-from utils import dims, decode_states, make_s_grid, split_states
+from utils import dims, decode_states, make_s_grid, split_states, s_new_index
 from probabilities import ccps
-from transitions import physical_matrices, transition_from_ccps, stationary_distribution
+from primitives import s_transition
+from transitions import stationary_q
 from ED import solve_equilibrium
 
 
@@ -62,7 +63,7 @@ def solve_regimes(g, zetas, path=None, verbose=False):
             print(f"régimen {t}: zeta = {z:+.3f}")
         eq = solve_equilibrium(g_t, P_init=P, EV_init=EV, verbose=verbose)
         c = ccps(eq.EV, eq.P, g_t)
-        q = stationary_distribution(transition_from_ccps(c, g_t))
+        q = stationary_q(c, g_t)
         vals = dict(R=np.asarray(g_t.repair_price), P=eq.P, EV=eq.EV, q=q, keep=c.keep,
                     purge=c.purge, trade=c.trade, buy=c.buy, repair=c.repair,
                     empty=eq.empty, converged=eq.converged)
@@ -70,8 +71,7 @@ def solve_regimes(g, zetas, path=None, verbose=False):
             out[k].append(np.asarray(vals[k]))
         P, EV = eq.P, eq.EV
     out = {k: np.stack(v) if isinstance(v, list) else v for k, v in out.items()}
-    Q0, Q1 = physical_matrices(g)                     # R no entra en Q: una sola vez
-    out["Q0"], out["Q1"] = np.asarray(Q0), np.asarray(Q1)
+    out["F"] = np.asarray(s_transition(g))            # F[r, j, d, s, s']; R no entra: una sola vez
     if path is not None:
         os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
         np.savez_compressed(path, **out)
@@ -85,14 +85,23 @@ def load_regimes(path):
 
 # Simulación ______________________________________________________________
 
-def _sample_rows(cum, rows, u, chunk=20_000):
-    # Para cada i, primer k con cum[rows[i], k] >= u[i]  (muestreo por filas, en bloques)
-    out = np.empty(len(rows), dtype=np.int64)
-    n = cum.shape[1]
-    for a in range(0, len(rows), chunk):
-        b = a + chunk
-        out[a:b] = (cum[rows[a:b]] < u[a:b, None]).sum(axis=1)
-    return np.minimum(out, n - 1)
+def _next_state(h, r, cumF, g, rng):
+    # Transición física sin la matriz Q (ver transitions.py): la tenencia h pasa a
+    # term con prob s (o 1 en la última edad); si sobrevive, s' ~ F_r(. | j, d, s) y edad d+1.
+    J, A, S, n_act, n = dims(g)
+    grid = np.asarray(make_s_grid(g))
+    kh, jh, dh, sh = decode_states(h, g)
+    x_next = np.full(len(h), n - 1, dtype=np.int64)            # none -> none
+    car = kh < 2
+    s_idx = np.where(kh == 0, sh, s_new_index(g))               # nuevo: s_new
+    p_term = np.where((kh == 0) & (dh == A - 1), 1.0, grid[s_idx])
+    to_term = car & (rng.random(len(h)) < p_term)
+    x_next[to_term] = n_act + jh[to_term]
+    alive = car & ~to_term
+    rows = cumF[r[alive], jh[alive], dh[alive], s_idx[alive]]  # (m, S); nuevo: d = 0, r = 0
+    sn = np.minimum((rows < rng.random(alive.sum())[:, None]).sum(axis=1), S - 1)
+    x_next[alive] = (jh[alive] * (A - 1) + dh[alive]) * S + sn  # act(j, d+1, s')
+    return x_next
 
 
 def _sample_cat(p, size, rng):
@@ -108,7 +117,7 @@ def simulate_panel(regs, g, N, K, seed):
     J, A, S, n_act, n = dims(g)
     rng = np.random.default_rng(seed)
     grid = np.asarray(make_s_grid(g))
-    cumQ = (np.cumsum(regs["Q0"], axis=1), np.cumsum(regs["Q1"], axis=1))
+    cumF = np.cumsum(regs["F"], axis=-1)
     T = len(regs["zetas"])
 
     frames = []
@@ -133,10 +142,7 @@ def simulate_panel(regs, g, N, K, seed):
             # Etapa 2
             r = (rng.random(N) < repair[h]).astype(np.int8)
             # Transición física
-            x_next = np.empty(N, dtype=np.int64)
-            for rr in (0, 1):
-                sel = r == rr
-                x_next[sel] = _sample_rows(cumQ[rr], h[sel], rng.random(sel.sum()))
+            x_next = _next_state(h, r, cumF, g, rng)
 
             kx, jx, ax, sx = decode_states(x, g)
             kh, jh, dh, sh = decode_states(h, g)

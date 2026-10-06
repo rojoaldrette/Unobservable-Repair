@@ -8,11 +8,11 @@ componentes, siguiendo el layout del repo de Rust (`scripts/main/`).
 | archivo | qué tiene | depende de |
 |---|---|---|
 | `params.py` | `Params` (frozen, estático en jit) | — |
-| `utils.py` | `dims`, grid de s, layout X/H (`split_states`, `stack_states`, `decode_states`), `initial_prices` | params |
+| `utils.py` | `dims`, grid de s, layout X/H (`split_states`, `stack_states`, `decode_states`), `initial_prices`, `gmres` (anidable) | params |
 | `primitives.py` | utilidad, `sell_cost` (Ts), transición de s (`s_transition_rows`, `s_transition`), `emax`, `choice_probs` | utils |
-| `bellman.py` | `continuation_values`, `repair_stage`, nido de compra (`buy_inclusive`, `log_buy_probs`), `choice_values`, `T`, `solve_bellman` | primitives |
+| `bellman.py` | `continuation_values`, `repair_stage`, nido de compra (`buy_inclusive`, `log_buy_probs`), `choice_values`, `T`, `nk_step`, `solve_bellman` | primitives |
 | `probabilities.py` | `CCP`, `ccps` | bellman |
-| `transitions.py` | `physical_matrices` (Q0, Q1), `holding_transition`, `trade_matrices` (Ω), `transition_matrix` (M), `stationary_distribution`, `observed_s_transition` | probabilities |
+| `transitions.py` | **sin matrices (v1.6):** `holding_kernel`, `holding_apply` (Q v), `holding_rapply` (w Q), `M_apply` (M v), `M_rapply` (q M), `holding_distribution` (q Ω), `stationary_q`. **Densas, solo pruebas:** `physical_matrices` (Q0, Q1), `holding_transition`, `trade_matrices` (Ω), `transition_matrix` (M), `stationary_distribution`. Más `observed_s_transition` | probabilities |
 | `ED.py` | `market_components`, `excess_demand_log`, jacobiano sin matriz (`make_jvp`), `solve_equilibrium` | todo lo anterior |
 | `gen_dataset.py` | regímenes de R (`solve_regimes`), `simulate_panel`, vistas (`view`, `to_cells`) | ED |
 | `loglikelihood.py` | datos a celdas, verosimilitudes oráculo / ingenuo / hx, `estim_ll` | primitives |
@@ -20,8 +20,47 @@ componentes, siguiendo el layout del repo de Rust (`scripts/main/`).
 | `main.py` | CLI para correr local o por bloques en la supercomputadora | montecarlo |
 | `tests.py` | pruebas (`python tests.py [--ed] [--n_s 12]`) | todo |
 
-`solve_bellman` importa `transition_matrix` dentro de la función para evitar el ciclo
+`nk_step` importa `ccps` y `M_apply` dentro de la función para evitar el ciclo
 bellman -> transitions -> probabilities -> bellman.
+
+## Sin matrices densas (v1.6)
+
+Ningún paso del modelo arma matrices de n x n (salvo las pruebas a tamaño chico). Con
+a_max = 25 y n_s = 100 (n = 7,204), cada matriz densa eran ~415 MB.
+
+- **Q como kernel:** `holding_kernel` guarda (J, A-1, S, S) con la mezcla de la etapa 2
+  ya integrada. Q v y w Q son einsums sobre ese kernel.
+- **M = ΩQ por estructura:** Ω_keep es diagonal, Ω_trade = trade ⊗ buy es de rango 1 y
+  Ω_purge es una columna:
+
+      M v = keep ⊙ (Q v) + trade <buy, Q v> + purge v(none)
+
+- **Distribución estacionaria exacta, sin resolver sistemas** (`stationary_q`). Todo
+  coche activo viene de una compra, y las compras se reparten según `buy`, que no
+  depende de x. Con masa compradora 1, q se arma con una recursión en la edad (cada
+  edad sale de la anterior por el kernel); term y none salen de los flujos, y al final
+  se normaliza. Solo suma productos no negativos: precisión relativa de máquina aun
+  en celdas de 1e-15 (el solve denso solo daba precisión absoluta, con q de hasta
+  −1e-16).
+- **Newton-Kantorovich con GMRES** (`nk_step`): (I − βM) d = EV − T(EV) con productos
+  M v. Converge en pocas iteraciones porque M = (keep Q, nilpotente: la edad solo sube)
+  + una parte de rango 2.
+- **`utils.gmres`:** GMRES propio con jnp y lax. El de `jax.scipy` no se puede anidar
+  (el GMRES de P en `ED.py` llama dentro a uno de la Bellman), y daba
+  NotImplementedError.
+- **Simulación** (`gen_dataset._next_state`): accidente con prob s y luego s' ~ F_r, en
+  lugar de muestrear filas de Q. Los regímenes guardan F en lugar de Q0 y Q1 (los .npz
+  viejos hay que regenerarlos con `--solve-only`).
+
+**Verificado (`tests.py`, `test_matrix_free`):**
+- Q v, w Q, M v y q M contra las densas: ~1e-15.
+- q por recursión contra el solve denso: 2e-15.
+- Equilibrio completo contra la versión densa (tag `matrices-densas`): EV igual, P a
+  1e-7 (dentro de la tolerancia de ED). Con n_s = 24 pasó de 124 s a 56 s.
+- Bellman + q con a_max = 25 y n_s = 100: 9 s en laptop, sup|T(EV) − EV| = 1e-14,
+  q = qM a 4e-17.
+- Simulador: tasa de accidentes, E[s'] y fracción sin coche coinciden con el modelo
+  dentro del error de muestreo.
 
 ## Cambios de modelo en esta versión
 

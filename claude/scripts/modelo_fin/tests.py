@@ -25,7 +25,8 @@ from utils import dims, split_states, initial_prices, decode_states
 from bellman import T, solve_bellman
 from probabilities import ccps
 from transitions import (physical_matrices, holding_transition, trade_matrices,
-                         transition_matrix, stationary_distribution)
+                         transition_matrix, stationary_distribution, holding_kernel,
+                         holding_apply, holding_rapply, M_apply, M_rapply, stationary_q)
 from ED import market_components, solve_equilibrium, make_jvp, excess_demand_log
 
 
@@ -62,6 +63,39 @@ def test_model(g):
     qa, qt, qn = split_states(m.q, g)
     print("sin coche:", float(qn), "  masa que compra:", float(m.trade_mass))
     return EV, P0
+
+
+def test_matrix_free(g):
+    # Las versiones sin matrices contra las densas (tamaño chico), y a_max = 25 sin densas.
+    gs = dataclasses.replace(g, n_s=12)
+    P = initial_prices(gs)
+    EV = solve_bellman(P, gs)
+    c = ccps(EV, P, gs)
+    K = holding_kernel(c, gs)
+    Q = holding_transition(c, gs)
+    M = transition_matrix(EV, P, gs)
+    v = jax.random.normal(jax.random.PRNGKey(1), EV.shape)
+    print("Q v   sin matriz == densa:", float(jnp.max(jnp.abs(holding_apply(v, K, gs) - Q @ v))))
+    print("v Q   sin matriz == densa:", float(jnp.max(jnp.abs(holding_rapply(v, K, gs) - v @ Q))))
+    print("M v   sin matriz == densa:", float(jnp.max(jnp.abs(M_apply(v, c, K, gs) - M @ v))))
+    print("v M   sin matriz == densa:", float(jnp.max(jnp.abs(M_rapply(v, c, K, gs) - v @ M))))
+    q_d = stationary_distribution(M)
+    q_s = stationary_q(c, gs)
+    print("q recursión == q densa:", float(jnp.max(jnp.abs(q_s - q_d))),
+          "  q = q M:", float(jnp.max(jnp.abs(M_rapply(q_s, c, K, gs) - q_s))))
+
+    # a_max = 25: solo sin matrices (Bellman con NK-GMRES y q por recursión)
+    g25 = dataclasses.replace(gs, a_max=25, repair_price=tuple(
+        tuple(r[0] * (1 + 0.15 * a) for a in range(24)) for r in g.repair_price))
+    P25 = initial_prices(g25)
+    t0 = time.time()
+    EV25 = solve_bellman(P25, g25, verbose=True)
+    c25 = ccps(EV25, P25, g25)
+    q25 = stationary_q(c25, g25)
+    K25 = holding_kernel(c25, g25)
+    print(f"a_max = 25, n_s = 12 (n = {EV25.shape[0]}): {time.time() - t0:.1f} s;  "
+          f"sup|T(EV) - EV| = {float(jnp.max(jnp.abs(T(EV25, P25, g25) - EV25))):.1e};  "
+          f"q = q M: {float(jnp.max(jnp.abs(M_rapply(q25, c25, K25, g25) - q25))):.1e}")
 
 
 def test_jacobians(g):
@@ -104,6 +138,7 @@ if __name__ == "__main__":
 
     g = Params() if args.n_s is None else dataclasses.replace(Params(), n_s=args.n_s)
     test_model(g)
+    test_matrix_free(g)
     test_jacobians(g)
     if args.ed:
         test_equilibrium(g)

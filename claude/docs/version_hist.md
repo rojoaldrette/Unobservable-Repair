@@ -5,6 +5,36 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.6: modelo_fin sin matrices densas (2026-10-06)
+
+Fase 1 del plan. Detalle en `modelo_fin.md`, "Sin matrices densas".
+
+### Cambios
+- **`transitions.py`:**
+  - Q como kernel (J, A-1, S, S);
+  - M v y q M por la estructura de Ω (diagonal + rango 1 + una columna);
+  - `stationary_q`: q exacta por recursión en la edad, sin resolver sistemas.
+  - Las funciones densas quedan solo para pruebas.
+- **`bellman.nk_step`:** Newton-Kantorovich con GMRES en vez de `solve` denso.
+- **`ED.py`:** q por recursión; el sistema (I − βM) dEV = dT/dP dP con GMRES en vez de LU.
+- **`utils.gmres`:** GMRES propio, anidable (el de jax.scipy no se puede anidar).
+- **`gen_dataset.py`:** simula con el kernel F; los regímenes guardan F, no Q0/Q1.
+- `params.gmres_maxiter` (nuevo).
+- `tests.py`: `test_matrix_free`.
+
+### Resultados
+- Todo coincide con la versión densa (tag `matrices-densas`): operadores a ~1e-15,
+  equilibrio con P a 1e-7. Más rápido: 124 s -> 56 s con n_s = 24.
+- **a_max = 25 y n_s = 100 ya caben:** Bellman + q en 9 s en laptop.
+- El equilibrio a tamaño completo no se corrió (se deja para la supercomputadora).
+
+### Pendientes
+- Fases 2-5 del plan (v1.5).
+- Los .npz de regímenes guardados con la versión anterior traen Q0/Q1 en vez de F:
+  regenerarlos.
+
+---
+
 ## v1.5: plan y documentos de diseño (2026-10-05)
 
 Sin cambios de código. Es el último estado de `modelo_fin` con matrices densas (tag
