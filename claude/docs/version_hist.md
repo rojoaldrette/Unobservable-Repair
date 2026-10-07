@@ -5,6 +5,33 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v1.9: manual reescrito y corredor para la supercomputadora (2026-10-06)
+
+Sin cambios en el modelo ni en los estimadores.
+
+### Cambios
+- **`manual.md` reescrito**: rutas completas de cada script (hay archivos con el mismo
+  nombre en varias carpetas), calibraciones de modelo_fin y Gillingham (incluye cómo
+  agregar una con nombre), Monte Carlo y sus reglas (tags, `--rep_reporte 0`,
+  `verdad.npz` primero, MC del cruce), resultados y gráficas, supercomputadora
+  (2 × Quadro GV100, sin SLURM), uso sin tmux y cómo vigilar las GPUs.
+- **`scripts/correr_gpu.sh`**: corre todo por fases (`prueba`, `fase1`, `fase2`,
+  `cruce`, `analisis`, `todo`, `estado`) con un proceso por GPU vía
+  `CUDA_VISIBLE_DEVICES`; diseño por variables de entorno.  Solo se revisó la sintaxis
+  (`bash -n`); no se ha corrido.
+- **`codigo.md`**: mapa de carpetas actualizado; sección 11.0 "¿se aplicaron los
+  log-odds?" (sí, en "tesis") con dónde entra en cada archivo; tablas de `params`,
+  `utils` y `primitives` con `s_space`, `make_state_grid` y `scrap`.
+
+### Pendientes
+- Correr `correr_gpu.sh prueba` en la supercomputadora y anotar tiempos.
+- Corregir la docstring de `gillingham/estimar.py` (dice que modelo_fin no tiene
+  chatarreo endógeno; lo tiene desde v1.8).
+- `dataclasses.replace(g, mu=...)` no afecta a la API nueva (mu, u0, u1, tc_buy,
+  tc_buy_nocar salen de `PAPER_TYPES`); documentado en el manual, sec. 2.5.
+
+---
+
 ## v1.8: calibración de la tesis (a_max = 25, log-odds) y chatarreo endógeno (2026-10-06)
 
 Fase 3 del plan y lo que faltaba de la Fase 2.  Detalle en `calibracion.md`.

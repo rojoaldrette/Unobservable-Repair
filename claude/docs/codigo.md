@@ -69,22 +69,33 @@ sí se permiten (g es constante).
 ```
 claude/
 ├── scripts/
-│   ├── modelo_fin/        el modelo de la tesis (con s y reparación no observada)
-│   ├── gillingham/        réplica de Gillingham et al. (sin s, con chatarreo endógeno)
-│   └── comparacion/       corre los dos modelos y compara equilibrios
-├── docs/                  documentación (este archivo, decisiones, resultados)
-└── output/montecarlo/     resultados del Monte Carlo (CSV, npz)
+│   ├── modelo_fin/          el modelo de la tesis (con s y reparación no observada)
+│   │   ├── estimar.py         ◄ corredor actual: verdad, panel, estimación D0/D1
+│   │   ├── calibracion.py     calibraciones con nombre ("tesis" = la de la tesis)
+│   │   ├── main.py            corredor viejo (v1.0): MC de la primera etapa de Hu & Xin
+│   │   └── slurm_mc.sh        SLURM del corredor viejo
+│   ├── gillingham/          réplica de Gillingham et al. (sin s, con chatarreo endógeno)
+│   │   ├── estimar.py         ◄ corredor actual: sus datos o el panel de modelo_fin (--panel)
+│   │   └── main.py            corredor viejo (v1.3-v1.4)
+│   ├── analisis/            ◄ main.py: gráficas y tablas a partir de las salidas de estimar.py
+│   ├── comparacion/         compare.py: equilibrios G25 vs M25 (sin estimar)
+│   ├── correr_gpu.sh        ◄ supercomputadora sin SLURM: fases prueba/fase1/fase2/cruce/analisis/todo
+│   └── slurm_estimar.sh     SLURM de los corredores actuales (solo si hay SLURM)
+├── docs/                    documentación (este archivo, decisiones, resultados)
+└── output/
+    ├── estimaciones/        ◄ salidas de modelo_fin/estimar.py y gillingham/estimar.py, por <tag>
+    ├── analisis/            ◄ salidas de analisis/main.py, por --nombre
+    ├── logs/                logs de corridas (no se suben)
+    └── montecarlo/          resultados de los MC viejos de gillingham/main.py
 ```
 
-Cómo correr (siempre desde la carpeta del script y con `PYTHONIOENCODING=utf-8`):
+Los archivos marcados con ◄ son los que se usan hoy.  `modelo_fin/` y `gillingham/`
+tienen módulos con el mismo nombre (`params.py`, `bellman.py`, `theta.py`,
+`equilibrium.py`, ...) pero distintos: cada script se corre **desde su carpeta**.  La
+carpeta `scripts/main/` de la raíz del repo es código del autor, no de `claude/`.
 
-```
-cd claude/scripts/modelo_fin
-python tests.py                 # pruebas (añadir --ed para el equilibrio, --n_s 12 para chico)
-python main.py --smoke          # Monte Carlo de humo (minutos)
-python main.py --solve-only     # resolver y guardar los equilibrios de un diseño
-python main.py --reps 0:10      # bloque de réplicas
-```
+**Cómo correr cada cosa: `manual.md`** (rutas completas, calibraciones, Monte Carlo,
+gráficas y supercomputadora).
 
 ---
 
@@ -310,8 +321,9 @@ T ──► choice_values(EV, P, g) ──┬─► flow_utility(g)             
 | costos de transacción | `tc_buy`, `tc_buy_nocar`, `tc_sell`, `tc_sell_inspect`, `inspect_age_min` | Tablas 5 y 10 |
 | precios exógenos | `p_new`, `p_scrap`, `repair_price` | R(j, a) es la variable excluida |
 | shocks | `sigma`, `sigma_trade`, `sigma_s`, `sigma_repair` | GEV válido: 0 < sigma_s <= sigma_trade <= sigma |
-| estados | `n_brands`, `a_max`, `s_min`, `s_max`, `n_s`, `s_new` | |
-| transición de s | `s_const`, `s_age`, `s_persist`, `s_repair`, `s_sigma` | m = s_const_j + s_age d + s_persist s − s_repair r |
+| chatarreo | `scrap`, `sigma_sell` | `scrap = False` en `Params()`, `True` en "tesis" (sección 11) |
+| estados | `n_brands`, `a_max`, `s_space`, `s_min`, `s_max`, `n_s`, `s_new` | `s_space`: `"level"` (default de `Params()`) o `"logodds"` ("tesis"); s_min, s_max y s_new van en las unidades del grid (s o ℓ). `s_new` puede ser uno por marca |
+| transición de s | `s_const`, `s_age`, `s_persist`, `s_repair`, `s_sigma` | m = s_const_j + s_age d + s_persist x − s_repair r, con x = s o ℓ según `s_space` |
 | equilibrio | `dep_factor`, `ed_floor`, `ed_tol`, `ed_mass_tol`, `tat_*`, `nk_ed_max_iter`, `gmres_tol`, `gmres_restart`, `gmres_maxiter` | |
 | Bellman | `sa_tol`, `sa_max_iter`, `vfi_tol`, `nk_max_iter` | |
 | MC | `mc_replic` | |
@@ -327,8 +339,9 @@ Para otro año de precios de reparación: `dataclasses.replace(g, repair_price=.
 |---|---|---|
 | (al importar) | | activa float64 en JAX |
 | `dims(g)` | -> (J, A, S, n_act, n) | las dimensiones; casi toda función empieza con esto |
-| `make_s_grid(g)` | -> (S,) | `linspace(s_min, s_max, n_s)` |
-| `s_new_index(g)` | -> int de Python | índice del grid más cercano a s_new (numpy: tiene que ser estático) |
+| `make_state_grid(g)` | -> (S,) | `linspace(s_min, s_max, n_s)`: el grid **del estado**, en la variable donde la transición es lineal (s en niveles, ℓ en log-odds) |
+| `make_s_grid(g)` | -> (S,) | la **probabilidad de descomponerse** en cada punto: igual a `make_state_grid` en niveles, `sigmoid(ℓ)` en log-odds |
+| `s_new_index(g)` | -> (J,) numpy | índice del grid más cercano a s_new de cada marca (numpy: tiene que ser estático) |
 | `split_states(x, g)` | (n,) -> (act (J, A−1, S), term (J,), none ()) | partir un vector de estados |
 | `stack_states(act, term, none)` | -> (n,) | lo inverso |
 | `decode_states(idx, g)` | índices -> (tipo, j, a, s) | tipo 0 = act/used, 1 = term/new, 2 = none; en H, los nuevos tienen a = 0 |
@@ -344,8 +357,8 @@ Las piezas "primitivas" del modelo: no dependen de EV ni de P.
 | `flow_utility(g)` | (J, A, S) | u0_j + u1_j d + u2_j d² + u_s s, d = 0..A−1 |
 | `sell_cost(g)` | (A−1,) | Ts(a) = tc_sell_inspect si a par >= inspect_age_min, si no tc_sell |
 | `s_transition_rows(mean, sd, grid)` | mean.shape + (S,) | discretiza N(mean, sd²) en el grid: probabilidad de caer en el intervalo de cada punto; las colas se acumulan en los extremos |
-| `s_mean_next(g)` | (2, J, A, S) | m(r, j, d, s) |
-| `s_transition(g)` | (2, J, A, S, S) | F = s_transition_rows(s_mean_next(g), s_sigma, grid) |
+| `s_mean_next(g)` | (2, J, A, S) | m(r, j, d, x) sobre `make_state_grid` (x = ℓ en log-odds) |
+| `s_transition(g)` | (2, J, A, S, S) | F = s_transition_rows(s_mean_next(g), s_sigma, make_state_grid(g)) |
 | `emax(values, sigma)` | | E max{v_k + sigma ε_k} = sigma logsumexp(v / sigma) (sin la constante de Euler) |
 | `choice_probs(values, sigma)` | eje 0 = alternativa | probabilidades logit |
 
@@ -673,6 +686,54 @@ con un `Model`, así que un θ nuevo no recompila.
 ---
 
 ## 11. Log-odds, chatarreo y calibración (v1.8)
+
+### 11.0 ¿Se aplicaron los log-odds?  Sí, en la calibración "tesis"
+
+| | log-odds activos |
+|---|---|
+| `calibracion("tesis")` — **default** de `modelo_fin/estimar.py`, `modelo_fin/main.py` y `comparacion/compare.py` (M25) | **sí** (`s_space = "logodds"`) |
+| `calibracion("tesis_v0" \| "gill_s" \| "defaults")` | no (niveles) |
+| `Params()` a secas, y por lo tanto `tests.py` sin `--estructural` y la API vieja `ED.solve_equilibrium(Params())` | no (niveles) |
+| `tests.py --estructural` | sí (usa "tesis" a tamaño de juguete) |
+| `gillingham/` | no aplica: no tiene s; su prob. de accidente ya es un logit en la edad |
+
+Qué hace "tesis" (`calibracion.py`): el estado es ℓ = logit(s), con grid uniforme en
+ℓ ∈ [−9, 1], y
+
+```
+ℓ_nuevo(j) = acc_int_j                               (s_new,  Tabla 4)
+ℓ'         = ℓ + acc_age_j − s_repair r + η          (s_const = acc_age_j, s_age = 0, s_persist = 1)
+η ~ N(0, s_sigma²) discretizado en el grid de ℓ
+prob. de descomponerse este periodo = s = sigmoid(ℓ)
+```
+
+No hay una rama de código aparte para log-odds: **todo el modelo es el mismo** y lo único
+que cambia es qué grid usa cada pieza.  Dónde entra, archivo por archivo:
+
+| archivo | función | usa | por qué |
+|---|---|---|---|
+| `utils.py` | `make_state_grid` | `linspace(s_min, s_max)` = ℓ | el estado |
+| `utils.py` | `make_s_grid` | `sigmoid(ℓ)` (si `s_space == "logodds"`) | **el único lugar donde se aplica la transformación** |
+| `primitives.py` | `s_mean_next`, `s_transition` | estado (ℓ) | la transición es lineal y normal en ℓ |
+| `primitives.py` | `flow_utility` (u_s · s) | prob. (s) | |
+| `utils.py` | `initial_prices` | prob. (s) | P0 = p_new dep^a (1 − s) |
+| `bellman.py` | `continuation_values` | prob. (s) para sobrevivir / descomponerse; F (en ℓ) para s' | |
+| `transitions.py` | `holding_kernel`, `physical_matrices` | igual que bellman | |
+| `estructural.py` | `cell_logp` | prob. (s) para la verosimilitud de los accidentes | |
+| `gen_dataset.py` | `simulate_panel`, `simulate_economy` | prob. (s) para sortear accidentes; índices del grid para s' | |
+| `loglikelihood.py` (primera etapa, v1.0) | `treat_data` | estado (ℓ) | la primera etapa estima la transición |
+| `estimar.py` | `tablas_equilibrio` | escribe las dos: columna `s` (prob.) y `ell` (estado) | |
+| `analisis/graficas.py` | `_eje_s` | grafica contra ℓ si `config.json` dice `"logodds"` | |
+
+Consecuencias prácticas:
+- Con "tesis", los parámetros estimados de la transición (`s_const`, `s_age`,
+  `s_persist`, `s_repair`, `s_sigma` en `parametros_*.csv`) están **en unidades de ℓ**:
+  `s_repair = 0.5` significa que reparar multiplica las odds de descomponerse por
+  e^−0.5 ≈ 0.61.
+- `s_new` no se estima (no está en `theta.FIELDS`).
+- Para saber si una corrida usó log-odds: `config.json` → `params.s_space`.
+
+### 11.1 Detalle
 
 **El estado de desgaste.** `Params.s_space` dice en qué variable está el grid:
 
