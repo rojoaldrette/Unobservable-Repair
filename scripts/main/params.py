@@ -19,7 +19,7 @@ class Params:
 
     # Structural params ###################
 
-    beta: float = 0.97
+    beta: float = 0.98
 
     # Utility/cost of keeping the car
     mileage_cost: float = 0.013
