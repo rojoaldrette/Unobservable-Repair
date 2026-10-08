@@ -93,6 +93,46 @@ def _newton(z, th, cfg):
     return F, -jnp.linalg.solve(Jz, F)
 
 
+@partial(jax.jit, static_argnames="cfg")
+def factor(z, th, cfg):
+    # F(z) y la factorización LU del jacobiano F_z: se reutiliza en pasos de cuerda (θ
+    # cercanos) y en el gradiente implícito de la verosimilitud.
+    F, Jz = jacobian(lambda v: residual(v, th, cfg), z, cfg.jac_chunk)
+    return F, jax.scipy.linalg.lu_factor(Jz)
+
+
+@partial(jax.jit, static_argnames="cfg")
+def _chord(z, th, cfg, lu):
+    F = residual(z, th, cfg)
+    return F, -jax.scipy.linalg.lu_solve(lu, F)
+
+
+def solve_chord(th, cfg, z0, lu, max_iter=15, rate=0.5):
+    # Equilibrio en θ partiendo de z0 (el de un θ cercano) con la LU de ese θ: pasos de
+    # Newton "de cuerda", cada uno de costo ~ una evaluación de F.  Si ||F|| no baja al
+    # menos a `rate` de la anterior, se refactoriza en el punto actual.  Si aun así no
+    # converge, Newton completo (solve).  Devuelve (z, lu, convergió, estadísticas).
+    z, nrm_prev = jnp.asarray(z0), np.inf
+    st = dict(cuerda=0, factorizaciones=0, newton_completo=False)
+    for _ in range(max_iter):
+        F, dz = _chord(z, th, cfg, lu)
+        err = float(jnp.max(jnp.abs(F)))
+        if not np.isfinite(err):
+            break
+        if err < cfg.eq_tol:
+            return z, lu, True, st
+        nrm = float(jnp.linalg.norm(F))
+        if nrm > rate * nrm_prev:
+            F, lu = factor(z, th, cfg)
+            dz = -jax.scipy.linalg.lu_solve(lu, F)
+            st["factorizaciones"] += 1
+        z, nrm_prev = z + dz, nrm
+        st["cuerda"] += 1
+    z, ok, _ = solve(th, cfg, z0)
+    st["newton_completo"] = True
+    return z, factor(z, th, cfg)[1], ok, st
+
+
 @partial(jax.jit, static_argnames=("cfg", "n_iter"))
 def _sa(EVs, P, th, cfg, n_iter):
     return per_type(lambda EV, P_, tht, c: successive_approx(EV, P_, tht, c, n_iter), EVs, P, th, cfg)

@@ -63,7 +63,8 @@ def w_transition(th, cfg):
     # m = w + delta_j - acc_age_j - kappa r.  Los extremos absorben las colas.  Piso eps_F.
     g = jnp.asarray(cfg.w_grid)
     h = cfg.w_step
-    edges = jnp.concatenate([jnp.array([-jnp.inf]), g[:-1] + h / 2, jnp.array([jnp.inf])])
+    # bordes extremos finitos (no ±inf): con inf, la derivada respecto a sigma_eta da 0·inf = NaN
+    edges = jnp.concatenate([jnp.array([-1e3]), g[:-1] + h / 2, jnp.array([1e3])])
     drift = th["delta"] - th["acc_age"]                                       # (J,)
     m = (g[None, None, :] + drift[None, :, None]
          - th["kappa"] * jnp.arange(2.0)[:, None, None])                     # (2, J, W)

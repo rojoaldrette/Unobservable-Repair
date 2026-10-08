@@ -4,7 +4,15 @@ La especificación vigente está en `modelo_fin.md`. Este doc dice cómo está h
 cómo se corre y qué sale. El plan anterior (2026-10-07, grid de 13 puntos) quedó
 reemplazado.
 
-Estado (2026-10-08): **modelo teórico completo hasta `gen_dataset`.** Falta la estimación.
+Estado (2026-10-08): **modelo teórico completo hasta `gen_dataset`; núcleo de la
+verosimilitud y script de tiempos listos.** Falta el optimizador y el Monte Carlo.
+
+**Equilibrio en la estimación (`equilibrio.factor`, `solve_chord`):** la LU del jacobiano se
+calcula una vez y se reutiliza.
+
+- Para θ cercanos se usan pasos "de cuerda", cada uno del costo de una evaluación de F.
+- Se refactoriza solo si la convergencia se frena.
+- La misma LU sirve para dz/dθ, con 4 pasos de refinamiento.
 
 ## 1. Archivos (`claude/niu/modelo_tesis/`)
 
@@ -17,6 +25,8 @@ Estado (2026-10-08): **modelo teórico completo hasta `gen_dataset`.** Falta la 
 | `equilibrio.py` | sistema conjunto F(z) por régimen, Newton denso, `solve_regimes`, estadísticas de mercado y por (j, a) |
 | `gen_dataset.py` | panel de hogares por régimen: decisiones, r, accidentes, chatarreo endógeno, w' |
 | `teoria.py` | corre todo lo anterior, compara con Gillingham y guarda CSV |
+| `ll_estim.py` | núcleo de la estimación: parámetros libres (27), celdas y verosimilitud de los 3 diseños, dz/dθ con la LU reutilizada + refinamiento, scores y BHHH |
+| `tiempos.py` | mide en GPU cada pieza de una evaluación de la verosimilitud y extrapola las horas del MC |
 | `tests.py` | pruebas (sec. 3) |
 
 **Convenciones:** como `niu/gillingham`.
@@ -67,6 +77,16 @@ por paso en GPU a tamaño completo es el dato que hace falta para planear la est
 - flujo estacionario por marca;
 - Pr(reparar) = 0 en la edad A−1;
 - el panel simulado reproduce keep y Pr(reparar) del modelo (±0.002).
+- **gradiente implícito de la LL contra diferencias finitas**, diseños 1, 2 y 3: error
+  relativo ≤ 2e-6, usando la LU de un θ cercano.
+  - Con 2 pasos de refinamiento, dz/dθ queda a 1e-5; con 5, a 6e-11. Default: 4.
+  - Dos arreglos que salieron de esta prueba:
+    - los bordes extremos de la transición de w son ±1e3 y no ±∞ (con ∞, la derivada
+      respecto a σ_η daba 0·∞ = NaN);
+    - el factor de compra es `where(trade, buy, 1)` y no `buy ** trade` (0⁰ tiene derivada
+      NaN).
+- `tiempos.py --prueba` (a_max = 8): la cuerda converge sin refactorizar para pasos de hasta
+  0.03 en x (4-12 pasos).
 
 **Solver:** desde cero, el régimen central converge en 14 pasos de Newton (tope de 150
 mil DKK por paso en precios). Los regímenes ±0.3, arrancando del central, convergen en 5.
