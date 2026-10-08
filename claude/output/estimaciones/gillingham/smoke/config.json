@@ -1,0 +1,89 @@
+{
+ "args": {
+  "reps": "0:1",
+  "panel": "",
+  "N": 3000,
+  "K": 4,
+  "a_max": 7,
+  "infos": "parcial,completa",
+  "fix": "",
+  "types": "low_couple_poor,low_single_poor",
+  "f": "",
+  "n_starts": 0,
+  "perturb": 0.1,
+  "tag": "smoke",
+  "outdir": "/home/colaboradorx/Documents/Unobservable-Repair/claude/output/estimaciones/gillingham",
+  "smoke": true,
+  "verbose": true
+ },
+ "datos": "gillingham",
+ "params": {
+  "beta": 0.95,
+  "mu": 0.1131,
+  "u0": [
+   3.649,
+   3.1132,
+   5.1535
+  ],
+  "u1": [
+   -0.1459,
+   -0.0922,
+   -0.2196
+  ],
+  "u2": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "u_even": 0.0,
+  "u_none": 0.0,
+  "tc_buy": 6.5944,
+  "tc_buy_nocar": 1.7899,
+  "tc_sell": 0.9106,
+  "tc_sell_inspect": 2.1929,
+  "inspect_age_min": 4,
+  "term_pays_nocar": false,
+  "p_new": [
+   142.33,
+   110.09,
+   275.84
+  ],
+  "p_scrap": [
+   2.0,
+   2.0,
+   2.0
+  ],
+  "acc_int": [
+   -5.6248,
+   -6.0443,
+   -5.6728
+  ],
+  "acc_age": [
+   0.1804,
+   0.2216,
+   0.202
+  ],
+  "sigma": 1.0,
+  "sigma_trade": 1.0,
+  "sigma_sell": 0.3454,
+  "n_brands": 3,
+  "a_max": 7,
+  "dep_factor": 0.87,
+  "sa_tol": 1e-06,
+  "sa_max_iter": 5000,
+  "vfi_tol": 1e-12,
+  "nk_max_iter": 20,
+  "ed_tol": 1e-10,
+  "ed_max_iter": 50
+ },
+ "tipos": {
+  "names": [
+   "low_couple_poor",
+   "low_single_poor"
+  ],
+  "f": [
+   0.5,
+   0.5
+  ]
+ }
+}
