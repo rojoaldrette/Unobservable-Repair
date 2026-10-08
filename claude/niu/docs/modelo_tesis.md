@@ -42,6 +42,8 @@ inicio (~12 s). Eso daba 44-118 h de MC. De ahí los cambios de arriba.
 | `teoria.py` | corre todo lo anterior, compara con Gillingham y guarda CSV |
 | `ll_estim.py` | núcleo de la estimación: parámetros libres (27), celdas y verosimilitud de los 3 diseños, dz/dθ con la LU reutilizada + refinamiento, scores y BHHH |
 | `tiempos.py` | mide en GPU cada pieza de una evaluación de la verosimilitud y extrapola las horas del MC |
+| `montecarlo.py` | MC: por réplica, panel → diseños 1, 2 y 3 (GPU) y Gillingham sobre el mismo panel (CPU, en paralelo); CSV por réplica; `--summarize` |
+| `../gillingham/estimar_panel.py` | estima Gillingham (parcial y completa) sobre un panel externo; lo lanza `montecarlo.py` |
 | `tests.py` | pruebas (sec. 3) |
 
 **Convenciones:** como `niu/gillingham`.
@@ -209,3 +211,37 @@ Plan:
 - **El estimador de Gillingham es barato:** 150 incógnitas, segundos.
 
 Decidir n_w y el plan con el tiempo por paso de Newton medido en GPU (`teoria.py -v`).
+
+## 7. Monte Carlo (`montecarlo.py`)
+
+**Por réplica:**
+
+1. Simula el panel: 10,000 hogares por régimen, 4 años, 3 regímenes.
+2. Lanza Gillingham en CPU sobre el mismo panel, sin w ni r (estados (j, a)), con las
+   verosimilitudes parcial y completa.
+3. Mientras tanto, la GPU estima los diseños 1, 2 y 3. Arrancan desde la verdad, con los
+   equilibrios verdaderos y sus inversas.
+   - Cada evaluación: cuerda desde el predictor, dz/dθ y scores.
+   - En la réplica `--rep_perturbados` (0), además 2 arranques perturbados.
+4. Escribe los CSV e imprime una línea por diseño y la línea `[avance]`.
+
+**Cómo correrlo:**
+
+```bash
+cd claude/niu/modelo_tesis
+python -u montecarlo.py --smoke                            # juguete, CPU (~2 min)
+python -u montecarlo.py --reps 0:1 -v | tee mc_rep0.log    # una réplica completa (GPU), con log de L-BFGS
+CUDA_VISIBLE_DEVICES=0 nohup python -u montecarlo.py --reps 0:25  > mc_0-24.log  2>&1 &
+CUDA_VISIBLE_DEVICES=1 nohup python -u montecarlo.py --reps 25:50 > mc_25-49.log 2>&1 &
+python -u montecarlo.py --summarize                        # resumen_mc.csv
+```
+
+- **El MC grande y la réplica 0 se pisan.** Corre `--reps 0:25` solo si la réplica 0 de
+  prueba se borra o va en otro `--tag`. Si no, la réplica 0 queda dos veces en los CSV.
+- **Etiquetas de estimador:** `diseno_1`, `diseno_2`, `diseno_3`, `gill_parcial` y
+  `gill_completa`. Los nombres de parámetro coinciden (`mu_t0`, `u0_t1_j0`, `acc_age_j0`,
+  ...): la tabla resumen compara el sesgo de Gillingham contra los diseños parámetro por
+  parámetro.
+
+**Verificado:** `--smoke` corre completo en CPU (2 min). Escribe los 4 CSV y la tabla
+resumen.

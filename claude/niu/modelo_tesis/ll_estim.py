@@ -240,3 +240,118 @@ def score_parts(zs, Dz, x, th_fixed, data, cfg, spec, design):
 @partial(jax.jit, static_argnames=("cfg", "spec", "design"))
 def loglik(zs, x, th_fixed, data, cfg, spec, design):
     return data["cnt"] @ cell_logp(zs, unpack(x, spec, th_fixed, cfg), cfg, data, design)
+
+
+# Evaluador y optimización ______________________________________________________________
+
+class LLEval:
+    # LL(x) con gradiente y BHHH.  Guarda el último punto aceptado (x, z de cada régimen, la
+    # inversa del jacobiano y dz/dx) y arranca cada evaluación desde el predictor
+    # z + (dz/dx)(x_nuevo - x) con pasos de cuerda (equilibrio.solve_chord).
+    def __init__(self, cfg, spec, th_fixed, data, design, zs0, Jinvs0, x0):
+        self.cfg, self.spec, self.th_fixed, self.data, self.design = cfg, spec, th_fixed, data, design
+        self.x, self.zs, self.Jinvs = jnp.asarray(x0), list(zs0), list(Jinvs0)
+        self.Dz = dz_dx(self.zs, self.Jinvs, self.x, th_fixed, cfg, spec)
+        self.N = float(jnp.sum(data["cnt"]))
+        self.st = dict(n_eval=0, n_fail=0, cuerda=0, refact=0, newton=0)
+
+    def __call__(self, x):
+        from equilibrio import solve_chord
+        self.st["n_eval"] += 1
+        x = jnp.asarray(x)
+        th = unpack(x, self.spec, self.th_fixed, self.cfg)
+        dx = x - self.x
+        zs, Jinvs = [], []
+        for t in range(len(self.cfg.zetas)):
+            z, Ji, ok, s = solve_chord(regime_theta(th, self.cfg, t), self.cfg,
+                                       self.zs[t] + self.Dz[t] @ dx, self.Jinvs[t])
+            self.st["cuerda"] += s["cuerda"]
+            self.st["refact"] += s["factorizaciones"]
+            self.st["newton"] += s["newton_completo"]
+            if not ok:
+                self.st["n_fail"] += 1
+                return -np.inf, None, None
+            zs.append(z)
+            Jinvs.append(Ji)
+        Dz = dz_dx(zs, Jinvs, x, self.th_fixed, self.cfg, self.spec)
+        ll, g, B = score_parts(zs, Dz, x, self.th_fixed, self.data, self.cfg, self.spec, self.design)
+        self.x, self.zs, self.Jinvs, self.Dz = x, zs, Jinvs, Dz           # punto aceptado
+        return float(ll), np.asarray(g), np.asarray(B)
+
+
+def estim_lbfgs(ev, x0, max_iter, verbose=False):
+    import time
+    from scipy.optimize import minimize
+    t0, st = time.perf_counter(), dict(it=0, f=np.nan, g=np.nan)
+
+    def fun(x):
+        ll, g, _ = ev(x)
+        if not np.isfinite(ll):
+            return 1e10, np.zeros_like(x)            # la búsqueda de línea retrocede
+        st["f"], st["g"] = -ll / ev.N, np.max(np.abs(g)) / ev.N
+        return -ll / ev.N, -g / ev.N
+
+    def log(xk):
+        st["it"] += 1
+        if verbose and st["it"] % 10 == 0:
+            print(f"    L-BFGS {st['it']:4d}: LL/N = {-st['f']:.8f}, |g|max = {st['g']:.1e}, "
+                  f"evals = {ev.st['n_eval']}, refact = {ev.st['refact']}, "
+                  f"{time.perf_counter() - t0:.0f} s", flush=True)
+
+    res = minimize(fun, np.asarray(x0, float), jac=True, method="L-BFGS-B", callback=log,
+                   options=dict(maxiter=max_iter, gtol=1e-6))
+    if verbose:
+        print(f"  L-BFGS: LL/N = {-res.fun:.8f}, it = {res.nit}, {res.message}, "
+              f"{time.perf_counter() - t0:.1f} s", flush=True)
+    return res.x
+
+
+def estim_bhhh(ev, x0, max_iter, tol=1e-9, verbose=False):
+    # BHHH con búsqueda de línea por mitades.  Para cuando g'B^{-1}g/N < tol o cuando la LL
+    # deja de subir 3 iteraciones seguidas.
+    x = np.asarray(x0, float)
+    ll, g, B = ev(x)
+    if not np.isfinite(ll):
+        raise RuntimeError("el equilibrio no converge en el valor inicial de BHHH")
+    converged, stall, it = False, 0, 0
+    for it in range(max_iter):
+        d = np.linalg.pinv(B) @ g
+        crit = float(g @ d) / ev.N
+        if verbose:
+            print(f"    BHHH {it:3d}: LL/N = {ll / ev.N:.8f}, g'B^-1g/N = {crit:.1e}", flush=True)
+        if crit < tol:
+            converged = True
+            break
+        lam = 1.0
+        for _ in range(20):
+            out = ev(x + lam * d)
+            if np.isfinite(out[0]) and out[0] > ll:
+                break
+            lam *= 0.5
+        else:
+            break
+        stall = stall + 1 if ((out[0] - ll) / ev.N < 1e-10 or lam < 1e-3) else 0
+        x = x + lam * d
+        ll, g, B = out
+        if stall >= 3:
+            break
+    if not np.allclose(np.asarray(ev.x), x):           # que el estado guardado sea el de x
+        ll, g, B = ev(x)
+    return x, ll, B, converged, it
+
+
+def estimate(ev, x0, lbfgs_iter=300, bhhh_iter=30, verbose=False):
+    # θ̂ (escala natural), errores estándar (delta), LL, convergencia y diagnósticos
+    import time
+    t0 = time.perf_counter()
+    x = estim_lbfgs(ev, x0, lbfgs_iter, verbose) if lbfgs_iter > 0 else np.asarray(x0, float)
+    x, ll, B, converged, it = estim_bhhh(ev, x, bhhh_iter, verbose=verbose)
+    cov = np.linalg.pinv(B)
+    sv = np.linalg.svd(B, compute_uv=False)
+    xj = jnp.asarray(x)
+    jac = np.diag(np.asarray(jax.jacfwd(lambda v: natural(v, ev.spec, ev.th_fixed, ev.cfg))(xj)))
+    var = np.diag(cov)
+    se = np.where(var > 0, np.abs(jac) * np.sqrt(np.abs(var)), np.nan)
+    return dict(x=x, theta=np.asarray(natural(xj, ev.spec, ev.th_fixed, ev.cfg)), se=se, ll=ll,
+                zs=list(ev.zs), converged=converged, bhhh_iters=it, cond_B=float(sv[0] / max(sv[-1], 1e-300)),
+                seconds=time.perf_counter() - t0, **ev.st)
