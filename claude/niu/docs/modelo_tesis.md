@@ -44,6 +44,7 @@ inicio (~12 s). Eso daba 44-118 h de MC. De ahí los cambios de arriba.
 | `tiempos.py` | mide en GPU cada pieza de una evaluación de la verosimilitud y extrapola las horas del MC |
 | `montecarlo.py` | MC: por réplica, panel → diseños 1, 2 y 3 (GPU) y Gillingham sobre el mismo panel (CPU, en paralelo); CSV por réplica; `--summarize` |
 | `../gillingham/estimar_panel.py` | estima Gillingham (parcial y completa) sobre un panel externo; lo lanza `montecarlo.py` |
+| `por_edad_mc.py` | después del MC: equilibrio en cada θ̂ (cuerda desde la verdad, GPU) → precio, Pr(reparar) y q por (marca, edad); lanza `../gillingham/por_edad_mc.py` (CPU) para Gillingham. Lo usan las figuras 6-8 de `analisis/reporte_mc.py` |
 | `tests.py` | pruebas (sec. 3) |
 
 **Convenciones:** como `niu/gillingham`.

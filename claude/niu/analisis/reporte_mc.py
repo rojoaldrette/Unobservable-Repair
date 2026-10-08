@@ -27,6 +27,12 @@ archivo) y escribe en claude/niu/output/modelo_tesis/reportes/mc_<tag>/:
     tabla_mc.csv / .md / .tex  por estimador y parámetro: verdad, media, sesgo, sesgo %, t del
                              sesgo, sd, se mediano, sd/se, RMSE, cobertura, réplicas
     tabla_estimadores.csv / .md  por estimador: réplicas, fallas, evaluaciones, segundos, etc.
+Si existen por_edad_mc.csv y gill_por_edad_mc.csv (modelo_tesis/por_edad_mc.py, en GPU), además:
+    fig6_precios_edad.png    precio por edad, un panel por marca: verdad vs equilibrio en θ̂
+    fig7_reparacion_edad.png Pr(reparar) por edad (solo diseños; Gillingham no repara)
+    fig8_distribucion_edad.png  distribución de la población q(j, a) por edad
+                             En las tres: régimen central (ζ = 0); línea continua = verdad,
+                             punteada = media entre réplicas, banda = percentiles 5-95.
 '''
 
 import argparse
@@ -234,6 +240,64 @@ def fig5(r, reps, fig_dir):
     plt.close(fig)
 
 
+# Perfiles por edad (equilibrio en θ̂) ______________________________________________________________
+
+MARCA = {0: "light brown (LB)", 1: "heavy brown (HB)"}
+
+
+def cargar_por_edad(mc):
+    # Régimen central de los diseños + Gillingham (que no tiene regímenes), en formato común
+    f1, f2 = os.path.join(mc, "por_edad_mc.csv"), os.path.join(mc, "gill_por_edad_mc.csv")
+    if not (os.path.exists(f1) and os.path.exists(f2)):
+        return None
+    d = pd.read_csv(f1).drop_duplicates(["rep", "estimador", "regimen", "j", "a"], keep="last")
+    d = d[d.regimen == d.regimen.max() // 2].rename(columns={"P_stock": "P"})
+    g = pd.read_csv(f2).drop_duplicates(["rep", "estimador", "j", "a"], keep="last")
+    g = g[g.estimador != "gill_verdad"]
+    return pd.concat([d, g], ignore_index=True)
+
+
+def fig_por_edad(pe, var, ests, ylabel, titulo, nota, fname, fig_dir):
+    fig, axes = plt.subplots(1, 2, figsize=(9.0, 4.1))
+    for j, ax in enumerate(axes):
+        d = pe[pe.j == j]
+        v = d[d.estimador == "verdad"].sort_values("a")
+        for e in ests:
+            s = d[d.estimador == e].groupby("a")[var]
+            if not len(s):
+                continue
+            lab, c, _ = EST[e]
+            lo, hi = s.quantile(0.05), s.quantile(0.95)
+            ax.fill_between(lo.index, lo, hi, color=c, alpha=0.12, lw=0, zorder=1)
+            ax.plot(s.mean().index, s.mean(), color=c, lw=1.8, ls=":", label=lab, zorder=3)
+        ax.plot(v.a, v[var], color=INK, lw=1.6, label="verdad", zorder=2)
+        ax.set_title(MARCA[j], loc="left")
+        ax.set_xlabel("edad del coche (años)")
+        ax.set_ylim(0, None)
+        ax.set_ylabel(ylabel)
+    fig.suptitle(titulo, x=0.01, ha="left", fontweight="bold", fontsize=10)
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, loc="upper left", bbox_to_anchor=(0.01, 0.93), ncol=3, fontsize=8)
+    fig.text(0.01, 0.005, nota, color=MUTED, fontsize=8)
+    fig.tight_layout(rect=(0, 0.10, 1, 0.80))
+    fig.savefig(os.path.join(fig_dir, fname), dpi=170)
+    plt.close(fig)
+
+
+def figs_por_edad(pe, fig_dir):
+    nota = ("Continua: verdad.  Punteada: media entre réplicas del equilibrio en los parámetros estimados."
+            "\nBanda: percentiles 5-95 entre réplicas.  Régimen central (ζ = 0).")
+    fig_por_edad(pe, "P", list(EST), "precio del usado, miles de DKK",
+                 "Precio por edad: verdad vs equilibrio en los parámetros estimados", nota
+                 + "\nModelo de la tesis: precio promedio sobre w, ponderado por el stock.", "fig6_precios_edad.png", fig_dir)
+    fig_por_edad(pe, "reparar", DISENOS, "Pr(reparar)",
+                 "Probabilidad de reparar por edad (Gillingham no tiene reparación)", nota,
+                 "fig7_reparacion_edad.png", fig_dir)
+    fig_por_edad(pe, "q", list(EST), "fracción de hogares",
+                 "Distribución de la población: hogares que empiezan el año con un coche de esa edad", nota,
+                 "fig8_distribucion_edad.png", fig_dir)
+
+
 # Tablas en texto ______________________________________________________________
 
 def a_md(df, fmt):
@@ -300,6 +364,11 @@ def main():
     fig4(t, fig_dir)
     fig5(r, reps, fig_dir)
     escribir_tablas(t, te, fig_dir)
+    pe = cargar_por_edad(mc)
+    if pe is None:
+        print("sin por_edad_mc.csv: corre modelo_tesis/por_edad_mc.py para las figuras 6-8")
+    else:
+        figs_por_edad(pe, fig_dir)
     print(te.round(3).to_string(index=False))
     print(f"listo: {fig_dir}")
 

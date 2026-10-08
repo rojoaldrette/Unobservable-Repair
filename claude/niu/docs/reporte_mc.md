@@ -84,7 +84,30 @@ el objetivo o usar `maxls`/un primer paso de BHHH). Para el MC no hace falta.
 
 ![fallas](../output/modelo_tesis/reportes/mc_base/fig5_fallas.png)
 
-### 4. Costo
+### 4. Perfiles por edad: precios, reparación y población (pendiente de correr)
+
+El MC guardó los θ̂ pero no los equilibrios. `modelo_tesis/por_edad_mc.py` resuelve el
+equilibrio en cada θ̂ (pasos de cuerda desde el verdadero, como en la estimación) y guarda
+por (marca, edad) el precio medio, Pr(reparar) y la masa de hogares q; para Gillingham
+resuelve su equilibrio en sus θ̂ (`gillingham/por_edad_mc.py`, CPU, en paralelo). Con eso
+`reporte_mc.py` hace tres figuras, un panel por marca, en el régimen central (ζ = 0):
+línea continua = verdad, punteada = media entre réplicas, banda = percentiles 5-95.
+
+- `fig6_precios_edad.png`: precio del usado por edad (tesis: promedio sobre w ponderado por
+  el stock; Gillingham: P(j, a)). Los 5 estimadores.
+- `fig7_reparacion_edad.png`: Pr(reparar) por edad, solo los 3 diseños.
+- `fig8_distribucion_edad.png`: fracción de hogares que empiezan el año con un coche (j, a).
+
+Probado en el juguete (`--smoke`): el error de precios recalculado reproduce el `P_rmse`
+guardado por el MC (17.30 vs 17.29). Falta correrlo a tamaño completo en la workstation:
+
+    cd claude/niu/modelo_tesis
+    python -u por_edad_mc.py --reps 0:50 > por_edad.log 2>&1
+    cd ../analisis && python -u reporte_mc.py
+
+Pendiente: comentar las figuras cuando estén.
+
+### 5. Costo
 
 ~130 s y ~200 evaluaciones por estimación en GPU (las 36 re-estimadas: ~160 s y ~8
 evaluaciones, más refactorizaciones porque la cuerda da pasos largos). Re-estimar las 36
