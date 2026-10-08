@@ -1,0 +1,11 @@
+**Equilibrio verdadero y en los parámetros estimados**
+
+| Estadística | Verdad (modelo de Gillingham) | Gillingham sobre datos con reparación | Gillingham (ve accidentes) sobre datos con reparación | Gillingham (paper) | Gillingham (ve accidentes) |
+|---|---|---|---|---|---|
+| Hogares sin coche | 0.0268 | 0.0220 | 0.0220 | 0.0267 | 0.0267 |
+| Chatarreo endógeno (por coche) | 0.0197 | 0.0307 | 0.0282 | 0.0215 | 0.0200 |
+| Tasa de accidentes (por coche) | 0.0348 | 0.0167 | 0.0193 | 0.0331 | 0.0345 |
+| Fracción voluntaria de las salidas | 0.3521 | 0.5960 | 0.5476 | 0.3831 | 0.3576 |
+| RMSE de P (miles DKK, ponderado por q) |  |  |  | 1.388 | 0.296 |
+
+Promedio sobre regímenes de R (modelo_fin). Gillingham sobre datos con reparación no tiene RMSE de P comparable (otro espacio de estados).

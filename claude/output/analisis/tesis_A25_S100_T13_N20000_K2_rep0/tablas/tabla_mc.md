@@ -1,0 +1,114 @@
+**Monte Carlo: sesgo, RMSE y cobertura**
+
+| estimador | parametro | verdad | media | sesgo | rmse | se_medio | sd_mc | cobertura_95 | replicas |
+|---|---|---|---|---|---|---|---|---|---|
+| Gillingham sobre datos con reparación | mu_t0 | 0.1131 | 0.1060 | -0.0071 | 0.0071 | 0.0044 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | mu_t1 | 0.0941 | 0.0906 | -0.0035 | 0.0035 | 0.0039 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t0_0 | 3.6490 | 3.5364 | -0.1126 | 0.1126 | 0.0852 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t0_1 | 3.1132 | 3.0283 | -0.0849 | 0.0849 | 0.0660 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t0_2 | 5.1535 | 4.7600 | -0.3935 | 0.3935 | 0.1718 |  | 0.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t1_0 | 2.4042 | 2.3734 | -0.0308 | 0.0308 | 0.0712 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t1_1 | 2.1504 | 2.1178 | -0.0326 | 0.0326 | 0.0533 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u0_t1_2 | 3.5823 | 3.3165 | -0.2658 | 0.2658 | 0.1521 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t0_0 | -0.1459 | -0.1417 | 0.0042 | 0.0042 | 0.0044 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t0_1 | -0.0922 | -0.0936 | -0.0014 | 0.0014 | 0.0032 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t0_2 | -0.2196 | -0.1980 | 0.0216 | 0.0216 | 0.0117 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t1_0 | -0.0984 | -0.0969 | 0.0015 | 0.0015 | 0.0038 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t1_1 | -0.0615 | -0.0637 | -0.0022 | 0.0022 | 0.0028 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | u1_t1_2 | -0.1600 | -0.1436 | 0.0164 | 0.0164 | 0.0104 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_buy_t0 | 6.5944 | 6.5789 | -0.0155 | 0.0155 | 0.1659 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_buy_t1 | 6.5457 | 6.5730 | 0.0273 | 0.0273 | 0.1606 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_buy_nocar_t0 | 1.7899 | 1.7843 | -0.0056 | 0.0056 | 0.0538 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_buy_nocar_t1 | 3.0816 | 3.1600 | 0.0784 | 0.0784 | 0.0499 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_sell | 0.9106 | 0.5921 | -0.3185 | 0.3185 | 0.1631 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | tc_sell_inspect | 2.1929 | 1.8783 | -0.3146 | 0.3146 | 0.1654 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | sigma_sell | 0.3454 | 0.3919 | 0.0465 | 0.0465 | 0.0198 |  | 0.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_int_0 | -5.6248 | -5.6287 | -0.0039 | 0.0039 | 0.1647 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_int_1 | -6.0443 | -6.0087 | 0.0356 | 0.0356 | 0.0732 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_int_2 | -5.6728 | -5.8966 | -0.2238 | 0.2238 | 0.4348 |  | 1.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_age_0 | 0.1804 | 0.0940 | -0.0864 | 0.0864 | 0.0214 |  | 0.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_age_1 | 0.2216 | 0.1586 | -0.0630 | 0.0630 | 0.0077 |  | 0.0000 | 1 |
+| Gillingham sobre datos con reparación | acc_age_2 | 0.2020 | 0.1919 | -0.0101 | 0.0101 | 0.0356 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | mu_t0 | 0.1131 | 0.1088 | -0.0043 | 0.0043 | 0.0040 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | mu_t1 | 0.0941 | 0.0920 | -0.0021 | 0.0021 | 0.0035 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t0_0 | 3.6490 | 3.5577 | -0.0913 | 0.0913 | 0.0774 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t0_1 | 3.1132 | 3.0148 | -0.0984 | 0.0984 | 0.0587 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t0_2 | 5.1535 | 4.8689 | -0.2846 | 0.2846 | 0.1474 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t1_0 | 2.4042 | 2.3739 | -0.0303 | 0.0303 | 0.0630 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t1_1 | 2.1504 | 2.0964 | -0.0540 | 0.0540 | 0.0456 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u0_t1_2 | 3.5823 | 3.3786 | -0.2037 | 0.2037 | 0.1297 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t0_0 | -0.1459 | -0.1417 | 0.0042 | 0.0042 | 0.0040 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t0_1 | -0.0922 | -0.0897 | 0.0025 | 0.0025 | 0.0026 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t0_2 | -0.2196 | -0.2048 | 0.0148 | 0.0148 | 0.0079 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t1_0 | -0.0984 | -0.0963 | 0.0021 | 0.0021 | 0.0033 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t1_1 | -0.0615 | -0.0605 | 0.0010 | 0.0010 | 0.0022 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | u1_t1_2 | -0.1600 | -0.1487 | 0.0113 | 0.0113 | 0.0069 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_buy_t0 | 6.5944 | 6.4334 | -0.1610 | 0.1610 | 0.1439 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_buy_t1 | 6.5457 | 6.4189 | -0.1268 | 0.1268 | 0.1357 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_buy_nocar_t0 | 1.7899 | 1.7843 | -0.0056 | 0.0056 | 0.0538 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_buy_nocar_t1 | 3.0816 | 3.1601 | 0.0785 | 0.0785 | 0.0499 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_sell | 0.9106 | 0.7460 | -0.1646 | 0.1646 | 0.1405 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | tc_sell_inspect | 2.1929 | 2.0317 | -0.1612 | 0.1612 | 0.1433 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | sigma_sell | 0.3454 | 0.3724 | 0.0270 | 0.0270 | 0.0163 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_int_0 | -5.6248 | -5.7659 | -0.1411 | 0.1411 | 0.1135 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_int_1 | -6.0443 | -6.1033 | -0.0590 | 0.0590 | 0.0491 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_int_2 | -5.6728 | -5.7067 | -0.0339 | 0.0339 | 0.3350 |  | 1.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_age_0 | 0.1804 | 0.1155 | -0.0649 | 0.0649 | 0.0080 |  | 0.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_age_1 | 0.2216 | 0.1745 | -0.0471 | 0.0471 | 0.0030 |  | 0.0000 | 1 |
+| Gillingham (ve accidentes) sobre datos con reparación | acc_age_2 | 0.2020 | 0.1738 | -0.0282 | 0.0282 | 0.0213 |  | 1.0000 | 1 |
+| Gillingham (paper) | mu_t0 | 0.1131 | 0.1141 | 0.0010 | 0.0081 | 0.0080 | 0.0080 | 0.9700 | 100 |
+| Gillingham (paper) | mu_t1 | 0.0941 | 0.0947 | 0.0006 | 0.0065 | 0.0066 | 0.0065 | 0.9700 | 100 |
+| Gillingham (paper) | u0_t0_0 | 3.6490 | 3.6688 | 0.0198 | 0.1514 | 0.1577 | 0.1508 | 0.9900 | 100 |
+| Gillingham (paper) | u0_t0_1 | 3.1132 | 3.1281 | 0.0149 | 0.1110 | 0.1187 | 0.1106 | 0.9800 | 100 |
+| Gillingham (paper) | u0_t0_2 | 5.1535 | 5.1693 | 0.0158 | 0.2918 | 0.3028 | 0.2929 | 0.9700 | 100 |
+| Gillingham (paper) | u0_t1_0 | 2.4042 | 2.4151 | 0.0109 | 0.1259 | 0.1268 | 0.1260 | 0.9800 | 100 |
+| Gillingham (paper) | u0_t1_1 | 2.1504 | 2.1595 | 0.0091 | 0.0895 | 0.0942 | 0.0895 | 0.9800 | 100 |
+| Gillingham (paper) | u0_t1_2 | 3.5823 | 3.5850 | 0.0027 | 0.2391 | 0.2510 | 0.2403 | 0.9700 | 100 |
+| Gillingham (paper) | u1_t0_0 | -0.1459 | -0.1469 | -0.0010 | 0.0096 | 0.0094 | 0.0096 | 0.9700 | 100 |
+| Gillingham (paper) | u1_t0_1 | -0.0922 | -0.0930 | -0.0008 | 0.0066 | 0.0068 | 0.0066 | 0.9700 | 100 |
+| Gillingham (paper) | u1_t0_2 | -0.2196 | -0.2187 | 0.0009 | 0.0182 | 0.0191 | 0.0183 | 0.9800 | 100 |
+| Gillingham (paper) | u1_t1_0 | -0.0984 | -0.0989 | -0.0005 | 0.0084 | 0.0079 | 0.0084 | 0.9500 | 100 |
+| Gillingham (paper) | u1_t1_1 | -0.0615 | -0.0621 | -0.0006 | 0.0057 | 0.0058 | 0.0057 | 0.9600 | 100 |
+| Gillingham (paper) | u1_t1_2 | -0.1600 | -0.1591 | 0.0009 | 0.0152 | 0.0161 | 0.0152 | 0.9800 | 100 |
+| Gillingham (paper) | tc_buy_t0 | 6.5944 | 6.5812 | -0.0132 | 0.2577 | 0.2233 | 0.2586 | 0.9300 | 100 |
+| Gillingham (paper) | tc_buy_t1 | 6.5457 | 6.5340 | -0.0117 | 0.2477 | 0.2169 | 0.2487 | 0.9300 | 100 |
+| Gillingham (paper) | tc_buy_nocar_t0 | 1.7899 | 1.7912 | 0.0013 | 0.0658 | 0.0637 | 0.0661 | 0.9500 | 100 |
+| Gillingham (paper) | tc_buy_nocar_t1 | 3.0816 | 3.0851 | 0.0035 | 0.0484 | 0.0533 | 0.0485 | 1.0000 | 100 |
+| Gillingham (paper) | tc_sell | 0.9106 | 0.9203 | 0.0097 | 0.2536 | 0.2189 | 0.2547 | 0.9200 | 100 |
+| Gillingham (paper) | tc_sell_inspect | 2.1929 | 2.2098 | 0.0169 | 0.2630 | 0.2250 | 0.2638 | 0.9400 | 100 |
+| Gillingham (paper) | sigma_sell | 0.3454 | 0.3488 | 0.0034 | 0.0344 | 0.0313 | 0.0344 | 0.9300 | 100 |
+| Gillingham (paper) | acc_int_0 | -5.6248 | -5.6223 | 0.0025 | 0.1743 | 0.1703 | 0.1752 | 0.9500 | 100 |
+| Gillingham (paper) | acc_int_1 | -6.0443 | -6.0381 | 0.0062 | 0.0682 | 0.0664 | 0.0683 | 0.9300 | 100 |
+| Gillingham (paper) | acc_int_2 | -5.6728 | -5.7331 | -0.0603 | 0.4321 | 0.4688 | 0.4300 | 0.9600 | 100 |
+| Gillingham (paper) | acc_age_0 | 0.1804 | 0.1795 | -0.0009 | 0.0199 | 0.0188 | 0.0199 | 0.9300 | 100 |
+| Gillingham (paper) | acc_age_1 | 0.2216 | 0.2209 | -0.0007 | 0.0066 | 0.0065 | 0.0066 | 0.9700 | 100 |
+| Gillingham (paper) | acc_age_2 | 0.2020 | 0.2045 | 0.0025 | 0.0350 | 0.0389 | 0.0351 | 0.9500 | 100 |
+| Gillingham (ve accidentes) | mu_t0 | 0.1131 | 0.1139 | 0.0008 | 0.0050 | 0.0054 | 0.0050 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | mu_t1 | 0.0941 | 0.0946 | 0.0005 | 0.0044 | 0.0046 | 0.0044 | 0.9800 | 100 |
+| Gillingham (ve accidentes) | u0_t0_0 | 3.6490 | 3.6669 | 0.0179 | 0.0959 | 0.1047 | 0.0947 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u0_t0_1 | 3.1132 | 3.1259 | 0.0127 | 0.0699 | 0.0783 | 0.0690 | 0.9500 | 100 |
+| Gillingham (ve accidentes) | u0_t0_2 | 5.1535 | 5.1759 | 0.0224 | 0.1825 | 0.1991 | 0.1820 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | u0_t1_0 | 2.4042 | 2.4141 | 0.0099 | 0.0806 | 0.0842 | 0.0804 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u0_t1_1 | 2.1504 | 2.1583 | 0.0079 | 0.0554 | 0.0603 | 0.0551 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u0_t1_2 | 3.5823 | 3.5923 | 0.0100 | 0.1614 | 0.1702 | 0.1619 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | u1_t0_0 | -0.1459 | -0.1468 | -0.0009 | 0.0054 | 0.0056 | 0.0053 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | u1_t0_1 | -0.0922 | -0.0928 | -0.0006 | 0.0033 | 0.0037 | 0.0033 | 0.9900 | 100 |
+| Gillingham (ve accidentes) | u1_t0_2 | -0.2196 | -0.2202 | -0.0006 | 0.0103 | 0.0109 | 0.0103 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u1_t1_0 | -0.0984 | -0.0988 | -0.0004 | 0.0046 | 0.0047 | 0.0046 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u1_t1_1 | -0.0615 | -0.0619 | -0.0004 | 0.0028 | 0.0031 | 0.0028 | 0.9600 | 100 |
+| Gillingham (ve accidentes) | u1_t1_2 | -0.1600 | -0.1604 | -0.0004 | 0.0090 | 0.0093 | 0.0090 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | tc_buy_t0 | 6.5944 | 6.5952 | 0.0008 | 0.1898 | 0.1788 | 0.1907 | 0.9300 | 100 |
+| Gillingham (ve accidentes) | tc_buy_t1 | 6.5457 | 6.5475 | 0.0018 | 0.1754 | 0.1674 | 0.1762 | 0.9300 | 100 |
+| Gillingham (ve accidentes) | tc_buy_nocar_t0 | 1.7899 | 1.7912 | 0.0013 | 0.0658 | 0.0637 | 0.0661 | 0.9500 | 100 |
+| Gillingham (ve accidentes) | tc_buy_nocar_t1 | 3.0816 | 3.0851 | 0.0035 | 0.0484 | 0.0533 | 0.0485 | 1.0000 | 100 |
+| Gillingham (ve accidentes) | tc_sell | 0.9106 | 0.9062 | -0.0044 | 0.1850 | 0.1740 | 0.1859 | 0.9200 | 100 |
+| Gillingham (ve accidentes) | tc_sell_inspect | 2.1929 | 2.1950 | 0.0021 | 0.1906 | 0.1792 | 0.1915 | 0.9200 | 100 |
+| Gillingham (ve accidentes) | sigma_sell | 0.3454 | 0.3462 | 0.0008 | 0.0198 | 0.0217 | 0.0199 | 0.9800 | 100 |
+| Gillingham (ve accidentes) | acc_int_0 | -5.6248 | -5.6308 | -0.0060 | 0.1235 | 0.1205 | 0.1239 | 0.9300 | 100 |
+| Gillingham (ve accidentes) | acc_int_1 | -6.0443 | -6.0416 | 0.0027 | 0.0493 | 0.0471 | 0.0494 | 0.9400 | 100 |
+| Gillingham (ve accidentes) | acc_int_2 | -5.6728 | -5.7198 | -0.0470 | 0.3243 | 0.3553 | 0.3224 | 0.9700 | 100 |
+| Gillingham (ve accidentes) | acc_age_0 | 0.1804 | 0.1813 | 0.0009 | 0.0087 | 0.0082 | 0.0087 | 0.9500 | 100 |
+| Gillingham (ve accidentes) | acc_age_1 | 0.2216 | 0.2215 | -0.0001 | 0.0030 | 0.0029 | 0.0030 | 0.9200 | 100 |
+| Gillingham (ve accidentes) | acc_age_2 | 0.2020 | 0.2039 | 0.0019 | 0.0199 | 0.0226 | 0.0200 | 0.9800 | 100 |
+
+Cobertura: fracción de réplicas con |estimado − verdad| <= 1.96 se.

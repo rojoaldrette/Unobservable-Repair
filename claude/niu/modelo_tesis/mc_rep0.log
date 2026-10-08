@@ -1,0 +1,190 @@
+dispositivo: cuda:0 | 27 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/teoria/R_LB
+verdad lista (26 s)
+  rep 0 [diseño 1] arranque 0
+  Gillingham [parcial]: LL = -146896.40, convergió = True, 21 s
+  Gillingham [completa]: LL = -148357.47, convergió = True, 19 s
+    L-BFGS   10: LL/N = -3.98909169, |g|max = 2.6e-03, evals = 13, refact = 44, 176 s
+    L-BFGS   20: LL/N = -3.98907985, |g|max = 1.7e-03, evals = 25, refact = 44, 178 s
+    L-BFGS   30: LL/N = -3.98906763, |g|max = 2.0e-03, evals = 36, refact = 44, 180 s
+    L-BFGS   40: LL/N = -3.98906380, |g|max = 8.8e-04, evals = 47, refact = 44, 181 s
+    L-BFGS   50: LL/N = -3.98905956, |g|max = 2.5e-03, evals = 58, refact = 44, 183 s
+    L-BFGS   60: LL/N = -3.98905768, |g|max = 5.8e-04, evals = 69, refact = 44, 184 s
+    L-BFGS   70: LL/N = -3.98905666, |g|max = 1.0e-03, evals = 81, refact = 44, 186 s
+    L-BFGS   80: LL/N = -3.98905378, |g|max = 2.5e-03, evals = 92, refact = 44, 188 s
+    L-BFGS   90: LL/N = -3.98905180, |g|max = 8.1e-04, evals = 104, refact = 44, 190 s
+    L-BFGS  100: LL/N = -3.98905041, |g|max = 6.4e-04, evals = 115, refact = 44, 192 s
+    L-BFGS  110: LL/N = -3.98904915, |g|max = 7.3e-04, evals = 125, refact = 44, 194 s
+    L-BFGS  120: LL/N = -3.98904863, |g|max = 5.8e-04, evals = 136, refact = 44, 196 s
+    L-BFGS  130: LL/N = -3.98904800, |g|max = 6.4e-04, evals = 146, refact = 44, 198 s
+    L-BFGS  140: LL/N = -3.98904723, |g|max = 3.6e-04, evals = 156, refact = 44, 200 s
+    L-BFGS  150: LL/N = -3.98904674, |g|max = 4.2e-04, evals = 166, refact = 44, 202 s
+    L-BFGS  160: LL/N = -3.98904610, |g|max = 1.5e-03, evals = 176, refact = 44, 203 s
+    L-BFGS  170: LL/N = -3.98904565, |g|max = 3.9e-04, evals = 188, refact = 44, 206 s
+    L-BFGS  180: LL/N = -3.98904432, |g|max = 6.7e-04, evals = 198, refact = 44, 208 s
+    L-BFGS  190: LL/N = -3.98904370, |g|max = 9.3e-04, evals = 209, refact = 44, 210 s
+  L-BFGS: LL/N = -3.98904361, it = 194, CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH, 210.6 s
+    BHHH   0: LL/N = -3.98904361, g'B^-1g/N = 5.5e-06
+    BHHH   1: LL/N = -3.98904090, g'B^-1g/N = 1.3e-08
+    BHHH   2: LL/N = -3.98904089, g'B^-1g/N = 4.3e-11
+  rep 0 [diseño 1] arranque 1
+    L-BFGS   10: LL/N = -4.00586196, |g|max = 6.2e-02, evals = 13, refact = 50, 204 s
+    L-BFGS   20: LL/N = -3.99672429, |g|max = 1.1e-01, evals = 23, refact = 51, 208 s
+    L-BFGS   30: LL/N = -3.99370112, |g|max = 1.4e-01, evals = 34, refact = 51, 211 s
+    L-BFGS   40: LL/N = -3.99127186, |g|max = 1.9e-02, evals = 46, refact = 51, 214 s
+    L-BFGS   50: LL/N = -3.99091930, |g|max = 2.0e-02, evals = 56, refact = 51, 216 s
+    L-BFGS   60: LL/N = -3.99034732, |g|max = 2.0e-02, evals = 66, refact = 51, 218 s
+    L-BFGS   70: LL/N = -3.99011483, |g|max = 4.2e-03, evals = 78, refact = 51, 221 s
+    L-BFGS   80: LL/N = -3.99003299, |g|max = 1.2e-02, evals = 88, refact = 51, 223 s
+    L-BFGS   90: LL/N = -3.98988617, |g|max = 2.0e-02, evals = 99, refact = 51, 226 s
+    L-BFGS  100: LL/N = -3.98983192, |g|max = 7.4e-03, evals = 111, refact = 51, 228 s
+    L-BFGS  110: LL/N = -3.98974075, |g|max = 1.1e-02, evals = 121, refact = 51, 231 s
+    L-BFGS  120: LL/N = -3.98962357, |g|max = 6.7e-03, evals = 132, refact = 51, 233 s
+    L-BFGS  130: LL/N = -3.98956944, |g|max = 1.0e-02, evals = 143, refact = 51, 236 s
+    L-BFGS  140: LL/N = -3.98950483, |g|max = 9.8e-03, evals = 153, refact = 51, 238 s
+    L-BFGS  150: LL/N = -3.98933811, |g|max = 1.4e-02, evals = 164, refact = 51, 240 s
+    L-BFGS  160: LL/N = -3.98929850, |g|max = 5.1e-03, evals = 175, refact = 51, 243 s
+    L-BFGS  170: LL/N = -3.98923151, |g|max = 4.5e-03, evals = 187, refact = 51, 246 s
+    L-BFGS  180: LL/N = -3.98921440, |g|max = 4.2e-03, evals = 197, refact = 51, 248 s
+    L-BFGS  190: LL/N = -3.98920601, |g|max = 4.8e-03, evals = 208, refact = 51, 250 s
+    L-BFGS  200: LL/N = -3.98917455, |g|max = 5.5e-03, evals = 219, refact = 51, 253 s
+    L-BFGS  210: LL/N = -3.98915481, |g|max = 4.8e-03, evals = 231, refact = 51, 256 s
+    L-BFGS  220: LL/N = -3.98914267, |g|max = 6.5e-03, evals = 242, refact = 51, 259 s
+    L-BFGS  230: LL/N = -3.98912594, |g|max = 1.9e-03, evals = 253, refact = 51, 261 s
+    L-BFGS  240: LL/N = -3.98911417, |g|max = 4.5e-03, evals = 263, refact = 51, 263 s
+    L-BFGS  250: LL/N = -3.98910638, |g|max = 2.3e-03, evals = 274, refact = 51, 266 s
+    L-BFGS  260: LL/N = -3.98909995, |g|max = 3.3e-03, evals = 285, refact = 51, 269 s
+    L-BFGS  270: LL/N = -3.98909009, |g|max = 8.6e-03, evals = 296, refact = 51, 271 s
+    L-BFGS  280: LL/N = -3.98907854, |g|max = 1.6e-03, evals = 307, refact = 51, 274 s
+    L-BFGS  290: LL/N = -3.98907419, |g|max = 1.4e-03, evals = 319, refact = 51, 277 s
+    L-BFGS  300: LL/N = -3.98906600, |g|max = 2.5e-03, evals = 331, refact = 51, 279 s
+  L-BFGS: LL/N = -3.98906600, it = 300, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 279.4 s
+    BHHH   0: LL/N = -3.98906600, g'B^-1g/N = 5.2e-05
+    BHHH   1: LL/N = -3.98904097, g'B^-1g/N = 1.1e-07
+    BHHH   2: LL/N = -3.98904090, g'B^-1g/N = 3.2e-10
+  rep 0 [diseño 1] arranque 2
+  L-BFGS: LL/N = -10000000000.00000000, it = 1, CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL, 177.5 s
+  rep 0 [diseño 1] arranque 2 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 0 [diseño 1]: LL = -359013.68, convergió = True, 216 evals, 213 s
+  rep 0 [diseño 2] arranque 0
+    L-BFGS   10: LL/N = -3.78243205, |g|max = 1.4e-03, evals = 12, refact = 18, 117 s
+    L-BFGS   20: LL/N = -3.78241599, |g|max = 4.9e-03, evals = 24, refact = 18, 119 s
+    L-BFGS   30: LL/N = -3.78240341, |g|max = 3.3e-03, evals = 35, refact = 18, 120 s
+    L-BFGS   40: LL/N = -3.78239734, |g|max = 2.5e-03, evals = 45, refact = 18, 122 s
+    L-BFGS   50: LL/N = -3.78239188, |g|max = 8.5e-04, evals = 56, refact = 18, 123 s
+    L-BFGS   60: LL/N = -3.78239083, |g|max = 3.5e-03, evals = 66, refact = 18, 124 s
+    L-BFGS   70: LL/N = -3.78238908, |g|max = 9.7e-04, evals = 76, refact = 18, 126 s
+    L-BFGS   80: LL/N = -3.78238802, |g|max = 8.0e-04, evals = 87, refact = 18, 127 s
+    L-BFGS   90: LL/N = -3.78238644, |g|max = 1.7e-03, evals = 97, refact = 18, 129 s
+    L-BFGS  100: LL/N = -3.78238454, |g|max = 2.6e-03, evals = 109, refact = 18, 130 s
+    L-BFGS  110: LL/N = -3.78238350, |g|max = 1.4e-03, evals = 120, refact = 18, 132 s
+    L-BFGS  120: LL/N = -3.78238255, |g|max = 1.6e-03, evals = 130, refact = 18, 133 s
+    L-BFGS  130: LL/N = -3.78238176, |g|max = 3.1e-04, evals = 140, refact = 18, 135 s
+    L-BFGS  140: LL/N = -3.78238117, |g|max = 1.7e-03, evals = 151, refact = 18, 136 s
+    L-BFGS  150: LL/N = -3.78238067, |g|max = 2.3e-03, evals = 163, refact = 18, 138 s
+    L-BFGS  160: LL/N = -3.78237994, |g|max = 1.3e-03, evals = 173, refact = 18, 139 s
+  L-BFGS: LL/N = -3.78237942, it = 167, CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH, 140.2 s
+    BHHH   0: LL/N = -3.78237942, g'B^-1g/N = 9.4e-06
+    BHHH   1: LL/N = -3.78237481, g'B^-1g/N = 3.5e-08
+    BHHH   2: LL/N = -3.78237480, g'B^-1g/N = 1.4e-10
+  rep 0 [diseño 2] arranque 1
+    L-BFGS   10: LL/N = -3.80005237, |g|max = 1.4e-01, evals = 12, refact = 37, 129 s
+    L-BFGS   20: LL/N = -3.79034684, |g|max = 5.0e-02, evals = 22, refact = 39, 134 s
+    L-BFGS   30: LL/N = -3.78569976, |g|max = 4.4e-02, evals = 33, refact = 40, 137 s
+    L-BFGS   40: LL/N = -3.78487542, |g|max = 1.4e-02, evals = 43, refact = 40, 140 s
+    L-BFGS   50: LL/N = -3.78408885, |g|max = 1.0e-02, evals = 53, refact = 40, 142 s
+    L-BFGS   60: LL/N = -3.78363257, |g|max = 1.6e-02, evals = 63, refact = 40, 145 s
+    L-BFGS   70: LL/N = -3.78341468, |g|max = 1.7e-02, evals = 73, refact = 40, 147 s
+    L-BFGS   80: LL/N = -3.78324901, |g|max = 1.4e-02, evals = 84, refact = 40, 150 s
+    L-BFGS   90: LL/N = -3.78314125, |g|max = 6.3e-03, evals = 94, refact = 40, 152 s
+    L-BFGS  100: LL/N = -3.78307926, |g|max = 8.2e-03, evals = 105, refact = 40, 155 s
+    L-BFGS  110: LL/N = -3.78299545, |g|max = 4.8e-03, evals = 115, refact = 40, 157 s
+    L-BFGS  120: LL/N = -3.78296839, |g|max = 2.7e-03, evals = 125, refact = 40, 159 s
+    L-BFGS  130: LL/N = -3.78289741, |g|max = 1.4e-02, evals = 135, refact = 40, 161 s
+    L-BFGS  140: LL/N = -3.78281492, |g|max = 1.4e-02, evals = 145, refact = 40, 163 s
+    L-BFGS  150: LL/N = -3.78264730, |g|max = 4.5e-03, evals = 155, refact = 40, 166 s
+    L-BFGS  160: LL/N = -3.78263205, |g|max = 4.5e-03, evals = 166, refact = 40, 168 s
+    L-BFGS  170: LL/N = -3.78258235, |g|max = 2.4e-03, evals = 176, refact = 40, 171 s
+    L-BFGS  180: LL/N = -3.78256960, |g|max = 3.6e-03, evals = 186, refact = 40, 173 s
+    L-BFGS  190: LL/N = -3.78255017, |g|max = 4.0e-03, evals = 198, refact = 40, 175 s
+    L-BFGS  200: LL/N = -3.78251947, |g|max = 4.8e-03, evals = 209, refact = 40, 178 s
+    L-BFGS  210: LL/N = -3.78247420, |g|max = 7.7e-03, evals = 220, refact = 40, 180 s
+    L-BFGS  220: LL/N = -3.78246353, |g|max = 3.3e-03, evals = 232, refact = 40, 183 s
+    L-BFGS  230: LL/N = -3.78244585, |g|max = 1.1e-03, evals = 244, refact = 40, 186 s
+    L-BFGS  240: LL/N = -3.78243645, |g|max = 2.0e-03, evals = 255, refact = 40, 188 s
+    L-BFGS  250: LL/N = -3.78242663, |g|max = 3.1e-03, evals = 266, refact = 40, 191 s
+    L-BFGS  260: LL/N = -3.78242049, |g|max = 2.3e-03, evals = 278, refact = 40, 194 s
+    L-BFGS  270: LL/N = -3.78241505, |g|max = 3.9e-03, evals = 288, refact = 40, 196 s
+    L-BFGS  280: LL/N = -3.78241073, |g|max = 3.7e-03, evals = 300, refact = 40, 199 s
+    L-BFGS  290: LL/N = -3.78240336, |g|max = 1.6e-03, evals = 310, refact = 40, 201 s
+    L-BFGS  300: LL/N = -3.78239937, |g|max = 2.0e-03, evals = 322, refact = 40, 203 s
+  L-BFGS: LL/N = -3.78239937, it = 300, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 203.4 s
+    BHHH   0: LL/N = -3.78239937, g'B^-1g/N = 5.0e-05
+    BHHH   1: LL/N = -3.78237492, g'B^-1g/N = 2.1e-07
+    BHHH   2: LL/N = -3.78237480, g'B^-1g/N = 4.4e-10
+  rep 0 [diseño 2] arranque 2
+  L-BFGS: LL/N = -10000000000.00000000, it = 1, CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL, 180.7 s
+  rep 0 [diseño 2] arranque 2 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 0 [diseño 2]: LL = -340413.73, convergió = True, 184 evals, 141 s
+  rep 0 [diseño 3] arranque 0
+    L-BFGS   10: LL/N = -3.73677881, |g|max = 2.1e-03, evals = 13, refact = 12, 80 s
+    L-BFGS   20: LL/N = -3.73675726, |g|max = 3.1e-03, evals = 25, refact = 12, 82 s
+    L-BFGS   30: LL/N = -3.73674649, |g|max = 2.5e-03, evals = 35, refact = 12, 83 s
+    L-BFGS   40: LL/N = -3.73673995, |g|max = 9.2e-04, evals = 46, refact = 12, 85 s
+    L-BFGS   50: LL/N = -3.73673659, |g|max = 1.5e-03, evals = 58, refact = 12, 87 s
+    L-BFGS   60: LL/N = -3.73673501, |g|max = 7.4e-04, evals = 68, refact = 12, 88 s
+    L-BFGS   70: LL/N = -3.73673439, |g|max = 6.1e-04, evals = 78, refact = 12, 90 s
+    L-BFGS   80: LL/N = -3.73673381, |g|max = 7.3e-04, evals = 89, refact = 12, 91 s
+    L-BFGS   90: LL/N = -3.73673283, |g|max = 5.0e-04, evals = 100, refact = 12, 93 s
+    L-BFGS  100: LL/N = -3.73673156, |g|max = 8.7e-04, evals = 110, refact = 12, 94 s
+    L-BFGS  110: LL/N = -3.73673068, |g|max = 4.5e-04, evals = 120, refact = 12, 96 s
+    L-BFGS  120: LL/N = -3.73673004, |g|max = 7.2e-04, evals = 131, refact = 12, 97 s
+    L-BFGS  130: LL/N = -3.73672937, |g|max = 2.3e-04, evals = 142, refact = 12, 99 s
+    L-BFGS  140: LL/N = -3.73672906, |g|max = 4.7e-04, evals = 152, refact = 12, 100 s
+  L-BFGS: LL/N = -3.73672905, it = 141, CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH, 100.5 s
+    BHHH   0: LL/N = -3.73672905, g'B^-1g/N = 6.4e-06
+    BHHH   1: LL/N = -3.73672581, g'B^-1g/N = 2.3e-08
+    BHHH   2: LL/N = -3.73672580, g'B^-1g/N = 2.4e-10
+  rep 0 [diseño 3] arranque 1
+    L-BFGS   10: LL/N = -3.75062859, |g|max = 5.4e-02, evals = 13, refact = 53, 139 s
+    L-BFGS   20: LL/N = -3.74572613, |g|max = 2.8e-01, evals = 23, refact = 54, 142 s
+    L-BFGS   30: LL/N = -3.74067781, |g|max = 3.8e-02, evals = 34, refact = 59, 150 s
+    L-BFGS   40: LL/N = -3.73959291, |g|max = 7.5e-02, evals = 45, refact = 60, 153 s
+    L-BFGS   50: LL/N = -3.73849160, |g|max = 1.8e-02, evals = 56, refact = 60, 156 s
+    L-BFGS   60: LL/N = -3.73787941, |g|max = 2.0e-02, evals = 67, refact = 60, 158 s
+    L-BFGS   70: LL/N = -3.73754265, |g|max = 3.1e-02, evals = 78, refact = 60, 160 s
+    L-BFGS   80: LL/N = -3.73745412, |g|max = 1.4e-02, evals = 90, refact = 60, 163 s
+    L-BFGS   90: LL/N = -3.73735993, |g|max = 8.8e-03, evals = 101, refact = 60, 165 s
+    L-BFGS  100: LL/N = -3.73729510, |g|max = 2.5e-03, evals = 111, refact = 60, 167 s
+    L-BFGS  110: LL/N = -3.73726516, |g|max = 6.8e-03, evals = 123, refact = 60, 169 s
+    L-BFGS  120: LL/N = -3.73722347, |g|max = 2.2e-03, evals = 133, refact = 60, 171 s
+    L-BFGS  130: LL/N = -3.73719799, |g|max = 1.6e-02, evals = 143, refact = 60, 173 s
+    L-BFGS  140: LL/N = -3.73713239, |g|max = 1.3e-02, evals = 154, refact = 60, 175 s
+    L-BFGS  150: LL/N = -3.73710499, |g|max = 6.0e-03, evals = 164, refact = 60, 177 s
+    L-BFGS  160: LL/N = -3.73704242, |g|max = 3.8e-03, evals = 175, refact = 60, 179 s
+    L-BFGS  170: LL/N = -3.73701353, |g|max = 3.2e-03, evals = 185, refact = 60, 181 s
+    L-BFGS  180: LL/N = -3.73700238, |g|max = 4.7e-03, evals = 196, refact = 60, 183 s
+    L-BFGS  190: LL/N = -3.73698494, |g|max = 4.2e-03, evals = 207, refact = 60, 185 s
+    L-BFGS  200: LL/N = -3.73693700, |g|max = 5.0e-03, evals = 219, refact = 60, 187 s
+    L-BFGS  210: LL/N = -3.73689355, |g|max = 6.6e-03, evals = 230, refact = 60, 190 s
+    L-BFGS  220: LL/N = -3.73687492, |g|max = 4.2e-03, evals = 241, refact = 60, 192 s
+    L-BFGS  230: LL/N = -3.73683535, |g|max = 4.6e-03, evals = 252, refact = 60, 194 s
+    L-BFGS  240: LL/N = -3.73681271, |g|max = 2.6e-03, evals = 262, refact = 60, 196 s
+    L-BFGS  250: LL/N = -3.73680513, |g|max = 1.8e-03, evals = 272, refact = 60, 198 s
+    L-BFGS  260: LL/N = -3.73679727, |g|max = 3.7e-03, evals = 283, refact = 60, 200 s
+    L-BFGS  270: LL/N = -3.73679025, |g|max = 1.1e-03, evals = 294, refact = 60, 203 s
+    L-BFGS  280: LL/N = -3.73677952, |g|max = 2.3e-03, evals = 304, refact = 60, 205 s
+    L-BFGS  290: LL/N = -3.73676901, |g|max = 1.1e-03, evals = 315, refact = 60, 207 s
+    L-BFGS  300: LL/N = -3.73676411, |g|max = 1.9e-03, evals = 326, refact = 60, 209 s
+  L-BFGS: LL/N = -3.73676411, it = 300, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 209.3 s
+    BHHH   0: LL/N = -3.73676411, g'B^-1g/N = 8.1e-05
+    BHHH   1: LL/N = -3.73672645, g'B^-1g/N = 1.3e-06
+    BHHH   2: LL/N = -3.73672581, g'B^-1g/N = 4.4e-09
+    BHHH   3: LL/N = -3.73672580, g'B^-1g/N = 4.0e-11
+  rep 0 [diseño 3] arranque 2
+  L-BFGS: LL/N = -10000000000.00000000, it = 1, CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL, 182.4 s
+  rep 0 [diseño 3] arranque 2 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 0 [diseño 3]: LL = -336305.32, convergió = True, 156 evals, 101 s
+rep 0 lista (1837 s)
+[avance] 1/1 réplicas, 0.51 h transcurridas, ~0.00 h restantes (2026-10-08 02:39)
+listo: /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/montecarlo/base
