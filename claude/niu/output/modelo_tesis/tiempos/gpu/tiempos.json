@@ -1,0 +1,102 @@
+{
+ "dispositivo": "cuda:0",
+ "incognitas": 10230,
+ "W": 71,
+ "F": 0.0016298213352759678,
+ "jacobiano": 0.616856137290597,
+ "lu_factor": 0.4602921437472105,
+ "lu_solve": 0.017769230529665947,
+ "cuerda": {
+  "0.001": {
+   "segundos": 0.5204700957983732,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 5,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 5,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 5,
+     "factorizaciones": 0,
+     "newton_completo": false
+    }
+   ]
+  },
+  "0.01": {
+   "segundos": 13.75544362142682,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 13,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 14,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 15,
+     "factorizaciones": 0,
+     "newton_completo": true
+    }
+   ]
+  },
+  "0.03": {
+   "segundos": 19.744375973939896,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 12,
+     "factorizaciones": 2,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 15,
+     "factorizaciones": 1,
+     "newton_completo": true
+    },
+    {
+     "ok": true,
+     "cuerda": 15,
+     "factorizaciones": 1,
+     "newton_completo": true
+    }
+   ]
+  }
+ },
+ "dz_dx": 0.4165672278031707,
+ "scores": {
+  "1": 0.007146277464926243,
+  "2": 0.007160944864153862,
+  "3": 0.012620281428098679
+ },
+ "celdas": {
+  "1": 48682,
+  "2": 45810,
+  "3": 45294
+ },
+ "memoria_pico_GB": 7.79408896,
+ "por_evaluacion": {
+  "1": 14.179157126694918,
+  "2": 14.179171794094145,
+  "3": 14.18463113065809
+ },
+ "horas_mc": {
+  "150": 44.31558338692412,
+  "250": 73.85930564487353,
+  "400": 118.17488903179765
+ }
+}
