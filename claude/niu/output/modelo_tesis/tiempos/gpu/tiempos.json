@@ -2,13 +2,14 @@
  "dispositivo": "cuda:0",
  "incognitas": 10230,
  "W": 71,
- "F": 0.0016298213352759678,
- "jacobiano": 0.616856137290597,
- "lu_factor": 0.4602921437472105,
- "lu_solve": 0.017769230529665947,
+ "F": 0.002851701652010282,
+ "jacobiano": 0.4089336786419153,
+ "inversa": 1.3506030589342117,
+ "matvec": 0.0021203874299923577,
+ "dz_dx": 0.20475659985095263,
  "cuerda": {
   "0.001": {
-   "segundos": 0.5204700957983732,
+   "segundos": 0.2638260927051306,
    "regimenes": [
     {
      "ok": true,
@@ -30,8 +31,31 @@
     }
    ]
   },
+  "0.001_predictor": {
+   "segundos": 0.1805866677314043,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 4,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 4,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 4,
+     "factorizaciones": 0,
+     "newton_completo": false
+    }
+   ]
+  },
   "0.01": {
-   "segundos": 13.75544362142682,
+   "segundos": 0.28051023185253143,
    "regimenes": [
     {
      "ok": true,
@@ -49,54 +73,99 @@
      "ok": true,
      "cuerda": 15,
      "factorizaciones": 0,
-     "newton_completo": true
+     "newton_completo": false
     }
    ]
   },
-  "0.03": {
-   "segundos": 19.744375973939896,
+  "0.01_predictor": {
+   "segundos": 0.2572793960571289,
    "regimenes": [
     {
      "ok": true,
      "cuerda": 12,
-     "factorizaciones": 2,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 13,
+     "factorizaciones": 0,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 13,
+     "factorizaciones": 0,
+     "newton_completo": false
+    }
+   ]
+  },
+  "0.03": {
+   "segundos": 6.56270875968039,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 29,
+     "factorizaciones": 1,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 23,
+     "factorizaciones": 1,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 28,
+     "factorizaciones": 1,
+     "newton_completo": false
+    }
+   ]
+  },
+  "0.03_predictor": {
+   "segundos": 6.24878310225904,
+   "regimenes": [
+    {
+     "ok": true,
+     "cuerda": 18,
+     "factorizaciones": 1,
+     "newton_completo": false
+    },
+    {
+     "ok": true,
+     "cuerda": 17,
+     "factorizaciones": 1,
      "newton_completo": false
     },
     {
      "ok": true,
      "cuerda": 15,
      "factorizaciones": 1,
-     "newton_completo": true
-    },
-    {
-     "ok": true,
-     "cuerda": 15,
-     "factorizaciones": 1,
-     "newton_completo": true
+     "newton_completo": false
     }
    ]
   }
  },
- "dz_dx": 0.4165672278031707,
  "scores": {
-  "1": 0.007146277464926243,
-  "2": 0.007160944864153862,
-  "3": 0.012620281428098679
+  "1": 0.00717481505125761,
+  "2": 0.004335337318480015,
+  "3": 0.013136232271790504
  },
  "celdas": {
   "1": 48682,
   "2": 45810,
   "3": 45294
  },
- "memoria_pico_GB": 7.79408896,
+ "memoria_pico_GB": 6.098194176,
  "por_evaluacion": {
-  "1": 14.179157126694918,
-  "2": 14.179171794094145,
-  "3": 14.18463113065809
+  "1": 0.46921081095933914,
+  "2": 0.46637133322656155,
+  "3": 0.47517222817987204
  },
  "horas_mc": {
-  "150": 44.31558338692412,
-  "250": 73.85930564487353,
-  "400": 118.17488903179765
+  "150": 1.4695358045476798,
+  "250": 2.4492263409127997,
+  "400": 3.9187621454604797
  }
 }
