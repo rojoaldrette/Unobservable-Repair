@@ -61,13 +61,16 @@ OUTDIR = os.path.normpath(os.path.join(HERE, "..", "output", "modelo_tesis", "te
 
 
 def gillingham(cfg, outdir):
-    # Corre niu/gillingham/exportar.py en un proceso aparte y lee sus salidas
+    # Corre niu/gillingham/exportar.py en un proceso aparte y lee sus salidas.  En CPU: es
+    # chico (150 incógnitas) y este proceso ya tiene reservada la memoria de la GPU (JAX
+    # preasigna 75%), así que otro proceso en la misma GPU falla al crear cuSolver.
     path = os.path.join(outdir, "gill_por_edad.csv")
     if not os.path.exists(path):
+        env = dict(os.environ, JAX_PLATFORMS="cpu")
         subprocess.run([sys.executable, "-u", "exportar.py", "--outdir", outdir,
                         "--a_max", str(cfg.a_max), "--brands", ",".join(cfg.brands),
                         "--types", ",".join(cfg.types), "--nocar", cfg.nocar],
-                       cwd=os.path.join(HERE, "..", "gillingham"), check=True)
+                       cwd=os.path.join(HERE, "..", "gillingham"), check=True, env=env)
     with open(os.path.join(outdir, "gill_resumen.json"), encoding="utf-8") as fh:
         return pd.read_csv(path), json.load(fh)
 
