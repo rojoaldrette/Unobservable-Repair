@@ -7,12 +7,27 @@ reemplazado.
 Estado (2026-10-08): **modelo teórico completo hasta `gen_dataset`; núcleo de la
 verosimilitud y script de tiempos listos.** Falta el optimizador y el Monte Carlo.
 
-**Equilibrio en la estimación (`equilibrio.factor`, `solve_chord`):** la LU del jacobiano se
-calcula una vez y se reutiliza.
+**Equilibrio en la estimación (`equilibrio.factor`, `solve_chord`):**
 
-- Para θ cercanos se usan pasos "de cuerda", cada uno del costo de una evaluación de F.
-- Se refactoriza solo si la convergencia se frena.
-- La misma LU sirve para dz/dθ, con 4 pasos de refinamiento.
+- **Inversa reutilizada:** la inversa del jacobiano se calcula una vez y se reutiliza. Para
+  un θ cercano se dan pasos "de cuerda" que arrancan del predictor z + (dz/dθ)Δθ. Cada paso
+  es una evaluación de F más un producto matriz-vector.
+- **Refactorización:** solo cuando la cuerda se estanca (||F|| no baja a 0.7 de la anterior).
+  Si aun así no converge, Newton completo desde donde quedó.
+- **Gradiente:** dz/dθ usa la misma inversa con 4 pasos de refinamiento.
+- **Por qué inversa y no LU:** en GPU, `lu_solve` (sustituciones triangulares) costó 17.8 ms a
+  tamaño completo, contra ~1 ms de un producto matriz-vector.
+
+**Primera medición en GPU (`tiempos/gpu/`, versión con LU):**
+
+- F(z): 1.6 ms;
+- jacobiano: 0.62 s;
+- LU: 0.46 s;
+- dz/dθ: 0.42 s;
+- scores: 0.01 s.
+
+La cuerda con pasos ≥ 0.01 se quedaba sin intentos (15) y caía a Newton completo desde el
+inicio (~12 s). Eso daba 44-118 h de MC. De ahí los cambios de arriba.
 
 ## 1. Archivos (`claude/niu/modelo_tesis/`)
 

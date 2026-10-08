@@ -30,8 +30,8 @@ C[x, o] = Pr(o | x), buy(h), p(h) = Pr(reparar | h), s(h) y F_r(w' | h):
         resto:    como el diseño 2
 
 Precios no observados: P(θ) del equilibrio de cada régimen.  Gradiente por la función
-implícita, régimen por régimen: dz_t/dx = -F_z^{-1} F_x, con la LU de F_z que ya calculó el
-solver (equilibrio.factor) más pasos de refinamiento (la LU puede ser de un θ cercano).
+implícita, régimen por régimen: dz_t/dx = -F_z^{-1} F_x, con la inversa de F_z que ya calculó
+el solver (equilibrio.factor) más pasos de refinamiento (puede ser de un θ cercano).
 Scores por celda -> gradiente y BHHH.
 
 Parámetros libres x <-> θ: mu, sigma_eta, sigma_rep, kappa = exp(x);
@@ -45,7 +45,6 @@ import numpy as np
 import pandas as pd
 import jax
 import jax.numpy as jnp
-from jax.scipy.linalg import lu_solve
 
 from params import TYPE_KEYS, regime_theta
 from utils import dims, split_states, type_axes
@@ -211,18 +210,18 @@ def cell_logp(zs, th, cfg, data, design):
 # Gradiente implícito, scores y BHHH ______________________________________________________________
 
 @partial(jax.jit, static_argnames=("cfg", "spec", "n_refine"))
-def dz_dx(zs, lus, x, th_fixed, cfg, spec, n_refine=4):
-    # dz_t/dx = -F_z^{-1} F_x por régimen, con la LU dada (de este θ o de uno cercano) y
-    # n_refine pasos de refinamiento con productos F_z v exactos.
+def dz_dx(zs, Jinvs, x, th_fixed, cfg, spec, n_refine=4):
+    # dz_t/dx = -F_z^{-1} F_x por régimen, con la inversa dada (de este θ o de uno cercano)
+    # y n_refine pasos de refinamiento con productos F_z v exactos.
     out = []
     for t in range(len(cfg.zetas)):
         th_of = lambda x_: regime_theta(unpack(x_, spec, th_fixed, cfg), cfg, t)
         Fx = jax.jacfwd(lambda x_: residual(zs[t], th_of(x_), cfg))(x)
         _, jvp = jax.linearize(lambda z_: residual(z_, th_of(x), cfg), zs[t])
-        X = -lu_solve(lus[t], Fx)
+        X = -Jinvs[t] @ Fx
         for _ in range(n_refine):
             res = jax.vmap(jvp, in_axes=1, out_axes=1)(X) + Fx
-            X = X - lu_solve(lus[t], res)
+            X = X - Jinvs[t] @ res
         out.append(X)
     return out
 

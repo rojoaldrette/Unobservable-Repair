@@ -102,7 +102,7 @@ def gradient_test():
     df = simulate_panel(objs, cfg, 3_000, 3, seed=2)
     spec = free_spec(th)
     x0 = pack(th, spec, cfg)
-    # LU de un θ cercano (no exacto), como pasará en la estimación
+    # inversa del jacobiano de un θ cercano (no exacto), como pasará en la estimación
     x_near = x0 + 1e-3 * jnp.asarray(np.random.default_rng(3).standard_normal(len(x0)))
     th_near = unpack(x_near, spec, th, cfg)
     lus_near = [factor(z, regime_theta(th_near, cfg, t), cfg)[1] for t, z in enumerate(zs)]

@@ -95,40 +95,46 @@ def _newton(z, th, cfg):
 
 @partial(jax.jit, static_argnames="cfg")
 def factor(z, th, cfg):
-    # F(z) y la factorización LU del jacobiano F_z: se reutiliza en pasos de cuerda (θ
-    # cercanos) y en el gradiente implícito de la verosimilitud.
+    # F(z) y la INVERSA del jacobiano F_z.  Se reutiliza en pasos de cuerda (θ cercanos) y en
+    # el gradiente implícito.  Inversa y no LU: en GPU un lu_solve (sustituciones
+    # triangulares, secuenciales) cuesta ~18 ms a tamaño completo y un producto
+    # matriz-vector ~1 ms; la inversa cuesta más que la LU, pero se calcula pocas veces.
     F, Jz = jacobian(lambda v: residual(v, th, cfg), z, cfg.jac_chunk)
-    return F, jax.scipy.linalg.lu_factor(Jz)
+    return F, jnp.linalg.inv(Jz)
 
 
 @partial(jax.jit, static_argnames="cfg")
-def _chord(z, th, cfg, lu):
+def _chord(z, th, cfg, Jinv):
     F = residual(z, th, cfg)
-    return F, -jax.scipy.linalg.lu_solve(lu, F)
+    return F, -Jinv @ F
 
 
-def solve_chord(th, cfg, z0, lu, max_iter=15, rate=0.5):
-    # Equilibrio en θ partiendo de z0 (el de un θ cercano) con la LU de ese θ: pasos de
-    # Newton "de cuerda", cada uno de costo ~ una evaluación de F.  Si ||F|| no baja al
-    # menos a `rate` de la anterior, se refactoriza en el punto actual.  Si aun así no
-    # converge, Newton completo (solve).  Devuelve (z, lu, convergió, estadísticas).
+def solve_chord(th, cfg, z0, Jinv, max_iter=60, rate=0.7):
+    # Equilibrio en θ partiendo de z0 con la inversa del jacobiano de un θ cercano: pasos de
+    # Newton "de cuerda", cada uno de costo ~ una evaluación de F más un producto
+    # matriz-vector (pocos ms en GPU a tamaño completo).
+    # z0 conviene que sea el predictor z_ant + (dz/dθ) Δθ (error O(Δθ²) en vez de O(Δθ)).
+    # Si ||F|| no baja al menos a `rate` de la anterior (la cuerda se estancó), se
+    # refactoriza en el punto actual (~1-2 s; después converge como Newton).  Si aun así no
+    # converge, Newton completo desde donde quedó.  Devuelve (z, Jinv, convergió, estadísticas).
     z, nrm_prev = jnp.asarray(z0), np.inf
     st = dict(cuerda=0, factorizaciones=0, newton_completo=False)
     for _ in range(max_iter):
-        F, dz = _chord(z, th, cfg, lu)
+        F, dz = _chord(z, th, cfg, Jinv)
         err = float(jnp.max(jnp.abs(F)))
         if not np.isfinite(err):
+            z = jnp.asarray(z0)
             break
         if err < cfg.eq_tol:
-            return z, lu, True, st
+            return z, Jinv, True, st
         nrm = float(jnp.linalg.norm(F))
         if nrm > rate * nrm_prev:
-            F, lu = factor(z, th, cfg)
-            dz = -jax.scipy.linalg.lu_solve(lu, F)
+            F, Jinv = factor(z, th, cfg)
+            dz = -Jinv @ F
             st["factorizaciones"] += 1
         z, nrm_prev = z + dz, nrm
         st["cuerda"] += 1
-    z, ok, _ = solve(th, cfg, z0)
+    z, ok, _ = solve(th, cfg, z)
     st["newton_completo"] = True
     return z, factor(z, th, cfg)[1], ok, st
 

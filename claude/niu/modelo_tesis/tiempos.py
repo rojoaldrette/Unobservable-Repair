@@ -21,9 +21,10 @@ Una evaluación de la verosimilitud en la estimación = para cada régimen, el e
 θ nuevo (pasos de cuerda con la LU del θ anterior) + dz/dθ (gradiente implícito) + scores
 por celda.  Este script mide cada pieza por separado:
 
-    1. F(z) (una evaluación del sistema), armar el jacobiano, factorizarlo (LU), un lu_solve
-    2. cuerda: equilibrio en θ + paso, para pasos típicos de L-BFGS, partiendo del z y la LU de θ
-    3. dz/dθ con 4 pasos de refinamiento (los 3 regímenes)
+    1. F(z) (una evaluación del sistema), armar el jacobiano, invertirlo, un producto inversa @ F
+    2. dz/dθ con 4 pasos de refinamiento (los 3 regímenes)
+    3. cuerda: equilibrio en θ + paso, para pasos típicos de L-BFGS, con la LU de θ, partiendo
+       de z(θ) (sin predictor) o de z(θ) + dz/dθ · paso (con predictor)
     4. scores + BHHH por diseño, con un panel del tamaño del MC (N = 10,000 por régimen, K = 4)
 
 y extrapola: horas del MC (50 réplicas × 3 diseños; Gillingham aparte, segundos) con 2 GPUs,
@@ -91,41 +92,45 @@ def main():
     # 1. Piezas del solver
     f_res = jax.jit(lambda z, th_: residual(z, th_, cfg))
     f_jac = jax.jit(lambda z, th_: jacobian(lambda v: residual(v, th_, cfg), z, cfg.jac_chunk)[1])
-    f_lu = jax.jit(jax.scipy.linalg.lu_factor)
-    f_sol = jax.jit(jax.scipy.linalg.lu_solve)
+    f_inv = jax.jit(jnp.linalg.inv)
+    f_mv = jax.jit(lambda M, v: M @ v)
     F, res["F"] = timed(f_res, zs[1], ths[1])
     Jz, res["jacobiano"] = timed(f_jac, zs[1], ths[1], reps=1)
-    lu, res["lu_factor"] = timed(f_lu, Jz, reps=1)
-    _, res["lu_solve"] = timed(f_sol, lu, F)
-    del Jz
-    lus = [factor(z, th_, cfg)[1] for z, th_ in zip(zs, ths)]
+    Ji, res["inversa"] = timed(f_inv, Jz, reps=1)
+    _, res["matvec"] = timed(f_mv, Ji, F)
+    del Jz, Ji
+    lus = [factor(z, th_, cfg)[1] for z, th_ in zip(zs, ths)]          # inversas por régimen
     print(f"1. F(z) {res['F'] * 1e3:.1f} ms | jacobiano {res['jacobiano']:.2f} s | "
-          f"LU {res['lu_factor']:.2f} s | lu_solve {res['lu_solve'] * 1e3:.1f} ms", flush=True)
+          f"inversa {res['inversa']:.2f} s | inversa @ F {res['matvec'] * 1e3:.1f} ms", flush=True)
 
-    # 2. Cuerda: equilibrio en θ + paso, desde el z y la LU de θ (los 3 regímenes)
+    # 2. dz/dθ (3 regímenes)
     spec = free_spec(th)
     x0 = pack(th, spec, cfg)
+    Dz, res["dz_dx"] = timed(lambda: dz_dx(zs, lus, x0, th, cfg, spec), reps=2)
+    print(f"2. dz/dθ ({len(x0)} parámetros, 3 regímenes): {res['dz_dx']:.2f} s", flush=True)
+
+    # 3. Cuerda: equilibrio en θ + paso, con la LU de θ, sin y con predictor z + Dz Δx
     rng = np.random.default_rng(0)
     res["cuerda"] = {}
     for t in range(R):                                   # calentamiento: compilar sin medir
         solve_chord(ths[t], cfg, zs[t], lus[t])
     for step in (1e-3, 1e-2, 3e-2):
-        x1 = x0 + step * jnp.asarray(rng.standard_normal(len(x0)))
-        th1 = unpack(x1, spec, th, cfg)
-        t0, stats = time.perf_counter(), []
-        for t in range(R):
-            z1, _, ok, st = solve_chord(regime_theta(th1, cfg, t), cfg, zs[t], lus[t])
-            jax.block_until_ready(z1)
-            stats.append(dict(ok=ok, **st))
-        dt = time.perf_counter() - t0
-        res["cuerda"][str(step)] = dict(segundos=dt, regimenes=stats)
-        print(f"2. cuerda, paso {step:g} en x: {dt:.2f} s (3 regímenes) | "
-              + " | ".join(f"{s['cuerda']} pasos, {s['factorizaciones']} LU, ok={s['ok']}" for s in stats),
-              flush=True)
-
-    # 3. dz/dθ (3 regímenes)
-    Dz, res["dz_dx"] = timed(lambda: dz_dx(zs, lus, x0, th, cfg, spec), reps=2)
-    print(f"3. dz/dθ ({len(x0)} parámetros, 3 regímenes): {res['dz_dx']:.2f} s", flush=True)
+        dx = step * jnp.asarray(rng.standard_normal(len(x0)))
+        th1 = unpack(x0 + dx, spec, th, cfg)
+        for pred in (False, True):
+            t0, stats = time.perf_counter(), []
+            for t in range(R):
+                z0 = zs[t] + Dz[t] @ dx if pred else zs[t]
+                z1, _, ok, st = solve_chord(regime_theta(th1, cfg, t), cfg, z0, lus[t])
+                jax.block_until_ready(z1)
+                stats.append(dict(ok=ok, **st))
+            dt = time.perf_counter() - t0
+            key = f"{step:g}" + ("_predictor" if pred else "")
+            res["cuerda"][key] = dict(segundos=dt, regimenes=stats)
+            print(f"3. cuerda, paso {step:g}, {'con' if pred else 'sin'} predictor: {dt:.2f} s | "
+                  + " | ".join(f"{s['cuerda']} pasos, {s['factorizaciones']} refact."
+                               + (", NEWTON COMPLETO" if s["newton_completo"] else "")
+                               + ("" if s["ok"] else ", NO CONVERGE") for s in stats), flush=True)
 
     # 4. Scores + BHHH por diseño, panel del tamaño del MC
     objs = [equilibrium_objects(z, th_, cfg) for z, th_ in zip(zs, ths)]
@@ -144,8 +149,8 @@ def main():
     except Exception:
         res["memoria_pico_GB"] = None
 
-    # Extrapolación: una evaluación = cuerda (paso típico 1e-2) + dz/dθ + scores
-    per_eval = {d: res["cuerda"]["0.01"]["segundos"] + res["dz_dx"] + res["scores"][d] for d in DESIGNS}
+    # Extrapolación: una evaluación = cuerda con predictor (paso típico 1e-2) + dz/dθ + scores
+    per_eval = {d: res["cuerda"]["0.01_predictor"]["segundos"] + res["dz_dx"] + res["scores"][d] for d in DESIGNS}
     res["por_evaluacion"] = per_eval
     print(f"\nPor evaluación (cuerda con paso 1e-2 + dz/dθ + scores): "
           + ", ".join(f"diseño {d}: {v:.2f} s" for d, v in per_eval.items()), flush=True)
