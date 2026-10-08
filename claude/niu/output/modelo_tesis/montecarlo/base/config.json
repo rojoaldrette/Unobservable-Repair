@@ -1,6 +1,6 @@
 {
  "args": {
-  "reps": "0:1",
+  "reps": "1:26",
   "N": 10000,
   "K": 4,
   "designs": [
@@ -18,7 +18,7 @@
   "tag": "base",
   "summarize": false,
   "smoke": false,
-  "verbose": true
+  "verbose": false
  },
  "config": {
   "brands": [
@@ -209,4 +209,4 @@
   "sigma_eta",
   "sigma_rep"
  ]
-}
+}}

@@ -1,0 +1,154 @@
+nohup: ignoring input
+dispositivo: cuda:0 | 27 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/teoria/R_LB
+verdad lista (21 s)
+rep 26 [diseño 1]: LL = -358213.78, convergió = True, 200 evals, 165 s
+rep 26 [diseño 2]: LL = -340031.37, convergió = True, 154 evals, 135 s
+  Gillingham [parcial]: LL = -147069.65, convergió = True, 425 s
+rep 26 [diseño 3]: LL = -335658.65, convergió = True, 184 evals, 160 s
+  Gillingham [completa]: LL = -148610.12, convergió = True, 293 s
+rep 26 lista (731 s)
+rep 27 [diseño 1]: LL = -357298.97, convergió = True, 265 evals, 144 s
+  rep 27 [diseño 2] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  Gillingham [parcial]: LL = -145783.90, convergió = True, 341 s
+rep 27 [diseño 3]: LL = -334536.34, convergió = True, 238 evals, 144 s
+  Gillingham [completa]: LL = -147254.43, convergió = True, 297 s
+rep 27 lista (652 s)
+rep 28 [diseño 1]: LL = -357098.49, convergió = True, 122 evals, 126 s
+rep 28 [diseño 2]: LL = -338493.12, convergió = True, 201 evals, 124 s
+  Gillingham [parcial]: LL = -146174.70, convergió = True, 371 s
+rep 28 [diseño 3]: LL = -334442.89, convergió = True, 154 evals, 126 s
+  Gillingham [completa]: LL = -147634.12, convergió = True, 304 s
+rep 28 lista (687 s)
+rep 29 [diseño 1]: LL = -358290.67, convergió = True, 149 evals, 168 s
+rep 29 [diseño 2]: LL = -339557.21, convergió = True, 162 evals, 156 s
+  Gillingham [parcial]: LL = -146508.65, convergió = True, 390 s
+  rep 29 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  Gillingham [completa]: LL = -147938.52, convergió = True, 307 s
+rep 29 lista (709 s)
+rep 30 [diseño 1]: LL = -357828.81, convergió = True, 331 evals, 143 s
+rep 30 [diseño 2]: LL = -339284.46, convergió = True, 297 evals, 174 s
+  Gillingham [parcial]: LL = -145991.89, convergió = True, 336 s
+rep 30 [diseño 3]: LL = -335145.36, convergió = True, 308 evals, 139 s
+  Gillingham [completa]: LL = -147398.30, convergió = True, 208 s
+rep 30 lista (556 s)
+[avance] 5/24 réplicas, 0.93 h transcurridas, ~3.52 h restantes (2026-10-08 03:42)
+  rep 31 [diseño 1] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  Gillingham [parcial]: LL = -145805.33, convergió = True, 223 s
+  Gillingham [completa]: LL = -147327.78, convergió = True, 212 s
+  rep 31 [diseño 2] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  rep 31 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 31 lista (833 s)
+  Gillingham [parcial]: LL = -146296.06, convergió = True, 21 s
+  Gillingham [completa]: LL = -147724.81, convergió = True, 18 s
+rep 32 [diseño 1]: LL = -358279.00, convergió = True, 156 evals, 93 s
+rep 32 [diseño 2]: LL = -339811.21, convergió = True, 169 evals, 121 s
+rep 32 [diseño 3]: LL = -335726.61, convergió = True, 253 evals, 151 s
+rep 32 lista (371 s)
+  Gillingham [parcial]: LL = -145798.09, convergió = True, 20 s
+  Gillingham [completa]: LL = -147308.37, convergió = True, 17 s
+rep 33 [diseño 1]: LL = -358143.57, convergió = True, 286 evals, 148 s
+rep 33 [diseño 2]: LL = -339400.97, convergió = True, 329 evals, 142 s
+rep 33 [diseño 3]: LL = -335198.06, convergió = True, 290 evals, 133 s
+rep 33 lista (429 s)
+  Gillingham [parcial]: LL = -146772.08, convergió = True, 20 s
+  Gillingham [completa]: LL = -148281.49, convergió = True, 17 s
+rep 34 [diseño 1]: LL = -358945.23, convergió = True, 141 evals, 105 s
+rep 34 [diseño 2]: LL = -340241.95, convergió = True, 161 evals, 83 s
+  rep 34 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 34 lista (354 s)
+  rep 35 [diseño 1] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  Gillingham [parcial]: LL = -145910.11, convergió = True, 216 s
+  Gillingham [completa]: LL = -147414.79, convergió = True, 114 s
+  rep 35 [diseño 2] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  rep 35 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 35 lista (794 s)
+[avance] 10/24 réplicas, 1.70 h transcurridas, ~2.38 h restantes (2026-10-08 04:29)
+  Gillingham [parcial]: LL = -145997.84, convergió = True, 23 s
+  Gillingham [completa]: LL = -147444.46, convergió = True, 18 s
+rep 36 [diseño 1]: LL = -358334.26, convergió = True, 185 evals, 118 s
+rep 36 [diseño 2]: LL = -339567.80, convergió = True, 181 evals, 128 s
+rep 36 [diseño 3]: LL = -335366.66, convergió = True, 324 evals, 152 s
+rep 36 lista (404 s)
+  Gillingham [parcial]: LL = -145987.00, convergió = True, 22 s
+  Gillingham [completa]: LL = -147409.61, convergió = True, 16 s
+  rep 37 [diseño 1] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 37 [diseño 2]: LL = -339057.01, convergió = True, 153 evals, 125 s
+  rep 37 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 37 lista (481 s)
+  Gillingham [parcial]: LL = -145646.05, convergió = True, 21 s
+  Gillingham [completa]: LL = -147136.02, convergió = True, 17 s
+rep 38 [diseño 1]: LL = -357410.35, convergió = True, 335 evals, 128 s
+rep 38 [diseño 2]: LL = -338768.90, convergió = True, 333 evals, 119 s
+rep 38 [diseño 3]: LL = -334543.11, convergió = True, 327 evals, 176 s
+rep 38 lista (429 s)
+  Gillingham [parcial]: LL = -146050.85, convergió = True, 21 s
+  Gillingham [completa]: LL = -147573.11, convergió = True, 19 s
+rep 39 [diseño 1]: LL = -358151.94, convergió = True, 93 evals, 105 s
+rep 39 [diseño 2]: LL = -339591.55, convergió = True, 125 evals, 107 s
+rep 39 [diseño 3]: LL = -335212.58, convergió = True, 67 evals, 116 s
+rep 39 lista (335 s)
+  Gillingham [parcial]: LL = -146190.47, convergió = True, 21 s
+  Gillingham [completa]: LL = -147658.50, convergió = True, 19 s
+rep 40 [diseño 1]: LL = -357943.22, convergió = True, 143 evals, 94 s
+rep 40 [diseño 2]: LL = -339146.86, convergió = True, 176 evals, 76 s
+rep 40 [diseño 3]: LL = -334979.10, convergió = True, 219 evals, 81 s
+rep 40 lista (257 s)
+[avance] 15/24 réplicas, 2.23 h transcurridas, ~1.34 h restantes (2026-10-08 05:00)
+  Gillingham [parcial]: LL = -146196.55, convergió = True, 21 s
+  Gillingham [completa]: LL = -147655.85, convergió = True, 16 s
+rep 41 [diseño 1]: LL = -357001.92, convergió = True, 261 evals, 151 s
+rep 41 [diseño 2]: LL = -338513.14, convergió = True, 291 evals, 154 s
+rep 41 [diseño 3]: LL = -334317.35, convergió = True, 224 evals, 147 s
+rep 41 lista (458 s)
+  Gillingham [parcial]: LL = -145694.79, convergió = True, 22 s
+  Gillingham [completa]: LL = -147142.04, convergió = True, 18 s
+rep 42 [diseño 1]: LL = -357496.18, convergió = True, 165 evals, 129 s
+rep 42 [diseño 2]: LL = -338713.79, convergió = True, 139 evals, 135 s
+rep 42 [diseño 3]: LL = -334538.06, convergió = True, 143 evals, 113 s
+rep 42 lista (383 s)
+  Gillingham [parcial]: LL = -145693.97, convergió = True, 21 s
+  Gillingham [completa]: LL = -147152.23, convergió = True, 18 s
+  rep 43 [diseño 1] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  rep 43 [diseño 2] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+  rep 43 [diseño 3] arranque 0 falló: el equilibrio no converge en el valor inicial de BHHH
+rep 43 lista (645 s)
+  Gillingham [parcial]: LL = -146965.34, convergió = True, 22 s
+  Gillingham [completa]: LL = -148473.68, convergió = True, 17 s
+rep 44 [diseño 1]: LL = -358518.46, convergió = True, 125 evals, 109 s
+rep 44 [diseño 2]: LL = -340036.07, convergió = True, 107 evals, 101 s
+rep 44 [diseño 3]: LL = -335649.07, convergió = True, 158 evals, 98 s
+rep 44 lista (315 s)
+  Gillingham [parcial]: LL = -146270.64, convergió = True, 21 s
+  Gillingham [completa]: LL = -147715.50, convergió = True, 16 s
+rep 45 [diseño 1]: LL = -357077.20, convergió = True, 132 evals, 89 s
+rep 45 [diseño 2]: LL = -338660.93, convergió = True, 130 evals, 94 s
+rep 45 [diseño 3]: LL = -334495.96, convergió = True, 238 evals, 110 s
+rep 45 lista (300 s)
+[avance] 20/24 réplicas, 2.81 h transcurridas, ~0.56 h restantes (2026-10-08 05:35)
+  Gillingham [parcial]: LL = -146277.50, convergió = True, 21 s
+  Gillingham [completa]: LL = -147806.95, convergió = True, 18 s
+rep 46 [diseño 1]: LL = -358392.28, convergió = True, 156 evals, 75 s
+rep 46 [diseño 2]: LL = -339655.23, convergió = True, 201 evals, 153 s
+rep 46 [diseño 3]: LL = -335378.66, convergió = True, 193 evals, 112 s
+rep 46 lista (348 s)
+  Gillingham [parcial]: LL = -146456.15, convergió = True, 21 s
+  Gillingham [completa]: LL = -147996.63, convergió = True, 17 s
+rep 47 [diseño 1]: LL = -358353.67, convergió = True, 164 evals, 96 s
+rep 47 [diseño 2]: LL = -339807.04, convergió = True, 148 evals, 65 s
+rep 47 [diseño 3]: LL = -335469.51, convergió = True, 183 evals, 137 s
+rep 47 lista (305 s)
+  Gillingham [parcial]: LL = -146613.90, convergió = True, 21 s
+  Gillingham [completa]: LL = -148044.70, convergió = True, 17 s
+rep 48 [diseño 1]: LL = -358886.37, convergió = True, 203 evals, 141 s
+rep 48 [diseño 2]: LL = -340066.80, convergió = True, 194 evals, 147 s
+rep 48 [diseño 3]: LL = -335869.58, convergió = True, 224 evals, 136 s
+rep 48 lista (430 s)
+  Gillingham [parcial]: LL = -146673.91, convergió = True, 21 s
+  Gillingham [completa]: LL = -148180.80, convergió = True, 18 s
+rep 49 [diseño 1]: LL = -358242.73, convergió = True, 185 evals, 146 s
+rep 49 [diseño 2]: LL = -339503.38, convergió = True, 324 evals, 134 s
+rep 49 [diseño 3]: LL = -335324.77, convergió = True, 170 evals, 87 s
+rep 49 lista (373 s)
+[avance] 24/24 réplicas, 3.22 h transcurridas, ~0.00 h restantes (2026-10-08 06:00)
+listo: /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/montecarlo/base
