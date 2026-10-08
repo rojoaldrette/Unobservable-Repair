@@ -111,8 +111,15 @@ KAPPA = 0.25
 P_BAR = 0.3                       # tasa de reparación objetivo: delta_j = acc_age_j + kappa p_bar
 U_W = -0.2                        # utils por unidad de w (propuesta; el autor probará 0)
 SIGMA_REP = 0.3
-R_BASE = {"light_brown": (4.0, 0.24), "light_green": (3.5, 0.21),     # (R en a = 1, aumento anual)
-          "heavy_brown": (10.0, 0.60), "heavy_green": (8.0, 0.48)}     # miles de DKK
+# R(j, a) = base + pendiente (a - 1) + prima e^{-(a-1)/tau}, miles de DKK.  La prima de
+# coches jóvenes es el costo de piezas nuevas (menos disponibles).  (base, pendiente, prima, tau)
+R_BASE = {"light_brown": (4.0, 0.10, 6.0, 4.0), "light_green": (3.5, 0.21, 0.0, 1.0),
+          "heavy_brown": (10.0, 0.60, 0.0, 1.0), "heavy_green": (8.0, 0.48, 0.0, 1.0)}
+
+
+def repair_price(brand, a):
+    base, slope, prima, tau = R_BASE[brand]
+    return base + slope * (a - 1) + prima * np.exp(-(a - 1) / tau)
 
 
 def theta(cfg, **over):
@@ -136,7 +143,7 @@ def theta(cfg, **over):
         # desgaste y reparación
         u_w=U_W, delta=acc_age + KAPPA * P_BAR, kappa=KAPPA, sigma_eta=SIGMA_ETA,
         sigma_rep=SIGMA_REP,
-        R=np.stack([R_BASE[b][0] + R_BASE[b][1] * (a - 1) for b in cfg.brands]),   # (J, A-1)
+        R=np.stack([repair_price(b, a) for b in cfg.brands]),                     # (J, A-1)
     )
     th.update(over)
     return {k: jnp.asarray(v, dtype=float) for k, v in th.items()}

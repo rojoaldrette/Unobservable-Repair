@@ -196,13 +196,20 @@ edad tenga sentido:
 - más en edades intermedias;
 - y que nada sea absurdo (tasas, precios, edad del parque).
 
-**Valores iniciales [propuesta, ad hoc; se cambian según se vea]:**
+**Forma [aprobado]:** R(j, a) = base + pendiente (a − 1) + prima · e^{−(a−1)/τ}.
 
-| | valor |
-|---|---|
-| R(LB, a) | 4.0 + 0.24 (a − 1) mil DKK |
-| R(HB, a) | 10.0 + 0.6 (a − 1) mil DKK |
-| σ_rep | 0.3 |
+- El precio sube poco con la edad y se queda cerca de un nivel.
+- La prima hace más cara la reparación de coches nuevos (piezas menos disponibles). Es lo
+  que logra poca reparación al inicio de la vida, sin tocar la transición.
+
+**Valores [propuesta; se ajustan según se vea]:**
+
+| | base | pendiente | prima | τ | R en edades 1 / 5 / 10 / 23 |
+|---|---|---|---|---|---|
+| light brown | 4.0 | 0.10 | 6.0 | 4 | 10.0 / 6.6 / 5.5 / 6.2 mil DKK |
+| heavy brown | 10.0 | 0.60 | 0 | — | 10.0 / 12.4 / 15.4 / 23.2 mil DKK (sin cambios) |
+
+σ_rep = 0.3.
 
 ### 4.3 Variable excluida: regímenes  [aprobado]
 
@@ -353,11 +360,9 @@ regímenes. Eso decide si hace falta el plan B (sec. 5).
 
 ## 8. Decisiones abiertas
 
-1. **Reparación al inicio de la vida.** En la corrida preliminar (`modelo_tesis.md`, sec. 4),
-   Pr(reparar) baja con la edad desde 0.69 en la edad 1 (light brown). No cumple el
-   criterio de la sec. 4.2. La causa: un κ constante da el mismo beneficio a un coche
-   nuevo que a uno viejo, y el nuevo lo disfruta más años. Hay que elegir un mecanismo
-   (opciones en `modelo_tesis.md`, sec. 4).
+1. **Reparación al inicio de la vida: resuelto con R(LB, a)** (sec. 4.2). Vista
+   preliminar (grid grueso, CPU): Pr(reparar) de light brown 0.26 en la edad 1, pico de
+   0.43 en la 7 y 0.12 en la 23. Falta confirmarlo con el grid completo en GPU.
 
 Valores por ajustar con el modelo resuelto:
 
@@ -386,3 +391,7 @@ Valores por ajustar con el modelo resuelto:
     - σ_w = 0.1;
     - quién repara (usados de edad 1 a 23);
     - tres diseños de MC según qué se observe (r; motivo de salida).
+  - Probado y descartado: que reparar recupere una fracción ρ del desgaste acumulado (daba la
+    forma por edad, pero el autor prefiere que todo el ajuste venga de R). Se queda κ constante.
+  - Aprobado: forma de R con prima para coches jóvenes (piezas nuevas menos disponibles) y
+    casi plana después; aplicada a light brown.

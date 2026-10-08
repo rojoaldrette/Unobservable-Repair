@@ -115,7 +115,30 @@ h = 0.075. Carpeta `output/modelo_tesis/teoria/preliminar_h025/`.
      R es 2.5 veces mayor.
    - Al final de la vida sí repara poco.
 
-## 5. Opciones para que reparar sea bajo en coches jóvenes (decidir)
+## 5. Reparar poco en coches jóvenes  [decidido: con R(LB, a)]
+
+**Decisión del autor:** la transición no se toca; el patrón viene de los precios de
+reparación. La opción "ρ" (fracción del desgaste acumulado) se probó el 2026-10-08 y se
+descartó.
+
+Se usa R(LB, a) = 4.0 + 0.10 (a − 1) + 6.0 e^{−(a−1)/4}: caro de joven y casi plano después.
+
+**Vista preliminar** (grid grueso, `teoria/preliminar_RLB_h025/`), light brown:
+
+| edad | 1 | 3 | 5 | 7 | 10 | 15 | 20 | 23 |
+|---|---|---|---|---|---|---|---|---|
+| Pr(reparar), ζ = 0 | .26 | .37 | .42 | .43 | .38 | .26 | .17 | .12 |
+| Pr(reparar), ζ = ∓0.3 | .44/.10 | .53/.19 | .56/.26 | .55/.27 | .50/.24 | .35/.15 | .25/.10 | .19/.07 |
+| P medio | 139.2 | 114.2 | 93.6 | 75.3 | 58.5 | 27.9 | 26.5 | 16.0 |
+| P Gillingham | 139.1 | 111.8 | 88.6 | 68.3 | 49.8 | 19.5 | 22.5 | 15.7 |
+
+**Lectura:**
+
+- La reparación sube y luego baja con la edad.
+- La distribución por edad es igual a la de Gillingham.
+- Los precios de light brown caen menos que en Gillingham: 9 mil DKK arriba a la edad 10.
+
+Opciones que se consideraron antes (descartadas):
 
 1. **El efecto de reparar crece con el desgaste acumulado** (recomendada):
 
