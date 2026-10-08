@@ -1,7 +1,10 @@
 # Reporte: Monte Carlo completo (2026-10-08)
 
 50 réplicas (0-49) del diseño de `modelo_fin.md`: 10,000 hogares por régimen, 4 años, 3
-regímenes de R (90,000 transiciones por réplica). Corrido en la workstation (commit 691c378).
+regímenes de R (90,000 transiciones por réplica). Corrido en la workstation: corrida base
+(commit 691c378) + re-estimación de las 36 estimaciones perdidas con `--solo_faltantes`
+(commit 6382556). **Ahora las 150 estimaciones de los diseños y las 100 de Gillingham están
+completas.**
 
 - Datos: `claude/niu/output/modelo_tesis/montecarlo/base/`.
 - Gráficas y tablas: `claude/niu/output/modelo_tesis/reportes/mc_base/` (`analisis/reporte_mc.py`,
@@ -12,13 +15,22 @@ regímenes de R (90,000 transiciones por réplica). Corrido en la workstation (c
 
 ### 1. El modelo de la tesis no se sesga, en ninguno de los tres diseños
 
-- Sesgo medio < 1% del valor verdadero en casi todos los parámetros. El mayor es Ts (−2 a
-  −3%), con t del sesgo entre −1.0 y −1.7: no significativo.
-- Cobertura del IC 95% entre 0.89 y 1.00 (banda binomial con ~38 réplicas: 0.88-1.00).
-- sd entre réplicas / se mediano entre 0.76 y 1.22: los errores estándar BHHH están bien.
+50 réplicas por diseño.
+
+- Sesgo medio < 1.5% del valor verdadero en todos los parámetros salvo Ts (−1.5, −2.4 y
+  −2.9% en los diseños 1, 2, 3; t del sesgo −1.0 a −1.7, no significativo).
+- Único |t| > 2: Tb (pareja), +0.5-0.6% en los diseños 2 y 3 (t = 2.1 y 2.3; 1.7 en el
+  diseño 1). Con 27 parámetros × 3 diseños se esperan algunos |t| > 2 por azar, pero sale
+  con el mismo signo en los tres diseños (son los mismos paneles, no son independientes).
+  En magnitud es despreciable frente al +19-30% de Gillingham; probablemente sesgo de
+  muestra finita del MLE.
+- Cobertura del IC 95% entre 0.90 y 1.00 (banda binomial con 50 réplicas: ~0.88-1.00).
+- sd entre réplicas / se mediano entre 0.78 y 1.21: los errores estándar BHHH están bien.
 - Los parámetros de reparación (κ, σ_η, σ_rep, u_w, δ) se recuperan sin sesgo aun en el
   diseño 3 (sin r ni motivo de salida); no ver r agranda la dispersión, sobre todo la de δ.
 - La tasa de reparación implícita sale 0.276, igual a la verdadera.
+- Perder información cuesta poco: del diseño 1 al 3 el sesgo de los parámetros comunes
+  sube algo (μ −0.1% → −0.5%) y la cobertura baja un poco, sin salir de la banda.
 
 ![sesgo](../output/modelo_tesis/reportes/mc_base/fig1_sesgo.png)
 
@@ -40,60 +52,44 @@ dinero (u/μ, costos de transacción, disposición a pagar) sale inflado.
 
 ![cobertura](../output/modelo_tesis/reportes/mc_base/fig3_cobertura.png)
 
-### 3. Se perdieron 36 de 150 estimaciones (y no al azar)
+### 3. Las 36 estimaciones perdidas ya se recuperaron (y no cambian nada)
 
-12, 11 y 13 en los diseños 1, 2 y 3, todas con "el equilibrio no converge en el valor
-inicial de BHHH". Gillingham no perdió ninguna. Las fallas se agrupan por réplica: 31 réplicas sin falla, 7
-con una, 7 con dos y 5 con las tres.
+En la corrida base se perdieron 36/150 estimaciones (12, 11, 13 en los diseños 1-3), todas
+con "el equilibrio no converge en el valor inicial de BHHH": BHHH arrancaba desde el
+último punto de prueba de L-BFGS, no desde el mejor. Se arregló en `ll_estim.py`
+(BHHH arranca en la mejor evaluación, `restore_best`, con rescates desde el mejor y desde
+cero) y se re-estimaron con `montecarlo.py --solo_faltantes` (mismo panel, misma semilla).
+
+Resultado de la re-estimación (logs `modelo_tesis/mc_faltantes_*.log`):
+- 36/36 convergen (criterio de BHHH g'B⁻¹g/N < 1e-9). Ningún rescate hizo falta
+  (`rescate_mejor = rescate_frio = 0`): bastó arrancar BHHH en el mejor punto.
+- Todas tienen el mismo patrón: **2 evaluaciones fallidas y ~8 evaluaciones en total**
+  (vs ~200 en las demás). Es decir, en estas réplicas el primer paso de L-BFGS cae en un
+  θ donde el equilibrio no converge desde la cuerda, L-BFGS se rinde tras dos intentos
+  (devolvemos 1e10 con gradiente cero) y quien estima es BHHH solo, desde el valor
+  verdadero. Eso es lo que antes tiraba la estimación: el estado guardado era el del
+  punto fallido. Como BHHH llega al mismo criterio de convergencia, la estimación es
+  válida; solo cambia el camino.
+- **No hay selección.** La preocupación del reporte anterior era que las réplicas perdidas
+  no fueran al azar (en ellas Gillingham daba μ y u0 0.5-0.7 sd más bajos). Con los
+  diseños ya estimados, el estadístico z = (θ̂ − θ)/se de las 36 recuperadas vs las 114
+  originales: media +0.03 vs −0.01, sd 0.96 vs 0.98 (todos los parámetros); para μ,
+  −0.18 vs −0.09 (72 vs 228 obs.). Sin diferencia relevante. Los números de las secciones
+  1-2 (que ya incluyen todo) casi no se movieron respecto a la versión con 114
+  estimaciones.
+
+Pendiente menor (no urgente): el primer paso de L-BFGS es demasiado largo en ~1/4 de los
+paneles. Si se quiere que L-BFGS haga su trabajo, acotar el paso inicial (p. ej. escalar
+el objetivo o usar `maxls`/un primer paso de BHHH). Para el MC no hace falta.
 
 ![fallas](../output/modelo_tesis/reportes/mc_base/fig5_fallas.png)
 
-**Por qué falla.** Cada evaluación de la verosimilitud necesita el equilibrio (P, EV) en el
-θ que se evalúa. Para no resolverlo desde cero (~minutos), `LLEval` parte del equilibrio de
-la evaluación anterior y lo corrige con pasos de cuerda (Newton con el jacobiano viejo).
-Eso funciona si el θ nuevo está cerca del θ anterior. El "θ anterior" era la **última
-evaluación que convergió**, no el mejor punto. En la búsqueda de línea L-BFGS prueba
-puntos (a veces lejanos) y los rechaza; el último de esos puntos de prueba se quedaba como
-punto de partida. Al terminar L-BFGS, BHHH evaluaba en el θ̂ de L-BFGS partiendo de ese
-punto de prueba lejano; la cuerda y el Newton de respaldo no convergían desde ahí y la
-excepción tiraba toda la estimación (~2 min de GPU), aunque el equilibrio en θ̂ ya se
-había resuelto bien antes.
-
-**Qué implica.**
-- No es un problema del modelo ni de la identificación: el equilibrio en θ̂ existe y se
-  había encontrado. Es un problema del punto de partida numérico.
-- Pero las réplicas perdidas no son al azar. En ellas Gillingham (que sí se estimó)
-  da μ y u0 más bajos y u1, Tb más altos (0.5-0.7 sd, el mismo signo en todo el bloque).
-  Los paneles que "empujan" el optimizador hacia μ baja hacen búsquedas de línea más
-  largas y más fallas. Quitar esas réplicas es selección: los sesgos y coberturas de
-  arriba son de una muestra no aleatoria de paneles. Como el sesgo ya es ~0 el efecto
-  debe ser chico, pero hay que re-estimar las 36 para reportar el MC limpio.
-
-**Arreglo (en `ll_estim.py`).**
-1. `LLEval` guarda también la **mejor** evaluación (mayor LL) con su equilibrio.
-2. Al terminar L-BFGS, BHHH arranca en esa mejor evaluación con su equilibrio ya resuelto
-   (`restore_best`): la primera evaluación de BHHH no se mueve.
-3. Respaldo (`robusto=True`, solo en las evaluaciones de BHHH que no pueden fallar): si la
-   cuerda no converge desde el último punto, reintenta desde el mejor y al final resuelve
-   desde cero (`solve_regimes`). Contadores `rescate_mejor` y `rescate_frio` en el resumen.
-4. `montecarlo.py --solo_faltantes` re-estima solo los (réplica, diseño) sin resultado,
-   con la misma semilla (mismo panel), sin Gillingham; escribe `*_faltantes.csv` y guarda
-   las fallas que queden en `fallas_reps*.csv`. `reporte_mc.py` las junta solo.
-
-Probado en el juguete (`--smoke`): mismo resultado que antes; con el estado corrupto a
-propósito, los rescates desde el mejor y desde cero dan la misma LL (diferencia 7e-10);
-`--solo_faltantes` reproduce el panel (misma LL).
-
-Para correrlo en la workstation:
-
-    python -u montecarlo.py --reps 0:50 --solo_faltantes > mc_faltantes.log 2>&1
-
-(~36 × 2.5 min ≈ 1.5 h en una GPU; o partir en `--reps 0:25` y `--reps 25:50`, una por GPU.)
-
 ### 4. Costo
 
-~130 s y ~190-210 evaluaciones por estimación en GPU; Gillingham ~20 s en CPU (más cuando
-compite por CPU con otra corrida).
+~130 s y ~200 evaluaciones por estimación en GPU (las 36 re-estimadas: ~160 s y ~8
+evaluaciones, más refactorizaciones porque la cuerda da pasos largos). Re-estimar las 36
+tomó ~0.9 h en dos GPUs. Gillingham ~85-105 s por estimación en CPU (compitiendo por CPU con
+la corrida de los diseños).
 
 ![se](../output/modelo_tesis/reportes/mc_base/fig4_se.png)
 ![reparación](../output/modelo_tesis/reportes/mc_base/fig2_reparacion.png)
