@@ -1,0 +1,40 @@
+nohup: ignoring input
+faltantes: 20 estimaciones en 11 réplicas: {7: (1, 2, 3), 9: (1, 2), 13: (1, 2), 14: (1, 2, 3), 16: (3,), 18: (1,), 19: (2,), 20: (2, 3), 21: (1, 3), 23: (1,), 24: (1, 3)}
+dispositivo: cuda:0 | 27 parámetros libres | diseños (1, 2, 3) | Gillingham: False
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/teoria/R_LB
+verdad lista (21 s)
+rep 7 [diseño 1]: LL = -358271.28, convergió = True, 8 evals, 148 s
+rep 7 [diseño 2]: LL = -339764.00, convergió = True, 8 evals, 139 s
+rep 7 [diseño 3]: LL = -335457.00, convergió = True, 8 evals, 132 s
+rep 7 lista (450 s)
+rep 9 [diseño 1]: LL = -357957.91, convergió = True, 8 evals, 216 s
+rep 9 [diseño 2]: LL = -339234.23, convergió = True, 8 evals, 162 s
+rep 9 lista (381 s)
+rep 13 [diseño 1]: LL = -358015.17, convergió = True, 7 evals, 131 s
+rep 13 [diseño 2]: LL = -339339.22, convergió = True, 7 evals, 138 s
+rep 13 lista (273 s)
+rep 14 [diseño 1]: LL = -357227.73, convergió = True, 8 evals, 207 s
+rep 14 [diseño 2]: LL = -338586.40, convergió = True, 8 evals, 214 s
+rep 14 [diseño 3]: LL = -334499.09, convergió = True, 8 evals, 142 s
+rep 14 lista (568 s)
+rep 16 [diseño 3]: LL = -335528.29, convergió = True, 8 evals, 235 s
+rep 16 lista (236 s)
+[avance] 5/11 réplicas, 0.53 h transcurridas, ~0.64 h restantes (2026-10-08 09:14)
+rep 18 [diseño 1]: LL = -358466.62, convergió = True, 8 evals, 151 s
+rep 18 lista (152 s)
+rep 19 [diseño 2]: LL = -339973.78, convergió = True, 7 evals, 197 s
+rep 19 lista (199 s)
+rep 20 [diseño 2]: LL = -339675.24, convergió = True, 8 evals, 116 s
+rep 20 [diseño 3]: LL = -335562.90, convergió = True, 8 evals, 107 s
+rep 20 lista (226 s)
+rep 21 [diseño 1]: LL = -359094.33, convergió = True, 8 evals, 140 s
+rep 21 [diseño 3]: LL = -336264.41, convergió = True, 8 evals, 178 s
+rep 21 lista (321 s)
+rep 23 [diseño 1]: LL = -357245.42, convergió = True, 8 evals, 159 s
+rep 23 lista (161 s)
+[avance] 10/11 réplicas, 0.82 h transcurridas, ~0.08 h restantes (2026-10-08 09:32)
+rep 24 [diseño 1]: LL = -357675.18, convergió = True, 8 evals, 152 s
+rep 24 [diseño 3]: LL = -335254.25, convergió = True, 8 evals, 128 s
+rep 24 lista (283 s)
+[avance] 11/11 réplicas, 0.90 h transcurridas, ~0.00 h restantes (2026-10-08 09:37)
+listo: /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/output/modelo_tesis/montecarlo/base
