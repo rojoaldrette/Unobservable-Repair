@@ -1,0 +1,153 @@
+# Código de `modelo_tesis` y resultados del modelo teórico
+
+La especificación vigente está en `modelo_fin.md`. Este doc dice cómo está hecho el código,
+cómo se corre y qué sale. El plan anterior (2026-10-07, grid de 13 puntos) quedó
+reemplazado.
+
+Estado (2026-10-08): **modelo teórico completo hasta `gen_dataset`.** Falta la estimación.
+
+## 1. Archivos (`claude/niu/modelo_tesis/`)
+
+| archivo | qué tiene |
+|---|---|
+| `params.py` | `Config` (estático: marcas, tipos, grid de w, regímenes, tolerancias), `theta(cfg, **over)` y `regime_theta`. Las tablas de Gillingham se leen de `niu/gillingham/params.py` (una sola fuente) |
+| `utils.py` | layout X/H con w, log-sumas, θ por tipo, `jacobian` por bloques |
+| `bellman.py` | u(j, d, w), s(j, d, w), transición de w por intervalos (Tauchen), etapa de reparar, valores por elección, operador Γ |
+| `probabilidades.py` | CCPs, núcleos físicos por edad, q estacionaria por recursión en la edad, `advance` (un periodo completo) |
+| `equilibrio.py` | sistema conjunto F(z) por régimen, Newton denso, `solve_regimes`, estadísticas de mercado y por (j, a) |
+| `gen_dataset.py` | panel de hogares por régimen: decisiones, r, accidentes, chatarreo endógeno, w' |
+| `teoria.py` | corre todo lo anterior, compara con Gillingham y guarda CSV |
+| `tests.py` | pruebas (sec. 3) |
+
+**Convenciones:** como `niu/gillingham`.
+
+- JAX con x64; `cfg` estático en jit; θ dinámico (un θ nuevo no recompila).
+- vmap sobre los tipos de hogar.
+- Sin matrices n×n en el modelo: la física va por núcleos por edad, de tamaño (A−2, J, W, W).
+- La única matriz densa es el jacobiano del equilibrio, que se arma por bloques de
+  `jac_chunk` columnas (`jax.linearize` + `vmap` + `lax.map`). Así la memoria en GPU queda
+  acotada aunque haya ~10,000 incógnitas.
+
+## 2. Cómo se corre
+
+```bash
+cd claude/niu/modelo_tesis
+python -u tests.py                          # pruebas (segundos, CPU)
+python -u teoria.py --prueba -v             # todo el flujo en chico (CPU)
+python -u teoria.py -v                      # tamaño completo: a_max 25, h = 0.075 (W = 71) -> GPU
+python -u teoria.py --u_w 0 --tag sin_uw -v # con u_w = 0 (o editar params.py)
+```
+
+Salidas en `claude/niu/output/modelo_tesis/teoria/<tag>/` (lista en el docstring de
+`teoria.py`):
+
+- `resumen.csv`: agregados por régimen y Gillingham;
+- `por_edad.csv`: precios medios, q, keep, reparar y w medio por (j, a), con las columnas
+  de Gillingham al lado;
+- `panel_resumen.csv`: lo observado en el panel simulado.
+
+**Tamaño completo por régimen:**
+
+- W = 71 puntos de w y n = 3,411 estados por tipo;
+- 10,230 incógnitas;
+- jacobiano de 840 MB.
+
+En CPU, con el grid grueso (3,174 incógnitas), cada paso de Newton tarda ~1 s. **El tiempo
+por paso en GPU a tamaño completo es el dato que hace falta para planear la estimación**:
+`teoria.py -v` lo imprime.
+
+## 3. Verificado (2026-10-08, CPU)
+
+`tests.py` (a_max = 8):
+
+- la transición de w suma 1 y su media es exacta en el interior (= w + δ − acc_age − κr);
+- el equilibrio converge;
+- las CCPs y buy suman 1;
+- q = qM con error de 1e-16 (con `advance`, sin armar M);
+- flujo estacionario por marca;
+- Pr(reparar) = 0 en la edad A−1;
+- el panel simulado reproduce keep y Pr(reparar) del modelo (±0.002).
+
+**Solver:** desde cero, el régimen central converge en 14 pasos de Newton (tope de 150
+mil DKK por paso en precios). Los regímenes ±0.3, arrancando del central, convergen en 5.
+
+## 4. Resultados preliminares
+
+Grid grueso (h = 0.25, W = 22) y a_max = 25, CPU. Es solo una vista: el grid aprobado es
+h = 0.075. Carpeta `output/modelo_tesis/teoria/preliminar_h025/`.
+
+**Agregados:**
+
+| | ζ = −0.3 | ζ = 0 | ζ = +0.3 | Gillingham |
+|---|---|---|---|---|
+| sin coche | 0.322 | 0.335 | 0.349 | 0.336 |
+| compran nuevo / usado | .037 / .196 | .038 / .198 | .039 / .201 | .038 / .191 |
+| reparan (por coche en mano) | 0.40 | 0.31 | 0.22 | — |
+| chatarreo endógeno / accidentes | .030 / .021 | .027 / .026 | .024 / .032 | .026 / .031 |
+| edad media del parque | 10.2 | 9.9 | 9.5 | 9.6 |
+| masa en los bordes de w | 0.5% | 0.2% | 0.2% | — |
+
+**Por edad, light brown, régimen central contra Gillingham** (promedio sobre w):
+
+| edad | 1 | 2 | 5 | 10 | 15 | 20 | 24 |
+|---|---|---|---|---|---|---|---|
+| P medio (stock) | 140.2 | 128.1 | 95.3 | 57.9 | 25.6 | 24.9 | 20.8 |
+| P Gillingham | 139.1 | 125.1 | 88.6 | 49.8 | 19.5 | 22.5 | 21.8 |
+| q / q Gillingham | .032/.030 | .032/.030 | .031/.029 | .029/.027 | .024/.022 | .012/.008 | .004/.002 |
+| Pr(reparar) | 0.69 | 0.66 | 0.54 | 0.32 | 0.15 | 0.08 | 0 |
+| w medio | 0.08 | −0.02 | −0.27 | −0.47 | −0.54 | −0.89 | −1.28 |
+
+**Lectura:**
+
+1. **La calibración objetivo casi se cumple sin ajustar nada:**
+   - hogares sin coche y compras iguales a Gillingham;
+   - distribución por edad parecida;
+   - precios medios que bajan igual, aunque light brown queda 6-8 mil DKK arriba en edades
+     medias (sus coches están mejor que el promedio de Gillingham, porque w medio < 0).
+2. **R mueve mucho la reparación:** 0.40 → 0.31 → 0.22 entre regímenes. Eso es lo que
+   identifica en Hu & Xin.
+3. **La masa en los bordes de w queda debajo del 0.5%.** Pasa el diagnóstico.
+4. **Problema: la reparación de light brown baja con la edad desde 0.69.** No cumple el
+   criterio de poca reparación al inicio (`modelo_fin.md`, sec. 4.2).
+   - Con κ constante, reparar le da al coche nuevo el mismo beneficio por año que al
+     viejo (u_w κ por año más supervivencia), y el nuevo lo disfruta más años.
+   - Heavy brown repara poco en todas las edades (0.42 en la edad 1 → 0.04 en la 10) porque
+     R es 2.5 veces mayor.
+   - Al final de la vida sí repara poco.
+
+## 5. Opciones para que reparar sea bajo en coches jóvenes (decidir)
+
+1. **El efecto de reparar crece con el desgaste acumulado** (recomendada):
+
+       ℓ' = ℓ + δ − r · ρ · (ℓ − ℓ_nuevo) + η
+
+   Reparar recupera una fracción ρ de lo que el coche se ha desgastado desde nuevo.
+   - Un coche joven casi no tiene qué recuperar.
+   - Un coche gastado recupera mucho, así que se repara más cuando w es alto. Eso también
+     da variación de p en w.
+   - Hu & Xin permiten que el efecto dependa del estado: m(1, x) − m(0, x) puede variar
+     con x.
+   - Se mantiene la persistencia si ρ < 1: un coche reparado nunca vuelve a nuevo.
+2. **κ crece con la edad:** κ_a = κ · min(a / a*, 1). Es más simple, pero no depende del
+   estado del coche.
+3. **R alto en edades jóvenes** (por ejemplo, el servicio de agencia en garantía). Es ad
+   hoc.
+
+## 6. Para la estimación (siguiente paso)
+
+**Meta: < 10 horas** con 2 GPUs:
+
+- 50 réplicas × 4 estimaciones (3 diseños + Gillingham) = 200 estimaciones;
+- ~6 min de GPU por estimación con 3 regímenes.
+
+**El costo lo domina armar el jacobiano del equilibrio** (10,230 columnas por régimen).
+Plan:
+
+- **Arranque en caliente y Newton "de cuerda":** reutilizar la factorización LU de la
+  evaluación anterior (los θ de L-BFGS cambian poco) y solo rehacerla cuando la
+  convergencia se frene.
+- **Gradiente implícito con esa misma LU:** dz/dθ = −F_z⁻¹F_θ, con 30 columnas y unos
+  pasos de refinamiento con jvp exactos.
+- **El estimador de Gillingham es barato:** 150 incógnitas, segundos.
+
+Decidir n_w y el plan con el tiempo por paso de Newton medido en GPU (`teoria.py -v`).

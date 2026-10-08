@@ -1,0 +1,128 @@
+{
+ "args": {
+  "reps": "0:1",
+  "N": 3000,
+  "K": 4,
+  "brands": "light_brown,heavy_brown",
+  "types": "low_couple_poor,low_single_poor",
+  "a_max": 10,
+  "nocar": "reemplaza",
+  "infos": [
+   "parcial",
+   "completa"
+  ],
+  "fix": "u1,tc_buy_nocar,tc_sell_inspect,acc_age",
+  "n_starts": 1,
+  "perturb": 0.1,
+  "lbfgs_iter": 30,
+  "bhhh_iter": 5,
+  "print_every": 5,
+  "tag": "smoke",
+  "outdir": "C:\\Users\\rorya\\Desktop\\COLMEX\\TESIS\\Tesis\\tesis_final_1\\claude\\niu\\output\\gillingham",
+  "summarize": false,
+  "smoke": true,
+  "verbose": true
+ },
+ "config": {
+  "brands": [
+   "light_brown",
+   "heavy_brown"
+  ],
+  "types": [
+   "low_couple_poor",
+   "low_single_poor"
+  ],
+  "f": [
+   0.5,
+   0.5
+  ],
+  "a_max": 10,
+  "beta": 0.95,
+  "p_scrap": 2.0,
+  "inspect_age_min": 4,
+  "sigma": 1.0,
+  "sigma_trade": 1.0,
+  "tc_units": "utils",
+  "nocar": "reemplaza",
+  "sa_iter": 1000,
+  "eq_tol": 1e-10,
+  "eq_max_iter": 50
+ },
+ "theta": {
+  "mu": [
+   0.1131,
+   0.0941
+  ],
+  "u0": [
+   [
+    3.649,
+    5.1535
+   ],
+   [
+    2.4042,
+    3.5823
+   ]
+  ],
+  "u1": [
+   [
+    -0.1459,
+    -0.2196
+   ],
+   [
+    -0.0984,
+    -0.16
+   ]
+  ],
+  "u2": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "tc_buy": [
+   6.5944,
+   6.5457
+  ],
+  "tc_buy_nocar": [
+   1.7899,
+   3.0816
+  ],
+  "tc_sell": 0.9106,
+  "tc_sell_inspect": 2.1929,
+  "sigma_sell": 0.3454,
+  "acc_int": [
+   -5.6248,
+   -5.6728
+  ],
+  "acc_age": [
+   0.1804,
+   0.202
+  ],
+  "p_new": [
+   142.33,
+   275.84
+  ],
+  "p_scrap": [
+   2.0,
+   2.0
+  ]
+ },
+ "libres": [
+  "mu_t0",
+  "mu_t1",
+  "u0_t0_j0",
+  "u0_t0_j1",
+  "u0_t1_j0",
+  "u0_t1_j1",
+  "tc_buy_t0",
+  "tc_buy_t1",
+  "tc_sell",
+  "sigma_sell",
+  "acc_int_j0",
+  "acc_int_j1"
+ ]
+}

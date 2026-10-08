@@ -33,7 +33,7 @@ set -uo pipefail
 
 # Diseño (se puede sobrescribir desde fuera) ____________________________________
 CALIB=${CALIB:-tesis}
-A_MAX=${A_MAX:-25}
+A_MAX=${A_MAX:-25}-
 N_S=${N_S:-100}
 T_REG=${T_REG:-13}
 SPREAD=${SPREAD:-0.3}
