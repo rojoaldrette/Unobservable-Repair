@@ -19,6 +19,8 @@ Uso (desde claude/niu/modelo_tesis/):
     CUDA_VISIBLE_DEVICES=0 python -u montecarlo.py --reps 0:25  > mc_0-24.log 2>&1 &
     CUDA_VISIBLE_DEVICES=1 python -u montecarlo.py --reps 25:50 > mc_25-49.log 2>&1 &
     python -u montecarlo.py --summarize                 # tabla de sesgo, RMSE y cobertura
+    python -u montecarlo.py --reps 0:50 --solo_faltantes  # re-estima solo los (rep, diseño)
+                                                        # que no están en resumen_reps*.csv
 
 Por réplica (semilla = rep), modelo_fin.md secs. 6-7:
 1. Simula el panel: N hogares por régimen, K años, 3 regímenes de R.
@@ -37,6 +39,9 @@ Salidas en claude/niu/output/modelo_tesis/montecarlo/<tag>/:
                                      refact, newton, segundos, cond_B, P_rmse, reparacion_verdad, reparacion_est
     gill_parametros_reps<a>-<b>.csv  lo mismo para Gillingham (estimador gill_parcial / gill_completa)
     gill_resumen_reps<a>-<b>.csv
+    fallas_reps<a>-<b>.csv           rep, diseno, arranque, error (estimaciones perdidas)
+    con --solo_faltantes los archivos llevan el sufijo _faltantes (p. ej. resumen_reps0-49_faltantes.csv);
+    el panel se vuelve a simular con la misma semilla (= rep) y Gillingham no se re-estima.
     resumen_mc.csv                   (--summarize) por estimador y parámetro: sesgo, sd, se mediano,
                                      RMSE, cobertura al 95%
 '''
@@ -114,7 +119,7 @@ def launch_gillingham(df, cfg, args, rep, outdir, bloque):
 
 # Una réplica ______________________________________________________________
 
-def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdir, bloque):
+def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdir, bloque, designs):
     t_rep = time.time()
     df = simulate_panel(objs_true, cfg, args.N, args.K, seed=rep)
     gill = launch_gillingham(df, cfg, args, rep, outdir, bloque) if args.gillingham else None
@@ -128,8 +133,8 @@ def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdi
     w_true = [sum(f * split_states(o["q"], cfg)[0] for o, f in zip(objs, cfg.f)) for objs in objs_true]
     rep_true = [market_stats(objs, cfg)["reparacion"] for objs in objs_true]
 
-    par, res = [], []
-    for design in args.designs:
+    par, res, fallas = [], [], []
+    for design in designs:
         cells = to_cells(df, cfg, design)
         data = cell_data(cells, cfg)
         fits = []
@@ -141,6 +146,7 @@ def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdi
                 r = estimate(ev, xs, args.lbfgs_iter, args.bhhh_iter, verbose=args.verbose)
             except RuntimeError as err:
                 print(f"  rep {rep} [diseño {design}] arranque {s} falló: {err}", flush=True)
+                fallas.append(dict(rep=rep, diseno=design, arranque=s, error=str(err)))
                 continue
             r["arranque"] = s
             fits.append(r)
@@ -162,14 +168,17 @@ def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdi
             rep_est.append(market_stats(equilibrium_objects(z, regime_theta(th_hat, cfg, t), cfg), cfg)["reparacion"])
         res.append(dict(rep=rep, estimador=f"diseno_{design}", ll=best["ll"],
                         n_obs=int(cells["cnt"].sum()), n_celdas=len(cells), convergio=best["converged"],
-                        **{k: best[k] for k in ("n_eval", "n_fail", "cuerda", "refact", "newton", "cond_B")},
+                        **{k: best[k] for k in ("n_eval", "n_fail", "cuerda", "refact", "newton", "rescate_mejor",
+                                                 "rescate_frio", "cond_B")},
                         segundos=best["seconds"], arranques=len(fits),
                         P_rmse=float(np.sqrt(num / den)),
                         reparacion_verdad=float(np.mean(rep_true)), reparacion_est=float(np.mean(rep_est))))
         print(f"rep {rep} [diseño {design}]: LL = {best['ll']:.2f}, convergió = {best['converged']}, "
               f"{best['n_eval']} evals, {best['seconds']:.0f} s", flush=True)
 
-    for name, d in (("parametros", par), ("resumen", res)):
+    for name, d in (("parametros", par), ("resumen", res), ("fallas", fallas)):
+        if not d:
+            continue
         path = os.path.join(outdir, f"{name}{bloque}.csv")
         pd.DataFrame(d).to_csv(path, mode="a", header=not os.path.exists(path), index=False)
     if gill is not None:
@@ -213,6 +222,8 @@ def parse():
     ap.add_argument("--desde", default="R_LB", help="tag de teoria/ con los equilibrios verdaderos")
     ap.add_argument("--tag", default="base")
     ap.add_argument("--summarize", action="store_true")
+    ap.add_argument("--solo_faltantes", action="store_true",
+                    help="solo los (rep, diseño) sin resultado en resumen_reps*.csv; sin Gillingham")
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("-v", "--verbose", action="store_true")
     return ap.parse_args()
@@ -232,9 +243,23 @@ def main():
     if args.summarize:
         return summarize(outdir)
     os.makedirs(outdir, exist_ok=True)
+    a, b = map(int, args.reps.split(":"))
+    bloque = f"_reps{a}-{b - 1}" + ("_faltantes" if args.solo_faltantes else "")
+    pendientes = {rep: args.designs for rep in range(a, b)}
+    if args.solo_faltantes:
+        args.gillingham = False
+        files = glob.glob(os.path.join(outdir, "resumen_reps*.csv"))
+        hechos = pd.concat(map(pd.read_csv, files)) if files else pd.DataFrame(columns=["rep", "estimador"])
+        hechos = set(zip(hechos.rep, hechos.estimador))
+        pendientes = {rep: tuple(d for d in args.designs if (rep, f"diseno_{d}") not in hechos)
+                      for rep in range(a, b)}
+        pendientes = {rep: ds for rep, ds in pendientes.items() if ds}
+        print(f"faltantes: {sum(map(len, pendientes.values()))} estimaciones en "
+              f"{len(pendientes)} réplicas: {pendientes}", flush=True)
     th0 = theta(cfg)
     spec = free_spec(th0)
-    with open(os.path.join(outdir, "config.json"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(outdir, "config_faltantes.json" if args.solo_faltantes else "config.json"),
+              "w", encoding="utf-8") as fh:
         json.dump(dict(args=vars(args), config=dataclasses.asdict(cfg),
                        theta={k: np.asarray(v).tolist() for k, v in th0.items()}, libres=labels(spec)), fh, indent=1)
     print(f"dispositivo: {jax.devices()[0]} | {len(labels(spec))} parámetros libres | diseños {args.designs}"
@@ -247,15 +272,13 @@ def main():
     objs_true = [equilibrium_objects(z, th_, cfg) for z, th_ in zip(zs_true, ths)]
     print(f"verdad lista ({time.time() - t0:.0f} s)", flush=True)
 
-    a, b = map(int, args.reps.split(":"))
-    bloque = f"_reps{a}-{b - 1}"
-    t_mc = time.time()
-    for i, rep in enumerate(range(a, b), start=1):
-        una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdir, bloque)
-        if i % args.print_every == 0 or rep == b - 1:
+    t_mc, n_reps = time.time(), len(pendientes)
+    for i, (rep, designs) in enumerate(pendientes.items(), start=1):
+        una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdir, bloque, designs)
+        if i % args.print_every == 0 or i == n_reps:
             el = time.time() - t_mc
-            print(f"[avance] {i}/{b - a} réplicas, {el / 3600:.2f} h transcurridas, "
-                  f"~{el / i * (b - a - i) / 3600:.2f} h restantes ({time.strftime('%Y-%m-%d %H:%M')})", flush=True)
+            print(f"[avance] {i}/{n_reps} réplicas, {el / 3600:.2f} h transcurridas, "
+                  f"~{el / i * (n_reps - i) / 3600:.2f} h restantes ({time.strftime('%Y-%m-%d %H:%M')})", flush=True)
     print(f"listo: {outdir}")
 
 

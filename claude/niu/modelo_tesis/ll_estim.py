@@ -248,35 +248,70 @@ class LLEval:
     # LL(x) con gradiente y BHHH.  Guarda el último punto aceptado (x, z de cada régimen, la
     # inversa del jacobiano y dz/dx) y arranca cada evaluación desde el predictor
     # z + (dz/dx)(x_nuevo - x) con pasos de cuerda (equilibrio.solve_chord).
+    # El "último punto aceptado" es la última evaluación que convergió, que en una búsqueda
+    # de línea puede ser un punto de prueba lejano y no el iterado del optimizador.  Por eso
+    # también guarda la mejor evaluación (mayor LL) y, con robusto=True, si el equilibrio no
+    # converge desde el último punto reintenta desde el mejor y al final desde cero.
     def __init__(self, cfg, spec, th_fixed, data, design, zs0, Jinvs0, x0):
         self.cfg, self.spec, self.th_fixed, self.data, self.design = cfg, spec, th_fixed, data, design
         self.x, self.zs, self.Jinvs = jnp.asarray(x0), list(zs0), list(Jinvs0)
         self.Dz = dz_dx(self.zs, self.Jinvs, self.x, th_fixed, cfg, spec)
         self.N = float(jnp.sum(data["cnt"]))
-        self.st = dict(n_eval=0, n_fail=0, cuerda=0, refact=0, newton=0)
+        self.st = dict(n_eval=0, n_fail=0, cuerda=0, refact=0, newton=0, rescate_mejor=0, rescate_frio=0)
+        self.best = None                                    # (ll, x, zs, Jinvs, Dz)
 
-    def __call__(self, x):
+    def _chord_from(self, x, th, base):
+        # Equilibrios en x desde el estado base = (x_b, zs_b, Jinvs_b, Dz_b); None si alguno falla
         from equilibrio import solve_chord
-        self.st["n_eval"] += 1
-        x = jnp.asarray(x)
-        th = unpack(x, self.spec, self.th_fixed, self.cfg)
-        dx = x - self.x
+        xb, zsb, Jb, Dzb = base
         zs, Jinvs = [], []
         for t in range(len(self.cfg.zetas)):
             z, Ji, ok, s = solve_chord(regime_theta(th, self.cfg, t), self.cfg,
-                                       self.zs[t] + self.Dz[t] @ dx, self.Jinvs[t])
+                                       zsb[t] + Dzb[t] @ (x - xb), Jb[t])
             self.st["cuerda"] += s["cuerda"]
             self.st["refact"] += s["factorizaciones"]
             self.st["newton"] += s["newton_completo"]
             if not ok:
-                self.st["n_fail"] += 1
-                return -np.inf, None, None
+                return None
             zs.append(z)
             Jinvs.append(Ji)
+        return zs, Jinvs
+
+    def _cold(self, th):
+        # Equilibrios desde cero (aprox. sucesivas + Newton), como los verdaderos
+        from equilibrio import solve_regimes, factor
+        zs, info = solve_regimes(th, self.cfg)
+        if not all(i["ok"] for i in info):
+            return None
+        return zs, [factor(z, regime_theta(th, self.cfg, t), self.cfg)[1] for t, z in enumerate(zs)]
+
+    def __call__(self, x, robusto=False):
+        self.st["n_eval"] += 1
+        x = jnp.asarray(x)
+        th = unpack(x, self.spec, self.th_fixed, self.cfg)
+        out = self._chord_from(x, th, (self.x, self.zs, self.Jinvs, self.Dz))
+        if out is None and robusto and self.best is not None:
+            self.st["rescate_mejor"] += 1
+            out = self._chord_from(x, th, self.best[1:])
+        if out is None and robusto:
+            self.st["rescate_frio"] += 1
+            out = self._cold(th)
+        if out is None:
+            self.st["n_fail"] += 1
+            return -np.inf, None, None
+        zs, Jinvs = out
         Dz = dz_dx(zs, Jinvs, x, self.th_fixed, self.cfg, self.spec)
         ll, g, B = score_parts(zs, Dz, x, self.th_fixed, self.data, self.cfg, self.spec, self.design)
+        ll = float(ll)
         self.x, self.zs, self.Jinvs, self.Dz = x, zs, Jinvs, Dz           # punto aceptado
-        return float(ll), np.asarray(g), np.asarray(B)
+        if np.isfinite(ll) and (self.best is None or ll > self.best[0]):
+            self.best = (ll, x, zs, Jinvs, Dz)
+        return ll, np.asarray(g), np.asarray(B)
+
+    def restore_best(self):
+        # Vuelve al estado de la mejor evaluación y devuelve su x
+        _, self.x, self.zs, self.Jinvs, self.Dz = self.best
+        return np.asarray(self.x)
 
 
 def estim_lbfgs(ev, x0, max_iter, verbose=False):
@@ -310,9 +345,9 @@ def estim_bhhh(ev, x0, max_iter, tol=1e-9, verbose=False):
     # BHHH con búsqueda de línea por mitades.  Para cuando g'B^{-1}g/N < tol o cuando la LL
     # deja de subir 3 iteraciones seguidas.
     x = np.asarray(x0, float)
-    ll, g, B = ev(x)
+    ll, g, B = ev(x, robusto=True)
     if not np.isfinite(ll):
-        raise RuntimeError("el equilibrio no converge en el valor inicial de BHHH")
+        raise RuntimeError("el equilibrio no converge en el valor inicial de BHHH (ni desde cero)")
     converged, stall, it = False, 0, 0
     for it in range(max_iter):
         d = np.linalg.pinv(B) @ g
@@ -336,7 +371,9 @@ def estim_bhhh(ev, x0, max_iter, tol=1e-9, verbose=False):
         if stall >= 3:
             break
     if not np.allclose(np.asarray(ev.x), x):           # que el estado guardado sea el de x
-        ll, g, B = ev(x)
+        if np.allclose(np.asarray(ev.best[1]), x):
+            ev.restore_best()                          # x es la mejor: la cuerda no se mueve
+        ll, g, B = ev(x, robusto=True)
     return x, ll, B, converged, it
 
 
@@ -345,6 +382,12 @@ def estimate(ev, x0, lbfgs_iter=300, bhhh_iter=30, verbose=False):
     import time
     t0 = time.perf_counter()
     x = estim_lbfgs(ev, x0, lbfgs_iter, verbose) if lbfgs_iter > 0 else np.asarray(x0, float)
+    if ev.best is not None:
+        # BHHH arranca en la mejor evaluación de L-BFGS (su iterado final o un punto de
+        # prueba con LL aún mayor), con su equilibrio ya resuelto: la primera evaluación de
+        # BHHH no tiene que moverse.  Antes arrancaba desde la última evaluación que
+        # convergió, que podía ser un punto de prueba lejano (36/150 fallas en el MC base).
+        x = ev.restore_best()
     x, ll, B, converged, it = estim_bhhh(ev, x, bhhh_iter, verbose=verbose)
     cov = np.linalg.pinv(B)
     sv = np.linalg.svd(B, compute_uv=False)
