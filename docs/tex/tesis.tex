@@ -1,5 +1,12 @@
 \documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{trees, shapes.geometric, arrows.meta, shadows.blur}
 \title{Proyecto de titulación}
 \author{Rodrigo Antonio Aldrette Salas}
 \date{August 2026}
@@ -7,8 +14,420 @@
 \begin{document}
 \maketitle
 
-\section{Introduction}
+\section{Introducción}
 
+
+\section{Revisión de literatura}
+
+\begin{itemize}
+    \item Pendiente
+\end{itemize}
+
+\section{Modelo}
+
+
+En esta sección modelaremos una economía donde consumidores compran, venden y reparan coches usados con un modelo dinámico de elección discreta. Seguimos de cerca a Gillingham et al. (2021) en su adaptación del \textit{stationary flow equilibrium} de Rust (1985) y su estrategia para modelar el mercado secundario, mientras modelamos la reparación como en Hu \& Xin(2024) . Nos centraremos en un modelo con dos marcas de coches y una masa unitaria de dos tipos de consumidores con preferencias heterogéneas. 
+
+
+
+\subsection{Suposiciones clave}
+
+Consideramos un equilibrio estacionario en una economía de horizonte infinito donde se venden coches nuevos del mercado primario y posteriormente se intercambian en el mercado de coches usados, comúnmente llamado mercado secundario. Los consumidores eligen comprar, vender, desechar, mantener o \textbf{reparar} sus coches de tal forma que maximizan su utilidad esperada descontada por un factor de descuento común $\beta\in (0,1)$.
+
+Nuestro concepto de equilibrio consiste en la determinación endógena del vector de precios de equilibrio $P$, con un elemento típico $P_{jaw}$, donde $j\in\{1,...,J\}$, con $J$ el número de coches, $a\in\{1,...,\bar{a}-1\}$ la edad del vehículo y $w\in\{-\infty, \infty\}$ el coeficiente de propensión a averiarse (un proxy del estado del coche). Cuando los coches llegan a su edad $\bar{a}$, no son seguros para manejar, por tanto no se pueden vender ni compraar y deben ser desechados. El modelo se asemeja a una "pequeña economía abierta" donde los precios de los coches nuevos son determinados por el mercado global con una oferta infinitamente elástica a precios $\overline{P}_{j}$. Asumimos que hay una demanda infinitamente elástica para coches de cualquier edad incluyendo $\bar{a}$ por su valor de chatarrería $\underline{P}_j$, lo cual normalmente resulta en que $\forall j,a,\;P_{jaw}\ge \underline{P}_j$ si y solo si los precios de transacción no son muy altos.
+
+En este modelo, todas las diferencias persistentes en el tiempo de los coches están dados por su marca $j$, mientras que las variantes en el tiempo están completamente determinadas por $a$ y $w$. La masa unitaria de coches en la economía está distribuida sobre los $J\bar{a}w$ tipos posibles. 
+
+Las preferencias de los consumidores están representadas por la siguiente función de utilidad cuasilineal
+$$U(\dot)=u(j,a,w)-\mu_{\tau}[\text{Ingresos y Gastos}]$$
+
+Donde $\tau$ es el tipo de consumidor. El primer termino es la utilidad de tener el coche $(j,a,w)$ (incluído su uso) y el segundo término toma en cuenta los gastos e ingresos monetarios relacionados al mercado de coches. Como en Gillingham, se asume que la utilidad marginal de un coche adicional es suficientemente pequeña para que los consumidores no tengan más de un coche. El parámetro $\mu>0$ es una forma conveniente de capturar los efectos riqueza, se puede interpretar como la sensibilidad al gasto (más alto implica que se es más pobre). 
+
+El intercambio tiene fricciones en forma de costos de transacción: $T_b$ los costos que incurre un comprador (búsqueda, inspección, crédito, entre otros) y $T_s$ los costos que incurre el vendedor (promocionarse, inspección, entre otros)\footnote{En el modelo de Gillingham et al.(2021) se especifican tanto costos de buyer como de seller. Nosotros evitamos esa especificación pues intenta capturar las dinámicas de reparación antes de venta, lo cual nuestro modelo captura endógenamente.}. De esa forma los costos totales de transacción (comprar un coche $j,a$ y vender un coche $i,b$) están dados por: $P_{ja}-P_{ib}+T_b+T_s$. Al desacerse de un coche, el precio que recibe de chatarrería está normalzado por incluir todos los costos que incurre el vender como el desregistro.
+
+La reparación tiene un precio especifico por marca y edad $R_{ja}$, es el promedio del costo de una reparación de un coche, incluye desde mantenimiento hasta reparaciones mayores por avería o accidentes\footnote{Este planteamiento posiblemente se puede extender a reparación heterogénea según el modelo de Hu \& Xin (2024); sin embargo, escapa el objetivo de la presente tesis.}. No hay límites en cuanto es el precio de reparación. Para el presente trabajo, los precios de reparación siguen una forma de U invertida o logarítmica. Es decir, aumentan con la edad del coche de forma parabólica y cuando son nuevos los costos de reparación son relativamente bajos, dinámica que atribuimos a la garantía de los coches nuevos.
+
+
+
+\subsection{Estados y decisiones del consumidor}
+
+El estado de un consumidor en algún periodo $t$ está dado por $(j,a,w,\epsilon)$, con $j\in \{\emptyset,1,...,J \}$ la marca del coche, $a\in\{\emptyset, 1,...,\bar{a}\}$ la edad del coche y $w\in\{\emptyset, [-\infty, \infty]\}$ el coeficiente de avería. Usamos el símbolo $\emptyset$ para referirnos a los estados de no tenencia de coche o donde ese estado no es relevante para el flujo de utilidad, tal como el estado de no coche $(\emptyset,\emptyset,\emptyset,\epsilon)$ o el estado antes de la edad terminal $(j,\bar{a}-1,\emptyset, \epsilon)$ porque con certeza el coche entra a la edad terminal. El componente aleatorio del vector $\epsilon$ corresponde a la heterogeneidad idiosincrática en coches y consumidores (del mismo tipo).
+ 
+Al inicio de cada periodo, los consumidores que tienen un coche pueden escoger entre mantenerlo, intercambiarlo por otro coche o escoger la opción \textit{de afuera} para quedarse sin coche. Asumimos que el intercambio sucede instantáneamente al inicio de cada periodo de forma que hacen uso de ese coche hasta el final del siguiente periodo. Los coches aumentan deterministicamente de edad $d$ a $d+1$ cada periodo, pero pueden sufrir accidentes o averías que los saquen de comisión. Interpretamos esa dinámica como llegar a edad terminal $\bar{a}$ con la probabilidad de accidentes $s\in [0,1]$. Los coches con edad $\bar{a}-1$ llegan con certeza a edad terminal el siguiente periodo.
+
+Los coches que llegan a la edad $\bar{a}$ por edad o por acciente o avería son exógenamente desechados y desaparecen del mercado despues de la fase de intercambio. Los consumidores con algún coche no en edad terminal pueden desechar su coche endógenamente\footnote{Esto sucede porque hay costos de transacción, de lo contrario siempre ganaría vender en el mercado secundario.}.
+
+La probabilidad de accidente o avería depende directamente del coeficiente de avería de la siguiente manera
+$$s=logit(w)$$
+
+El coeficiente de avería $w\in (-\infty, \infty)$ de los coches evoluciona según la siguiente regla de transición adaptada del modelo de Hu \& Xin (2024)
+$$w_{t+1}=m(j,a,r_t,w_t)+\eta ,\;\;\eta\sim N(0,\sigma_w)$$
+
+Donde $r\in\{0,1\}$ es la decisión de reparación. Como notarán, el error $\eta$ hace a $w$ una variable de estado continua. Esta transición se aplica al final de las demás transiciones, lo que implica que el efecto de reparación se aprecia hasta el siguiente periodo y, por consecuencia, solo se pueden reparar coches en edad $d<\bar{a}-1$.
+
+Las decisiones tienen la siguiente secuencia
+
+\begin{figure}[htbp]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[
+    grow=right,
+    level distance=3.3cm,
+    edge from parent/.style={draw, -{Stealth[scale=0.8]}, thin, gray},
+    every node/.style={
+        rectangle,
+        rounded corners,
+        draw=black!60,
+        fill=blue!5,
+        blur shadow,
+        font=\scriptsize\sffamily,
+        inner sep=4pt,
+        align=center
+    },
+    level 1/.style={sibling distance=2.2cm},
+    level 2/.style={sibling distance=1.0cm},
+    level 3/.style={sibling distance=1.0cm},
+    level 4/.style={sibling distance=0.7cm}
+]
+
+\node[fill=blue!20, font=\small\bfseries] {Consumidor on coche}
+    child { node {Deshacerse $j=\emptyset$}
+        child { node[fill=blue!10] {Vender $D=0$}}
+        child { node {Deshuesar $D=1$}}
+    }
+    child { node {Mantener $j=K$}
+        child { node[fill=red!10] {Reparar $r=1$}}
+        child { node[fill=red!10] {No reparar $r=0$}}
+    }
+    child { node {Intercambiar $j\in \{1,\dots,J\}$}
+        child { node {Escoger $j$ luego $a$}
+            child { node[fill=red!10] {Reparar $r=1$}}
+        child { node[fill=red!10] {No reparar $r=0$}}
+        }
+    };
+
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Árbol de decisiones para un consumidor con coche}
+\label{fig:decision-tree}
+\end{figure}
+
+El componente aleatorio $\epsilon$ es un vector con el número de elementos igual a número de elecciones discretas dependientes de estado que el consumidor tenga. Asumimos que $\epsilon$ tiene una distribución Valor Extremo Generalizado $GEV$, lo cual nos permite introducir correlación entre nidos. Estos elementos nos permiten capturar las diferencias entre las elecciones que reflejan sus características idiosincráticas.
+
+
+\subsection{Modelo de elección dinámico de los consumidores}
+
+La estrategia óptima de intercambio o tenencia de coche está dada por la solución de su maximización de utilidad esperada en horizonte infinito, esto es un problema de programación dinámica con elección discreta. Sea $V(j,a,w,\epsilon)$ la función de valor para el consumidor en el estado $(j,a,w,\epsilon)$. La forma general es
+$$V(j,a,w,\epsilon)=\max_{d\in C(j,a)}\left[ v(j,a,w;d)+\epsilon(d) \right]$$
+
+Donde $d$ es una decisión en el conjunto de elección $C(j,a)$, $\epsilon(d)$ es el error especifico por decisión y $v(j,a,w;d)$ es la función de valor especifica por decisión, la cual contiene
+$$v(j,a,w;d)=U(d)+\beta\left( s\cdot EV(j,\bar{a},\emptyset) + (1-s) \int_{-\infty}^{\infty}f(w')EV(j',a+1,w')dw'\right)$$
+
+Donde $U(d)$ es la utilidad especifica de tomar la decisión $d$. Con probabilidad $s=logit(w)$ se llega a la edad terminal y con probabilidad $(1-s)$ el coche continua a la siguiente edad; sin embargo, el nuevo $w$ avanza al siguiente valor $w'$ con probabilidad $f(w')$; por tanto, debemos integrar sobre todos los posibles valores para obtener la esperanza. Si el consumidor reparó, entonces la distribución de $f(w')$ se modifica hacia la media donde $r=1$.
+
+Las \textit{funciones de valor esperado} $EV(\cdot)$ dan los valores esperados condicionales de iniciar el siguiente periodo en el estado objetivo. Sea $h=(j,a,w)$ un estado cualquiera
+
+$$EV(h)=\int_{\epsilon}V(h,\epsilon)f(\epsilon|h)d\epsilon$$
+
+donde $f(\epsilon|\cdot)$ es la pdf de la distribución GEV para el choque idiosincrático $\epsilon$.
+
+Omitimos el desarrollo de todas las posibles funciones de valor por cada estado, se dejará para el desarrollo final de la tesis, por ahora avanzamos al modelo.
+
+Con el anterior desarrollo, podemos definir la ecuación de bellman como el mapeo del espacio de funciones de valor $V(j,a,w,\epsilon)$ a si misma. Los argumentos estándar de mapas contractivos garantizan que $V$ es el punto fijo al operador Bellman. Podemos simplificar el cálculo computacional al resolver el problema en términos de la proyección $EV(j,a,w)$, el cual es un objeto de menor dimensión ya que no depende de los idiosincráticas variables de estado continuamente distribuidas $\epsilon$. Su dimensión es únicamente la de los estados posibles de $j,a,w$. Con ello llegamos al sistema de ecuaciones no lineales de esa misma dimensión
+
+$$EV=\Gamma(EV)$$
+
+Donde $\Gamma$ es el operador Bellman. 
+
+
+
+\subsection{Probabilidades}
+
+Para obtener las probabilidades, introducimos la función log-sum de McFadden (1981), la cual equivale a la maximización de la decisión dentro de algún nido, está definida como:
+$$I(\lambda, \chi_1, \dots, \chi_n)=\lambda \log (exp\frac{\chi_1}{\lambda}+\dots+exp\frac{\chi_n}{\lambda})$$
+
+Donde $\lambda$ es el la correlación $\sigma$ entre las decisiones del nido. De esta forma, vemos que
+$$EV(h)=I(\sigma, \underbrace{I(\sigma_D, v(D=1), v(D=0)),}_{\text{Deshacerse}}
+\underbrace{I(\sigma_r, v(r=1), v(r=0)),}_{\text{Mantener}} 
+ \underbrace{I(\sigma_y, I_1, \dots, I_J)}_{\text{Intercambiar}})$$
+
+Sea entonces $\Pi(i,b,x,D,r\mid j,a,w)$ la probabilidad condicional de escoger la alternativa $(i,b,x,D,r)$, esto es, escoger el coche $i$, con edad $b$, coeficiente de avería $x$, con decisión de deshuase del coche actual $D$ y decisión de reparación del coche que se adquirió $r$. Bajo GEV, las probabilidades de elección toman expresiones cerradas que dependen de la estructura del árbol de decisiones.
+
+Por ejemplo, la decisión de mantener el coche tiene la probabilidad dada por
+
+
+\begin{equation}
+  \begin{aligned}
+    &\Pi(k\mid j,a,w)= \\
+    &\frac{exp(I(\sigma_r, v(r=1), v(r=0)))}{
+    exp(I(\sigma_D, v(D=1), v(D=0)))+ 
+    exp(I_k)+ 
+    exp(I(\sigma_y, I_1, \dots, I_J))}
+  \end{aligned}
+\end{equation}
+
+Donde $I_k= I(\sigma_r, v(r=1), v(r=0))$. Mientras los nidos se hacen más complicados, podemos descomponer la probabilidad en sus probabilidades condicionales. Por ejemplo, intercambiar el coche y tomar varias decisiones:
+\begin{equation}
+    \begin{aligned}
+        & \Pi(i,b,x,D,r\mid j,a,w,)=\\
+        &\Pi(\text{Intercambiar}\mid j,a,w)\cdot \Pi(i\mid \{1,\dots, J\}, j,a)\cdot \Pi(b\mid i,j,a,w)\\
+        &\cdot \Pi(x\mid i,b,j,a,w)\cdot  \Pi(D\mid i,b,x,j,a,w)\cdot \Pi(r\mid i,b,x,D,j,a,w)
+    \end{aligned}
+\end{equation}
+
+La decisión de deshechar y de reparar son únicamente dependientes del coche objetivo: deshechar del coche que se tiene y reparar del coche que se consumió. Por tanto, son incondicionales al nido en el que se encuentran.
+
+Para obtener las probabilidades basta con obtener las funciones de valor especificas por decisión que resultan de sustituir $EV$ en su definición.
+
+\subsection{Equilibrio}
+
+Ya que tenemos descrito el modelo de elección dinámica del consumidor. Definiremos ahora el equilibrio estacionario en nuestro mercado secundario de coches. 
+
+\subsubsection{Precios y distribuciones}
+
+Recordemos que los precios de los coches nuevos $\overline{P}_j$ y los precios de deshuesadero $\underline{P}_j$ son exógenos. Asumimos que hay una oferta perfectamente elástica de coches nuevos, así como demanda perfectamente elástica de coches por su valor de chatarrización. Los precios del mercado secundario son endógenos y se determinan en el mercado. Los coches de edad $\bar{a}$ no se pueden intercambiar. Debido a que nuestra variable de estado $w$ es continua, vamos a discretizarla en $W$ secciones. El $w$ de los coches nuevos es fijo, mientras que los coches en edad $\bar{a}-1$ se vuelven terminales el siguiente periodo. Así el vector de precios del mercado secundario es
+
+$$P=(P_1,\dots,P_j)=((P_{1,1,w_1},\dots,P_{1,\bar{a}-1,w_1}), \dots, (P_{J,1,W},\dots,P_{J,\bar{a}-1,W}))\in\mathbb{R}^{(J(\bar{a}-1) - 2)W-1}$$
+
+Las probabilidades de la sección anterior dependen de estos precios.
+
+Sea $0\ge q_{jaw} \ge 1$ la fracción de la masa unitaria de consumidores/hogares en el estado $(j,a,w)$. Especificamente son los que inician el periodo con $(j,a,w)$ antes de la fase de intercambio. Así el vector $q$ resume la distribución de la mase unitaria de consumidores en la economía sobre todos los posibles estados:
+
+$$q=(q_{1,1,w_1}, \dots, q_{J,\bar{a}, \infty})\in \mathbb{R}^{(J\bar{a}-3)W+4}$$
+
+El vector $q$ es un vector de probabilidad, por lo que sus entradas suman a 1 y pertenece al simplex $\mathbb{R}^{(J\bar{a}-3)W+3}$. Aunque tenemos un continuo de consumidores, estamos estudiando una economía con una cantidad finita de bienes, así que nuestro concepto de equilibrio se basa en encontrar el vector $P$ que iguala la demanda y la oferta para todos los coches usados en el mercado secundario. Entonces definimos la oferta y la demanda como la fracción de consumidores que quieren vender y comprar un coche de una $(j,a,w)$ especifico. Sea $D_{jaw}(P,q)$ la demanda del coche usado $(j,a,w)$. Condicional en la distribución $q$ tenemos que
+
+$D_{jaw}(P,q)=\Pi(j,a,w|\empty, P)q_{\empty}+\sum_{i=1}^{J} \sum_{d=1}^{A}\sum_{x=w_0}^{W}\Pi(j,a,w\mid i,d,x)q_{idx}$
+
+La oferta del mercado secundario está compuesta por aquellos dueños que no quieren mantener ni chatarrizar su coche. Sea $S_{jaw}(P,q)$ la oferta de coches $(j,a,w)$, entonces
+
+$$S_{jaw}(P,q)=(1-\Pi(\text{Keep}\mid j,a,w,P))(1-\Pi(D=1\mid j,a,w,P))q_{jaw}$$
+
+De igual manera que la distrubución y los precios, podemos vectorizar estas cantidades a $D(P,q)$ y $S(P,q)$, para así definir el vector de exceso de demanda
+
+$$ED(P,q)=D(P,q)-S(P,q)$$
+
+En el equilibrio, los precios hacen la oferta igual a la demanda y así $ED(P,q)=0$.
+
+En conjunto con los precios, en un \textit{stationary flow equilibrium} se requiere una distribución $q$ estacionaria. La distribución evoluciona en 2 etapas: 1) Una fase instantanea de intercambio al inicio de cada periodo; 2) Una fase de transición física después del uso, aquí los coches sufren averías, envejecen en edad o salen de la muestra por chatarrización.
+
+Para describir estas dos fases usaremos herramientas de la teoría de cadenas de Markov con tres matrices de transición de probabilidad $Q$, $H(P)$ y $\Omega(P)$. Sea $\Omega(P)$ la matriz de transición de intercambio de dimensión $((J\bar{a}-3)W+4)\times ((J\bar{a}-3)W+4)$ con entradas
+
+$$
+\Omega(P)=\begin{pmatrix}
+    \Delta_{11}(P)+\Lambda_{1}(P) & \Delta_{12}(P) & \dots & \Delta_{1J}(P) & \Delta_{1\emptyset}(P) \\
+    \Delta_{21} & \Delta_{22}(P)+\Lambda_2(P) & \dots & \Delta_{2J}(P) & \Delta_{2\emptyset}(P) \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    \Delta_{J1}(P) & \Delta_{J2}(P) & \dots & \Delta_{JJ}(P)+\Lambda_{J}(P) & \Delta_{J\emptyset}(P) \\
+    \Delta_{\emptyset 1}(P) & \Delta_{\emptyset 2}(P) & \dots & \Delta_{\emptyset J}(P) & \Pi(\emptyset \mid \emptyset, P)
+\end{pmatrix}
+$$
+
+
+Donde un bloque de reemplazo $\Delta_{ji}(P)$ de $\bar{a}\times \bar{a}$ está dado por:
+
+$$
+\Delta_{ji}(P)=
+\begin{pmatrix}
+    \Psi(i,1\mid j,1, P) & \dots & \Psi(i,\bar{a}-1 \mid j, 1, P) & \Psi(i, 0 \mid j, 1, P) \\
+    \vdots & \ddots & \vdots & \vdots \\
+    \Psi(i,1\mid j, \bar{a}-1, P) & \dots & \Psi(i,\bar{a}-1 \mid j, \bar{a} - 1, P) & \Psi(i,0 \mid j, \bar{a} - 1, P) \\
+    \Psi(i,1 \mid j, \bar{a}, P) & \dots & \Psi(i,\bar{a}-1 \mid j, \bar{a}, P) & \Psi(i,0 \mid j, \bar{a}, P)
+\end{pmatrix}
+$$
+
+Y cada subbloque de reemplazo $\Psi(i,b \mid j, a, P)$ de tamaño $W\times W$:
+
+$$\Psi(i,b \mid j, a, P)=
+\begin{pmatrix}
+    \Pi(i,b,w_0\mid j,a,w_0) & \dots & \Pi(i,b,w_{1}\mid j,a,w_0)  & \dots & \Pi(i,b,W\mid j,a,w) \\
+
+    \vdots & \ddots & \vdots & \ddots & \vdots \\
+    \Pi(i,b,w_0\mid j,a,w_{W-1})  & \dots & \Pi(i,b,w_{1}\mid j,a,w_{W-1}) & \dots &  \Pi(i,b,W\mid j,a,w_{W-1}) \\
+    \Pi(i,b,w_0\mid j,a,W)  & \dots & \Pi(i,b,w_{1}\mid j,a,W)& \dots &  \Pi(i,b,W\mid j,a,W) \\
+\end{pmatrix}$$
+
+Y un bloque típico de subbloques de elección de mantener de tamaño $\bar{a} \times \bar{a}$
+
+$$
+\Lambda_j(P)=
+\begin{pmatrix}
+    \Xi(\text{Keep}\mid j, 1, P) & \dots & 0 & 0\\
+    \vdots & \ddots & \vdots & 0\\
+    0 & \dots & \Xi(\text{Keep}\mid j, \bar{a}-1, P) & 0
+    \\
+    0 & \dots & 0 & \Xi(\text{Keep}\mid j, \bar{a}, P)
+\end{pmatrix}
+$$
+
+Con cada subbloque de mantener dado por
+
+$$
+\Xi(\text{Keep}\mid j, a, P) = 
+\begin{pmatrix}
+    \Pi(\text{Keep} \mid j, a, w_0) & \dots & 0 & 0\\
+    \vdots & \ddots & \vdots & \vdots \\
+    0 & \dots & \Pi(\text{Keep} \mid j, a, w_{W-1}) & 0\\
+    0 & \dots & 0 & 0
+\end{pmatrix}
+$$
+
+Adicionalmente, la última fila y columna están dados por 
+
+$$
+\Delta_{\emptyset j}(P)=\begin{pmatrix}
+    \Psi(i, 1 \mid \emptyset, P), \dots, \Psi(i, \bar{a}-1 \mid \emptyset, P), \Psi(i, 0 \mid \emptyset, P)
+\end{pmatrix},
+\;\;
+\Delta_{j \emptyset}(P)=\begin{pmatrix}
+    \Psi(\emptyset \mid j, 1, P)\\
+    \vdots \\
+    \Psi(\emptyset \mid j, \bar{a}, P)
+\end{pmatrix}
+$$
+
+Las probabilidades de elección $\Pi(\cdot)$ son positivas estríctamente para distribuciones GEV no degeneradas, las de intercambio aparecen en toda la matriz, mientras las de mantener aparecen en la diagonal. La fila de abajo tiene la probabilidad de comprar un coche, mientras la columna hasta la derecha la probabilidad de elegir el estado sin coche y el término de la esquina inferior derecha la de permanecer en el estado sin coche. 
+
+La matriz de transición de intercambio $\Omega(P)$ tiene la misma dimensión al cuadrado que la del vector de distribución $q$. El producto $q\Omega(P)$ representa la distribución de tenencia de coches en la economía después de la fase de intercambio. El resultado es la distribución \textit{Post-intercambio}. 
+
+Después del intercambio, los consumidores usan su coche mientras suceden accidentes y envejecen. Esta dinámica está determinada por la matriz de probabilidad de transición física $Q$
+
+$$Q=
+\begin{pmatrix}
+    Q_s & \dots & 0 & 0 \\
+    \vdots & \ddots& \vdots & \vdots \\
+    0 & \dots & Q_s & 0 \\
+    0 & \dots & 0 & 1 \\
+\end{pmatrix}
+$$
+
+Los subvectores $Q_s$ de tamaño $\bar{a} \times 1$
+
+$$
+Q_s = \begin{pmatrix}
+    Q_1 \\
+    \vdots \\
+    Q_{\bar{a}}\\
+    Q_0
+\end{pmatrix}
+$$
+
+Y las submatrices tamaño $W \times \bar{a}W$ con una forma que va cambiando con la edad del coche
+
+$$
+Q_1=\begin{pmatrix}
+   0 & 1-s(w_0) & \dots  & s(w_0) \\
+   \vdots & \vdots & \vdots  & \vdots \\
+   0 & 1-s(W) & \dots & s(W) \\
+\end{pmatrix}
+$$
+$$
+Q_{\bar{a} - 2}=\begin{pmatrix}
+    0 & \dots & 1-s(w_0) & s(w_0) \\
+    \vdots & \vdots & \vdots & \vdots \\
+    0 & \dots & 1-s(W) & s(W)
+\end{pmatrix}
+$$
+
+$$
+Q_{\bar{a}-1}=\begin{pmatrix}
+    0 & \dots & 0 & 1 \\
+    \vdots & \ddots & \vdots & \vdots \\
+    0 & \dots & 0 & 1
+\end{pmatrix}
+$$
+
+Las submatrices representan el envejecimiento que depende del estado $w$ en el que se encuentran. Con probabilidad $1-s(w)$ aumentan de edad con el mismo $w$, mientras que con probabilidad $s(w)$ llegan a edad terminal. La transición física es la misma entre marcas en tanto a que $Q_j=Q_i=Q_s$, la diferencia en tasas de supervivencia por marca radica en qué $w$ se agrupa cada marca.
+
+Así el producto $q\Omega(P)Q$ nos da la distribución de tenencia de coches en la economía después que el coche haya sido manejado en el periodo.
+
+Posterior a este evento, nos distinguimos de Gillingham et al. (2022) al introducir una dinámica adicional en la forma de la matriz $A(P, R)$ donde $P$ es nuestro vector de precios y $R$ es el régimen de precios de reparación o, en otras palabras, el vector de precios de reparación para las edades y marcas en las cuales la reparación está disponible. Esta matriz es la transición del coeficiente de avería para los coches. Según hemos definido, $w$ tiene una pdf $f$ que depende de la marca $j$, edad $a$, decisión de reparación $r$ y el coeficiente de avería pasado $w$. La matriz $A$ de tamaño $(J\bar{a}-3)W+4\times (J\bar{a}-3)W+4$ tiene entonces la siguiente forma
+
+$$A=
+\begin{pmatrix}
+    B_1 & \dots & 0 & 0 \\
+    \vdots & \ddots& \vdots & \vdots \\
+    0 & \dots & B_J & 0 \\
+    0 & \dots & 0 & 1 \\
+\end{pmatrix}
+$$
+
+Con cada submatriz $B_j$ de tamaño $\bar{a}\times \bar{a}$
+
+$$B_j=
+\begin{pmatrix}
+    C_1 & \dots & 0  \\
+    \vdots & \ddots & \vdots \\
+    0 & \dots & C_{\bar{a}}  
+\end{pmatrix}
+$$
+
+Y cada subsubmatriz $C_a$ de tamaño $W\times W$
+
+$$
+C_a=\begin{pmatrix}
+   Z(P,R,w_0)_{j,a,w_0} & \dots & Z(P,R,W)_{j,a,w_0}\\
+   \vdots & \ddots & \vdots\\
+   Z(P,R,w_0)_{j,a,W} & \dots & Z(P,R,W)_{j,a,W}\\ 
+\end{pmatrix}$$
+
+Donde $Z(P,R,w')_{j,a,w}$ es
+
+$$\begin{aligned}
+    Z(P,R,w')_{j,a,w}=\Pi(r|j,a,w, P, R)f(w'|j,a,w,r=1)+ \\
+    (1-\Pi(r|j,a,w, P, R))f(w'|j,a,w,r=0)
+\end{aligned}$$
+
+que es la probabilidad neta de que el coche $(j,a,w)$ adquirido y/o mantenido en $\Omega(P)$ y envejecido en $Q$ pase al coeficiente de avería $w'$ dados los precios $P$ y el régimen de reparación $R$. La probabilidad neta está dada por una mezcla de la probabilidad de reparación condicional al estado multiplicado por la probabilidad de caer en $w'$ dada la decisión de reparación $r$. Naturalmente esta matriz tambien depende de los precios $P$ y los precios de reparación $R$, pues la probabilidad de reparar depende de ambos.
+
+Así el producto $q\Omega(P,R)QA(P,R)$ es la distribución de tenencia de coches. con la cual inicia el siguiente periodo la economía.\\
+
+
+\textbf{Definición 1} (Equilibrio estacionario en el mercado de coches) \textit{Un equilibrio estacionario en una economía con una masa unitaria de consumidores y coches de $J$ marcas, $\bar{a}$ edades y $W$ niveles de coeficientes de avería, está dado por el vector de precios y el vector de probabilidad de distribución $(P,q)$, de tal manera que las siguientes condiciones se cumplan:}
+\begin{enumerate}
+    \item \textit{Los consumidores siguen su estrategia óptima resultado del problema de optimización}
+    \item \textit{Las condiciones de vaciado de mercado se cumplen}
+    \item \textit{La distribución de tenencia es invariante}
+    \item \textit{La oferta de los coches nuevos y la demanda de chatarrización de coches ocurre a un precio fijo e infinitamente elástico}
+\end{enumerate}
+
+\textbf{Teorema 1} \textit{Según la definición 1, el equilibrio satisfacen las siguientes condiciones:}
+
+$$\begin{aligned}
+    q\Omega(P,R)QA(P)=q\\
+    ED(P,q)=0
+\end{aligned}$$
+
+
+\subsection{Equilibrio con consumidores heterogéneos}
+
+Podemos introducir una heterogeneidad persistente en el tiempo al modelo. Siguiendo a Gillingham et al. (2024), introducimos varios tipos de consumidores $\tau\in \{1,\dots,N_\tau\}$ diferenciados por su parámetro del efecto riqueza $\mu_\tau$ de los cuales existe una fracción $f_\tau$ en la economía. Cada tipo de consumidor tiene distintas probabilidades de elecciones pues la magnitud del costo cambia. Un mayor $\mu$ implica una mayor sensibilidad a los costos, es decir, tiene un menor poder adquisitivo.
+
+Como cada consumidor resuelve un problema intertemporal distinto, el punto fijo del operador Bellman será específico al tipo de consumidor, en otras palabras $EV_\tau \neq EV_{\tau'}$. 
+
+La definición de equilibrio en el mercado de coches debe modificarse para admitir esta heterogeneidad. El vector de distribución de tenencia en la economía por tipo de consumidor $q_\tau$ debe ser estacionario y cumplir con las condiciones del anterior equilibrio
+
+$$q_\tau \Omega_\tau(P,R)Q A_\tau(P,R)=q_\tau,\; \forall \tau$$
+
+Sin embargo, el vector de precios del mercado secundario $P$ es único para toda la economía, por lo que ambos consumidores participan en el vaciamiento del mercado. La ecuación del exceso de demanda es ahora
+
+$$ED(P,q)=\sum_{\tau=1}^{N_\tau}ED_\tau(P,q_\tau)f_\tau=0$$
+
+Es decir, 
+
+
+
+
+
+
+\section{Simulación}
+
+\section{Estimación}
+
+\section{Monte Carlo}
+
+
+\section{Discusión (notas personales)}
 Motivación
 \begin{itemize}
     \item En Gillingham miden mercado secundario, pero mandan toda la variación que sale del mercado de reparaciones
@@ -30,41 +449,5 @@ Extensiones
     \item Uso del odometro para complementar información asimétrica o mejorar la estimación de reparación
 \end{itemize}
 
-\section{Modelo}
-
-El modelo tendrá varias consideraciones sobre Gillingham
-\begin{itemize}
-    \item Una vs dos etapas (matiza el efecto de reparar y de info asimétrica)
-    \item Parametrizado vs no parametrizada la regla de transición de $s$
-    \item Beliefs vs un precio por nivel de s (mejora estimation time por bajar dimensión
-    de P, pero tener que calcular otro punto fijo?)
-    \item Varios tipos
-    \item Varios coches
-    \item Varios niveles de precio de reparación
-    
-\end{itemize}
-
-En esta sección modelaremos una economía donde consumidores compran, venden y reparan coches usados con un modelo dinámico de elección discreta. Seguimos de cerca a Gillingham et al. (2024) en su adaptación del equilibrio de Rust (1985) y su estrategia para modelar el mercado secundario. Nos centraremos en un modelo con 2 (o 3) marcas de coches y una masa unitaria de consumidores con preferencias idiosincráticamente heterogéneas. 
-
-
-
-\subsection{Suposiciones clave}
-
-
-
-\subsection{Coches}
-
-
-
-
-\subsection{Consumidores}
-
-\subsection{Probabilidades}
-
-\subsection{Equilibrio}
-
-\section{Identificación}
-
-\section{Monte Carlo}
 
 \end{document}

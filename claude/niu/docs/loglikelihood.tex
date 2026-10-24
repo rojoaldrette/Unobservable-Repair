@@ -1,0 +1,623 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\setlist{itemsep=2pt,topsep=4pt}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\act}{\mathrm{act}}
+\newcommand{\term}{\mathrm{term}}
+\newcommand{\none}{\mathrm{none}}
+\newcommand{\used}{\mathrm{used}}
+\newcommand{\new}{\mathrm{new}}
+\newcommand{\buy}{b}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\Osc}{\mathcal{O}_{\mathrm{ch}}}
+\newcommand{\Qbar}{\bar Q}
+
+\newtheorem*{obs}{Observación}
+
+\title{La verosimilitud de cada diseño del Monte Carlo\\[2pt]
+\large con énfasis en la mezcla del diseño 3 ($r$ y chatarreo no observados)}
+\author{Notas para Rodrigo Aldrette}
+\date{15 de octubre de 2026}
+
+\begin{document}
+\maketitle
+
+\noindent Versión en \LaTeX{} de \code{claude/niu/docs/loglikelihood.md}, revisada contra
+\code{modelo\_tesis/ll\_estim.py} (\code{to\_cells}, \code{cell\_data}, \code{cell\_logp}).
+Se añade la sección~\ref{sec:mezcla3}, que desarma qué entra nuevo en la mezcla cuando no se
+observan ni la reparación ni el motivo de salida del coche.
+
+\tableofcontents
+
+%======================================================================
+\section{Notación}
+%======================================================================
+
+\paragraph{Estados.} Dos espacios, como en Gillingham:
+\begin{itemize}
+  \item $\mathcal X$ (inicio de año): $\act(j,a,w)$, coche activo de marca $j$, edad
+  $a=1,\dots,24$ y desgaste $w$; $\term(j)$, el coche se murió (accidente o fin de vida);
+  y $\none$.
+  \item $\mathcal H$ (tenencia después de comerciar): $\used(j,d,w)$, $\new(j)$ y $\none$.
+\end{itemize}
+Con $J=2$, $A=25$ y $W=71$ puntos de $w$: $n_{\act}=2\cdot 24\cdot 71=3{,}408$ y
+$n=n_{\act}+J+1=3{,}411$ estados en $\mathcal X$ (y en $\mathcal H$).
+
+\paragraph{Dentro de un año}, quien empieza en $x$:
+\begin{enumerate}
+  \item \textbf{Etapa 1} (escala $\sigma$): \emph{keep}, \emph{purge} (deshacerse y quedarse sin
+  coche) o \emph{trade} (deshacerse y comprar). Al deshacerse de un activo elige vender
+  ($\mu P - T_s$) o chatarrear (escala $\sigma_{\text{sell}}$). Con trade elige qué
+  comprar: nuevo $j$ o usado $(j,d)$ y, dentro del nido, qué $w$ (escala $\sigma_w$).
+  \item \textbf{Etapa 2} (escala $\sigma_{\text{rep}}$): con un usado $h$ de edad $1..23$
+  decide reparar ($r=1$) o no ($r=0$). Nuevo, edad 24 y $\none$ no reparan.
+  \item \textbf{Se maneja $h$}: se descompone con probabilidad $s(h)$ y pasa a $\term$; si
+  sobrevive,
+  \[
+    w' = w + \delta_j - \text{acc\_age}_j - \kappa\, r + \eta,\qquad
+    \eta\sim N(0,\sigma_\eta^2)\ \text{discretizado},
+  \]
+  y la edad pasa a $d+1$.
+\end{enumerate}
+
+\paragraph{Objetos del equilibrio} (los precios $P(j,a,w)$ nunca se observan; se resuelven
+dentro de cada evaluación, régimen por régimen). Para el régimen $t$ y el tipo $\tau$:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+símbolo & qué es & código\\
+\midrule
+$C_{t\tau}(x,o)$ & $\Pr(\text{resultado } o\mid x)$ & \code{outcome\_probs}\\
+$\buy_{t\tau}(h)$ & $\Pr(\text{comprar } h\mid \text{trade})$, incluye la elección de $w$ & \code{c.buy}\\
+$p_{t\tau}(h)$ & $\Pr(r=1\mid h)$ & \code{c.repair}\\
+$s(h)=s(j,d,w)$ & $\operatorname{logit}^{-1}(\text{acc\_int}_j+\text{acc\_age}_j\, d + w)$ & \code{breakdown\_prob}\\
+$F_r(w'\mid j,w)$ & transición de $w$ dado $r$ & \code{w\_transition}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Resultados observables.} $o\in\{0,\dots,4\}$: 0 keep, 1 purge-vende,
+2 purge-chatarrea, 3 trade-vende, 4 trade-chatarrea. Escribo
+$\Osc=\{2,4\}$ para ``chatarrear''. Un coche terminal siempre se chatarrea:
+$C(\term(j),o)=0$ si $o\notin\Osc$.
+
+\paragraph{Dos propiedades que hacen manejable la verosimilitud.}
+\begin{enumerate}[label=(P\arabic*)]
+  \item \label{P1} \textbf{$s$ no depende de $r$} (``opción 2'' de \code{modelo\_fin.md},
+  sec.~3.3): reparar hoy no cambia la probabilidad de descomponerse hoy, solo el $w'$ de
+  mañana.
+  \item \label{P2} \textbf{$p(h)$ depende solo de $h$} (y de $t,\tau$), no de cómo se llegó
+  a $h$: el que se quedó el coche y el que lo acaba de comprar reparan con la misma
+  probabilidad.
+\end{enumerate}
+
+%======================================================================
+\section{Qué es cada probabilidad y qué se observa}\label{sec:lectura}
+%======================================================================
+
+\subsection{La línea de tiempo de un hogar}
+
+El año $k$ de un hogar tiene tres momentos, y en cada uno hay una variable:
+\[
+  \underbrace{h_{k-1}}_{\substack{\text{coche con el que}\\\text{terminó el año } k-1}}
+  \xrightarrow[\text{se maneja}]{\;r_{k-1},\ \text{accidente},\ \eta\;}
+  \underbrace{x_k}_{\substack{\text{estado de ese coche}\\\text{al empezar el año } k}}
+  \xrightarrow[\text{etapa 1}]{\;o_k\;}
+  \underbrace{h_k}_{\substack{\text{coche con el que}\\\text{termina el año } k}}
+  \xrightarrow[\text{etapa 2}]{\;r_k\;}\cdots
+\]
+\begin{itemize}
+  \item $h_{k-1}$: qué coche tenía el hogar después de comerciar el año pasado, p.~ej.
+  $\used(\text{LB},5,w=0.30)$.
+  \item $x_k$: qué le pasó a \emph{ese mismo coche} al manejarlo un año. O se murió
+  ($\term(\text{LB})$) o sigue vivo un año más viejo y con desgaste nuevo
+  ($\act(\text{LB},6,w')$). El hogar todavía no ha decidido nada.
+  \item $o_k$: qué hace el hogar con ese coche (etapa 1).
+  \item $h_k$: con qué coche se queda al final. Si $o_k=$ keep, $h_k$ es el mismo coche
+  ($\used(\text{LB},6,w')$); si purge, $h_k=\none$; si trade, $h_k$ es el que compró.
+\end{itemize}
+
+\subsection{Las tres piezas de probabilidad}
+
+\paragraph{$Q_r(h_{k-1},x_k)$: física, no es decisión.}
+$\Pr(x_k=x\mid h_{k-1}=h,\ r_{k-1}=r)$: la probabilidad de que el coche $h$ amanezca en el
+estado $x$, dado que el año pasado se reparó ($r=1$) o no. Ver~\eqref{eq:Qr}.
+
+\paragraph{$C_t(x,o)$: decisión de etapa 1, sin el qué comprar.}
+\[
+  C_t(x,o)=\Pr(o_k=o\mid x_k=x,\ \text{régimen } t,\ \text{tipo }\tau).
+\]
+Es una matriz de $n\times 5$: una fila por estado de inicio de año, una columna por
+resultado. Se arma con dos logits anidados. Sea $\text{keep}(x)$, $\text{purge}(x)$,
+$\text{trade}(x)$ la elección de etapa 1 (escala $\sigma$) y
+$\text{ch}(x)=\Pr(\text{chatarrear}\mid\text{se deshace del coche},x)$ la elección vender
+vs chatarrear (escala $\sigma_{\text{sell}}$). Entonces (\code{outcome\_probs}):
+\begin{center}
+\begin{tabular}{cll}
+\toprule
+$o$ & nombre & $C_t(x,o)$\\
+\midrule
+0 & keep & $\text{keep}(x)$\\
+1 & purge-vende & $\text{purge}(x)\,(1-\text{ch}(x))$\\
+2 & purge-chatarrea & $\text{purge}(x)\,\text{ch}(x)$\\
+3 & trade-vende & $\text{trade}(x)\,(1-\text{ch}(x))$\\
+4 & trade-chatarrea & $\text{trade}(x)\,\text{ch}(x)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Casos: si $x=\term(j)$, no hay keep y $\text{ch}=1$ (el coche muerto solo se chatarrea),
+así que solo $o\in\{2,4\}$ tienen probabilidad. Si $x=\none$, $o=0$ es ``seguir sin coche''
+y $o=3$ es ``comprar'' (no hay nada que vender ni chatarrear). Cada fila suma 1.
+
+\paragraph{$\buy_t(h_k)$: qué se compra, si hubo trade.}
+$\Pr(h_k=h\mid o_k\in\{3,4\})$: marca, edad y $w$ del coche comprado (nested logit con
+$\sigma_{\text{trade}}$ y $\sigma_w$). No depende de $x$: lo que se recibe por el coche viejo
+entra igual en todas las opciones de compra.
+
+\paragraph{$p_t(h_k)$: decisión de etapa 2.} $\Pr(r_k=1\mid h_k)$. Afecta el
+$Q_{r}(h_k,x_{k+1})$ \emph{del año siguiente}.
+
+\paragraph{Juntando.} Dado $x_k$, el par $(o_k,h_k)$ tiene probabilidad
+$C_t(x_k,o_k)\cdot\buy_t(h_k)^{\1\{o_k\in\{3,4\}\}}$; si no hubo trade, $h_k$ queda
+determinado por $(x_k,o_k)$ y no aporta nada más. La probabilidad de una fila completa es
+\[
+  \Pr(x_k,o_k,h_k\mid h_{k-1})=
+  \underbrace{\sum_{r}\pi_t(r\mid h_{k-1})\,Q_r(h_{k-1},x_k)}_{\text{física, con o sin mezcla}}
+  \cdot\underbrace{C_t(x_k,o_k)}_{\text{etapa 1}}
+  \cdot\underbrace{\buy_t(h_k)^{\text{trade}}}_{\text{qué compra}}.
+\]
+
+\paragraph{Ejemplo.} $h_{k-1}=\used(\text{LB},5,0.30)$, $x_k=\act(\text{LB},6,0.10)$,
+$o_k=$ trade-vende, $h_k=\used(\text{HB},3,-0.15)$. La probabilidad (diseño 2) es
+\[
+  \underbrace{(1-s)\bigl[(1-p)F_0(0.10\mid 0.30)+pF_1(0.10\mid 0.30)\bigr]}_{\text{sobrevivió y llegó a } w'=0.10}
+  \times\underbrace{\text{trade}(x_k)(1-\text{ch}(x_k))}_{C(x_k,3)}
+  \times\underbrace{\buy(\used(\text{HB},3,-0.15))}_{\text{eligió ese coche}}.
+\]
+
+\subsection{Qué se observa en cada diseño, comparado con Gillingham}
+
+Las tres variables de cada año son $x_k$, $o_k$, $h_k$. $h_k$ y $o_k$ se observan siempre
+(registro de propiedad y si el coche viejo se vendió o se chatarreó). Lo que cambia es $x_k$
+y $r$:
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+ & $x_k$ si el coche sigue (keep o vende) & $x_k$ si el coche se chatarrea & $r$\\
+\midrule
+Gillingham (registro danés) & implícito: $\act(j,a+1)$, no hay $w$ & no: no se sabe si murió o lo chatarrearon & no existe\\
+Diseño 1 & sí, con $w'$ & sí: si murió y, si no, su $w'$ & sí\\
+Diseño 2 & sí, con $w'$ & sí & no\\
+Diseño 3 & sí, con $w'$ & no & no\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent Es decir, el diseño 3 es Gillingham más una medición de $w$ (p.~ej. inspección u
+odómetro) en los coches que siguen circulando. En Gillingham, sin $w$, para un coche vivo
+$x_k$ es una función determinista de $h_{k-1}$, así que la única incógnita en $x_k$ es
+``¿se murió?''; por eso basta con $h_{k-1}\to(o_k,h_k)$. Aquí, con $w'$ aleatorio, $x_k$
+lleva información propia (el $w'$) y es justo la que usa Hu \& Xin.
+
+\subsection{¿Hay que seguir hogares o bastan las celdas?}
+
+Bastan los pares consecutivos $(h_{k-1};\,x_k,o_k,h_k)$; el panel solo sirve para
+\emph{formar} esos pares. La razón es que la verosimilitud de un hogar se factoriza:
+\[
+  \Pr(\text{historia del hogar}\mid h_0)=\prod_{k=1}^{K-1}\Pr(x_k,o_k,h_k\mid h_{k-1}),
+\]
+y cada $r_{k-1}$ no observado se integra \emph{dentro de su propio factor}. Esto vale porque:
+\begin{enumerate}
+  \item $r_{k-1}$ solo afecta $x_k$ (el desgaste de un año); no afecta $x_{k+1}$ más que a
+  través de $h_k$, que se observa.
+  \item $r_{k-1}$ se elige con choques de valor extremo independientes entre años; dado
+  $h_{k-1}$, no está correlacionado con $r_{k-2}$ ni con nada del pasado.
+  \item No hay heterogeneidad no observada persistente: el tipo de hogar y $w$ se observan.
+\end{enumerate}
+Por eso no hace falta sumar sobre secuencias $(r_0,r_1,r_2)$ de cada hogar
+($2^{K-1}$ combinaciones): la suma se hace año por año. Y como la probabilidad de cada par
+depende solo de $(t,\tau,h_{k-1},x_k,o_k,h_k)$, juntar pares idénticos en celdas con
+conteo es exacto.
+
+La identificación de $r$ tampoco viene de seguir al hogar, sino de comparar la distribución
+de $w'$ dado el mismo $h$ entre regímenes (ec.~\eqref{eq:d2}): con $R_t$ más barato hay más
+peso en $F_1$. Seguir hogares ayudaría si hubiera un tipo no observado (un hogar que repara
+siempre); entonces la mezcla sería sobre el tipo, la historia completa del hogar entraría
+en un mismo término y las celdas por par ya no bastarían.
+
+En el diseño 3 la factorización también se mantiene: aunque $x_k$ no se vea en una salida,
+el factor siguiente condiciona en $h_k$, que sí se ve.
+
+%======================================================================
+\section{Los datos: panel y celdas}
+%======================================================================
+
+\subsection{El panel (igual en los tres diseños)}
+
+\code{gen\_dataset.simulate\_panel}: por régimen $t\in\{\zeta=-0.3,0,+0.3\}$, $N=10{,}000$
+hogares repartidos entre tipos, $K=4$ años, con estado inicial sacado de la distribución
+estacionaria del régimen. Una fila por hogar y año con
+$(\text{régimen},\text{tipo},\text{id},k,x,o,h,r)$, donde $r=-1$ si $h$ no podía repararse.
+
+Siempre se observa: régimen, tipo, $x$ (incluido $w$), $o$, $h$ (incluido el $w$ del usado
+comprado). Nunca: precios de usados ni choques de utilidad.
+
+\begin{center}
+\begin{tabular}{cclllr}
+\toprule
+id & $k$ & $x$ & $o$ & $h$ & $r$\\
+\midrule
+17 & 0 & $\act(\text{LB},5,0.30)$ & keep & $\used(\text{LB},5,0.30)$ & 1\\
+17 & 1 & $\act(\text{LB},6,0.10)$ & keep & $\used(\text{LB},6,0.10)$ & 0\\
+17 & 2 & $\term(\text{LB})$ & trade-chatarrea & $\used(\text{HB},3,-0.15)$ & 0\\
+17 & 3 & $\act(\text{HB},4,0.05)$ & purge-vende & $\none$ & $-1$\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+{\small Ejemplo ilustrativo de un hogar.}
+\end{center}
+
+\subsection{La unidad de observación: $h_{k-1}\to(x_k,o_k,h_k)$}
+
+La verosimilitud es \textbf{condicional en la tenencia del año anterior}. Cada fila con
+$k\ge 1$ aporta
+\[
+  \Pr(x_k,o_k,h_k\mid h_{k-1},t,\tau).
+\]
+El año $k=0$ solo da $h_0$; no se usa la distribución inicial. Por réplica:
+$3\times 10{,}000\times 3 = 90{,}000$ observaciones. En el diseño~1 la transición además
+lleva $r_{k-1}$.
+
+\subsection{Celdas con conteos}
+
+Todo es discreto, así que las observaciones idénticas se agrupan (\code{to\_cells}):
+\[
+  \ell(\theta)=\sum_{c}\text{cnt}_c\,\log\Pr\bigl(c\mid\theta,P(\theta)\bigr).
+\]
+Llaves: $(t,\tau,h_{\text{prev}},r_{\text{prev}},x,o,h)$. Cada diseño borra información
+\emph{antes} de agrupar:
+
+\begin{center}
+\begin{tabular}{clll}
+\toprule
+diseño & $r_{\text{prev}}$ & $x$ & celdas/réplica\\
+\midrule
+1 & observado & observado & 48,729\\
+2 & borrado ($-1$) & observado & 45,802\\
+3 & borrado & borrado ($-1$) si $h_{\text{prev}}\neq\none$ y $o\in\Osc$ & 45,273\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Agrupar es exacto: la probabilidad de una observación depende solo de sus llaves.
+
+%======================================================================
+\section{Bloques comunes}
+%======================================================================
+
+Fijo $h=h_{k-1}=\used(j,d,w)$ (o $\new(j)$, con $d=0$, $w=w_0$, $p=0$) y omito $t,\tau$
+cuando no hay confusión.
+
+\paragraph{Transición física condicional en $r$.} Defino la matriz
+$Q_r:\mathcal H\to\mathcal X$:
+\begin{equation}\label{eq:Qr}
+  Q_r(h,x)=
+  \begin{cases}
+    s(h) & x=\term(j),\\
+    \bigl(1-s(h)\bigr)\,F_r(w'\mid j,w) & x=\act(j,d+1,w'),\\
+    0 & \text{otro caso,}
+  \end{cases}
+\end{equation}
+con $s=1$ si $d=24$ y $Q_r(\none,\none)=1$.
+
+\paragraph{Decisión del año $k$.}
+\[
+  \text{choice}(x,o,h_k)=C(x,o)\cdot \buy(h_k)^{\1\{o\ \text{es trade}\}}.
+\]
+
+\paragraph{Mezcla sobre $r$.} El objeto que reaparece en los diseños 2 y 3 es la transición
+física \emph{promediada} con los pesos de reparación del régimen:
+\begin{equation}\label{eq:Qbar}
+  \boxed{\;\Qbar_t(h,x)=\bigl(1-p_t(h)\bigr)\,Q_0(h,x)+p_t(h)\,Q_1(h,x).\;}
+\end{equation}
+Por~\ref{P1}, $\Qbar_t(h,\term(j))=s(h)$ no depende de $p_t$: la mezcla solo actúa sobre
+la parte de supervivencia.
+
+%======================================================================
+\section{Diseño 1: se observa $r$ y el motivo de salida}
+%======================================================================
+
+\[
+  \Pr(r,x,o,h_k\mid h)=\underbrace{p(h)^r\bigl(1-p(h)\bigr)^{1-r}}_{\text{etapa 2}}
+  \cdot \underbrace{Q_r(h,x)}_{\text{física}}\cdot \underbrace{C(x,o)\,\buy(h_k)^{\text{trade}}}_{\text{etapa 1}},
+\]
+con el primer factor igual a 1 si $h$ no puede repararse. Logit dinámico estándar con dos
+decisiones observadas y transición observada. Sin mezcla. El log se separa en tres sumandos:
+\begin{itemize}
+  \item $\log\Pr(r\mid h)$: $\sigma_{\text{rep}}$ y la utilidad de reparar (vía la variación
+  de $R_t$).
+  \item $\log Q_r(h,x)$: $\kappa$, $\delta$, $\sigma_\eta$ (transiciones de $w$ dado $r$) y
+  acc\_int, acc\_age (accidentes).
+  \item $\log C+\log \buy$: $\mu,u_0,u_1,T_b,T_s,\sigma_{\text{sell}}$, como en Gillingham
+  pero con $w$.
+\end{itemize}
+Hu \& Xin no se usa: es la referencia ``choices observed'' (su sec.~5).
+
+%======================================================================
+\section{Diseño 2: no se observa $r$}
+%======================================================================
+
+Se ve $x$ (con $w'$), $o$, $h$; no $r$. Se integra $r$:
+\begin{equation}\label{eq:d2}
+  \Pr(x,o,h_k\mid h)=\Qbar_t(h,x)\cdot C_t(x,o)\cdot\buy_t(h_k)^{\text{trade}}.
+\end{equation}
+Para un coche que sobrevive,
+\[
+  \Qbar_t\bigl(h,\act(j,d+1,w')\bigr)=\bigl(1-s(h)\bigr)\Bigl[(1-p_t(h))F_0(w'\mid j,w)+p_t(h)F_1(w'\mid j,w)\Bigr],
+\]
+y para un accidente, $s(h)$. Código: \code{trans = (1 - p1)*px[0] + p1*px[1]}.
+
+\paragraph{Lo que se toma de Hu \& Xin.}
+\begin{enumerate}
+  \item \emph{Identificación} (secs.~3 y 6.3).
+  \begin{itemize}
+    \item Assumption 2 (transición aditiva): $w'=g(w,r)+\eta$, $\eta\perp r$, con
+    $g(w,r)=w+\delta_j-\text{acc\_age}_j-\kappa r$.
+    \item Assumption 7 (variable excluida): $R_t$ mueve $p_t(h)$ pero no $F_r$. La variación
+    de la mezcla entre regímenes con componentes fijas separa $F_0,F_1,p_t$ (ecs.~3.2--3.4).
+    Bastan 2 valores; hay 3.
+    \item Observabilidad parcial (ec.~6.4): $f(x'\mid x,a^1)=\sum_{a^2}f(x'\mid x,a)\,
+    p(a^2\mid x,a^1)$; aquí $p(a^2\mid x,a^1)=p(h)$ por~\ref{P2}.
+  \end{itemize}
+  \item \emph{Estimador} (sec.~4, ec.~4.1): MV con la decisión no observada sumada dentro
+  del logaritmo, en su caso paramétrico.
+\end{enumerate}
+
+\paragraph{Lo que no se toma.} Sin sieve ($g$ lineal en $r$, $\eta$ normal); sin primer
+paso no paramétrico (Remark~2; no implementado); y equilibrio: los CCPs dependen de precios
+no observados que se resuelven en cada evaluación (punto fijo anidado), cosa que el paper,
+de agente único, no cubre. La identificación de la mezcla no cambia porque los precios son
+función de $(\theta,t)$, no de $r$.
+
+\paragraph{Clave para lo que sigue.} En~\eqref{eq:d2} $C_t(x,o)$ \emph{multiplica fuera} de
+la mezcla: como $x$ (y por tanto $w'$) se observa, $C_t(x,o)$ no depende de $r$ y se
+factoriza. Además, como $x$ se observa en \emph{todas} las filas, el marginal
+$\Pr(x\mid h)=\Qbar_t(h,x)$ es un objeto poblacional directamente observable: es literalmente
+la mezcla finita de Hu \& Xin.
+
+%======================================================================
+\section{Diseño 3: no se observa $r$ ni el motivo de salida}
+%======================================================================
+
+Como el diseño 2, salvo cuando un coche sale del parque: si $h_{k-1}\ne\none$ y
+$o\in\Osc$, no se sabe si fue
+\begin{itemize}
+  \item un \textbf{accidente}: $x=\term(j)$, chatarreo forzoso; o
+  \item un \textbf{chatarreo voluntario}: $x=\act(j,d+1,w')$ con $w'$ no observado y el dueño
+  eligió chatarrear en vez de vender.
+\end{itemize}
+En esas filas $x$ se borra (\code{d.loc[salida, "x"] = -1}). Es lo que ve Gillingham en el
+registro danés (apéndice D).
+
+Filas sin salida: igual que~\eqref{eq:d2}. Filas con salida se suma sobre $r$ \emph{y} sobre
+$x$:
+\begin{multline}\label{eq:d3}
+  \Pr(o,h_k\mid h)=\buy_t(h_k)^{\text{trade}}\sum_{r\in\{0,1\}}\pi_t(r\mid h)
+  \Bigl[s(h)\,C_t(\term(j),o)\Bigr.\\
+  \Bigl.+\bigl(1-s(h)\bigr)\sum_{w'}F_r(w'\mid j,w)\,
+  C_t\bigl(\act(j,d+1,w'),o\bigr)\Bigr],
+\end{multline}
+con $\pi_t(1\mid h)=p_t(h)$, $\pi_t(0\mid h)=1-p_t(h)$. Código: \code{mix}, \code{lp\_exit} en
+la rama \code{design == 3} de \code{cell\_logp}.
+
+%======================================================================
+\section{Qué añade la mezcla en el diseño 3}\label{sec:mezcla3}
+%======================================================================
+
+\subsection{Forma compacta: la verosimilitud parcial de Gillingham con $\Qbar_t$}
+
+Como desde $h$ solo se puede llegar a $\term(j)$ o a $\act(j,d+1,\cdot)$, la suma sobre $x$
+en~\eqref{eq:d3} es un producto de matrices:
+\begin{equation}\label{eq:compacta}
+  \boxed{\;\Pr(o,h_k\mid h)=\bigl(\Qbar_t\,C_t\bigr)(h,o)\cdot\buy_t(h_k)^{\text{trade}},\qquad o\in\Osc.\;}
+\end{equation}
+Comparar con Gillingham (sec.~\ref{sec:gill}): su verosimilitud parcial es
+$(QC)(h,o)\,\buy^{\text{trade}}$. El diseño 3 es exactamente esa expresión con la matriz
+física sustituida por la mezcla $\Qbar_t$ de~\eqref{eq:Qbar}. Del mismo modo, el diseño 2 es
+la ``completa'' de Gillingham, $Q(h,x)C(x,o)$, con $Q\to\Qbar_t$. Es decir:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & $x$ observado & $x$ no observado en salidas\\
+\midrule
+$r$ observado & $Q_r(h,x)\,C(x,o)$ \ (diseño 1) & $(Q_rC)(h,o)$\\
+$r$ no observado & $\Qbar_t(h,x)\,C(x,o)$ \ (diseño 2) & $(\Qbar_tC)(h,o)$ \ (diseño 3)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent (La celda $(Q_rC)$ no es un diseño del MC; está para completar la tabla.)
+
+\subsection{Desarmando la mezcla: dos variables latentes anidadas}
+
+Defino la probabilidad esperada de chatarrear con resultado $o$, dado que el coche
+sobrevive y se eligió $r$:
+\begin{equation}\label{eq:Cbar}
+  \bar C^{(r)}_t(h,o)=\sum_{w'}F_r(w'\mid j,w)\,C_t\bigl(\act(j,d+1,w'),o\bigr).
+\end{equation}
+Usando $\sum_r\pi_t(r\mid h)=1$, la ecuación~\eqref{eq:d3} queda
+\begin{equation}\label{eq:d3b}
+  \frac{\Pr(o,h_k\mid h)}{\buy_t(h_k)^{\text{trade}}}=
+  \underbrace{s(h)\,C_t(\term(j),o)}_{\text{accidente}}
+  +\bigl(1-s(h)\bigr)\underbrace{\Bigl[(1-p_t(h))\,\bar C^{(0)}_t(h,o)+p_t(h)\,\bar C^{(1)}_t(h,o)\Bigr]}_{\text{chatarreo voluntario, mezclado sobre } r}.
+\end{equation}
+
+Hay tres cosas nuevas respecto al diseño 2.
+
+\paragraph{(i) Una segunda variable latente: el estado $x$.} En el diseño 2 la única latente
+es $r$. Aquí también lo es el estado de inicio de año del coche que sale: muerto
+($\term$) o vivo con algún $w'$. Esta mezcla es la del apéndice D de Gillingham, no la de
+Hu \& Xin. Su peso, $s(h)$, depende de $w$ (observado en $h$) y no de $r$.
+
+\paragraph{(ii) Las dos mezclas no se cruzan gracias a~\ref{P1}.} El término de accidente
+sale de la suma sobre $r$ porque $\Qbar_t(h,\term)=s(h)$ no depende de $p_t$. La mezcla
+sobre $r$ queda \emph{anidada dentro} de la rama ``sobrevivió''. Con la opción~1
+(\code{opcion\_1\_reparar.md}), donde reparar baja la probabilidad de descomponerse ya este
+año, el accidente sería $\sum_r\pi_t(r\mid h)\,s_r(h)\,C_t(\term,o)$: la reparación movería
+los pesos accidente/voluntario y las dos mezclas quedarían entrelazadas (y con selección por
+supervivencia en los pesos).
+
+\paragraph{(iii) $C$ entra \emph{dentro} de la mezcla sobre $r$.} Es la diferencia de fondo.
+En el diseño 2, $C_t(x,o)$ se factoriza porque $w'$ se observa. En el diseño 3, la
+probabilidad de chatarrear voluntariamente depende de $w'$ (un coche más gastado vale menos
+en el mercado secundario, así que venderlo rinde menos frente a chatarrearlo), y $w'$ depende
+de $r$. Entonces las ``componentes'' de la mezcla ya no son las densidades $F_r$ sino sus
+\emph{momentos} contra $C_t$:
+\[
+  F_r(\cdot\mid j,w)\ \longrightarrow\ \bar C^{(r)}_t(h,o)=\mathbb E_{F_r}\bigl[C_t(\act(j,d+1,w'),o)\bigr].
+\]
+Se pierde la densidad de $w'$ y queda un escalar por $(h,o,r)$.
+
+\subsection{Cuánto informa una salida sobre la reparación}
+
+La sensibilidad de la probabilidad de una salida al peso de reparación es
+\begin{equation}\label{eq:dp}
+\begin{aligned}
+  \frac{\partial}{\partial p_t(h)}\,\frac{\Pr(o,h_k\mid h)}{\buy^{\text{trade}}}
+  &=\bigl(1-s(h)\bigr)\Bigl[\bar C^{(1)}_t(h,o)-\bar C^{(0)}_t(h,o)\Bigr]\\
+  &=\bigl(1-s(h)\bigr)\sum_{w'}\bigl[F_1-F_0\bigr](w'\mid j,w)\;C_t\bigl(\act(j,d+1,w'),o\bigr).
+\end{aligned}
+\end{equation}
+Lecturas:
+\begin{itemize}
+  \item Si $\kappa>0$, $F_1$ es $F_0$ desplazada hacia $w'$ menores (menos desgaste). Si
+  $C_t(\act(\cdot,w'),o)$ crece con $w'$ para $o\in\Osc$, entonces~\eqref{eq:dp} es
+  negativa: donde más se repara, menos chatarreo voluntario.
+  \item La información es de \emph{primer orden en $\kappa$ por la pendiente de $C$ en $w'$}:
+  si el chatarreo voluntario es casi plano en $w'$ (p.~ej. $\sigma_{\text{sell}}$ grande o
+  precios poco sensibles al desgaste), las salidas casi no informan sobre $(p,\kappa)$.
+  \item Se multiplica por $(1-s(h))$: en coches viejos o muy gastados, donde casi toda
+  salida es accidente, la salida no dice nada sobre la reparación.
+\end{itemize}
+
+\subsection{El precio: $w'$ faltante no al azar}
+
+En el diseño 3 el $w'$ de un coche vivo se observa solo si el dueño \emph{no} lo chatarrea.
+Lo que el econometrista ve para un $h$ dado es
+\[
+  \Pr\bigl(x=\act(j,d+1,w'),\,o\mid h\bigr)=\bigl(1-s(h)\bigr)\sum_r\pi_t(r\mid h)F_r(w'\mid j,w)\cdot C_t(\act(j,d+1,w'),o),
+  \qquad o\notin\Osc,
+\]
+más la masa total de salidas~\eqref{eq:d3b}. Sumando sobre $o\notin\Osc$, la densidad de
+$w'$ observada es
+\[
+  \bigl(1-s(h)\bigr)\,\Bigl[\sum_r\pi_t(r\mid h)F_r(w'\mid j,w)\Bigr]\cdot\Bigl(1-C_t^{\text{ch}}(\act(j,d+1,w'))\Bigr),
+  \qquad C^{\text{ch}}_t=\sum_{o\in\Osc}C_t(\cdot,o),
+\]
+es decir, la mezcla de Hu \& Xin \emph{inclinada} por la probabilidad de no chatarrear, que
+depende del propio $w'$ (faltante no al azar). Dos consecuencias:
+
+\begin{obs}
+\begin{enumerate}
+  \item \textbf{La verosimilitud sigue siendo correcta.} $C_t$ es un objeto del modelo, así que
+  la inclinación se corrige dentro de~\eqref{eq:d2} y~\eqref{eq:d3}: no hay sesgo de
+  selección en el MLE si el modelo está bien especificado.
+  \item \textbf{El argumento de identificación de Hu \& Xin ya no se aplica tal cual.} Su
+  Assumption~7 pide componentes de la mezcla invariantes entre regímenes. En el diseño 3 las
+  componentes observables son $F_r(w')\,(1-C^{\text{ch}}_t(w'))$, que sí cambian con $t$
+  (el precio de reparación cambia el valor de los coches y con ello la decisión de
+  chatarrear). El marginal limpio $\Qbar_t(h,\cdot)$ del diseño 2 deja de ser un objeto
+  observable. La separación de $F_0$, $F_1$ y $p_t$ se apoya ahora también en la estructura
+  de $C_t$ (el modelo de etapa 1), no solo en la exclusión de $R_t$.
+\end{enumerate}
+\end{obs}
+
+En la práctica la pérdida es moderada si la tasa de chatarreo voluntario es baja (la
+inclinación $1-C^{\text{ch}}_t$ es casi constante en $w'$), y crece en edades altas, donde
+el chatarreo voluntario es frecuente. Es la contraparte de~\eqref{eq:dp}: cuanto más
+depende el chatarreo de $w'$, más informa la salida sobre la reparación, pero también más
+se distorsiona la muestra de $w'$ observados.
+
+\subsection{Casos especiales en el código}
+
+\begin{itemize}
+  \item $h=\new(j)$: $p=0$, no hay mezcla sobre $r$, pero sí la de accidente/voluntario.
+  \item $h=\used(j,24,w)$: $s=1$, la salida es siempre accidente y~\eqref{eq:d3b} se reduce
+  a $C_t(\term(j),o)$.
+  \item $h=\none$: no hay coche que salga; $x=\none$ se observa siempre.
+  \item En el diseño 3 $x=\term$ nunca aparece observado: toda fila con $x=\term$ tiene
+  $o\in\Osc$ y se borra.
+\end{itemize}
+
+%======================================================================
+\section{Para comparar: Gillingham sobre los mismos datos}\label{sec:gill}
+%======================================================================
+
+\code{gillingham/ll\_estim.py}, sobre el mismo panel (\code{montecarlo.to\_gillingham}): se
+borran $w$ y $r$ y se juntan los regímenes. Celdas $(\tau,h_{\text{prev}},o,h)$ (parcial,
+$\approx 1{,}065$) o $(\tau,h_{\text{prev}},x,o,h)$ (completa, $\approx 1{,}108$).
+\begin{itemize}
+  \item Parcial (la del paper, análoga al diseño 3): $(QC)(h,o)\,\buy^{\text{trade}}$.
+  \item Completa (análoga al diseño 2): $Q(h,x)\,C(x,o)\,\buy^{\text{trade}}$.
+\end{itemize}
+Sin $w$ ni reparación el modelo está mal especificado y sus estimaciones están sesgadas
+(\code{reporte\_mc.md}, sec.~2).
+
+%======================================================================
+\section{Cómo se maximiza (igual en los tres diseños)}
+%======================================================================
+
+\begin{itemize}
+  \item \textbf{Punto fijo anidado.} Cada evaluación de $\ell(\theta)$ resuelve
+  $z_t(\theta)=(\text{EV por tipo},P)$ de los 3 regímenes con pasos de cuerda desde el
+  equilibrio anterior y predictor $z+(dz/d\theta)\Delta\theta$ (\code{LLEval},
+  \code{equilibrio.solve\_chord}).
+  \item \textbf{Gradiente implícito.} $dz_t/d\theta=-F_z^{-1}F_\theta$ (\code{dz\_dx}); el
+  score incluye el efecto directo de $\theta$ y el indirecto vía precios.
+  \item \textbf{Optimizador.} L-BFGS y luego BHHH desde la mejor evaluación, hasta
+  $g'B^{-1}g/N<10^{-9}$.
+  \item \textbf{Errores estándar.} Inversa de $\sum_c\text{cnt}_c\,s_cs_c'$, con método delta
+  a la escala natural ($\mu,\kappa,\sigma_\eta,\sigma_{\text{rep}}$ en log;
+  $\sigma_{\text{sell}}$ con sigmoide).
+  \item \textbf{Parámetros libres:} 27. Fijos: $\sigma,\sigma_{\text{trade}},\sigma_w,\beta,
+  p_{\text{new}},p_{\text{scrap}},u_2$ y $R$ (dato).
+\end{itemize}
+
+%======================================================================
+\section{Resumen}
+%======================================================================
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.3cm}
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+ & diseño 1 & diseño 2 & diseño 3\\
+\midrule
+observa $r$ & sí & no & no\\
+observa $x$ en salidas & sí & sí & no\\
+probabilidad & $\pi(r\mid h)\,Q_r(h,x)\,C(x,o)$ & $\Qbar_t(h,x)\,C(x,o)$ & salidas: $(\Qbar_tC)(h,o)$\\
+mezcla sobre $r$ & no & sí, en $w'$; $C$ fuera & sí, en $w'$ y en el chatarreo; $C$ dentro\\
+mezcla accidente/voluntario & no & no & sí (anidada por~\ref{P1})\\
+$w'$ & siempre observado & siempre observado & faltante no al azar en salidas\\
+papel de Hu \& Xin & referencia & identificación (A2, A7, ec.~6.4) y estimador (ec.~4.1) & mezcla sobre $r$ como en diseño 2; la identificación se apoya además en $C_t$; + apéndice D de Gillingham\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\end{document}

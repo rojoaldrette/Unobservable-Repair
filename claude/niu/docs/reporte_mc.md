@@ -84,28 +84,52 @@ el objetivo o usar `maxls`/un primer paso de BHHH). Para el MC no hace falta.
 
 ![fallas](../output/modelo_tesis/reportes/mc_base/fig5_fallas.png)
 
-### 4. Perfiles por edad: precios, reparación y población (pendiente de correr)
+### 4. Perfiles por edad: precios, reparación y población
 
-El MC guardó los θ̂ pero no los equilibrios. `modelo_tesis/por_edad_mc.py` resuelve el
-equilibrio en cada θ̂ (pasos de cuerda desde el verdadero, como en la estimación) y guarda
-por (marca, edad) el precio medio, Pr(reparar) y la masa de hogares q; para Gillingham
-resuelve su equilibrio en sus θ̂ (`gillingham/por_edad_mc.py`, CPU, en paralelo). Con eso
-`reporte_mc.py` hace tres figuras, un panel por marca, en el régimen central (ζ = 0):
-línea continua = verdad, punteada = media entre réplicas, banda = percentiles 5-95.
+El MC guardó los θ̂ pero no los equilibrios. `modelo_tesis/por_edad_mc.py` (workstation,
+4.5 min en GPU; commit 76588d9) resolvió el equilibrio en cada θ̂: 150 de los diseños y
+100 de Gillingham, ninguno falló. Las figuras tienen un panel por marca y usan el régimen
+central (ζ = 0). Línea continua: verdad. Punteada: media entre réplicas. Banda: percentiles
+5-95. El precio del modelo de la tesis es el promedio sobre w ponderado por el stock.
 
-- `fig6_precios_edad.png`: precio del usado por edad (tesis: promedio sobre w ponderado por
-  el stock; Gillingham: P(j, a)). Los 5 estimadores.
-- `fig7_reparacion_edad.png`: Pr(reparar) por edad, solo los 3 diseños.
-- `fig8_distribucion_edad.png`: fracción de hogares que empiezan el año con un coche (j, a).
+| | precio, edad 1-5 | edad 6-12 | edad 13-24 | q, máx. desviación | Pr(reparar), máx. desviación |
+|---|---|---|---|---|---|
+| diseño 1 | −0.0% | −0.0% | −0.3% | 0.7% | 0.0008 |
+| diseño 2 | −0.0% | −0.1% | −0.5% | 0.7% | 0.0005 |
+| diseño 3 | −0.0% | −0.2% | −0.7% | 1.5% | 0.0010 |
+| Gillingham parcial | −6% | −35% | −94% | 10% | — |
+| Gillingham completa | −4% | −19% | −52% | 11% | — |
 
-Probado en el juguete (`--smoke`): el error de precios recalculado reproduce el `P_rmse`
-guardado por el MC (17.30 vs 17.29). Falta correrlo a tamaño completo en la workstation:
+(Desviación de la media entre réplicas respecto a la verdad, promediada sobre marcas y
+edades del tramo; q y Pr(reparar): máximo sobre (marca, edad).)
 
-    cd claude/niu/modelo_tesis
-    python -u por_edad_mc.py --reps 0:50 > por_edad.log 2>&1
-    cd ../analisis && python -u reporte_mc.py
+**Precios.** Los tres diseños reproducen la curva de precios verdadera: las líneas
+punteadas quedan encima de la continua. Gillingham subestima los precios de los usados y
+el error crece con la edad. Con la verosimilitud parcial, el precio de LB se vuelve
+negativo desde ~15 años en la mayoría de las réplicas (mínimo −33 mil DKK). El dueño
+tendría que pagar por deshacerse del coche. Es la contraparte en precios del sesgo de
+parámetros: μ más baja y Ts mucho más negativo (sección 2).
 
-Pendiente: comentar las figuras cuando estén.
+![precios](../output/modelo_tesis/reportes/mc_base/fig6_precios_edad.png)
+
+**Reparación.** La Pr(reparar) por edad se recupera prácticamente exacta en los tres
+diseños (error máximo 0.001), incluso en el diseño 3. Se ven la joroba de LB (máximo
+~0.43 a los 6 años, que viene del precio de reparación R(LB, a)) y la caída monótona de HB.
+
+![reparación por edad](../output/modelo_tesis/reportes/mc_base/fig7_reparacion_edad.png)
+
+**Población.** La distribución por edad q(j, a) sí la ajusta Gillingham (error máximo ~10%,
+en las edades donde hay pocos coches). Es la parte del equilibrio que la verosimilitud
+"ve" directamente: las tenencias y las transacciones. Es decir, Gillingham reproduce las
+cantidades, pero sus precios implícitos están muy sesgados, y los precios no entran en su
+estimación. Validarlo con los precios observados (si los hay en los datos) lo delataría.
+
+![población](../output/modelo_tesis/reportes/mc_base/fig8_distribucion_edad.png)
+
+Los dientes de sierra en los precios (en la verdad y en Gillingham) alternan año con año
+desde la edad 4 (p. ej. LB: 35.8 a los 13 años, 37.9 a los 14). Probablemente vienen de la
+inspección cada dos años (Ts inspección, `inspect_age_min = 4`), que encarece vender en
+años alternos. No lo verifiqué más a fondo.
 
 ### 5. Costo
 

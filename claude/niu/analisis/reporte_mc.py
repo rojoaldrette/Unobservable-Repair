@@ -273,7 +273,10 @@ def fig_por_edad(pe, var, ests, ylabel, titulo, nota, fname, fig_dir):
         ax.plot(v.a, v[var], color=INK, lw=1.6, label="verdad", zorder=2)
         ax.set_title(MARCA[j], loc="left")
         ax.set_xlabel("edad del coche (años)")
-        ax.set_ylim(0, None)
+        bajo = ax.get_ylim()[0]                     # Gillingham puede dar precios negativos: no cortarlos
+        ax.set_ylim(min(0, bajo), None)
+        if bajo < 0:
+            ax.axhline(0, color=INK2, lw=0.8, zorder=1)
         ax.set_ylabel(ylabel)
     fig.suptitle(titulo, x=0.01, ha="left", fontweight="bold", fontsize=10)
     h, l = axes[0].get_legend_handles_labels()
