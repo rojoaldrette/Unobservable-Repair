@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\title{Matrices de transición (versión corregida)}
+\author{Rodrigo Antonio Aldrette Salas}
+\date{Octubre 2026}
+
+\begin{document}
+\maketitle
+
+% Propuesta para reemplazar las partes correspondientes de docs/tex/tesis.tex
+% (vector de precios, vector q, demanda, Omega, Q y A). Se mantiene la notación
+% de la tesis: j marca, a edad, w coeficiente de avería, W puntos del grid.
+
+\section*{Dimensiones}
+
+Un coche activo $(j,a,w)$ tiene $a\in\{1,\dots,\bar{a}-1\}$ y $w\in\{w_1,\dots,w_W\}$. El coche en edad terminal $(j,\bar{a})$ no tiene $w$ relevante, así que es un solo estado por marca; lo mismo ocurre con el coche nuevo $(j,0)$, que nace con un coeficiente fijo $w_{0j}$. Por tanto cada marca ocupa $(\bar{a}-1)W+1$ posiciones y, sumando el estado sin coche,
+$$n=J(\bar{a}-1)W+J+1 .$$
+
+El vector de precios del mercado secundario incluye solo coches activos
+$$P=(P_1,\dots,P_J),\quad P_j=(P_{j,1,w_1},\dots,P_{j,1,W},\dots,P_{j,\bar{a}-1,w_1},\dots,P_{j,\bar{a}-1,W})\in\mathbb{R}^{J(\bar{a}-1)W}$$
+
+y la distribución de inicio de periodo
+$$q=(q_1,\dots,q_J,q_{\emptyset}),\quad q_j=(q_{j,1,w_1},\dots,q_{j,\bar{a}-1,W},\,q_{j,\bar{a}})\in\mathbb{R}^{(\bar{a}-1)W+1}$$
+
+de modo que $q\in\mathbb{R}^{n}$ y, al sumar 1, pertenece al simplex de dimensión $n-1$.
+
+La demanda de un coche usado $(j,a,w)$ separa a los dueños de coches activos de los dueños de coches terminales:
+$$D_{jaw}(P,q)=\Pi(j,a,w\mid\emptyset,P)q_{\emptyset}+\sum_{i=1}^{J}\Big[\sum_{d=1}^{\bar{a}-1}\sum_{x=w_1}^{W}\Pi(j,a,w\mid i,d,x,P)q_{idx}+\Pi(j,a,w\mid i,\bar{a},P)q_{i\bar{a}}\Big]$$
+
+\section*{Ordenamiento de estados}
+
+Usamos el ordenamiento de Gillingham et al.: el hueco que deja el coche terminal en los estados de inicio de periodo lo ocupa el coche nuevo en los estados post-intercambio. Así, para cada marca $j$,
+\begin{itemize}
+    \item inicio de periodo (filas de $\Omega$): $(j,1,\cdot),\dots,(j,\bar{a}-1,\cdot),\;(j,\bar{a})$
+    \item post-intercambio (columnas de $\Omega$): $(j,1,\cdot),\dots,(j,\bar{a}-1,\cdot),\;(j,0)$
+\end{itemize}
+donde $(j,a,\cdot)$ denota el bloque de $W$ coeficientes de avería. Con esto $\Omega$, $Q$ y $A$ son cuadradas de $n\times n$.
+
+\section*{Matriz de intercambio $\Omega(P)$}
+
+$$
+\Omega(P)=\begin{pmatrix}
+    \Delta_{11}(P)+\Lambda_{1}(P) & \Delta_{12}(P) & \dots & \Delta_{1J}(P) & \Delta_{1\emptyset}(P) \\
+    \Delta_{21}(P) & \Delta_{22}(P)+\Lambda_2(P) & \dots & \Delta_{2J}(P) & \Delta_{2\emptyset}(P) \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    \Delta_{J1}(P) & \Delta_{J2}(P) & \dots & \Delta_{JJ}(P)+\Lambda_{J}(P) & \Delta_{J\emptyset}(P) \\
+    \Delta_{\emptyset 1}(P) & \Delta_{\emptyset 2}(P) & \dots & \Delta_{\emptyset J}(P) & \Pi(\emptyset \mid \emptyset, P)
+\end{pmatrix}
+$$
+
+Un bloque de reemplazo $\Delta_{ji}(P)$ es de $((\bar{a}-1)W+1)\times((\bar{a}-1)W+1)$:
+$$
+\Delta_{ji}(P)=
+\begin{pmatrix}
+    \Psi(i,1\mid j,1) & \dots & \Psi(i,\bar{a}-1 \mid j, 1) & \psi(i, 0 \mid j, 1) \\
+    \vdots & \ddots & \vdots & \vdots \\
+    \Psi(i,1\mid j, \bar{a}-1) & \dots & \Psi(i,\bar{a}-1 \mid j, \bar{a} - 1) & \psi(i,0 \mid j, \bar{a} - 1) \\
+    \phi(i,1 \mid j, \bar{a}) & \dots & \phi(i,\bar{a}-1 \mid j, \bar{a}) & \Pi(i,0 \mid j, \bar{a})
+\end{pmatrix}
+$$
+(se omite el argumento $P$). Los subbloques tienen tamaños distintos según el origen y el destino:
+\begin{itemize}
+    \item $\Psi(i,b\mid j,a)$, de $W\times W$: de un activo a un usado, con entradas $\Pi(i,b,w'\mid j,a,w)$, fila $w$ y columna $w'$.
+    \item $\psi(i,0\mid j,a)$, de $W\times 1$: de un activo a un nuevo, con entradas $\Pi(i,0\mid j,a,w)$.
+    \item $\phi(i,b\mid j,\bar{a})$, de $1\times W$: de un terminal a un usado, con entradas $\Pi(i,b,w'\mid j,\bar{a})$.
+    \item $\Pi(i,0\mid j,\bar{a})$, escalar: de un terminal a un nuevo.
+\end{itemize}
+
+El bloque de mantener es diagonal por bloques; el coche terminal no se puede mantener:
+$$
+\Lambda_j(P)=
+\begin{pmatrix}
+    \Xi(\text{Keep}\mid j, 1) & \dots & 0 & 0\\
+    \vdots & \ddots & \vdots & \vdots\\
+    0 & \dots & \Xi(\text{Keep}\mid j, \bar{a}-1) & 0\\
+    0 & \dots & 0 & 0
+\end{pmatrix}
+$$
+$$
+\Xi(\text{Keep}\mid j, a) =
+\begin{pmatrix}
+    \Pi(\text{Keep} \mid j, a, w_1) & \dots & 0\\
+    \vdots & \ddots & \vdots \\
+    0 & \dots & \Pi(\text{Keep} \mid j, a, W)
+\end{pmatrix}
+$$
+donde el último $0$ de $\Lambda_j$ es un escalar y $\Xi$ es de $W\times W$, con los $W$ elementos de la diagonal distintos de cero.
+
+La columna y la fila del estado sin coche:
+$$
+\Delta_{j \emptyset}(P)=\begin{pmatrix}
+    \psi(\emptyset \mid j, 1)\\
+    \vdots \\
+    \psi(\emptyset \mid j, \bar{a}-1)\\
+    \Pi(\emptyset \mid j, \bar{a})
+\end{pmatrix},
+\qquad
+\Delta_{\emptyset i}(P)=\begin{pmatrix}
+    \phi(i, 1 \mid \emptyset), \dots, \phi(i, \bar{a}-1 \mid \emptyset),\; \Pi(i, 0 \mid \emptyset)
+\end{pmatrix}
+$$
+con $\psi(\emptyset\mid j,a)$ de $W\times1$ (entradas $\Pi(\emptyset\mid j,a,w)$) y $\phi(i,b\mid\emptyset)$ de $1\times W$ (entradas $\Pi(i,b,w'\mid\emptyset)$).
+
+\section*{Matriz de transición física $Q$}
+
+Después del intercambio, los consumidores usan su coche mientras suceden accidentes y envejecen. En esta fase $w$ no cambia; solo cambia la edad. La matriz es diagonal por bloques de marca:
+$$Q=
+\begin{pmatrix}
+    Q_1 & \dots & 0 & 0 \\
+    \vdots & \ddots& \vdots & \vdots \\
+    0 & \dots & Q_J & 0 \\
+    0 & \dots & 0 & 1 \\
+\end{pmatrix}
+$$
+
+Cada $Q_j$ es de $((\bar{a}-1)W+1)\times((\bar{a}-1)W+1)$. Sus filas son la tenencia post-intercambio $(j,1,\cdot),\dots,(j,\bar{a}-1,\cdot),(j,0)$ y sus columnas el inicio del siguiente periodo $(j,1,\cdot),\dots,(j,\bar{a}-1,\cdot),(j,\bar{a})$:
+$$
+Q_j=\begin{pmatrix}
+    0 & \bar{S} & 0 & \dots & 0 & \mathbf{s} \\
+    0 & 0 & \bar{S} & \dots & 0 & \mathbf{s} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & 0 & \dots & \bar{S} & \mathbf{s} \\
+    0 & 0 & 0 & \dots & 0 & \mathbf{1} \\
+    (1-s(w_{0j}))\,e_{w_{0j}}' & 0 & 0 & \dots & 0 & s(w_{0j})
+\end{pmatrix}
+$$
+donde
+$$
+\bar{S}=\begin{pmatrix}
+   1-s(w_1) & \dots & 0 \\
+   \vdots & \ddots & \vdots \\
+   0 & \dots & 1-s(W)
+\end{pmatrix},
+\qquad
+\mathbf{s}=\begin{pmatrix} s(w_1)\\ \vdots \\ s(W)\end{pmatrix},
+\qquad
+\mathbf{1}=\begin{pmatrix} 1\\ \vdots \\ 1\end{pmatrix}
+$$
+y $e_{w_{0j}}'$ es el vector fila de $1\times W$ con un uno en la posición de $w_{0j}$. Las primeras $\bar{a}-2$ filas de bloques describen a un coche de edad $d$ que con probabilidad $1-s(w)$ pasa a la edad $d+1$ con el mismo $w$ (por eso $\bar{S}$ es diagonal) y con probabilidad $s(w)$ llega a la edad terminal. Los coches de edad $\bar{a}-1$ llegan a la terminal con certeza. La última fila es el coche nuevo, que pasa a $(j,1,w_{0j})$ o se descompone.
+
+Como $s=logit(w)$ depende solo de $w$, los bloques $\bar{S}$ y $\mathbf{s}$ son iguales entre marcas y edades; las marcas difieren en $Q_j$ solo por el coeficiente de entrada $w_{0j}$ y, más adelante, por la transición de $w$.
+
+\section*{Matriz de transición del coeficiente de avería $A(P,R)$}
+
+$$A=
+\begin{pmatrix}
+    B_1 & \dots & 0 & 0 \\
+    \vdots & \ddots& \vdots & \vdots \\
+    0 & \dots & B_J & 0 \\
+    0 & \dots & 0 & 1 \\
+\end{pmatrix},
+\qquad
+B_j=
+\begin{pmatrix}
+    C_{j1} & \dots & 0 & 0 \\
+    \vdots & \ddots & \vdots & \vdots \\
+    0 & \dots & C_{j,\bar{a}-1} & 0\\
+    0 & \dots & 0 & 1
+\end{pmatrix}
+$$
+
+$A$ actúa sobre los estados de inicio de periodo, ya envejecidos por $Q$. Cada $C_{ja}$ es de $W\times W$ y el $1$ final de $B_j$ es el estado terminal, que no tiene $w$. Para un coche que llega a la edad $a\ge 2$, la decisión de reparar se tomó cuando tenía edad $a-1$:
+$$
+C_{ja}=\begin{pmatrix}
+   Z(w_1\mid j,a-1,w_1) & \dots & Z(W\mid j,a-1,w_1)\\
+   \vdots & \ddots & \vdots\\
+   Z(w_1\mid j,a-1,W) & \dots & Z(W\mid j,a-1,W)\\
+\end{pmatrix},\quad a=2,\dots,\bar{a}-1
+$$
+$$\begin{aligned}
+    Z(w'\mid j,d,w)=\;&\Pi(r\mid j,d,w, P, R)\,f(w'\mid j,d,w,r=1)\\
+    &+(1-\Pi(r\mid j,d,w, P, R))\,f(w'\mid j,d,w,r=0)
+\end{aligned}$$
+Los coches que llegan a la edad 1 eran nuevos y no se reparan, así que $C_{j1}$ tiene entradas $f(w'\mid j,0,w,r=0)$; de ella solo se usa la fila de $w_{0j}$.
+
+Así el producto $q\Omega(P,R)QA(P,R)$ es la distribución de tenencia con la que la economía inicia el siguiente periodo, y con varios tipos de consumidores la condición de estacionariedad es
+$$q_\tau \Omega_\tau(P,R)\,Q\,A_\tau(P,R)=q_\tau,\; \forall \tau$$
+con $Q$ común a todos los tipos: la heterogeneidad de la transición física entra solo por $A_\tau$, porque la probabilidad de reparar depende de $\mu_\tau$.
+
+\paragraph{Nota sobre la factorización.} Escribir la fase física como $QA$ (primero envejecer o descomponerse, luego mover $w$) es válido porque la probabilidad de descomponerse en el periodo depende del $w$ actual y no de la decisión de reparar. Si reparar redujera la probabilidad de descomponerse ese mismo periodo, $Q$ dependería de $r$ y la fase física tendría que escribirse directamente como una sola matriz con bloques $\sum_r \Pi(r)\,(1-s_r(w))\,f(w'\mid r)$.
+
+\end{document}
