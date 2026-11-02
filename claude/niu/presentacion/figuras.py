@@ -204,7 +204,47 @@ def perfiles(col, ylab, titulo, nombre, ylim=None, leg="upper right"):
     guardar(fig, nombre)
 
 
+def fig_desgaste():
+    # s = logit^-1(α0 + α1 a + w), light brown (Tabla 4 de Gillingham)
+    a = np.arange(1, 25)
+    fig, ax = plt.subplots(figsize=(6, 4.2))
+    for w, c, lab in [(0.5, C_GP, "$w=+0.5$ (descuidado)"), (0.0, "black", "$w=0$ (curva de Gillingham)"),
+                      (-0.5, C_TESIS, "$w=-0.5$ (bien cuidado)")]:
+        ax.plot(a, 100 / (1 + np.exp(-(-5.625 + 0.1804 * a + w))), color=c, lw=2.2, label=lab)
+    ax.set_xlabel("edad del coche $a$ (años)")
+    ax.set_ylabel("prob. de avería en el año (%)")
+    ax.set_title("Light brown: misma edad, distinto desgaste")
+    ax.set_xlim(0, 25)
+    ax.set_ylim(0, 36)
+    ax.legend(loc="upper left", frameon=False)
+    guardar(fig, "fig_desgaste")
+
+
+def fig_calib():
+    # equilibrio con parámetros verdaderos: modelo de la tesis (ζ = 0) vs Gillingham sin reparación
+    d = pd.read_csv(os.path.join(MC, "por_edad_mc.csv"))
+    g = pd.read_csv(os.path.join(MC, "gill_por_edad_mc.csv"))
+    d = d[(d.rep == -1) & (d.estimador == "verdad") & (d.regimen == 1)]
+    g = g[g.estimador == "gill_verdad"]
+    fig, axs = plt.subplots(1, 2, figsize=(9.5, 3.9))
+    for j, ax in enumerate(axs):
+        s = g[g.j == j].sort_values("a")
+        ax.plot(s.a, s.P, color=C_GP, lw=2.2, ls="--", label="Gillingham (sin reparación)")
+        s = d[d.j == j].sort_values("a")
+        ax.plot(s.a, s.P_stock, color=C_TESIS, lw=2.2, label="Tesis (con reparación)")
+        ax.set_title(MARCAS[j])
+        ax.set_xlabel("edad del coche $a$ (años)")
+        ax.set_xlim(0, 25)
+        ax.set_ylim(0, None)
+    axs[0].set_ylabel("precio del usado, miles de DKK")
+    axs[1].legend(loc="upper right", frameon=False)
+    fig.suptitle("Precio de equilibrio por edad con los parámetros verdaderos", y=1.02)
+    guardar(fig, "fig_calib")
+
+
 if __name__ == "__main__":
+    fig_desgaste()
+    fig_calib()
     fig_R()
     fig_mezcla()
     fig_reparar()

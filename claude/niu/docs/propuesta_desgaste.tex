@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[margin=2.5cm]{geometry}
+\title{Propuesta: edad fuera del coeficiente de avería}
+\author{Rodrigo Antonio Aldrette Salas}
+\date{Octubre 2026}
+
+\begin{document}
+\maketitle
+
+% Propuesta para reemplazar la especificación de s(j,a,w) y de la transición de w en
+% tesis_claude/tesis.tex (ecs. de s y m, utilidad y tabla de parámetros).
+% No se ha aplicado ni a la tesis ni al código.
+
+\section{Punto de partida}
+
+En la tesis la probabilidad de avería y la transición del coeficiente son
+$$s(j,a,w)=\Lambda\left(\alpha_{0j}+\alpha_{1j}\,a+\alpha_{2j}\,a^2+w\right),\qquad
+w'=w+\delta_j-\gamma_j(a)-\kappa\, r+\eta,$$
+con $\gamma_j(a)=\alpha_{1j}+\alpha_{2j}(2a+1)$, $w_{nuevo}=0$ y $\eta\sim N(0,\sigma_\eta^2)$. El código usa la misma forma sin el término cuadrático ($\alpha_{2j}=0$, $\gamma_j=\alpha_{1j}$) y con $\delta_j=\alpha_{1j}+\kappa\bar{p}$.
+
+Esta forma confunde por dos razones:
+\begin{enumerate}
+    \item \textbf{La edad se suma y se resta.} Si $z=\alpha_{0j}+\alpha_{1j}a+w$ es el log-momio total, entonces
+    $$z'=\alpha_{0j}+\alpha_{1j}(a+1)+w'=z+\delta_j-\kappa r+\eta ,$$
+    así que la pendiente de la curva entra en $s$ y se cancela en la transición. Con la calibración del código, la deriva de $w$ es $\delta_j-\alpha_{1j}=\kappa\bar{p}$, es decir,
+    $$w'=w+\kappa(\bar{p}-r)+\eta .$$
+    \item \textbf{$w=0$ no es el promedio.} Con $w$ escrito como desviación de la curva, $w=0$ se lee como ``el coche promedio de su marca y edad''. No lo es: los coches con $w$ alto se descomponen más (selección) y la tasa de reparación de equilibrio varía con $(a,w)$ y no es $\bar{p}$. $w=0$ es, en realidad, la trayectoria de un coche sin choques que repara a la tasa $\bar{p}$.
+\end{enumerate}
+
+Lo que importa económicamente no es si la edad ``está dentro'' o ``fuera'' de $w$, sino qué parte del deterioro se puede frenar reparando y qué parte no. La propuesta escribe el modelo de forma que esa distinción quede explícita.
+
+\section{Especificación propuesta}
+
+$$s(j,a,w)=\Lambda\left(\alpha_{0j}+\alpha_{1j}\,a+w\right),\qquad \Lambda(z)=\frac{1}{1+e^{-z}}$$
+$$w'=m(j,r,w)+\eta,\qquad m(j,r,w)=w+\delta_j-\kappa\,r,\qquad \eta\sim N(0,\sigma_\eta^2),\qquad w_{nuevo}=0 .$$
+
+\begin{itemize}
+    \item $\alpha_{0j}+\alpha_{1j}a$ es el \textbf{envejecimiento no reparable}: fatiga de materiales, corrosión, tecnología vieja. Depende solo de la marca y la edad y no responde a la reparación.
+    \item $w$ es el \textbf{desgaste reparable acumulado}. Un coche nuevo tiene $w=0$; cada año sin reparar sube $\delta_j$ en promedio, y reparar lo baja $\kappa$.
+    \item $m$ no depende de la edad. La marca entra solo por $\delta_j$.
+\end{itemize}
+
+Que la avería dependa de la edad para un $w$ dado es un supuesto con contenido: dos coches igual de bien mantenidos ($w$ igual) no tienen la misma probabilidad de avería si uno es más viejo. Como $w$ se observa (solo $r$ no se observa), $\alpha_{1j}$ se identifica de la variación en $a$ con $w$ fijo, y $\delta_j$ y $\kappa$ de la transición de $w$.
+
+\section{Restricción de calibración}
+
+Gillingham et al.\ (2022) estiman una sola pendiente $\alpha^G_{1j}$ con datos en los que los hogares reparan. Sin distinguir las dos fuentes de deterioro, esa pendiente es el aumento promedio del log-momio por año:
+$$E[z_{a+1}-z_a]=\alpha_{1j}+E[w_{a+1}-w_a]=\alpha_{1j}+\delta_j-\kappa\,\bar{p}.$$
+Pedimos que el modelo la reproduzca,
+$$\alpha^G_{1j}=\underbrace{\alpha_{1j}}_{\text{no reparable}}+\underbrace{\delta_j-\kappa\bar{p}}_{\text{reparable, en promedio}},$$
+y conservamos $\alpha_{0j}=\alpha^G_{0j}$. Esto deja un grado de libertad: qué fracción $\phi\in[0,1]$ de la pendiente es no reparable,
+$$\alpha_{1j}=\phi\,\alpha^G_{1j},\qquad \delta_j=(1-\phi)\,\alpha^G_{1j}+\kappa\bar{p}.$$
+
+Dos salvedades. Primero, la igualdad ignora la selección: los coches que sobreviven tienen un $w$ menor que el promedio incondicional, así que la curva observada sube algo menos que $\alpha_{1j}+\delta_j-\kappa\bar{p}$. Segundo, $\bar{p}$ es una tasa objetivo; la tasa de equilibrio sale del modelo y puede no coincidir.
+
+\subsection{Casos}
+
+Con $\kappa=0.25$, $\bar{p}=0.3$ ($\kappa\bar{p}=0.075$) y las pendientes de Gillingham ($\alpha^G_1=0.1804$ para light brown, $0.2020$ para heavy brown):
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{light brown} & \multicolumn{2}{c}{heavy brown}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & $\alpha_{1j}$ & $\delta_j$ & $\alpha_{1j}$ & $\delta_j$\\
+\midrule
+$\phi=1$ (todo no reparable; código actual) & 0.180 & 0.075 & 0.202 & 0.075\\
+$\phi=0.5$ (intermedio) & 0.090 & 0.165 & 0.101 & 0.176\\
+$\phi=0$ (todo reparable) & 0.000 & 0.255 & 0.000 & 0.277\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{$\phi=1$.} Es exactamente el modelo que ya corre el código. Reparar solo mueve $w$ alrededor de cero: quien repara a la tasa $\bar{p}$ tiene $E[w]=0$ a toda edad, quien repara más tiene $w<0$ (mejor mantenido que lo normal), y aun así su $s$ sube $\alpha_{1j}$ por año. Como $\delta_j<\kappa$, una reparación baja $w$ en términos absolutos.
+    \item \textbf{$\phi=0$.} Todo el deterioro se puede frenar; la edad no importa dado $w$. Reparar vale mucho más.
+    \item \textbf{Reparar frena pero no revierte} ($\delta_j\ge\kappa$, de modo que $w$ nunca baja en promedio y $w\ge0$ se lee como desgaste acumulado desde nuevo) requiere
+    $$\phi\le 1-\frac{\kappa(1-\bar{p})}{\alpha^G_{1j}},$$
+    es decir $\phi\le0.03$ (light brown) o $\phi\le0.13$ (heavy brown). Con $\kappa=0.25$ esta interpretación obliga a casi todo reparable; si se quiere con $\phi$ intermedio, hay que bajar $\kappa$.
+\end{itemize}
+
+La versión actual de la tesis dice que $\delta_j\ge\kappa$ y que un coche reparado ``nunca queda mejor que nuevo''. Con $\phi=1$ eso solo es cierto para el log-momio total $z$, no para $w$; habría que quitarlo o reescribirlo.
+
+\section{Utilidad}
+
+La utilidad de uso es
+$$u_\tau(j,a,w)=u_{0,\tau j}+u_{1,\tau j}\,a+u_w\,w .$$
+El $u_{1,\tau j}$ de Gillingham ya incluye la desutilidad del desgaste promedio de un coche de edad $a$. Como $E[w\mid a]\approx(\delta_j-\kappa\bar{p})\,a=(1-\phi)\,\alpha^G_{1j}\,a$, el término $u_w w$ agrega en promedio $u_w(1-\phi)\alpha^G_{1j}$ utils por año de edad. Para conservar el perfil por edad de Gillingham en el coche promedio,
+$$u_{1,\tau j}=u^G_{1,\tau j}-u_w\,(1-\phi)\,\alpha^G_{1j}.$$
+Con $\phi=1$ no hay ajuste. Con $\phi=0.5$ y $u_w=-0.2$ el ajuste es de $+0.018$ (light brown) y $+0.020$ (heavy brown) utils por año. Con $u_w=0$ el punto desaparece.
+
+\section{Supuestos de Hu \& Xin (2024)}
+
+\begin{itemize}
+    \item \textbf{Supuesto 2 (error aditivo).} $w'=m(j,r,w)+\eta$ con $\eta$ independiente de $r$; ahora $m$ ni siquiera depende de la edad.
+    \item \textbf{Supuesto 7 (variable excluida).} Sin cambio: $R_{ja}$ mueve $\Pi(r=1\mid j,a,w)$ pero no $f(w'\mid j,w,r)$.
+    \item \textbf{Fronteras del grid.} Sigue valiendo la advertencia: en los extremos del grid $E[\eta\mid w]\ne0$ por el recorte. Con $\phi<1$ la masa se desplaza hacia arriba con la edad, así que la frontera superior importa más.
+\end{itemize}
+
+\section{Grid de $w$}
+
+En un año, $w$ cambia entre $\delta_j-\kappa$ (repara) y $\delta_j$ (no repara), más el choque. La media por edad se mueve $(1-\phi)\alpha^G_{1j}$ por año y la dispersión dentro de una edad depende de $\kappa$, de la heterogeneidad en reparar y de $\sigma_\eta$, no de $\phi$. Por eso el ancho que debe cubrir el grid es, aproximadamente,
+$$\text{dispersión dentro de una edad}+(1-\phi)\,\alpha^G_{1j}\,(\bar{a}-2).$$
+Con $\phi=1$ basta el grid actual $[-3,\,2.25]$ (71 puntos con paso 0.075). Con $\bar{a}=25$ y $\phi=0.5$ el segundo término suma unos 2.1--2.3 unidades (unos 30 puntos más); con $\phi=0$, unos 4.2--4.6 (unos 60 más). Las matrices de transición crecen como $W^2$ y el jacobiano de Newton-Kantorovich también.
+
+\section{Cambios al código}
+
+Ninguno cambia los resultados con $\phi=1$.
+\begin{itemize}
+    \item \texttt{params.py}: \texttt{delta} pasa a ser la deriva de $w$, $\delta_j=(1-\phi)\alpha^G_{1j}+\kappa\bar{p}$; \texttt{acc\_age} pasa a ser $\phi\,\alpha^G_{1j}$; nuevo parámetro \texttt{PHI} (base 1); ajuste de \texttt{u1} de la sección de utilidad.
+    \item \texttt{bellman.py}, \texttt{w\_transition}: \texttt{drift = th["delta"]} en lugar de \texttt{th["delta"] - th["acc\_age"]}. Actualizar el docstring.
+    \item \texttt{breakdown\_prob}: sin cambio.
+    \item Para $\phi<1$: ampliar \texttt{w\_max} según la sección anterior. Además, \texttt{delta} ya no es múltiplo del paso del grid; no es problema porque la transición integra la normal por intervalos.
+\end{itemize}
+
+\section{Recomendación}
+
+\begin{enumerate}
+    \item Escribir la tesis con esta especificación: edad y marca fuera de $w$, $w$ como desgaste reparable con $w_{nuevo}=0$, y la restricción de calibración con $\phi$ explícito. Quitar el término cuadrático y $\gamma_j(a)$.
+    \item Caso base $\phi=1$: es lo que corre el código y lo que usan todos los Monte Carlo, así que no hay que rehacer nada, y $u_1$ de Gillingham queda intacto.
+    \item Robustez con $\phi=0.5$ en la GPU: muestra cómo cambian la tasa de reparación, los precios y la identificación cuando reparar importa más.
+\end{enumerate}
+
+\end{document}

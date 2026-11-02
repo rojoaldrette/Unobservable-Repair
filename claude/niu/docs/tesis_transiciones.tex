@@ -3,7 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\title{Matrices de transición (versión corregida)}
+\title{Matrices de transición y verosimilitud}
 \author{Rodrigo Antonio Aldrette Salas}
 \date{Octubre 2026}
 
@@ -181,5 +181,96 @@ $$q_\tau \Omega_\tau(P,R)\,Q\,A_\tau(P,R)=q_\tau,\; \forall \tau$$
 con $Q$ común a todos los tipos: la heterogeneidad de la transición física entra solo por $A_\tau$, porque la probabilidad de reparar depende de $\mu_\tau$.
 
 \paragraph{Nota sobre la factorización.} Escribir la fase física como $QA$ (primero envejecer o descomponerse, luego mover $w$) es válido porque la probabilidad de descomponerse en el periodo depende del $w$ actual y no de la decisión de reparar. Si reparar redujera la probabilidad de descomponerse ese mismo periodo, $Q$ dependería de $r$ y la fase física tendría que escribirse directamente como una sola matriz con bloques $\sum_r \Pi(r)\,(1-s_r(w))\,f(w'\mid r)$.
+
+% ======================================================================
+\section*{Máxima verosimilitud}
+% ======================================================================
+
+% Propuesta para la subsección "Máxima verosimilitud" de docs/tex/tesis.tex.
+% Sigue la notación de la tesis: delta_t = (j,a,w) es la tenencia post-intercambio,
+% x el estado de inicio de periodo, l_{nt} la contribución de una observación.
+% Sigue la sección 5.1 y el apéndice D de Gillingham et al. y la versión por celdas
+% de claude/niu/modelo_tesis/ll_estim.py (cell_logp, diseño 3).
+
+Sea $\theta$ el vector de parámetros que caracterizan las preferencias de los consumidores, los costos de transacción, la utilidad de reparar, la probabilidad de avería y la regla de transición del coeficiente de avería $f(w'\mid j,a,w,r)$. Los precios de los coches nuevos $\overline{P}_j$, los de chatarra $\underline{P}_j$ y los precios de reparación $R$ son datos; los precios del mercado secundario no se observan.
+
+\paragraph{Regímenes.} Observamos a los hogares bajo $M$ regímenes de precios de reparación $R_1,\dots,R_M$. En cada régimen la economía está en su propio equilibrio estacionario $(P_m(\theta),q_m(\theta))$, que cumple
+$$q_{m\tau}\,\Omega_\tau(P_m,R_m)\,Q\,A_\tau(P_m,R_m)=q_{m\tau}\;\;\forall\tau,\qquad ED(P_m,q_m)=0 .$$
+Igual que en Gillingham, los precios no observados se sustituyen por los que implica el modelo, $P_m(\theta)$. $R_m$ es la variable excluida de Hu \& Xin (2024, Assumption 7): mueve la probabilidad de reparar $\Pi(r=1\mid j,a,w,P_m,R_m)$, pero no la transición $f(w'\mid j,a,w,r)$.
+
+\paragraph{Estado observado.} Sea $\delta_{nt}$ el estado de tenencia post-intercambio del hogar $n$ en el periodo $t$, es decir, una columna de $\Omega$: un usado $(j,a,w)$, un nuevo $(j,0)$ o $\emptyset$. Como en el apéndice D de Gillingham, la verosimilitud usa la transición $\delta_{nt}\to\delta_{n,t+1}$ y no $x_{nt}\to x_{n,t+1}$, porque cuando un coche se chatarriza no sabemos si llegó a la edad terminal por una avería o si seguía activo y el dueño decidió chatarrizarlo:
+$$\Pr(\delta_{t+1}\mid\delta_t)=\big[\,Q\,A(P,R)\,\Omega(P,R)\,\big]_{\delta_t,\delta_{t+1}} .$$
+Si $q$ es la distribución estacionaria de inicio de periodo, la de tenencia es $q\,\Omega$ y es invariante para esta matriz: $q\Omega\,QA\Omega=q\,\Omega$. Bajo estacionariedad, los $\delta_{nt}$ observados son una muestra de $q\,\Omega$.
+
+\paragraph{Qué se observa.} Además de $\delta_{t+1}$, observamos qué pasó con el coche $\delta_t$: si se mantuvo, se vendió ($D=0$) o se chatarrizó ($D=1$). El coeficiente $w'$ del coche $\delta_t$ al inicio de $t+1$ se observa si el coche sigue circulando (se mantiene o se vende), pero no si se chatarriza. La decisión de reparar nunca se observa. Nótese que $D$ sí se observa: la incertidumbre en un chatarreo no es entre $D=0$ y $D=1$, sino entre avería y chatarreo voluntario.
+
+\paragraph{La mezcla sobre la reparación.} Fijemos $\delta_t=(j,a,w)$. La reparación se decide con el coche que se tiene después del intercambio, así que se indexa con la edad $a$ de la tenencia (la misma que se usa en $C_{j,a+1}$ de $A$):
+$$\begin{aligned}
+    Z(w'\mid j,a,w)=\;&\Pi(r=1\mid j,a,w, P, R)\,f(w'\mid j,a,w,r=1)\\
+    &+\big(1-\Pi(r=1\mid j,a,w, P, R)\big)\,f(w'\mid j,a,w,r=0).
+\end{aligned}$$
+$Z(\cdot\mid j,a,w)$ es una distribución sobre el grid de $w'$ ($\sum_{w'}Z(w'\mid j,a,w)=1$): la probabilidad de \emph{llegar a cada} $w'$ integrando la reparación no observada. Es la ecuación (6.4) de Hu \& Xin para observabilidad parcial. La probabilidad de que el coche amanezca en $x$ en $t+1$ es la fila $\delta_t$ de $QA$:
+$$[QA]_{\delta_t,x}=\begin{cases}
+s(w) & x=(j,\bar{a}),\\[2pt]
+\big(1-s(w)\big)\,Z(w'\mid j,a,w) & x=(j,a+1,w'),\\[2pt]
+0 & \text{otro caso}.
+\end{cases}$$
+Para $a=\bar{a}-1$ el coche llega a la terminal con certeza ($s=1$); para el nuevo $(j,0)$ no hay reparación y $Z=f(\cdot\mid j,0,w_{0j},r=0)$.
+
+\paragraph{¿Por qué no basta con la media de $w'$?} Hay dos casos.
+\begin{itemize}
+    \item Si $w'$ se observa (mantener o vender), no hay que sumar sobre $w'$: se evalúa $Z$ en el $w'$ observado y se multiplica por la probabilidad de la decisión desde ese $w'$. Pero $Z(w'\mid\cdot)$ es la \emph{densidad} de la mezcla evaluada en ese punto, no la media.
+    \item Si $w'$ no se observa (chatarreo), hay que sumar sobre todos los $w'$ la probabilidad de llegar a cada uno por la de elegir lo observado desde ahí: $\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\cdot\mid j,a+1,w')$. Sustituir $w'$ por su media, $\Pi(\cdot\mid j,a+1,\mathbb{E}[w'])$, no es una probabilidad del modelo: $\Pi$ es no lineal en $w'$ (logit), así que $\mathbb{E}_Z[\Pi(\cdot\mid w')]\neq\Pi(\cdot\mid\mathbb{E}_Z[w'])$ y el estimador sería inconsistente. Además, la media de la mezcla solo depende de $\Pi(r=1)\kappa$, mientras que la identificación de Hu \& Xin usa la forma completa de la mezcla.
+\end{itemize}
+
+\paragraph{Contribución de una observación.} Sea $l_{nt}$ la contribución de la transición del hogar $n$ entre $t$ y $t+1$. Partiendo de $\delta_t=(j,a,w)$:
+\begin{itemize}
+    \item \textbf{Mantener} $\implies\delta_{t+1}=(j,a+1,w')$, y su contribución
+    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\text{Keep}\mid j,a+1,w')$$
+    \item \textbf{Comprar} $\implies\delta_{t+1}=(i,b,y)$ o $(i,0)$. Si el coche anterior se vendió ($D=0$), su $w'$ se observa:
+    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w')$$
+    Si se chatarrizó ($D=1$), no se sabe si fue avería ni cuál era su $w'$:
+    $$l_{nt}=\underbrace{s(w)\,\Pi(\delta_{t+1}\mid j,\bar{a})}_{\text{avería}}+\big(1-s(w)\big)\underbrace{\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w')}_{\text{chatarreo voluntario}}$$
+    \item \textbf{Sin coche} $\implies\delta_{t+1}=\emptyset$. Si vendió ($D=0$):
+    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\emptyset,D=0\mid j,a+1,w')$$
+    Si chatarrizó ($D=1$):
+    $$l_{nt}=s(w)\,\Pi(\emptyset\mid j,\bar{a})+\big(1-s(w)\big)\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\emptyset,D=1\mid j,a+1,w')$$
+\end{itemize}
+Un coche terminal no se puede vender ni mantener, por eso el término de avería solo aparece cuando se observa $D=1$. Si en su lugar partimos de $\delta_t=\emptyset$:
+\begin{itemize}
+    \item \textbf{Comprar} $\implies\delta_{t+1}=(i,b,y)$ o $(i,0)$: $\;l_{nt}=\Pi(\delta_{t+1}\mid\emptyset)$
+    \item \textbf{Sin coche} $\implies\delta_{t+1}=\emptyset$: $\;l_{nt}=\Pi(\text{Keep}\mid\emptyset)$
+\end{itemize}
+
+En forma matricial, separando $\Omega=\Omega^{K}+\Omega^{0}+\Omega^{1}$ en mantener, deshacerse vendiendo y deshacerse chatarrizando, con $\Omega^{D}_{x,\delta'}=\Pi(\delta',D\mid x)$: mantener y vender son $[QA]_{\delta_t,x_{t+1}}\,\Omega^{K\text{ o }0}_{x_{t+1},\delta_{t+1}}$ con $x_{t+1}$ observado, y chatarrizar es $[QA\,\Omega^{1}]_{\delta_t,\delta_{t+1}}$, sumando sobre el $x_{t+1}$ que no se observa. Sumando sobre todos los resultados se recupera la fila $\delta_t$ de $QA\Omega$, que suma uno. El caso de chatarreo es el análogo de la ecuación (75) del apéndice D de Gillingham: allí la mezcla es solo sobre la avería; aquí, dentro de la rama ``sobrevivió'', hay además una mezcla sobre $w'$ y, a través de $Z$, sobre la reparación. La avería queda fuera de la mezcla sobre $r$ porque $s$ depende del $w$ actual y no de $r$.
+
+\paragraph{La log-verosimilitud.} Sea $m$ el régimen y $\tau_n$ el tipo (observado) del hogar $n$, que se sigue en $t=1,\dots,T$. Condicionando en la primera tenencia observada, como Gillingham,
+$$LL(\theta)=\sum_{m=1}^{M}\sum_{n=1}^{N_m}\sum_{t=1}^{T-1}\log l_{nmt}\big(\theta,P_m(\theta)\big),$$
+donde $l_{nmt}$ es la contribución anterior evaluada con las probabilidades de elección del tipo $\tau_n$ a los precios de equilibrio del régimen $m$. Todos los regímenes comparten $\theta$. No hace falta sumar sobre las $2^{T-1}$ secuencias de reparación de cada hogar: $r_t$ solo afecta $w_{t+1}$, los choques $\epsilon$ son independientes entre periodos y $\delta_{t+1}$ se observa, así que cada $r_t$ se integra dentro de su propio $l_{nt}$.
+
+% ======================================================================
+\subsection*{Versión por celdas}
+% ======================================================================
+
+Como los estados son discretos y toda la heterogeneidad es observada, $l_{nmt}$ depende solo de un número finito de cosas: el régimen, el tipo, $\delta_t$ y lo observado en $t+1$. Agrupando las observaciones idénticas, la log-verosimilitud se escribe por celdas (Gillingham, ecuación 40). Es la forma que usa el código y es exacta, no una aproximación.
+
+\paragraph{Celdas.} Lo observado en una transición es $(\delta_t,\,e_{t+1},\,\delta_{t+1})$, donde $e_{t+1}\in\{\text{Keep},\,D=0,\,D=1\}$ es lo que pasó con el coche $\delta_t$ y, si $e_{t+1}\neq D=1$, también su $w'$. Una celda es
+$$c=\big(m,\;\tau,\;\delta_t,\;e_{t+1},\;w'_{t+1},\;\delta_{t+1}\big),$$
+con $w'_{t+1}$ vacío cuando $e_{t+1}=(D=1)$. Sea $N_c$ el número de transiciones de la celda $c$ y $l_c$ la contribución $l_{nt}$ de cualquiera de ellas, dada por las fórmulas anteriores: para $\delta_t=(j,a,w)$,
+$$l_c=\begin{cases}
+\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\text{Keep}\mid j,a+1,w') & e=\text{Keep},\\[4pt]
+\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w') & e=(D=0),\\[4pt]
+s(w)\,\Pi(\delta_{t+1}\mid j,\bar{a})+\big(1-s(w)\big)\displaystyle\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w') & e=(D=1),
+\end{cases}$$
+con $\delta_{t+1}\in\{(i,b,y),(i,0),\emptyset\}$ en los dos últimos casos, y para $\delta_t=\emptyset$, $l_c=\Pi(\delta_{t+1}\mid\emptyset)$ (con $\Pi(\emptyset\mid\emptyset)=\Pi(\text{Keep}\mid\emptyset)$). La log-verosimilitud es
+$$LL(\theta)=\sum_{c}N_c\,\log l_c\big(\theta,P_{m_c}(\theta)\big).$$
+
+\paragraph{Por qué es la misma verosimilitud.} Cada $l_{nmt}$ depende solo de $(m,\tau_n,\delta_{nt})$ y de lo observado en $t+1$, que son justamente las llaves de la celda. Por tanto todas las observaciones de una celda tienen la misma contribución y
+$$\sum_{m}\sum_{n}\sum_{t}\log l_{nmt}=\sum_c N_c\log l_c .$$
+Agrupar es exacto, no una aproximación; solo cambia el costo de evaluar $LL(\theta)$, que pasa a depender del número de celdas distintas y no del número de hogares.
+
+\paragraph{Correspondencia con el código.} En \texttt{modelo\_tesis/ll\_estim.py}, \texttt{to\_cells} forma las celdas con llaves \texttt{(regimen, tipo, h\_prev, x, o, h)}: \texttt{h\_prev} es $\delta_t$, \texttt{h} es $\delta_{t+1}$, \texttt{x} $=(j,a+1,w')$ guarda el $w'$ (\texttt{-1} si hubo chatarreo) y \texttt{o} distingue mantener, vender o chatarrizar, y si además se compró. El código no guarda $\Pi(\delta_{t+1},D\mid x)$ completa ($n\times n$), sino que la factoriza como $\Pr(\text{comprar o no},D\mid x)\cdot\Pi(\delta_{t+1}\mid\text{comprar})$ (\texttt{outcome\_probs} y \texttt{c.buy}); el segundo factor no depende de $x$ y sale de la suma sobre $w'$. Es solo una forma más barata de calcular las mismas $l_c$.
+
+\paragraph{Identificación de la reparación.} Para un mismo $\delta_t=(j,a,w)$, la distribución observada de $w'$ en los coches que siguen circulando es la mezcla $Z(w'\mid j,a,w)$ de dos densidades que no dependen del régimen, $f(\cdot\mid r=0)$ y $f(\cdot\mid r=1)$, con un peso $\Pi(r=1\mid j,a,w,P_m,R_m)$ que sí cambia con $R_m$. Esa variación entre regímenes es la que separa las dos densidades de los pesos (Hu \& Xin, sección 3). Una advertencia: $w'$ se observa solo si el coche no se chatarriza y la decisión de chatarrizar depende del propio $w'$, así que la densidad observada de $w'$ es $Z(w'\mid j,a,w)\,\big(1-\sum_{\delta'}\Pi(\delta',D=1\mid j,a+1,w')\big)$, que ya no es invariante entre regímenes. La verosimilitud lo corrige porque la probabilidad de chatarrizar es parte del modelo, pero la identificación ya no descansa solo en la variable excluida sino también en la estructura de la etapa de intercambio.
 
 \end{document}

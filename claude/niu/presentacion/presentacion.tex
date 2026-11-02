@@ -26,6 +26,14 @@
 \newcommand{\idea}[1]{\vspace{-0.3em}\begin{block}{}\centering\small #1\end{block}}
 \newcommand{\nota}[1]{\par\vfill{\scriptsize\color{gris}#1}}
 \newcommand{\ellbar}{\bar\ell_j(a)}
+\tikzset{
+  tarjeta/.style={draw=azul!60, rounded corners, fill=azul!6, align=center,
+                  text width=#1, inner sep=6pt, font=\small,
+                  execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}},
+  tarjeta/.default=4.2cm,
+  roja/.style={draw=rojo!70, fill=rojo!8},
+  flecha/.style={-{Stealth}, thick, gris},
+}
 
 \title{¿Qué tanto importan las decisiones de reparación?}
 \subtitle{Un mercado de autos usados en equilibrio con reparación no observada}
@@ -41,19 +49,21 @@
 
 % =====================================================================
 \begin{frame}{Motivación}
-  \begin{itemize}
-    \item Para muchos hogares el auto es un activo importante: comprarlo,
-          venderlo y \textbf{repararlo} determina cuánto dura y cuánto vale.
-    \item Los modelos estructurales del mercado de autos usados (Gillingham et al., 2022)
-          tratan la salida de un auto como accidente exógeno o chatarreo: \textbf{no hay
-          reparación}.
-    \item Pero la reparación se \textbf{elige}: depende de su precio, del estado del auto
-          y de cuánto vale el auto en el mercado secundario.
-    \item Y casi nunca se \textbf{observa}: ocurre en talleres informales, sin registro.
-    \item Discusiones actuales (\emph{right to repair}, obsolescencia programada, vida útil
-          y emisiones del parque) requieren saber cómo responde el mercado a los costos
-          de reparar.
-  \end{itemize}
+  Comprar, vender y \textbf{reparar} un auto determinan cuánto dura y cuánto vale. Los
+  modelos estructurales del mercado de usados (Gillingham et al., 2022) no incluyen la
+  reparación: un auto sale del parque por accidente o porque su dueño lo chatarrea.
+  \vspace{1.2em}
+
+  \centering
+  \begin{tikzpicture}[node distance=0.5cm]
+    \node[tarjeta=3.7cm, minimum height=2.5cm] (a) {\textbf{Se elige}\\[0.3em] depende de
+          su precio, del estado del auto y de cuánto vale en el mercado de usados};
+    \node[tarjeta=3.7cm, minimum height=2.5cm, roja, right=of a] (b) {\textbf{No se
+          observa}\\[0.3em] ocurre en talleres, muchas veces informales, sin registro};
+    \node[tarjeta=3.7cm, minimum height=2.5cm, right=of b] (c) {\textbf{Importa para
+          política}\\[0.3em] vida útil y emisiones del parque, \emph{right to repair}};
+  \end{tikzpicture}
+  \vspace{0.8em}
   \idea{Si la reparación mueve la vida y el valor de los autos, ignorarla puede sesgar lo
   que inferimos de las preferencias y de los precios.}
 \end{frame}
@@ -66,56 +76,47 @@
     \item ¿Se puede recuperar una decisión de reparar que el econometrista \textbf{no
           observa}?
   \end{enumerate}
-  \vspace{0.3em}
-  \textbf{Qué hago}
-  \begin{itemize}
-    \item Extiendo el equilibrio estacionario de Gillingham et al.\ con un estado de
-          \textbf{desgaste} $w$ y una decisión de \textbf{reparar} $r$.
-    \item La identifico con Hu \& Xin (2024): el precio de reparar es una variable
-          excluida.
-    \item Monte Carlo: simulo paneles con reparación y estimo (i) mi modelo sin ver $r$ y
-          (ii) el de Gillingham.
-  \end{itemize}
+  \vspace{0.6em}
+  \textbf{Qué hago} (y orden de la presentación)
+  \par\smallskip
+  \centering
+  \begin{tikzpicture}[node distance=0.5cm]
+    \node[tarjeta=3.8cm] (m) {\textbf{1. Modelo}\\[0.2em] equilibrio de Gillingham et
+          al.\ + desgaste $w$ + decisión de reparar $r$};
+    \node[tarjeta=3.8cm, right=of m] (i) {\textbf{2. Identificación}\\[0.2em] Hu \& Xin
+          (2024): el precio de reparar mueve $r$ sin mover el desgaste};
+    \node[tarjeta=3.8cm, right=of i] (s) {\textbf{3. Monte Carlo}\\[0.2em] simulo datos
+          con reparación; estimo mi modelo y el de Gillingham};
+    \draw[flecha] (m) -- (i);
+    \draw[flecha] (i) -- (s);
+  \end{tikzpicture}
   \idea{Resultado: mi modelo recupera parámetros y reparación sin sesgo; Gillingham
   subestima la utilidad marginal del dinero en 38--57\% y los precios de usados viejos.}
-\end{frame}
-
-\begin{frame}{Ruta}
-  \begin{enumerate}
-    \item Modelo base: Gillingham, Iskhakov, Munk-Nielsen, Rust y Schjerning (2022)
-    \item Lo que agrego: desgaste y reparación
-    \item Simulación e implicaciones teóricas
-    \item Estrategia empírica: identificación (Hu \& Xin, 2024), Monte Carlo y verosimilitud
-    \item Resultados
-    \item Conclusiones y siguientes pasos
-  \end{enumerate}
 \end{frame}
 
 % =====================================================================
 \section{Modelo base}
 
 \begin{frame}{Modelo base: Gillingham et al.\ (2022), \emph{Equilibrium Trade in Automobiles}}
-  Equilibrio estacionario de flujos (Rust, 1985) del mercado de autos nuevos y usados.
-  \begin{columns}[T]
-    \column{0.52\textwidth}
-    \begin{itemize}
-      \item Un periodo = un año. Masa unitaria de hogares, tipos $\tau$ con distinta
-            utilidad marginal del dinero $\mu_\tau$.
-      \item Auto: marca $j$ y edad $a=1,\dots,\bar a$. En $\bar a$ el auto desaparece.
-      \item Elecciones de un dueño: \textbf{mantener}, \textbf{intercambiar} (comprar
-            otro), \textbf{quedarse sin auto}; al deshacerse: vender o chatarrear.
-      \item Accidente: $\alpha_j(a)=\operatorname{logit}^{-1}(\alpha_{0j}+\alpha_{1j}a)$
-            manda el auto a $\bar a$.
-    \end{itemize}
-    \column{0.45\textwidth}
-    \begin{itemize}
-      \item Precios de nuevos $\overline P_j$ y chatarra $\underline P_j$:
-            exógenos (economía pequeña y abierta).
-      \item Precios de usados $P(j,a)$: \textbf{endógenos}, vacían el mercado.
-      \item Fricciones: costos de compra $T_b$ y de venta $T_s$.
-      \item Choques de preferencias valor extremo tipo I.
-    \end{itemize}
-  \end{columns}
+  Equilibrio estacionario (Rust, 1985) del mercado de autos nuevos y usados. Un periodo es
+  un año; un auto se describe por su marca $j$ y su edad $a$.
+  \par\medskip
+  \centering
+  \begin{tikzpicture}[node distance=0.4cm and 1.6cm]
+    \node[tarjeta=4.0cm] (h) {\textbf{Hogares}\\ tipos $\tau$ con distinta $\mu_\tau$
+          (utilidad marginal del dinero)\\ mantener, cambiar o quedarse sin auto};
+    \node[tarjeta=2.5cm, left=of h] (n) {\textbf{Autos nuevos}\\ precio $\overline P_j$
+          fijo};
+    \node[tarjeta=2.8cm, right=of h, roja] (u) {\textbf{Mercado de usados}\\ precio
+          $P(j,a)$ \textbf{endógeno}: vacía el mercado};
+    \node[tarjeta=3.6cm, below=0.7cm of h] (c) {\textbf{Chatarra}\\ precio
+          $\underline P_j$ fijo};
+    \draw[flecha] (n) -- node[above, font=\scriptsize]{compran} (h);
+    \draw[flecha, <->] (h) -- node[above, font=\scriptsize, align=center]{compran\\y venden}
+          node[below, font=\scriptsize, align=center]{costos\\$T_b, T_s$} (u);
+    \draw[flecha] (h) -- node[right, font=\scriptsize, align=left]{chatarreo voluntario o
+          accidente\\ prob.\ $\alpha_j(a)=\operatorname{logit}^{-1}(\alpha_{0j}+\alpha_{1j}a)$} (c);
+  \end{tikzpicture}
   \idea{Los precios de usados no se observan: se calculan dentro de la estimación como
   condición de equilibrio.}
 \end{frame}
@@ -156,19 +157,26 @@
   $\underbrace{q\,\Omega(P)\,Q = q}_{\text{la distribución no cambia}}$
   \quad y \quad
   $\underbrace{D(P,q)=S(P,q)}_{\text{cada mercado }(j,a)\text{ se vacía}}$
+  \par\bigskip
+  \textbf{Lo que deja fuera: para el modelo, estos dos autos son idénticos}
   \par\smallskip
-  {\small Con los parámetros del paper reproduce el mercado danés: precios que caen
-  $\approx 13\%$ al año y $\approx 34\%$ de hogares sin auto.}
-  \medskip
-
-  \textbf{Para el modelo, dos autos LB de 8 años son idénticos}
-  \begin{itemize}
-    \item Mismo precio $P(j,a)$ y misma probabilidad de accidente $\alpha_j(a)$.
-    \item Si un dueño se queda su auto y otro vende el suyo, la única explicación es
-          $\varepsilon$: un gusto que se sortea de nuevo cada año.
-    \item Cuidar un auto no sirve de nada: no lo hace durar más ni valer más.
-    \item El gasto en reparaciones no aparece en el presupuesto del hogar.
-  \end{itemize}
+  \begin{columns}[c]
+    \column{0.42\textwidth}
+    \centering
+    \begin{tikzpicture}[node distance=0.4cm]
+      \node[tarjeta=2.2cm] (a) {\textbf{Auto A}\\ LB, 8 años\\ bien cuidado};
+      \node[tarjeta=2.2cm, roja, right=of a] (b) {\textbf{Auto B}\\ LB, 8 años\\ descuidado};
+      \node[below=0.25cm of a.south east, xshift=0.2cm, font=\small, align=center]
+        {mismo precio $P(j,a)$\\ mismo riesgo $\alpha_j(a)$};
+    \end{tikzpicture}
+    \column{0.55\textwidth}
+    \begin{itemize}\small
+      \item Si el dueño de A lo conserva y el de B lo vende, la única explicación es
+            $\varepsilon$: un gusto que se sortea de nuevo cada año.
+      \item Cuidar un auto no lo hace durar más ni valer más.
+      \item El gasto en reparaciones no aparece en el presupuesto.
+    \end{itemize}
+  \end{columns}
   \idea{Si en los datos hay autos cuidados y descuidados, Gillingham solo puede explicar
   sus diferencias con suerte ($\varepsilon$) y con los parámetros de edad.}
 \end{frame}
@@ -177,22 +185,22 @@
 \section{Lo que agrego}
 
 \begin{frame}{Lo que agrego (1): el desgaste del auto $w$}
-  Cada auto tiene una probabilidad $s$ de descomponerse en el año. La escribo en log-odds
-  como la curva de Gillingham más una \textbf{desviación} $w$:
-  \[
-    \log\frac{s}{1-s}=\ellbar + w,\qquad
-    \ellbar=\alpha_{0j}+\alpha_{1j}\,a+\alpha_{2j}\,a^2
-  \]
-  \begin{itemize}
-    \item $w=0$: el auto se descompone como el promedio de Gillingham. $w>0$: más
-          desgastado.
-    \item Un auto nuevo nace con $w=0$. El estado del dueño es $x=(j,a,w)$.
-    \item El desgaste también molesta al usarlo:
-      \[
-        u_\tau(j,a,w)=u_{0\tau j}+u_{1\tau j}\,a+u_w\,w,\qquad u_w<0
-      \]
-    \item Mercado con información simétrica: un precio por celda, $P(j,a,w)$.
-  \end{itemize}
+  \begin{columns}[c]
+    \column{0.52\textwidth}
+    La probabilidad $s$ de que el auto se descomponga en el año es la curva de Gillingham
+    más una \textbf{desviación} $w$ (en log-odds):
+    \[
+      \log\frac{s}{1-s}=\underbrace{\alpha_{0j}+\alpha_{1j}\,a+\alpha_{2j}\,a^2}_{\text{curva de Gillingham}} + w
+    \]
+    \begin{itemize}\small
+      \item $w=0$: como el promedio de Gillingham. Los nuevos nacen así.
+      \item El desgaste también molesta al usarlo:
+            $u(j,a,w)=u_0+u_1a+u_w w$, con $u_w<0$.
+      \item Estado del dueño: $x=(j,a,w)$; un precio por celda, $P(j,a,w)$.
+    \end{itemize}
+    \column{0.46\textwidth}
+    \includegraphics[width=\linewidth]{figs/fig_desgaste.pdf}
+  \end{columns}
   \idea{Ahora dos autos de la misma marca y edad pueden valer distinto, y el dueño puede
   invertir en el suyo.}
 \end{frame}
@@ -262,32 +270,35 @@
 \section{Simulación}
 
 \begin{frame}{Simulación: una economía con los parámetros de Gillingham}
-  No tengo aún datos de reparación, así que \textbf{simulo} una economía que parte de la
-  que Gillingham et al.\ estimaron para Dinamarca.
-  \medskip
-  \begin{columns}[T]
-    \column{0.52\textwidth}
-    \textbf{Tomado del paper}
-    \begin{itemize}\small
-      \item 2 tipos de hogar (mitad y mitad): pareja pobre y soltero pobre, con
-            $\mu=0.113$ y $0.094$.
-      \item 2 marcas: \emph{light brown} (LB, nuevo a 142 mil DKK) y \emph{heavy
-            brown} (HB, 276 mil DKK).
-      \item Preferencias $u_0,u_1$, costos $T_b,T_s$ y curva de accidentes $\alpha$
-            (tablas 4--10).
-    \end{itemize}
-    \column{0.45\textwidth}
-    \textbf{Decisiones propias}
-    \begin{itemize}\small
-      \item $\beta=0.95$; vida máxima $\bar a=25$ años.
-      \item Precio de chatarra: 2 mil DKK.
-      \item Todo el bloque de desgaste y reparación (siguiente lámina).
-    \end{itemize}
+  \begin{columns}[c]
+    \column{0.42\textwidth}
+    Sin datos de reparación, \textbf{simulo} una economía con lo que Gillingham et al.\
+    estimaron para Dinamarca.
+    \par\medskip
+    \scriptsize
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+      \multicolumn{2}{@{}l}{\emph{Del paper}}\\
+      Hogares & pareja y soltero pobres\\
+      & ($\mu=0.113$ y $0.094$)\\
+      Marcas (precio nuevo) & LB: 142 mil DKK\\
+      & HB: 276 mil DKK\\
+      $u_0,u_1,T_b,T_s,\alpha$ & tablas 4--10\\
+      \midrule
+      \multicolumn{2}{@{}l}{\emph{Propio}}\\
+      $\beta$, vida máx.\ $\bar a$ & 0.95, 25 años\\
+      Chatarra & 2 mil DKK\\
+      Desgaste, reparación & siguiente lámina\\
+      \bottomrule
+    \end{tabular}
+    \column{0.56\textwidth}
+    \includegraphics[width=\linewidth]{figs/fig_calib.pdf}
+    {\scriptsize Gillingham sin reparación reproduce el paper: $\approx34\%$ de hogares sin
+    auto y precios que caen $\approx13\%$ al año. Con reparación los usados viejos valen
+    un poco más.}
   \end{columns}
-  \medskip
-  {\small Sin reparación, esta economía da lo que reporta el paper: $\approx34\%$ de
-  hogares sin auto y precios que caen $\approx13\%$ al año.}
-  \idea{Así, cualquier diferencia con Gillingham viene del desgaste y la reparación.}
+  \idea{Las dos economías se parecen; las diferencias vienen solo del desgaste y la
+  reparación.}
 \end{frame}
 
 \begin{frame}{Calibración de la reparación: tres mercados}
@@ -379,54 +390,77 @@
 \end{frame}
 
 \begin{frame}{Monte Carlo: cómo genero los datos}
-  \begin{enumerate}
-    \item Con los parámetros verdaderos $\theta_0$ resuelvo el equilibrio $(P_t,q_t)$ de
-          los 3 mercados.
-    \item En cada mercado sorteo 10{,}000 hogares de $q_t$ y simulo sus decisiones
-          durante 4 años: $\approx 90{,}000$ transiciones hogar-año.
-    \item Borro lo que un investigador no vería y estimo.
-    \item Repito 50 veces con paneles nuevos.
-  \end{enumerate}
-  \medskip
+  \centering
+  \begin{tikzpicture}[node distance=0.35cm]
+    \node[tarjeta=2.75cm, minimum height=2.1cm] (p1) {\textbf{1. Equilibrio}\\ con los parámetros verdaderos,
+          en los 3 mercados};
+    \node[tarjeta=2.75cm, minimum height=2.1cm, right=of p1] (p2) {\textbf{2. Panel}\\ 10{,}000 hogares por
+          mercado, 4 años ($\approx$90{,}000 obs.)};
+    \node[tarjeta=2.75cm, minimum height=2.1cm, right=of p2] (p3) {\textbf{3. Borrar}\\ lo que un investigador
+          no vería};
+    \node[tarjeta=2.75cm, minimum height=2.1cm, right=of p3] (p4) {\textbf{4. Estimar}\\ y repetir 50 veces
+          con paneles nuevos};
+    \draw[flecha] (p1) -- (p2);
+    \draw[flecha] (p2) -- (p3);
+    \draw[flecha] (p3) -- (p4);
+  \end{tikzpicture}
+  \par\bigskip
+  \raggedright
   \textbf{Qué ve el investigador} (imitando el registro danés de Gillingham):
-  \begin{center}\small
-  \begin{tabular}{*{3}{>{\raggedright\arraybackslash}p{0.3\textwidth}}}
-    \toprule
-    Siempre & Nunca & Depende del diseño\\
-    \midrule
-    tipo de hogar y mercado; auto $(j,a,w)$ cada año; si lo mantiene, lo cambia
-    (por cuál) o se queda sin auto; $R_t$
-    & precios de los usados
-    & si reparó ($r$); si el auto salió por accidente o por chatarreo\\
-    \bottomrule
-  \end{tabular}
-  \end{center}
+  \par\medskip
+  \centering
+  \begin{tikzpicture}[node distance=0.4cm]
+    \node[tarjeta=3.8cm, minimum height=2.4cm, fill=green!6, draw=green!50!black] (s) {\textbf{Siempre}\\[0.2em]
+          tipo de hogar y mercado; auto $(j,a,w)$ cada año; si lo mantiene, lo cambia o se
+          queda sin auto; $R_t$};
+    \node[tarjeta=3.8cm, minimum height=2.4cm, right=of s] (d) {\textbf{Según el diseño}\\[0.2em] si reparó
+          ($r$); si el auto salió por accidente o por chatarreo};
+    \node[tarjeta=3.8cm, minimum height=2.4cm, roja, right=of d] (n) {\textbf{Nunca}\\[0.2em] los precios de
+          los usados: salen del modelo};
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Estimación: máxima verosimilitud}
-  \textbf{Idea:} elegir los $\theta$ que hacen más probable lo que observamos.
-  Cada observación es un hogar que pasa de un año al siguiente:
+  Elegir los $\theta$ que hacen más probable lo observado (cada observación: un hogar de un
+  año al siguiente):
+  \vspace{-0.5em}
   \[
     \hat\theta=\arg\max_\theta \sum_{\text{mercados}}\;\sum_{\text{hogares}}\;\sum_{\text{años}}
     \log \Pr\big(\text{lo observado}\mid\theta\big)
   \]
-  {\small Para cada $\theta$ se resuelven los equilibrios: los precios salen del modelo.}
-  \medskip
-
-  \textbf{Ejemplo: un hogar se queda su auto y lo vemos con desgaste $w'$}
+  \vspace{-0.6em}
+  \centering
+  \begin{tikzpicture}[
+      n/.style={draw=azul!60, rounded corners, fill=azul!6, align=center,
+                font=\scriptsize, text width=1.95cm, inner sep=3pt},
+      e/.style={-{Stealth}, gris, thick},
+      lab/.style={font=\scriptsize, fill=white, inner sep=1pt}]
+    \node[n] (h) at (0,0) {auto $h=(j,a,w)$};
+    \node[n] (acc) at (2.8,0.7) {accidente:\\sale del parque};
+    \node[n] (sob) at (2.8,-0.7) {sobrevive};
+    \node[n, roja] (r1) at (5.6,0) {reparó};
+    \node[n, roja] (r0) at (5.6,-1.4) {no reparó};
+    \node[n] (w) at (8.4,-0.7) {llega a $w'$\\(se observa)};
+    \node[n, text width=2.4cm] (d) at (11.3,-0.7) {decide:\\$\Pi_t(\cdot\mid j,a+1,w')$};
+    \draw[e] (h) -- node[lab, above]{$s(h)$} (acc);
+    \draw[e] (h) -- node[lab, below]{$1-s(h)$} (sob);
+    \draw[e, rojo, dashed] (sob) -- node[lab, above]{$p_t(h)$} (r1);
+    \draw[e, rojo, dashed] (sob) -- node[lab, below]{$1-p_t(h)$} (r0);
+    \draw[e] (r1) -- node[lab, above]{$F_1(w')$} (w);
+    \draw[e] (r0) -- node[lab, below]{$F_0(w')$} (w);
+    \draw[e] (w) -- (d);
+  \end{tikzpicture}
+  \par\smallskip
+  \raggedright
+  \textbf{Ejemplo:} el hogar conserva su auto y lo vemos con desgaste $w'$:
   \[
-    \Pr = \underbrace{\big[1-s(h)\big]}_{\text{sobrevive}}\times
-    \underbrace{Z_t(w'\mid h)}_{\text{llega a }w'}\times
-    \underbrace{\Pi_t(\text{mantener}\mid w')}_{\text{decide quedárselo}}
+    \Pr = \big[1-s(h)\big]\times
+    \underbrace{\big[p_t(h)F_1(w')+(1-p_t(h))F_0(w')\big]}_{\text{los dos caminos rojos: } Z_t(w'\mid h)}
+    \times\Pi_t(\text{mantener}\mid w')
   \]
-  \textbf{Lo que no se ve se promedia con sus probabilidades}
-  \begin{itemize}\small
-    \item $r$ no se ve: llegar a $w'$ pondera ambos casos,
-          $Z_t(w'\mid h)=p_t(h)F_1(w'\mid h)+[1-p_t(h)]F_0(w'\mid h)$.
-    \item Si el auto sale del parque no sabemos si fue accidente, ni con qué $w'$
-          habría seguido: se suma sobre ambos motivos y sobre todos los $w'$, cada uno con
-          su probabilidad $s(h)$ y $Z_t(w'\mid h)$.
-  \end{itemize}
+  \vspace{-0.4em}
+  {\footnotesize Lo que no se ve (rojo) se suma sobre sus caminos. Si el auto sale del parque,
+  tampoco sabemos si fue accidente: se suman también esas ramas (apéndice).}
 \end{frame}
 
 \begin{frame}{Qué se compara}
@@ -527,22 +561,20 @@
 \section{Conclusiones}
 
 \begin{frame}{Conclusiones}
-  \begin{enumerate}
-    \item Agregar desgaste y reparación al equilibrio de Gillingham hace que \textbf{el
-          precio de reparar se refleje en el mercado}: con reparación barata los autos
-          duran más y los usados valen más.
-    \item La reparación no observada \textbf{se puede identificar con variación en su
-          precio} (Hu \& Xin): el modelo recupera parámetros y $\Pr(r)$ sin sesgo, aun
-          sin ver $r$ ni el motivo de salida.
-    \item Si el mundo tiene reparación, el modelo sin ella:
-      \begin{itemize}
-        \item \textbf{subestima la utilidad marginal del dinero} en 38--57\%;
-        \item \textbf{subestima los precios de los usados viejos}, hasta volverlos
-              negativos;
-        \item y aun así \textbf{ajusta bien las cantidades}, por lo que el error no se
-              nota a simple vista.
-      \end{itemize}
-  \end{enumerate}
+  \vspace{0.5em}
+  \centering
+  \begin{tikzpicture}[node distance=0.45cm]
+    \node[tarjeta=3.9cm, minimum height=3.6cm] (a) {\textbf{1. El precio de reparar se
+          refleja en el mercado}\\[0.5em] con reparación barata los autos duran más y los
+          usados valen más};
+    \node[tarjeta=3.9cm, minimum height=3.6cm, right=of a] (b) {\textbf{2. La reparación no
+          observada se puede identificar}\\[0.5em] con variación en su precio (Hu \& Xin),
+          aun sin ver $r$ ni el motivo de salida};
+    \node[tarjeta=3.9cm, minimum height=3.6cm, roja, right=of b] (c) {\textbf{3. Ignorarla
+          sesga el modelo}\\[0.5em] $\mu$ $-$38 a $-$57\%; precios de usados viejos muy bajos;
+          \textbf{y aun así ajusta bien las cantidades}};
+  \end{tikzpicture}
+  \vspace{0.8em}
   \idea{Modelar la reparación cambia lo que inferimos sobre preferencias, precios y
   bienestar en el mercado de autos usados.}
 \end{frame}
