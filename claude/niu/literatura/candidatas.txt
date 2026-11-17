@@ -1,0 +1,303 @@
+# clave | apellido primer autor | año | título   (se verifica contra Crossref)
+# --- Elección discreta dinámica
+Bellman1957|Bellman|1957|Dynamic Programming
+Blackwell1965|Blackwell|1965|Discounted Dynamic Programming
+McFadden1973|McFadden|1973|Conditional Logit Analysis of Qualitative Choice Behavior
+McFadden1978|McFadden|1978|Modelling the Choice of Residential Location
+McFadden1981|McFadden|1981|Econometric Models of Probabilistic Choice
+Rust1987|Rust|1987|Optimal Replacement of GMC Bus Engines: An Empirical Model of Harold Zurcher
+Rust1988|Rust|1988|Maximum Likelihood Estimation of Discrete Control Processes
+Rust1994|Rust|1994|Structural Estimation of Markov Decision Processes
+Rust1996|Rust|1996|Numerical Dynamic Programming in Economics
+Rust1997|Rust|1997|Using Randomization to Break the Curse of Dimensionality
+Wolpin1984|Wolpin|1984|An Estimable Dynamic Stochastic Model of Fertility and Child Mortality
+Miller1984|Miller|1984|Job Matching and Occupational Choice
+Pakes1986|Pakes|1986|Patents as Options: Some Estimates of the Value of Holding European Patent Stocks
+HotzMiller1993|Hotz|1993|Conditional Choice Probabilities and the Estimation of Dynamic Models
+HMSS1994|Hotz|1994|A Simulation Estimator for Dynamic Models of Discrete Choice
+AguirregabiriaMira2002|Aguirregabiria|2002|Swapping the Nested Fixed Point Algorithm: A Class of Estimators for Discrete Markov Decision Models
+AguirregabiriaMira2007|Aguirregabiria|2007|Sequential Estimation of Dynamic Discrete Games
+AguirregabiriaMira2010|Aguirregabiria|2010|Dynamic Discrete Choice Structural Models: A Survey
+AguirregabiriaNevo2013|Aguirregabiria|2013|Recent Developments in Empirical IO: Dynamic Demand and Dynamic Games
+KeaneWolpin1994|Keane|1994|The Solution and Estimation of Discrete Choice Dynamic Programming Models by Simulation and Interpolation: Monte Carlo Evidence
+KeaneWolpin1997|Keane|1997|The Career Decisions of Young Men
+KeaneToddWolpin2011|Keane|2011|The Structural Estimation of Behavioral Models: Discrete Choice Dynamic Programming Methods and Applications
+EcksteinWolpin1989|Eckstein|1989|The Specification and Estimation of Dynamic Stochastic Discrete Choice Models: A Survey
+SuJudd2012|Su|2012|Constrained Optimization Approaches to Estimation of Structural Models
+Iskhakov2016|Iskhakov|2016|Comment on Constrained Optimization Approaches to Estimation of Structural Models
+DubeFoxSu2012|Dube|2012|Improving the Numerical Performance of Static and Dynamic Aggregate Discrete Choice Random Coefficients Demand Estimation
+ArcidiaconoEllickson2011|Arcidiacono|2011|Practical Methods for Estimation of Dynamic Discrete Choice Models
+ArcidiaconoMiller2011|Arcidiacono|2011|Conditional Choice Probability Estimation of Dynamic Discrete Choice Models with Unobserved Heterogeneity
+ArcidiaconoMiller2020|Arcidiacono|2020|Identifying Dynamic Discrete Choice Models off Short Panels
+MagnacThesmar2002|Magnac|2002|Identifying Dynamic Discrete Decision Processes
+AbbringDaljord2020|Abbring|2020|Identifying the Discount Factor in Dynamic Discrete Choice Models
+KSS2021|Kalouptsidi|2021|Identification of Counterfactuals in Dynamic Discrete Choice Models
+KSS2021b|Kalouptsidi|2021|Linear IV Regression Estimators for Structural Dynamic Discrete Choice Models
+NoretsTang2014|Norets|2014|Semiparametric Inference in Dynamic Binary Choice Models
+Norets2009|Norets|2009|Inference in Dynamic Discrete Choice Models with Serially Correlated Unobserved State Variables
+BBL2007|Bajari|2007|Estimating Dynamic Models of Imperfect Competition
+POB2007|Pakes|2007|Simple Estimators for the Parameters of Discrete Dynamic Games (with Entry/Exit Examples)
+PesendorferSD2008|Pesendorfer|2008|Asymptotic Least Squares Estimators for Dynamic Games
+KasaharaShimotsu2012|Kasahara|2012|Sequential Estimation of Structural Models with a Fixed Point Constraint
+HeckmanSinger1984|Heckman|1984|A Method for Minimizing the Impact of Distributional Assumptions in Econometric Models for Duration Data
+Das1992|Das|1992|A Micro-Econometric Model of Capital Utilization and Retirement: The Case of the U.S. Cement Industry
+RustRothwell1995|Rust|1995|Optimal Response to a Shift in Regulatory Regime: The Case of the US Nuclear Power Industry
+Kennet1994|Kennet|1994|A Structural Model of Aircraft Engine Maintenance
+ImaiJainChing2009|Imai|2009|Bayesian Estimation of Dynamic Discrete Choice Models
+ChiongGalichonShum2016|Chiong|2016|Duality in Dynamic Discrete-Choice Models
+Cardell1997|Cardell|1997|Variance Components Structures for the Extreme-Value and Logistic Distributions with Application to Models of Heterogeneity
+Train2009|Train|2009|Discrete Choice Methods with Simulation
+AddaCooper2003|Adda|2003|Dynamic Economics: Quantitative Methods and Applications
+# --- Variables no observadas
+HuShum2012|Hu|2012|Nonparametric Identification of Dynamic Models with Unobserved State Variables
+HuXin2024|Hu|2024|Identification and Estimation of Dynamic Structural Models with Unobserved Choices
+Hu2008|Hu|2008|Identification and Estimation of Nonlinear Models with Misclassification Error Using Instrumental Variables: A General Solution
+HuSchennach2008|Hu|2008|Instrumental Variable Treatment of Nonclassical Measurement Error Models
+Hu2017|Hu|2017|The Econometrics of Unobservables: Applications of Measurement Error Models in Empirical Industrial Organization and Labor Economics
+HuSasaki2018|Hu|2018|Closed-Form Identification of Dynamic Discrete Choice Models with Proxies for Unobserved State Variables
+HuShumTanXiao2017|Hu|2017|A Simple Estimator for Dynamic Models with Serially Correlated Unobservables
+HigginsJochmans2023|Higgins|2023|Identification of Mixtures of Dynamic Discrete Choices
+HigginsJochmans2025|Higgins|2025|Learning Markov Processes with Latent Variables
+KasaharaShimotsu2009|Kasahara|2009|Nonparametric Identification of Finite Mixture Models of Dynamic Discrete Choices
+AllmanMatiasRhodes2009|Allman|2009|Identifiability of Parameters in Latent Structure Models with Many Observed Variables
+BonhommeJochmansRobin2016|Bonhomme|2016|Non-parametric Estimation of Finite Mixtures from Repeated Measurements
+BerryCompiani2023|Berry|2023|An Instrumental Variable Approach to Dynamic Models
+AGL2021|Aguirregabiria|2021|Sufficient Statistics for Unobserved Heterogeneity in Structural Dynamic Logit Models
+Rabiner1989|Rabiner|1989|A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
+Baum1970|Baum|1970|A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains
+Dempster1977|Dempster|1977|Maximum Likelihood from Incomplete Data via the EM Algorithm
+Hamilton1989|Hamilton|1989|A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle
+Poirier1980|Poirier|1980|Partial Observability in Bivariate Probit Models
+HausmanAS1998|Hausman|1998|Misclassification of the Dependent Variable in a Discrete-Response Setting
+Molinari2008|Molinari|2008|Partial Identification of Probability Distributions with Misclassified Data
+Schennach2016|Schennach|2016|Recent Advances in the Measurement Error Literature
+ChenHongNekipelov2011|Chen|2011|Nonlinear Models of Measurement Errors
+CunhaHeckmanSchennach2010|Cunha|2010|Estimating the Technology of Cognitive and Noncognitive Skill Formation
+PerrigneVuong2011|Perrigne|2011|Nonparametric Identification of a Contract Model with Adverse Selection and Moral Hazard
+GayleMiller2015|Gayle|2015|Identifying and Testing Models of Managerial Compensation
+CopelandMonnet2009|Copeland|2009|The Welfare Effects of Incentive Schemes
+MisraNair2011|Misra|2011|A Structural Model of Sales-Force Compensation Dynamics: Estimation and Field Implementation
+Hubbard1998|Hubbard|1998|An Empirical Examination of Moral Hazard in the Vehicle Inspection Market
+Chen2007|Chen|2007|Large Sample Sieve Estimation of Semi-Nonparametric Models
+# --- Equilibrio mercado autos y demanda durable
+Manski1983|Manski|1983|Analysis of Equilibrium Automobile Holdings in Israel with Aggregate Discrete Choice Models
+ManskiGoldin1983|Manski|1983|An Econometric Analysis of Automobile Scrappage
+Berkovec1985|Berkovec|1985|New Car Sales and Used Car Stocks: A Model of the Automobile Market
+BerkovecRust1985|Berkovec|1985|A Nested Logit Model of Automobile Holdings for One Vehicle Households
+ManneringWinston1985|Mannering|1985|A Dynamic Empirical Analysis of Household Vehicle Ownership and Utilization
+Rust1985|Rust|1985|Stationary Equilibrium in a Market for Durable Assets
+Rust1986|Rust|1986|When Is It Optimal to Kill Off the Market for Used Durable Goods?
+AndersonGinsburgh1994|Anderson|1994|Price Discrimination via Second-Hand Markets
+KonishiSandfort2002|Konishi|2002|Existence of Stationary Equilibrium in the Markets for New and Used Durable Goods
+Stolyarov2002|Stolyarov|2002|Turnover of Used Durables in a Stationary Equilibrium: Are Older Goods Traded More?
+EstebanShum2007|Esteban|2007|Durable-Goods Oligopoly with Secondary Markets: The Case of Automobiles
+ChenEstebanShum2013|Chen|2013|When Do Secondary Markets Harm Firms?
+GavazzaLizzeriRoketskiy2014|Gavazza|2014|A Quantitative Analysis of the Used-Car Market
+Gillingham2022|Gillingham|2022|Equilibrium Trade in Automobiles
+Schiraldi2011|Schiraldi|2011|Automobile Replacement: A Dynamic Structural Approach
+AddaCooper2000|Adda|2000|Balladurette and Juppette: A Discrete Analysis of Scrapping Subsidies
+Blundell2026|Blundell|2026|Durables and Lemons: Private Information and the Market for Cars
+Melnikov2013|Melnikov|2013|A Dynamic Analysis of the Demand for Differentiated Products
+GowrisankaranRysman2012|Gowrisankaran|2012|Dynamics of Consumer Demand for New Durable Goods
+Gordon2009|Gordon|2009|A Dynamic Model of Consumer Replacement Cycles in the PC Processor Industry
+Carranza2010|Carranza|2010|Product Innovation and Adoption in Market Equilibrium: The Case of Digital Cameras
+Nair2007|Nair|2007|Intertemporal Price Discrimination with Forward-Looking Consumers: Application to the US Market for Console Video-Games
+HendelNevo2006|Hendel|2006|Measuring the Implications of Sales and Consumer Inventory Behavior
+GoettlerGordon2011|Goettler|2011|Does AMD Spur Intel to Innovate More?
+IshiharaChing2019|Ishihara|2019|Dynamic Demand for New and Used Durable Goods Without Physical Depreciation: The Case of Japanese Video Games
+Ghose2009|Ghose|2009|Internet Exchanges for Used Goods: An Empirical Analysis of Trade Patterns and Adverse Selection
+Bento2009|Bento|2009|Distributional and Efficiency Impacts of Increased US Gasoline Taxes
+BusseKZ2013|Busse|2013|Are Consumers Myopic? Evidence from New and Used Car Purchases
+AllcottWozny2014|Allcott|2014|Gasoline Prices, Fuel Economy, and the Energy Paradox
+LiTimminsvH2009|Li|2009|How Do Gasoline Prices Affect Fleet Fuel Economy?
+JacobsenVanBenthem2015|Jacobsen|2015|Vehicle Scrappage and Gasoline Policy
+MianSufi2012|Mian|2012|The Effects of Fiscal Stimulus: Evidence from the 2009 Cash for Clunkers Program
+HoekstraPullerReimers2017|Hoekstra|2017|Cash for Corollas: When Stimulus Reduces Spending
+Kahn1986q|Kahn|1986|Gasoline Prices and the Used Automobile Market: A Rational Expectations Asset Price Approach
+Eberly1994|Eberly|1994|Adjustment of Consumers' Durables Stocks: Evidence from Automobile Purchases
+Attanasio2000|Attanasio|2000|Consumer Durables and Inertial Behaviour: Estimation and Aggregation of (S,s) Rules for Automobile Purchases
+GreenspanCohen1999|Greenspan|1999|Motor Vehicle Stocks, Scrappage, and Sales
+Parks1977|Parks|1977|Determinants of Scrapping Rates for Postwar Vintage Automobiles
+Walker1968|Walker|1968|Determinants of Auto Scrappage
+Bento2018|Bento|2018|Vehicle Lifetime and Scrappage Behavior: Trends in the U.S. Used Car Market
+HamiltonMacauley1999|Hamilton|1999|Heredity or Environment: Why is Automobile Longevity Increasing?
+ChevalierGoolsbee2009|Chevalier|2009|Are Durable Goods Consumers Forward-Looking? Evidence from College Textbooks
+Berry1994|Berry|1994|Estimating Discrete-Choice Models of Product Differentiation
+BLP1995|Berry|1995|Automobile Prices in Market Equilibrium
+BLP2004|Berry|2004|Differentiated Products Demand Systems from a Combination of Micro and Macro Data: The New Car Market
+Petrin2002|Petrin|2002|Quantifying the Benefits of New Products: The Case of the Minivan
+ConlonGortmaker2020|Conlon|2020|Best Practices for Differentiated Products Demand Estimation with PyBLP
+MoralJaumandreu2007|Moral|2007|Automobile Demand, Model Cycle and Age Effects
+GMY2024|Grieco|2024|The Evolution of Market Power in the US Automobile Industry
+GrigolonRV2018|Grigolon|2018|Consumer Valuation of Fuel Costs and Tax Policy: Evidence from the European Car Market
+# --- Equilibrio estacionario, industria dinámica
+LucasPrescott1971|Lucas|1971|Investment Under Uncertainty
+Hopenhayn1992|Hopenhayn|1992|Entry, Exit, and Firm Dynamics in Long Run Equilibrium
+HopenhaynPrescott1992|Hopenhayn|1992|Stochastic Monotonicity and Stationary Distributions for Dynamic Economies
+Huggett1993|Huggett|1993|The Risk-Free Rate in Heterogeneous-Agent Incomplete-Insurance Economies
+Aiyagari1994|Aiyagari|1994|Uninsured Idiosyncratic Risk and Aggregate Saving
+Young2010|Young|2010|Solving the Incomplete Markets Model with Aggregate Uncertainty Using the Krusell-Smith Algorithm and Non-Stochastic Simulations
+WeintraubBVR2008|Weintraub|2008|Markov Perfect Industry Dynamics with Many Firms
+EricsonPakes1995|Ericson|1995|Markov-Perfect Industry Dynamics: A Framework for Empirical Work
+DoraszelskiPakes2007|Doraszelski|2007|A Framework for Applied Dynamic Analysis in IO
+PakesMcGuire1994|Pakes|1994|Computing Markov-Perfect Nash Equilibria: Numerical Implications of a Dynamic Differentiated Product Model
+PakesMcGuire2001|Pakes|2001|Stochastic Algorithms, Symmetric Markov Perfect Equilibrium, and the Curse of Dimensionality
+DubeHC2010|Dube|2010|Tipping and Concentration in Markets with Indirect Network Effects
+HashmiVB2016|Hashmi|2016|The Relationship between Market Structure and Innovation in Industry Equilibrium: A Case Study of the Global Automobile Industry
+# --- Teoría de bienes durables
+Coase1972|Coase|1972|Durability and Monopoly
+Bulow1982|Bulow|1982|Durable-Goods Monopolists
+Bulow1986|Bulow|1986|An Economic Theory of Planned Obsolescence
+Stokey1981|Stokey|1981|Rational Expectations and Durable Goods Pricing
+GSW1986|Gul|1986|Foundations of Dynamic Monopoly and the Coase Conjecture
+AusubelDeneckere1989|Ausubel|1989|Reputation in Bargaining and Durable Goods Monopoly
+Swan1970|Swan|1970|Durability of Consumption Goods
+Swan1971|Swan|1971|The Durability of Goods and Regulation of Monopoly
+Swan1972|Swan|1972|Optimum Durability, Second-Hand Markets, and Planned Obsolescence
+LevhariSrinivasan1969|Levhari|1969|Durability of Consumption Goods: Competition Versus Monopoly
+KleimanOphir1966|Kleiman|1966|The Durability of Durable Goods
+Schmalensee1970|Schmalensee|1970|Regulation and the Durability of Goods
+SieperSwan1973|Sieper|1973|Monopoly and Competition in the Market for Durable Goods
+BenjaminKormendi1974|Benjamin|1974|The Interrelationship between Markets for New and Used Durable Goods
+Liebowitz1982|Liebowitz|1982|Durability, Market Structure, and New-Used Goods Models
+BondSamuelson1984|Bond|1984|Durable Good Monopolies with Rational Expectations and Replacement Sales
+Waldman1993|Waldman|1993|A New Perspective on Planned Obsolescence
+Waldman1996|Waldman|1996|Planned Obsolescence and the R&D Decision
+Waldman1997|Waldman|1997|Eliminating the Market for Secondhand Goods: An Alternative Explanation for Leasing
+Waldman2003|Waldman|2003|Durable Goods Theory for Real World Markets
+Fishman1993|Fishman|1993|Planned Obsolescence as an Engine of Technological Progress
+GroutPark2005|Grout|2005|Competitive Planned Obsolescence
+Strausz2009|Strausz|2009|Planned Obsolescence as an Incentive Device for Unobservable Quality
+LeeLee1998|Lee|1998|A Theory of Economic Obsolescence
+Choi1994|Choi|1994|Network Externality, Compatibility Choice, and Planned Obsolescence
+EllisonFudenberg2000|Ellison|2000|The Neo-Luddite's Lament: Excessive Upgrades in the Software Industry
+FudenbergTirole1998|Fudenberg|1998|Upgrades, Tradeins, and Buybacks
+Nahm2004|Nahm|2004|Durable-Goods Monopoly with Endogenous Innovation
+Akerlof1970|Akerlof|1970|The Market for Lemons: Quality Uncertainty and the Market Mechanism
+HendelLizzeri1999a|Hendel|1999|Interfering with Secondary Markets
+HendelLizzeri1999b|Hendel|1999|Adverse Selection in Durable Goods Markets
+HendelLizzeri2002|Hendel|2002|The Role of Leasing under Adverse Selection
+HLS2005|Hendel|2005|Efficient Sorting in a Dynamic Adverse-Selection Model
+HouseLeahy2004|House|2004|An sS Model with Adverse Selection
+JohnsonWaldman2003|Johnson|2003|Leasing, Lemons, and Buybacks
+Orbach2004|Orbach|2004|The Durapolist Puzzle: Monopoly Power in Durable-Goods Markets
+Kinokuni2021|Kinokuni|2021|Advance Disposal Fee vs. Disposal Fee: A Monopolistic Producer's Durability Choice Model
+Bond1982|Bond|1982|A Direct Test of the Lemons Model: The Market for Used Pickup Trucks
+Genesove1993|Genesove|1993|Adverse Selection in the Wholesale Used Car Market
+EngersHartmannStern2009|Engers|2009|Are Lemons Really Hot Potatoes?
+Larsen2021|Larsen|2021|The Efficiency of Real-World Bargaining: Evidence from Wholesale Used-Auto Auctions
+Biglaiser2020|Biglaiser|2020|Intermediaries and Product Quality in Used Car Markets
+LaceteraPopeSydnor2012|Lacetera|2012|Heuristic Thinking and Limited Attention in the Car Market
+# --- Reparación y mantenimiento
+Taylor1995|Taylor|1995|The Economics of Breakdowns, Checkups, and Cures
+DarbyKarni1973|Darby|1973|Free Competition and the Optimal Amount of Fraud
+Wolinsky1993|Wolinsky|1993|Competition in a Market for Informed Experts' Services
+DulleckKerschbamer2006|Dulleck|2006|On Doctors, Mechanics, and Computer Specialists: The Economics of Credence Goods
+Schneider2012|Schneider|2012|Agency Problems and Reputation in Expert Services: Evidence from Auto Repair
+Hubbard2002|Hubbard|2002|How Do Consumers Motivate Experts? Reputational Incentives in an Auto Repair Market
+PetersonSchneider2014|Peterson|2014|Adverse Selection in the Used-Car Market: Evidence from Purchase and Repair Patterns in the Consumer Expenditure Survey
+Mann1992|Mann|1992|Durable Goods Monopoly and Maintenance
+MoritaWaldman2004|Morita|2004|Durable Goods, Monopoly Maintenance, and Time Inconsistency
+MoritaWaldman2010|Morita|2010|Competition, Monopoly Maintenance, and Consumer Switching Costs
+CarltonWaldman2010|Carlton|2010|Competition, Monopoly, and Aftermarkets
+Borenstein2000|Borenstein|2000|Exercising Market Power in Proprietary Aftermarkets
+ChenRoss1993|Chen|1993|Refusals to Deal, Price Discrimination, and Independent Service Organizations
+JinYangZhu2023|Jin|2023|Right to Repair: Pricing, Welfare, and Environmental Implications
+RightToRepairRRC2025|Lambrecht|2025|Raising Rivals' Costs and Right to Repair Laws: Separating the Sheep from the Goats?
+ChowdhuryVerma2024|Chowdhury|2024|Walking a Tightrope: Voluntary Right to Repair
+Ozturkcan2024|Ozturkcan|2024|The Right-to-Repair Movement: Sustainability and Consumer Rights
+Perzanowski2022|Perzanowski|2022|The Right to Repair: Reclaiming the Things We Own
+Fachbach2022|Fachbach|2022|Drivers of the Consumers' Intention to Use Repair Services, Repair Networks and to Self-Repair
+McCollough2009|McCollough|2009|Factors Impacting the Demand for Repair Services of Household Products: The Disappearing Repair Trades and the Throwaway Society
+Sabbaghi2016|Sabbaghi|2016|Business Outcomes of Product Repairability: A Survey-Based Study of Consumer Repair Experiences
+Parajuly2024|Parajuly|2024|Product Repair in a Circular Economy: Exploring Public Repair Behavior from a Systems Perspective
+Fernandez1998|Fernandez|1998|Un Modelo de Duracion Estructural para el Reemplazo de Bienes Durables
+Fernandez2001|Fernandez|2001|Observable and Unobservable Determinants of Replacement of Home Appliances
+DrinkwaterHastings1967|Drinkwater|1967|An Economic Replacement Model
+Neuts2000|Neuts|2000|Repairable Models with Operating and Repair Times Governed by Phase Type Distributions
+BarlowHunter1960|Barlow|1960|Optimum Preventive Maintenance Policies
+PierskallaVoelker1976|Pierskalla|1976|A Survey of Maintenance Models: The Control and Surveillance of Deteriorating Systems
+Wang2002|Wang|2002|A Survey of Maintenance Policies of Deteriorating Systems
+HMMMaintenance2022|Gomez|2022|Hidden Markov Models in Reliability and Maintenance
+McGrattanSchmitz1999|McGrattan|1999|Maintenance and Repair: Too Big to Ignore
+AlbonicoKP2014|Albonico|2014|Capital Maintenance and Depreciation over the Business Cycle
+BoucekkineDM2009|Boucekkine|2009|Technological Progress, Obsolescence, and Depreciation
+# --- Numéricos: punto fijo, Newton, optimización, inferencia
+Banach1922|Banach|1922|Sur les operations dans les ensembles abstraits et leur application aux equations integrales
+Howard1960|Howard|1960|Dynamic Programming and Markov Processes
+PutermanBrumelle1979|Puterman|1979|On the Convergence of Policy Iteration in Stationary Dynamic Programming
+Puterman1994|Puterman|1994|Markov Decision Processes: Discrete Stochastic Dynamic Programming
+SLP1989|Stokey|1989|Recursive Methods in Economic Dynamics
+Judd1998|Judd|1998|Numerical Methods in Economics
+MirandaFackler2002|Miranda|2002|Applied Computational Economics and Finance
+OrtegaRheinboldt1970|Ortega|1970|Iterative Solution of Nonlinear Equations in Several Variables
+Kelley1995|Kelley|1995|Iterative Methods for Linear and Nonlinear Equations
+DennisSchnabel1996|Dennis|1996|Numerical Methods for Unconstrained Optimization and Nonlinear Equations
+Broyden1965|Broyden|1965|A Class of Methods for Solving Nonlinear Simultaneous Equations
+Anderson1965|Anderson|1965|Iterative Procedures for Nonlinear Integral Equations
+WalkerNi2011|Walker|2011|Anderson Acceleration for Fixed-Point Iterations
+VaradhanRoland2008|Varadhan|2008|Simple and Globally Convergent Methods for Accelerating the Convergence of Any EM Algorithm
+SaadSchultz1986|Saad|1986|GMRES: A Generalized Minimal Residual Algorithm for Solving Nonsymmetric Linear Systems
+Stewart1994|Stewart|1994|Introduction to the Numerical Solution of Markov Chains
+MeynTweedie2009|Meyn|2009|Markov Chains and Stochastic Stability
+Tauchen1986|Tauchen|1986|Finite State Markov-Chain Approximations to Univariate and Vector Autoregressions
+TauchenHussey1991|Tauchen|1991|Quadrature-Based Methods for Obtaining Approximate Solutions to Nonlinear Asset Pricing Models
+KopeckySuen2010|Kopecky|2010|Finite State Markov-Chain Approximations to Highly Persistent Processes
+GriewankWalther2008|Griewank|2008|Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation
+Baydin2018|Baydin|2018|Automatic Differentiation in Machine Learning: A Survey
+Blondel2022|Blondel|2022|Efficient and Modular Implicit Differentiation
+Aldrich2011|Aldrich|2011|Tapping the Supercomputer Under Your Desk: Solving Dynamic Equilibrium Models with Graphics Processors
+FVValencia2018|Fernandez-Villaverde|2018|A Practical Guide to Parallelization in Economics
+Iskhakov2017|Iskhakov|2017|The Endogenous Grid Method for Discrete-Continuous Dynamic Choice Models with (or without) Taste Shocks
+BHHH1974|Berndt|1974|Estimation and Inference in Nonlinear Structural Models
+Broyden1970|Broyden|1970|The Convergence of a Class of Double-Rank Minimization Algorithms
+Fletcher1970|Fletcher|1970|A New Approach to Variable Metric Algorithms
+Goldfarb1970|Goldfarb|1970|A Family of Variable-Metric Methods Derived by Variational Means
+Shanno1970|Shanno|1970|Conditioning of Quasi-Newton Methods for Function Minimization
+LiuNocedal1989|Liu|1989|On the Limited Memory BFGS Method for Large Scale Optimization
+Byrd1995|Byrd|1995|A Limited Memory Algorithm for Bound Constrained Optimization
+Armijo1966|Armijo|1966|Minimization of Functions Having Lipschitz Continuous First Partial Derivatives
+Wolfe1969|Wolfe|1969|Convergence Conditions for Ascent Methods
+NocedalWright2006|Nocedal|2006|Numerical Optimization
+WachterBiegler2006|Wachter|2006|On the Implementation of an Interior-Point Filter Line-Search Algorithm for Large-Scale Nonlinear Programming
+NelderMead1965|Nelder|1965|A Simplex Method for Function Minimization
+KnittelMetaxoglou2014|Knittel|2014|Estimation of Random-Coefficient Demand Models: Two Empiricists' Perspective
+NeweyMcFadden1994|Newey|1994|Large Sample Estimation and Hypothesis Testing
+White1982|White|1982|Maximum Likelihood Estimation of Misspecified Models
+MurphyTopel1985|Murphy|1985|Estimation and Inference in Two-Step Econometric Models
+Wooldridge2010|Wooldridge|2010|Econometric Analysis of Cross Section and Panel Data
+# --- Medio ambiente, política, medición, obsolescencia programada aplicada
+Bakker2014|Bakker|2014|Products that Go Round: Exploring Product Life Extension through Design
+OguchiFuse2015|Oguchi|2015|Regional and Longitudinal Estimation of Product Lifespan Distribution: A Case Study for Automobiles and a Simplified Estimation Method
+RiveraLallmahomed2016|Rivera|2016|Environmental Implications of Planned Obsolescence and Product Lifetime: A Literature Review
+Guiltinan2009|Guiltinan|2009|Creative Destruction and Destructive Creations: Environmental Ethics and Planned Obsolescence
+Wieser2016|Wieser|2016|Beyond Planned Obsolescence: Product Lifespans and the Challenges to a Circular Economy
+Satyro2018|Satyro|2018|Planned Obsolescence or Planned Resource Depletion? A Sustainable Approach
+Veral2022|Veral|2022|Planned Obsolescence: A Hidden Threat to Environmental Security and the Recent EU Policies
+Oraee2024|Oraee|2024|Overcoming Premature Smartphone Obsolescence amongst Young Adults
+Kuppelwieser2019|Kuppelwieser|2019|Consumer Responses to Planned Obsolescence
+AtesAcur2022|Ates|2022|Making Obsolescence Obsolete: Execution of Digital Transformation in a High-Tech Manufacturing SME
+Huisman2012jie|Huisman|2013|Too Big to Fail, Too Academic to Function: Producer Responsibility in the Global Financial and E-waste Crises
+Schreiber2022|Schreiber|2022|Reflective Analysis on the Role of Advertising to Consolidate the Programmed Obsolescence Model
+DeOliveira2013|Oliveira|2013|Planned Obsolescence
+Heidari2023|Heidari|2023|A Dynamic Model for CO2 Emissions Induced by Urban Transportation During 2005-2030, a Case Study of Mashhad, Iran
+Leeson2020|Leeson|2020|Logic is a Harsh Mistress: Welfare Economics for Economists
+GuptaRomano1998|Gupta|1998|Monitoring the Principal with Multiple Agents
+FisherGrilichesKaysen1962|Fisher|1962|The Costs of Automobile Model Changes since 1949
+Gordon1990|Gordon|1990|The Measurement of Durable Goods Prices
+Griliches1961|Griliches|1961|Hedonic Price Indexes for Automobiles: An Econometric Analysis of Quality Change
+OhtaGriliches1976|Ohta|1976|Automobile Prices Revisited: Extensions of the Hedonic Hypothesis
+Rosen1974|Rosen|1974|Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition
+Slade2006|Slade|2006|Made to Break: Technology and Obsolescence in America
+Stahel2010|Stahel|2010|The Performance Economy
+Packard1960|Packard|1960|The Waste Makers
+Cooper2010|Cooper|2010|Longer Lasting Products: Alternatives to the Throwaway Society
+Kirchherr2017|Kirchherr|2017|Conceptualizing the Circular Economy: An Analysis of 114 Definitions
+Geissdoerfer2017|Geissdoerfer|2017|The Circular Economy: A New Sustainability Paradigm?
+DavisKahn2010|Davis|2010|International Trade in Used Vehicles: The Environmental Consequences of NAFTA
+ChenGMW2019|Chen|2019|Used Vehicle Trade and Pollution: Evidence from the US and Mexico
+Davis2008|Davis|2008|The Effect of Driving Restrictions on Air Quality in Mexico City
+Oliva2015|Oliva|2015|Environmental Regulations and Corruption: Automobile Emissions in Mexico City
+GallegoMonteroSalas2013|Gallego|2013|The Effect of Transport Policies on Car Use: Evidence from Latin American Cities
+KnittelSandler2018|Knittel|2018|The Welfare Impact of Second-Best Uniform-Pigouvian Taxation: Evidence from Transportation
+Fukasawa2025|Fukasawa|2025|When Do Firms Sell High Durability Products? The Case of Light Bulb Industry

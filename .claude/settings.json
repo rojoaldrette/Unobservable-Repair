@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(latexmk *)",
+      "Bash(biber *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(pdflatex *)",
+      "Bash(bibtex *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "PowerShell(pdflatex *)",
+      "PowerShell(bibtex *)",
+      "PowerShell(git diff)",
+      "PowerShell(git diff *)",
+      "PowerShell(python *)",
+      "PowerShell(latexmk *)",
+      "PowerShell(biber *)",
+      "PowerShell(git status)",
+      "PowerShell(git status *)"
+    ]
+  }
+}

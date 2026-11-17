@@ -7,21 +7,118 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{trees, shapes.geometric, arrows.meta, shadows.blur}
-\title{Proyecto de titulación}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=authoryear,              % Autor (Año). Alternativas: authoryear-comp, apa, numeric
+  maxcitenames=2,                % 3+ autores en el texto -> "Gillingham et al."
+  maxbibnames=99,                % en la lista se escriben todos
+  uniquename=false,
+  giveninits=true,               % nombres como iniciales
+  doi=false, url=false, isbn=false, eprint=true
+]{biblatex}
+\addbibresource{referencias.bib} % ruta relativa al .tex
+
+
+
+\title{¿Qué tanto importa la reparación? Identificación de decisiones de reparación no observadas en el mercado de coches en un modelo de elección discreta dinámico}
 \author{Rodrigo Antonio Aldrette Salas}
-\date{August 2026}
+\date{Noviembre 2026}
 
 \begin{document}
 \maketitle
 
+\begin{abstract}
+Hola nya >.<
+
+\medskip
+\noindent\textbf{Palabras clave:} Reparación, Elección Discreta, Identificación, No-observables\\
+\noindent\textbf{Clasificación JEL:} 1, 2, 3
+\end{abstract}
+
 \section{Introducción}
 
+Motivación
+
+La reparación es un aspecto clave en la determinación de la vida útil y los precios de los bienes durables. Después de comprar un bien durable de el productor primario, este cambia de dueño, sufre descomposturas, sube y baja de calidad, 
+
+Poco contexto
+
+Hueco teórico
+
+Hueco empírico
+
+que hacemos
+
+preguntas clave
+
+resultados
+
+contribución
 
 \section{Revisión de literatura}
 
-\begin{itemize}
-    \item Pendiente
-\end{itemize}
+
+
+
+El presente trabajo se situa en la intersección de varias lineas de investigación. En la parte de la teoría tenemos la literatura de los bienes durables, esta incluye el rol en la economía de la durabilidad de los bienes, la presencia de mercados secundarios y la reparación y el mantenimiento como decisiones económicas. Del lado empírico, nos situamos en la literatura de modelos estructurales de elección discreta estáticos y dinámicos aplicados al mercado de coches, así como en la identificación de modelos dinámicos con decisiones no observadas.
+
+\subsection{Bienes durables y durabilidad}
+
+La literatura teórica de bienes durables inicia con \textcite{Coase1972} quien plantea que un monopolista que vende un bien durable compite consigo mismo en el futuro pues tras venderle a los consumidores con mayor disposición a pagar, este bajará el precio para venderle a los demás, los consumidores anticipan este comportamiento y se niegan a pagar precios altos hoy.
+
+El artículo de Coase introdujo al \textit{duropolista}, el agente que vende bienes durables (no perecederos), como un area de estudio dentro de Organización Industrial. El productor duropolista puede elegir la durabilidad de su producto para evitar competir consigo mismo en el futuro, \textcite{Bulow1982} muestra que el duropolista prefiere rentar a vender y que, si no puede rentar, puede producir bienes menos durables para mitigar su problema de compromiso, con ese resultado \textcite{Bulow1986} desarrolla una teoría de la obsolescencia programada donde el monopolista elige una durabilidad ineficientemente baja. Un resultado contrastante es el de \textcite{Swan1970,Swan1972} donde muestra que bajo ciertas condiciones (rendimientos constantes, unidades nuevas son sustitutos perfectos), el monopolista elige la durabilidad socialmente óptima, incluso en presencia de mercados de segunda mano, este resultado es conocido como el \textit{resultado de independencia}.
+
+La obsolescencia programada es la aplicación más conocida de estas ideas. \textcite{Waldman1993,Waldman1996} la vincula con las mejoras tecnológicas y la investigación y desarrollo, \textcite{Fishman1993} argumentan que puede ser una condición del progreso tecnológico, y \textcite{LeeLee1998} distinguen la obsolescencia económica de la física. \textcite{GroutPark2005} y \textcite{Strausz2009} encuentran incentivos para la obsolescencia aun fuera del monopolio o como mecanismo para proveer calidad no observable. \textcite{Waldman2003} resume estos resultados y lo conecta con mercados reales. La evidencia empírica es más escasa: \textcite{FisherGrilichesKaysen1962} estiman los costos de los cambios de modelo en la industria automotriz, y, recientemente, \textcite{Fukasawa2025} estima un modelo dinámico estructural de oligopolio en el mercado de focos en Japón y encuentra que las empresas grandes tienen incentivos a coludirse para eliminar los focos de alta durabilidad.
+
+En esta literatura la durabilidad es, sobre todo, un atributo que elige la empresa, y en nuestro modelo la oferta de coches nuevos es exógena, así que no modelamos esa decisión. Lo que tomamos de ella es la pregunta sobre qué determina la vida y el precio de los bienes durables. Varios de sus resultados dependen, además, de cómo compiten las unidades usadas con las nuevas, por lo que iluminan parte de la importancia del mercado secundario.
+
+
+\subsection{Mercado secundario}
+
+Los mercados secundarios cambian el problema del productor de bienes durables porque las unidades usadas compiten con las nuevas. \textcite{Rust1986} muestra las condiciones necesarias para que un monopolista intente acabar con el mercado secundario. \textcite{HendelLizzeri1999a} estudian los incentivos del productor a interfereir con el mercado secundario contrastando a \textcite{Swan1972} y construyendo sobre \textcite{Waldman1993}.
+
+Cuando el vendedor conoce mejor la calidad de su bien que el comprador, aparece el problema de selección adversa de \textcite{Akerlof1970}. \textcite{HendelLizzeri1999b} muestran que, en mercados de bienes durables con un mercado de nuevos, la selección adversa no cierra el mercado de usados y sus distorsiones son menores de lo que se pensaba. \textcite{Biglaiser2020} estudian el papel de los intermediarios en la calidad de los coches usados al disminuir las asimetrías de información.
+
+En otra linea de investigación de los mercados secundarios se estudia el equilibrio con intercambio de bienes durables que se deprecian. \textcite{Rust1985} formula un modelo dinámico de equilibrio estacionario en el que un bien que se deteriora estocásticamente pasa por los mercados primario, secundario y al final se chatarriza, con información perfecta y sin costos de transacción muestra la existencia de un equilibrio estacionario donde los precios funcionan como precios sombra de un problema de \textit{paro óptimo}. \textcite{KonishiSandfort2002} ARREGLAR CITA prueban la existencia del equilibrio estacionario con costos de transacción y múltiples tipos de bienes durables. \textcite{Stolyarov2002} muestra que con costos de transacción la probabilidad de reventa es no monótona en la edad del bien para explicar los patrones de reventa de coches usados en Estados Unidos.
+
+En casi todos estos modelos la calidad de un usado está resumida por su edad o por un estado que evoluciona de forma exógena, y el dueño no puede cambiarla. Sin embargo, parte de esa calidad la produce quien mantiene el bien. Nosotros agregamos heterogeneidad dentro de cada marca y edad mediante el desgaste del coche que el dueño controla con la reparación y que se refleja en el precio. Suponemos información simétrica (el comprador observa el desgaste), por lo que no hay selección adversa; sin embargo, dejamos la literatura para tomar en cuenta el posible sesgo de su omisión y la extensión posible de nuestro modelo.
+
+\subsection{Reparación y mantenimiento}
+
+La teoría de bienes durables incorporó pronto el rol del mantenimiento. \textcite{schmalensee} AGREGAR LA CITA y \textcite{su1975} AGREGAR CITA lo introducen en el marco de Swan al relajar sus supuestos. \textcite{Morita Waldman 2004} AGREGAR CITA muestran que monopolizar el mantenimiento reduce o elimina el problema de inconsistencia temporal de \textcite{Bulow1982}, de forma parecida a rentar, y \textcite{Morita Waldman 2010} AGREGAR CITA estudian un caso en el que, con costos de cambio, los consumidores mantienen unidades que sería más eficiente reemplazar. En estos trabajos el interés está en la estrategia de la empresa; nosotros tomamos el precio de reparación como dado y nos concentramos en la respuesta del dueño.
+
+Otra literatura trata la información en el mantenimiento y reparaciones. \textcite{taylor 1995} estudia a dueños que no pueden distinguir si su bien necesita la reparación que recomienda un experto. La evidencia indica que estos problemas existen en los talleres y en la verificación en el mercado de coches. \textcite{schneider 2012} AGREGAR CITA, con un experimento de campo, encuentra subtratamiento y sobretratamiento generalizados en los talleres de coches. \textcite{Hubbard1998} encuentra que los inspectores privados de emisiones en California tienen incentivos a ayudar a pasar a los coches de sus clientes.
+
+En una tercera línea se relaciona la reparación con la vida útil \textcite{ManskiGoldin1983} plantean que un coche usado se chatarriza cuando su precio neto de los costos de reparación cae por debajo de su valor de chatarra, y encuentran una fuerte relación inversa entre el precio neto de reparación y probabilidad de chatarrización. \textcite{Berkovec1985} usa este modelo en su equilibrio. \textcite{HamiltonMacauley1999} descomponen el aumento en la longevidad de los coches en Estados Unidos entre 1950 y 1991 en un efecto de durabilidad inherente y uno externo, y encuentran que todo el aumento viene del factor externo, como menores tasas de accidentes o menores precios de las refacciones. \textcite{Bento2018} documentan que la vida media de los coches en Estados Unidos pasó de 12.2 a 15.6 años entre los setenta y los dos miles, con una elasticidad de la chatarrización al precio de los usados de alrededor de $-0.4$, en este artículo se usan los precios de reparación y mantenimiento para obtener un proxy del valor de tenencia de un coche. \textcite{McGrattanSchmitz1999} documentan que el gasto en mantenimiento y reparación es grande en comparación con la inversión y argumentan que incluirlo cambia las respuestas cuantitativas de los modelos, un argumento que compartimos. Desde otra perspectiva, la literatura de economía circular estudia el comportamiento de reparación y la extensión de la vida útil \parencite{Bakker2014,Parajuly2024}, y \textcite{JinYangZhu2023} muestran que los efectos de las políticas de \textit{right to repair} son ambiguos porque el fabricante responde en el mercado del bien nuevo, una respuesta que nuestro modelo, con oferta exógena, no captura.
+
+En esta evidencia la reparación aparece de forma implícita o en forma reducida, y \textcite{Gillingham2022} queda absorbida por otros componentes del modelo: los choques idiosincráticos se interpretan, entre otros componentes, como costos no observados de mantener el coche, y el patrón en zig-zag de la chatarrización en Dinamarca se explica porque, en los años de inspección obligatoria, los dueños de coches viejos prefieren chatarrizarlos a pagar por repararlos. No encontramos trabajos que modelen la reparación como una decisión explícita del consumidor dentro de un modelo de equilibrio del mercado de coches nuevos y usados, en el que el precio de reparación afecte el estado de los coches y, a través de él, los precios de los usados. Esa es la contribución de nuestro modelo teórico.
+
+\subsection{Modelos dinámicos de elección discreta}
+
+\textcite{Rust1987} modela la decisión de reemplazar el motor de un autobús como un problema de paro óptimo regenerativo: el administrador compara el costo de reemplazar con el costo de mantenimiento esperado, que crece con el kilometraje. Para estimarlo propone el algoritmo de punto fijo anidado (NFXP), que resuelve la ecuación de Bellman para cada valor de los parámetros dentro de la maximización de la verosimilitud. \textcite{Kennet1994} aplica la misma idea a la decisión de mandar a mantenimiento mayor los motores de aviones. \textcite{AguirregabiriaMira2010} revisa la literatura de modelos dinámicos de elección discreta. En \textcite{Rust1987} y \textcite{Kennet1994}, a diferencia de nuestro caso, la decisión de mantenimiento se observa.
+
+La base de estos artículos son los modelos de utilidad aleatoria de \textcite{McFadden1973,McFadden1978,McFadden1981}, que dan lugar al logit y a la familia de valor extremo generalizado (GEV), así como a la función log-sum que usamos en todo el modelo. Sus fundamentos matemáticos vienen de la programación dinámica \parencite{Bellman1957,Blackwell1965,SLP1989}, que desarrollamos en la sección del modelo.
+
+Para los coches, el antecedente son los modelos estáticos de demanda. \textcite{Berry1994} propone invertir las participaciones de mercado para recuperar la utilidad media de cada producto y así tratar con instrumentos la endogeneidad de los precios, \textcite{BLP1995} aplican este método al mercado de coches nuevos con coeficientes aleatorios. Estos modelos ignoran, sin embargo, que los coches son durables y que existe un mercado secundario. Los modelos dinámicos atienden lo primero: \textcite{ManneringWinston1985} estiman un modelo dinámico de tenencia y uso de vehículos, \textcite{AddaCooper2000} evalúan los subsidios a la chatarrización en Francia con un modelo dinámico con datos agregados, \textcite{GowrisankaranRysman2012} extienden BLP a un modelo dinámico de demanda de bienes durables nuevos (videocámaras) e \textcite{IshiharaChing2019} estiman la demanda dinámica de bienes durables nuevos y usados sin depreciación física (videojuegos).
+
+\subsection{Equilibrio estructural del mercado de coches}
+
+Algunos de los primeros modelos numéricamente tractables de equilibrio del mercado secundario de coches son los de \textcite{Manski1983} y \textcite{Berkovec1985} con modelos estáticos. Con un enfoque en la oferta, \textcite{EstebanShum2007} calibran un modelo similar y calculan que las pérdidas de los productores al abrir un mercado secundario es de 35\%. \textcite{Schiraldi2011} estima un modelo dinámico estructural de reemplazo con mercado secundario en Italia y lo usa para evaluar subsidios a la chatarrización. \textcite{GavazzaLizzeriRoketskiy2014} cuantifican el efecto de los costos de transacción en la distribución de coches en hogares. \textcite{EricsonPakes1995} proponen el equilibrio de Markov perfecto para analizar industrias, y su aplicación en \textcite{GoettlerGordon2011}.
+
+\textcite{Gillingham2022} unen la literatura en un modelo de equilibrio estacionario del mercado de coches nuevos y usados, donde la oferta y la demanda determinada por un modelo dinámico de elección discreta determinan los precios que vacían el mercado secundario. Estiman su modelo con datos de dinamarca, los cuales intentamos recrear en nuestro diseño de Monte Carlo. Este artículo es el principal sobre el que depende el presente trabajo; por lo que su lectura es recomendada, si no es que obligatoria, para contextualizar nuestra aportación. Otro artículo reciente con gran parecido a nuestro aporte es el de \textcite{LethPetersenLowMeghir2026}, quienes usan también datos de Dinamarca y agregan información privada sobre la calidad a un modelo de equilibrio de tenencia de coches: estiman que la penalización por \textit{lemons} es de 12\% del precio en el primer año de tenencia. Estos modelos llevan el equilibrio a los datos observando las transiciones de los coches entre hogares. Sin embargo, para el objetivo de nuestro trabajo, no basta con agregar las decisiones de reparación, pues queremos estimarlas.
+
+\subsection{Identificación y estimación con decisiones no observadas}
+
+En la parte de identificación, la literatura comienza con los métodos de estimación en decisiones observadas. El método base propuesto por \textcite{Rust1985} es el Nested Fixed Point (NXFP), mencionado brevemente en la sección pasada, el cual itera múltiples veces al probar distintos equilibrios donde cada uno resuelve la ecuación de Bellman, este método es demandante computacionalmente. \textcite{HotzMiller1993} usan las CCP para estimar las probabilidades de elección sin resolver la ecuación de Bellman. \textcite{AguirregabiriaMira2002} aportan a las CCP a través de un algoritmo que itera entre ambos métodos de estimación. Por otro lado, \textcite{SuJudd2012} aportan una nueva forma de estimar los equilibrios con restricciones (MPEC), mientras que \textcite{Iskhakov2016} muestra que NFXP es igual de rápido con un buen solucionador. Casi toda la literatura se centra en decisiones observadas \parencite{Rust1994,MagnacThesmar2002,ArcidiaconoMiller2020} donde el principal enfoque es la forma en la que los datos están organizados (datos agregados, microdatos, paneles desbalanceados, entre otros). Si bien esta literatura es vital para la identificación de la mayor parte de nuestro modelo, la literatura central para esta tesis es aquella que trata la identificación de decisiones no observadas.
+
+Los trabajos con decisiones no observadas infieren dichas decisiones de observables. Estas estrategias no son desconocidas para la literatura, tenemos a \textcite{MisraNair2011} y \textcite{GayleMiller2015} que estiman sus modelos tomando en cuenta el \textit{esfuerzo} no observado, un no-observable común. \textcite{HuXin2024}, artículo del que depende nuestra identificación, proponen una estrategia para estimar decisiones no observadas de modelos dinámicos de elección discreta con el costo de incluir una variable de estado continua y reglas de transición latentes. Sus resultados se extienden a observabilidad parcial, juegos dinámicos y múltiples especificaciones estructurales.
+
+Nuestra aplicación se asemeja a la estimación que realizaron de \textcite{Rust1987} con el reemplazo no observado. Más especificamente, usamos su estrategia de identificación adaptada a un modelo de elección discreta dinámico con horizonte infinito, en el cual el precio de reparación funge como restricción de exclusión. Sumado a esto, añadimos la mezcla presente en \textcite{Gillingham2022} en la cual la decisión de chatarrización no se distingue entre voluntaria e involuntaria.
+
+Así nuestro trabajo se centra en aportaciones a dos literaturas. Primero a la reparación como una decisión dentro de un equilibrio del mercado de coches y, segundo, su identificación como decisión no observada. \textcite{Gillingham2022} nos da el sustento necesario para contrastar nuestros resultados.
+
+
 
 \section{Modelo}
 
@@ -62,7 +159,7 @@ Los coches que llegan a la edad $\bar{a}$ por edad, accidente o avería son exó
 La probabilidad de accidente o avería depende de la marca, la edad y el coeficiente de avería de la siguiente manera
 $$s(j,a,w)=\Lambda\left(\alpha_{0j}+\alpha_{1j}\,a+w\right),\qquad \Lambda(z)=\frac{1}{1+e^{-z}}$$
 
-Los dos primeros términos son el \textbf{envejecimiento no reparable} (fatiga de materiales, corrosión, tecnología vieja): dependen solo de la marca y la edad y no responden a la reparación. El coeficiente $w$ es el \textbf{desgaste reparable}, medido en log-momios: dos coches de la misma marca y edad con $w$ distinto tienen distinta probabilidad de accidente, y dos coches con el mismo $w$ y distinta edad también, porque el más viejo tiene más envejecimiento no reparable. Los coches nuevos nacen con $w=0$, que es la normalización del nivel de $w$: está anclada en el coche nuevo, que es el mismo para todos, y no en un promedio de los coches que circulan, que dependería de quién sobrevive y de cuánto se repara. Trabajamos en log-momios porque ahí el choque al desgaste es aditivo y de media cero, como pide Hu \& Xin (2024, Supuesto 2), y $s$ siempre queda en $(0,1)$.
+Los dos primeros términos son el \textbf{envejecimiento no reparable} (fatiga de materiales, corrosión, tecnología vieja): dependen solo de la marca y la edad y no responden a la reparación. El coeficiente $w$ es el \textbf{desgaste reparable}, medido en log-momios: dos coches de la misma marca y edad con $w$ distinto tienen distinta probabilidad de accidente, y dos coches con el mismo $w$ y distinta edad también, porque el más viejo tiene más envejecimiento no reparable. Los coches nuevos nacen con $w=0$, que es la normalización del nivel de $w$: está anclada en el coche nuevo, que es el mismo para todos, y no en un promedio de los coches que circulan, que dependería de quién sobrevive y de cuánto se repara. Trabajamos en log-momios porque ahí el choque al desgaste es aditivo y de media cero, como pide Hu \& Xin (2024), y $s$ siempre queda en $(0,1)$.
 
 El coeficiente de avería $w$ de los coches que sobreviven evoluciona según la siguiente regla de transición adaptada del modelo de Hu \& Xin (2024)
 $$w_{t+1}=m(j,r_t,w_t)+\eta ,\qquad m(j,r,w)=w+\delta_j-\kappa\, r,\qquad \eta\sim N(0,\sigma_\eta^2)$$
@@ -87,7 +184,7 @@ Las decisiones tienen la siguiente secuencia:
 \begin{adjustbox}{max width=\textwidth}
 \begin{tikzpicture}[
     grow=right,
-    level distance=3.3cm,
+    level distance=3.1cm,
     edge from parent/.style={draw, -{Stealth[scale=0.8]}, thin, gray},
     every node/.style={
         rectangle,
@@ -102,7 +199,7 @@ Las decisiones tienen la siguiente secuencia:
     level 1/.style={sibling distance=2.2cm},
     level 2/.style={sibling distance=1.0cm},
     level 3/.style={sibling distance=1.0cm},
-    level 4/.style={sibling distance=0.7cm}
+    level 4/.style={sibling distance=0.7cm},
 ]
 
 \node[fill=blue!20, font=\small\bfseries] {Consumidor on coche}
@@ -115,16 +212,17 @@ Las decisiones tienen la siguiente secuencia:
         child { node[fill=red!10] {No reparar $r=0$}}
     }
     child { node {Intercambiar $j\in \{1,\dots,J\}$}
-        child { node {Escoger $j$ luego $a$}
-            child { node[fill=red!10] {Reparar $r=1$}}
-            child { node[fill=red!10] {No reparar $r=0$}}
+        child { node {Vender $D=0$ o\\chatarrizar $D=1$\\el coche actual}
+            child { node {Escoger $j$ luego $a$}
+                child { node[fill=red!10] {Reparar $r=1$}}
+                child { node[fill=red!10] {No reparar $r=0$}}
+            }
         }
-        child { node {Vender $D=0$ o\\chatarrizar $D=1$\\el coche actual}}
     };
 
 \end{tikzpicture}
 \end{adjustbox}
-\caption{Árbol de decisiones para un consumidor con un coche activo $(j,a,w)$. En rojo, las decisiones que el econometrista no observa. Los coches nuevos ($b=0$) y los de edad $\bar{a}-1$ no se reparan.}
+\caption{Árbol de decisiones para un consumidor con un coche activo $(j,a,w)$. En rojo, las decisiones que el econometrista no observa. Los coches nuevos y los de edad $\bar{a}-1$ no se reparan.}
 \label{fig:decision-tree}
 \end{figure}
 
@@ -250,7 +348,7 @@ y, para un usado $h$ que se puede reparar,
 $$\Pi(r=1\mid h)=\frac{\exp\big(v_1(h)/\sigma_r\big)}{\exp\big(v_0(h)/\sigma_r\big)+\exp\big(v_1(h)/\sigma_r\big)}$$
 
 
-La decisión de chatarrizar y la de reparar dependen únicamente del coche objetivo: chatarrizar del coche que se tiene y reparar del coche que se adquirió. Como sus valores entran de forma aditiva, son independientes del resto de las decisiones del nido en el que se encuentran: la probabilidad de chatarrizar es la misma si el hogar se queda sin coche o si compra otro, y la de reparar es la misma si el hogar mantuvo su coche o si lo compró. Esta última propiedad es justo la observabilidad parcial de Hu \& Xin (2024, sección 6.3): lo que se observa (mantener o intercambiar) y lo que no (reparar) están anidados.
+La decisión de chatarrizar y la de reparar dependen únicamente del coche objetivo: chatarrizar del coche que se tiene y reparar del coche que se adquirió. Como sus valores entran de forma aditiva, son independientes del resto de las decisiones del nido en el que se encuentran: la probabilidad de chatarrizar es la misma si el hogar se queda sin coche o si compra otro, y la de reparar es la misma si el hogar mantuvo su coche o si lo compró. Esta última propiedad es justo la observabilidad parcial de Hu \& Xin (2024): lo que se observa (mantener o intercambiar) y lo que no (reparar) están anidados.
 
 Para obtener las probabilidades basta con obtener las funciones de valor específicas por decisión que resultan de sustituir $EV$ en su definición.
 
@@ -453,9 +551,9 @@ que es la probabilidad neta de que el coche $(j,a,w)$ adquirido y/o mantenido en
 
 Escribir la fase física como $QA$ (primero envejecer o descomponerse, luego mover $w$) es válido porque la probabilidad de descomponerse en el periodo depende del $w$ actual y no de la decisión de reparar. Si reparar redujera la probabilidad de descomponerse ese mismo periodo, $Q$ dependería de $r$ y la fase física tendría que escribirse como una sola matriz con bloques $\sum_r \Pi(r)\,(1-s_r(w))\,f(w'\mid r)$.
 
-Así el producto $q\Omega(P,R)QA(P,R)$ es la distribución de tenencia de coches con la cual inicia el siguiente periodo la economía. La matriz $\mathcal{M}(P,R)=\Omega(P,R)QA(P,R)$ es la matriz de transición de un periodo entre estados de inicio de periodo, la misma cuyo producto por $\beta$ es el jacobiano del operador de Bellman.\\
+Así el producto $q\Omega(P,R)QA(P,R)$ es la distribución de tenencia de coches con la cual inicia el siguiente periodo la economía. El producto $\Omega(P,R)QA(P,R)$ es la matriz de transición de un periodo entre estados de inicio de periodo, la misma cuyo producto por $\beta$ es el jacobiano del operador de Bellman.
 
-Para precios $P$ dados, $\mathcal{M}$ es una matriz estocástica de dimensión finita, así que tiene al menos una distribución invariante $q=q\mathcal{M}$. Además, como todas las probabilidades de elección son estrictamente positivas, desde cualquier estado se llega con probabilidad positiva al estado sin coche en un periodo, y de ahí se puede permanecer sin coche; por tanto, la cadena tiene una sola clase recurrente, que contiene a $\emptyset$, y es aperiódica. Esto garantiza que la distribución invariante es única y que $q_0\mathcal{M}^k$ converge a ella desde cualquier distribución inicial $q_0$. Como la edad aumenta determinísticamente, en la práctica $q$ se puede calcular por recursión en la edad, sin resolver un sistema de $n$ ecuaciones.\\
+Para precios $P$ dados, $\Omega(P,R)QA(P,R)$ es un producto de matrices estocásticas de dimensión finita, y por tanto también es estocástica, así que tiene al menos una distribución invariante $q=q\,\Omega(P,R)QA(P,R)$. Además, como todas las probabilidades de elección son estrictamente positivas, desde cualquier estado se llega con probabilidad positiva al estado sin coche en un periodo, y de ahí se puede permanecer sin coche; por tanto, la cadena tiene una sola clase recurrente, que contiene a $\emptyset$, y es aperiódica. Esto garantiza que la distribución invariante es única y que $q_0\big(\Omega(P,R)QA(P,R)\big)^k$ converge a ella desde cualquier distribución inicial $q_0$.\\
 
 
 \textbf{Definición 1} (Equilibrio estacionario en el mercado de coches) \textit{Un equilibrio estacionario en una economía con una masa unitaria de consumidores y coches de $J$ marcas, $\bar{a}$ edades y $W$ niveles de coeficientes de avería, está dado por el vector de precios y el vector de probabilidad de distribución $(P,q)$, de tal manera que las siguientes condiciones se cumplan:}
@@ -473,7 +571,7 @@ $$\begin{aligned}
 \end{aligned}$$
 \textit{donde las probabilidades de elección que forman $\Omega$, $A$ y $ED$ se calculan con el punto fijo $EV=\Gamma(EV;P,R)$.}
 
-El equilibrio es, entonces, un sistema de ecuaciones no lineales en $(EV,P)$: $J(\bar{a}-1)W$ condiciones de vaciado de mercado y $n$ ecuaciones de Bellman, con $q$ determinado por $(EV,P)$. No probamos la existencia del equilibrio en este modelo; en modelos parecidos se ha demostrado con argumentos de punto fijo (Rust, 1985; Konishi \& Sandfort, 2002), y en nuestro caso verificamos numéricamente que el sistema tiene solución en cada régimen.
+El equilibrio es, entonces, un sistema de ecuaciones no lineales en $(EV,P)$: $J(\bar{a}-1)W$ condiciones de vaciado de mercado y $n$ ecuaciones de Bellman, con $q$ determinado por $(EV,P)$. No probamos la existencia del equilibrio en este modelo\footnote{Nota al asesor: debería? tal vez no es tan dificil, solo es extender Gillingham, o no sé si se puede indicar a Gill y dejarlo así}, en nuestro caso verificamos numéricamente que el sistema tiene solución en cada régimen.
 
 \subsection{Equilibrio con consumidores heterogéneos}
 
@@ -500,105 +598,216 @@ Para esto diseñamos una estrategía de identificación del modelo junto con la 
 
 Siguiendo la base de datos de Gillingham et al. (2022), el econometrista puede observar las transiciones de consumidores/hogares entre coches de cada edad y marca, y cuantos son chatarrizados sin poder distinguir si el motivo es voluntario o exógeno. Nosotros agregamos dos variables observables: algún indicador del estado de los coches $w$ y régimen de costos de reparación $R$.
 
-Contrario al método "BLP" de Berry, Levinsohn \& Pakes (1995) y apegándonos a Gillingham et al. (2022), nuestro modelo se estima sin la necesidad de variables instrumentales pues los precios son otro parámetro a estimar. En BLP estiman el modelo invirtiendo el mapeo de la participación de mercado de cada coche a la utilidad promedio descontada de ese estado, nosotros, al evitar endogeneidad de los precios, podemos estimar los parámetros del modelo con máxima verosimilitud.
+A diferencia del método ``BLP'' de Berry, Levinsohn \& Pakes (1995), y apegándonos a Gillingham et al. (2022), nuestro modelo se estima sin la necesidad de variables instrumentales. En BLP los precios se observan y son endógenos porque están correlacionados con características de los coches que el econometrista no observa; por eso estiman el modelo invirtiendo el mapeo de la participación de mercado de cada coche a su utilidad media y usan instrumentos. En nuestro modelo no hay características no observadas de los coches, toda la heterogeneidad no observada está en los choques idiosincráticos $\epsilon$, que son independientes de los precios, y los precios de los usados no se observan: no se estiman como parámetros libres, sino que se sustituyen por los precios de equilibrio que implica el modelo, $P(\theta)$. Así, podemos estimar los parámetros del modelo con máxima verosimilitud.
 
-Sea $\theta$ el vector de parámetros que caracterizan las preferencias de los consumidores, costos de transacción de los coches y la regla de transición del estado de los coches. A partir de eso definimos la función de verosilimitud $L(\theta)$. Asumimos que el proceso generador de datos verdadero es estocásticamente estacionario, así los datos son una muestra de la distribución estacionaria. Asumimos también que los tipos de consumidores $\tau$ son observables. Los hogares pueden observar $M$ distintos regímenes de precios $R_1,\dots,R_M$. Sea $\delta_{nt}$ el estado de tenencia de un hogar $n$ en el tiempo $t$. En cada régimen, la economía está en su propio equilibrio estacionario $(P_m(\theta), q_m(\theta))$ que cumplen el teorema 1.
+Sea $\theta$ el vector de parámetros que caracterizan las preferencias de los consumidores, los costos de transacción, la utilidad del desgaste, la probabilidad de avería, la escala de la decisión de reparar y la regla de transición del coeficiente de avería $f(w'\mid j,a,w,r)$. Los precios de los coches nuevos $\overline{P}_j$, los de chatarra $\underline{P}_j$ y los precios de reparación $R$ son datos; los precios del mercado secundario no se observan. A partir de eso definimos la función de verosimilitud $L(\theta)$. Asumimos que el proceso generador de datos verdadero es estocásticamente estacionario, así los datos son una muestra de la distribución estacionaria. Asumimos también que los tipos de consumidores $\tau$ son observables. Los hogares pueden enfrentar $M$ distintos regímenes de precios de reparación $R_1,\dots,R_M$. En cada régimen, la economía está en su propio equilibrio estacionario $(P_m(\theta), q_m(\theta))$, que cumple
+$$q_{m\tau}\,\Omega_\tau(P_m,R_m)\,Q\,A_\tau(P_m,R_m)=q_{m\tau}\;\;\forall\tau,\qquad ED(P_m,q_m)=0 .$$
+Interpretamos los regímenes como mercados distintos (por ejemplo, regiones), cada uno en su propio equilibrio estacionario, en los que los hogares perciben su precio de reparación como permanente; no son años sucesivos para los mismos hogares.
 
-En un modelo con información completa, sería razonable pensar que observamos los estados pre-intercambio $x_{nt}$ del hogar $n$ en el tiempo $t$, en otras palabras, observar directamente $q_{m}$ pues así podemos distinguir quienes hicieron chatarrización voluntaria; sin embargo, para adherirnos a Gilligham et al. (2022), usaremos sus datos observados donde la chatarrización no es observada y en su lugar vemos los coches que fueron chatarrizados como un total. Los estados que observamos son entonces aquellos estados post-intercambio $\delta_{nt}$ del hogar $n$ en el tiempo $t$. Los hogares transicionan de su $\delta_{nt}$ inicial al siguiente $\delta_{n,t+1}$ a través de un proceso de markov. Es decir, para la verosimilitud nos interesa saber el comportamiento de $Pr(\delta_{t+1}\mid \delta_t)$. Como $\delta = q\Omega$, entonces:
+Sea $\delta_{gt}$ el estado de tenencia post-intercambio del hogar $g$ en el periodo $t$, es decir, una columna de $\Omega$: un usado $(j,a,w)$, un nuevo $(j,0)$ o $\emptyset$. En un modelo con información completa sería razonable pensar que observamos los estados pre-intercambio $x_{gt}$ del hogar $g$ en el tiempo $t$, pues así podemos distinguir quiénes hicieron chatarrización voluntaria; sin embargo, para adherirnos a Gillingham et al. (2022), usaremos sus datos observados, donde el motivo de la chatarrización no se observa y en su lugar vemos los coches que fueron chatarrizados como un total. Los estados que observamos son entonces los estados post-intercambio $\delta_{gt}$. Los hogares transitan de su $\delta_{gt}$ inicial al siguiente $\delta_{g,t+1}$ a través de un proceso de Markov, es decir, para la verosimilitud nos interesa el comportamiento de $\Pr(\delta_{t+1}\mid \delta_t)$. Como la distribución de la tenencia es $q\Omega$, se tiene que:
+$$\Pr(\delta_{t+1}\mid \delta_t)=[Q \,A(P,R)\, \Omega(P,R)]_{\delta_t, \delta_{t+1}}$$
+Si $q$ es la distribución estacionaria de inicio de periodo, la de tenencia $q\Omega$ es invariante para esta matriz: $q\Omega\,QA\Omega=q\,\Omega$. Bajo estacionariedad, los $\delta_{gt}$ observados son una muestra de $q\,\Omega$.
 
-$$Pr(\delta_{t+1}\mid \delta_t)=[Q \,A(P,R) \Omega(P,R)]_{\delta_t, \delta_{t+1}}$$
+¿Qué se observa en cada transición? Un hogar en el estado $\delta_{gt}$ con algún coche $j$ pasa primero por la matriz de transición física $Q$, en la que puede llegar a la edad terminal $\bar{a}$ o sobrevivir y avanzar a la siguiente edad. Posteriormente pasa por la matriz de transición del coeficiente de avería $A(P,R)$, donde, dependiendo de su decisión de reparación, avanza a algún $w'$. Al llegar al siguiente periodo con esos cambios, vuelve a entrar a la decisión de intercambio, donde puede elegir entre mantener, vender o chatarrizar, o comprar y vender o chatarrizar, y así terminar en el nuevo $\delta_{g,t+1}$.
 
-¿Qué se observa en cada transición? Un hogar en el estado $\delta_{nt}$ con algún coche $j$ pasa primero por la matriz de transición física $Q$ en la que puede llegar a edad terminal $\bar{a}$ o sobrevivir y avanzar a la siguiente edad. Posteriormente pasa por la matriz de transición del coeficiente de avería $A(P,R)$, donde dependiendo de su decisión de reparación, avanza a algún $w'$. Al llegar al siguiente periodo con esos cambios vuelve a entrar a la decisión de intercambio donde puede elegir entre mantener, vender o chatarrizar, o comprar y vender o chatarrizar; y así terminar en el nuevo $\delta_{n,t+1}$.
+Mantener es la decisión que observamos con menor incertidumbre, pues ocurre cuando vemos un coche en $\delta_t$ y ese mismo coche envejecido en $\delta_{t+1}$. La decisión de comprar también es observada, pues en $\delta_t$ observamos la tenencia de algún coche o ningún coche, mientras que en $\delta_{t+1}$ el hogar aparece con un coche que no tenía. Además de $\delta_{t+1}$, observamos qué pasó con el coche $\delta_t$: si se mantuvo, se vendió ($D=0$) o se chatarrizó ($D=1$). El coeficiente $w'$ del coche $\delta_t$ al inicio de $t+1$ se observa si el coche sigue circulando (se mantiene o se vende), pero no si se chatarriza. La decisión de reparar nunca se observa. La incertidumbre surge entonces de qué sucede cuando un coche se chatarriza, pues este coche puede no haber sobrevivido la transición física, o haber sobrevivido y haber sido chatarrizado voluntariamente con algún $w'$ que no vemos.
 
-Mantener es la decisión que observamos con menor incertidumbre, pues ocurre cuando vemos un coche en $\delta_t$ y ese mismo coche envejecido en $\delta_{t+1}$. La decisión de comprar también es observada pues en $\delta_t$ observamos la tenencia de algún coche o ningún coche, mientras que en $\delta_{t+1}$ aparece con un coche que no tenía este hogar. La incertidumbre surge de qué sucede cuando un coche desaparece del hogar, pues este coche puede no sobrevivir la transición física y ser chatarrizado, o sobrevivir y ser vendido, o sobrevivir y ser chatarrizado.
+%Como la transición de la matriz $A$ es resultado de la reparación no observada, usamos la especificación de Hu \& Xin (2024) de la regla de transición del coeficiente de avería para poder identificar la reparación. Nos basta con una mezcla de la reparación, pues estamos usando una regla de transición paramétrica; sin embargo, esto se puede relajar a una regla de transición no paramétrica con la verosimilitud propuesta en ese artículo. Dejamos la versión paramétrica para estimarlo en un solo paso y simplificar el desarrollo. Para poder identificar dicha decisión no observada es necesario observar distintos regímenes de precios de reparación. (ESTO PUEDE IR EN EL APÉNDICE)
 
-Como la transición de la matriz $A$ es resultado de la reparación no observada, usamos la especificación de Hu \& Xin (2024) de la regla de transición del coeficiente de avería para poder identificar la reparación. Nos basta con una mezcla de la reparación, pues estamos usando una regla de transición paramétrica; sin embargo, esto se puede relajar a una regla de transición no paramétrica con la verosimilitud propuesta en ese artículo. Dejamos la versión paramétrica para estimarlo en un solo paso y simplificar el desarrollo. Para poder identificar dicha decisión no observada es necesario observar distintos regímenes de precios de reparación. (ESTO PUEDE IR EN EL APÉNDICE)
-
-La mezcla sobre reparación comprende los posibles caminos de $Q\,A$ por los que $\delta_{nt}$ pudo haber pasado para aun así llegar a $\delta_{n,t+1}$. Sea $x$ el estado intermedio tras aplicar $Q\,A$, pero antes de la fase de intercambio
-
+La mezcla sobre reparación comprende los posibles caminos de $Q\,A$ por los que $\delta_{gt}$ pudo haber pasado para aun así llegar a $\delta_{g,t+1}$. Fijemos $\delta_t=(j,a,w)$. La reparación se decide con el coche que se tiene después del intercambio, así que se indexa con la edad $a$ de la tenencia (la misma que se usa en $C_{j,a+1}$ de $A$). Sea $x$ el estado intermedio tras aplicar $Q\,A$, pero antes de la fase de intercambio
 $$[QA]_{\delta_t,x}=\begin{cases}
-s(w) & x=(j,\bar{a}),\\[2pt]
-\big(1-s(w)\big)\,Z(w'\mid j,a+1,w) & x=(j,a+1,w'),\\[2pt]
+s(j,a,w) & x=(j,\bar{a}),\\[2pt]
+\big(1-s(j,a,w)\big)\,Z(w'\mid j,a,w) & x=(j,a+1,w'),\\[2pt]
 0 & \text{otro caso},
 \end{cases}$$
 con
-$$Z(w'\mid j,a,w)=\sum_{r\in\{0,1\}}\Pi(r\mid j,a,w,P,R)\,f(w'\mid j,a+1,w,r),$$
+$$Z(w'\mid j,a,w)=\sum_{r\in\{0,1\}}\Pi(r\mid j,a,w,P,R)\,f(w'\mid j,a,w,r).$$
+$Z(\cdot\mid j,a,w)$ es una distribución sobre el grid de $w'$ ($\sum_{w'}Z(w'\mid j,a,w)=1$): la probabilidad de llegar a cada $w'$ integrando la reparación no observada. Es la ecuación (6.4) de Hu \& Xin (2024) para observabilidad parcial. Para $a=\bar{a}-1$ el coche llega a la terminal con certeza ($s=1$), y para el nuevo $(j,0)$ no hay reparación y $Z=f(\cdot\mid j,0,0,r=0)$.
 
-La verosimilitud $L(\theta)$ está construida a partir del producto de la probabilidad de cada observación. Sea $l_{nt}$ la contribución de la transición del hogar $n$ entre $t$ y $t+1$. Partiendo de $\delta_t=(j,a,w)$:
+La verosimilitud $L(\theta)$ está construida a partir del producto de la probabilidad de cada observación. Sea $l_{gt}$ la contribución de la transición del hogar $g$ entre $t$ y $t+1$ y escribamos $s=s(j,a,w)$. Partiendo de $\delta_t=(j,a,w)$:
 \begin{itemize}
     \item \textbf{Mantener} $\implies\delta_{t+1}=(j,a+1,w')$, y su contribución
-    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\text{Keep}\mid j,a+1,w')$$
+    $$l_{gt}=\big(1-s\big)\,Z(w'\mid j,a,w)\,\Pi(K\mid j,a+1,w')$$
     \item \textbf{Comprar} $\implies\delta_{t+1}=(i,b,y)$ o $(i,0)$. Si el coche anterior se vendió ($D=0$), su $w'$ se observa:
-    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w')$$
+    $$l_{gt}=\big(1-s\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w')$$
     Si se chatarrizó ($D=1$), no se sabe si fue avería ni cuál era su $w'$:
-    $$l_{nt}=\underbrace{s(w)\,\Pi(\delta_{t+1}\mid j,\bar{a})}_{\text{avería}}+\big(1-s(w)\big)\underbrace{\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w')}_{\text{chatarreo voluntario}}$$
+    $$l_{gt}=\underbrace{s\,\Pi(\delta_{t+1}\mid j,\bar{a})}_{\text{avería}}+\big(1-s\big)\underbrace{\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w')}_{\text{chatarreo voluntario}}$$
     \item \textbf{Sin coche} $\implies\delta_{t+1}=\emptyset$. Si vendió ($D=0$):
-    $$l_{nt}=\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\emptyset,D=0\mid j,a+1,w')$$
+    $$l_{gt}=\big(1-s\big)\,Z(w'\mid j,a,w)\,\Pi(\emptyset,D=0\mid j,a+1,w')$$
     Si chatarrizó ($D=1$):
-    $$l_{nt}=s(w)\,\Pi(\emptyset\mid j,\bar{a})+\big(1-s(w)\big)\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\emptyset,D=1\mid j,a+1,w')$$
+    $$l_{gt}=s\,\Pi(\emptyset\mid j,\bar{a})+\big(1-s\big)\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\emptyset,D=1\mid j,a+1,w')$$
 \end{itemize}
-Un coche terminal no se puede vender ni mantener, por eso el término de avería solo aparece cuando se observa $D=1$. Si en su lugar partimos de $\delta_t=\emptyset$:
+Un coche terminal no se puede vender ni mantener; por eso el término de avería solo aparece cuando se observa $D=1$. Si en su lugar partimos de un nuevo $\delta_t=(j,0)$, las contribuciones son las mismas con $a=0$, $w=0$ y $Z=f(\cdot\mid j,0,0,r=0)$. Si partimos de $\delta_t=\emptyset$:
 \begin{itemize}
-    \item \textbf{Comprar} $\implies\delta_{t+1}=(i,b,y)$ o $(i,0)$: $\;l_{nt}=\Pi(\delta_{t+1}\mid\emptyset)$
-    \item \textbf{Sin coche} $\implies\delta_{t+1}=\emptyset$: $\;l_{nt}=\Pi(\text{Keep}\mid\emptyset)$
+    \item \textbf{Comprar} $\implies\delta_{t+1}=(i,b,y)$ o $(i,0)$: $\;l_{gt}=\Pi(\delta_{t+1}\mid\emptyset)$
+    \item \textbf{Sin coche} $\implies\delta_{t+1}=\emptyset$: $\;l_{gt}=\Pi(\emptyset\mid\emptyset)$
 \end{itemize}
-Sea $m$ el régimen y $\tau_n$ el tipo (observado) del hogar $n$, que se sigue en $t=1,\dots,T$. Condicionando en la primera tenencia observada, como Gillingham,
-$$LL(\theta)=\sum_{m=1}^{M}\sum_{n=1}^{N_m}\sum_{t=1}^{T-1}\log l_{nmt}\big(\theta,P_m(\theta)\big),$$
-donde $l_{nmt}$ es la contribución anterior evaluada con las probabilidades de elección del tipo $\tau_n$ a los precios de equilibrio del régimen $m$. Todos los regímenes comparten $\theta$.
 
-Recordemos que por cada régimen distinto observamos un equilibrio distinto; sin embargo, comparten todos los parámetros .
+Sea $m$ el régimen y $\tau_g$ el tipo (observado) del hogar $g$, que se sigue en $t=1,\dots,T$. Condicionando en la primera tenencia observada, como Gillingham,
+$$LL(\theta)=\sum_{m=1}^{M}\sum_{g=1}^{N_g}\sum_{t=1}^{T-1}\log l_{gmt}\big(\theta,P_m(\theta)\big),$$
+donde $l_{gmt}$ es la contribución anterior evaluada con las probabilidades de elección del tipo $\tau_g$ a los precios de equilibrio del régimen $m$. Recordemos que por cada régimen distinto observamos un equilibrio distinto; sin embargo, todos los regímenes comparten los parámetros $\theta$.
+
+El estimador de máxima verosimilitud es $\hat\theta=\arg\max_\theta LL(\theta)$. Como en Rust (1987) y Gillingham et al. (2022), es un estimador de punto fijo anidado: cada vez que se evalúa $LL(\theta)$ se resuelven, para cada régimen, el punto fijo de Bellman de cada tipo y los precios de equilibrio.
 
 \subsection{Versión por celdas}
 
-En los datos de Gillingham, el panel está colapsado a transiciones por celda; es decir, el número de hogares de un estado $\delta_t$ que tomaron la decisión $e_{t+1}$ y llegaron a $\delta_{t+1}$. Entonces ahora presentamos la versión por celdas que se apega a la especificación de Gillingham.
+En los datos de Gillingham, el panel está colapsado en transiciones por celda; es decir, el número de hogares de un estado $\delta_t$ que tomaron la decisión $e_{t+1}$ y llegaron a $\delta_{t+1}$. Ahora presentamos la versión por celdas, que se apega a la especificación de Gillingham y es la que usamos para estimar.
 
-$l_{nmt}$ depende solo de el régimen $m$, el tipo $\tau$, $\delta_t$ y lo observado en $t+1$. Agrupando las observaciones idénticas, la log-verosimilitud se puede escribir por celdas.
+Como los estados son discretos y toda la heterogeneidad persistente es observada, $l_{gmt}$ depende solo del régimen $m$, el tipo $\tau$, $\delta_t$ y lo observado en $t+1$. Agrupando las observaciones idénticas, la log-verosimilitud se puede escribir por celdas.
 
-Lo observado en una transición es $(\delta_t,\,e_{t+1},\,\delta_{t+1})$, donde $e_{t+1}\in\{\text{Keep},\,D=0,\,D=1\}$ es lo que pasó con el coche $\delta_t$
-$$c=\big(m,\;\tau,\;\delta_t,\;e_{t+1},\;\delta_{t+1}\big),$$
-Sea $N_c$ el número de transiciones de la celda $c$ y $l_c$ la contribución $l_{nt}$ de cualquiera de ellas, dada por las fórmulas anteriores: para $\delta_t=(j,a,w)$,
+Lo observado en una transición es $(\delta_t,\,e_{t+1},\,w'_{t+1},\,\delta_{t+1})$, donde $e_{t+1}\in\{K,\,D=0,\,D=1\}$ es lo que pasó con el coche $\delta_t$ y $w'_{t+1}$ es su coeficiente de avería, que está vacío cuando $e_{t+1}=(D=1)$. Una celda es
+$$c=\big(m,\;\tau,\;\delta_t,\;e_{t+1},\;w'_{t+1},\;\delta_{t+1}\big).$$
+Sea $N_c$ el número de transiciones de la celda $c$ y $l_c$ la contribución $l_{gt}$ de cualquiera de ellas, dada por las fórmulas anteriores: para $\delta_t=(j,a,w)$,
 $$l_c=\begin{cases}
-\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\text{Keep}\mid j,a+1,w') & e=\text{Keep},\\[4pt]
-\big(1-s(w)\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w') & e=(D=0),\\[4pt]
-s(w)\,\Pi(\delta_{t+1}\mid j,\bar{a})+\big(1-s(w)\big)\displaystyle\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w') & e=(D=1),
+\big(1-s\big)\,Z(w'\mid j,a,w)\,\Pi(K\mid j,a+1,w') & e=K,\\[4pt]
+\big(1-s\big)\,Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=0\mid j,a+1,w') & e=(D=0),\\[4pt]
+s\,\Pi(\delta_{t+1}\mid j,\bar{a})+\big(1-s\big)\sum_{w'}Z(w'\mid j,a,w)\,\Pi(\delta_{t+1},D=1\mid j,a+1,w') & e=(D=1),
 \end{cases}$$
-con $\delta_{t+1}\in\{(i,b,y),(i,0),\emptyset\}$ en los dos últimos casos, y para $\delta_t=\emptyset$, $l_c=\Pi(\delta_{t+1}\mid\emptyset)$ (con $\Pi(\emptyset\mid\emptyset)=\Pi(\text{Keep}\mid\emptyset)$). La log-verosimilitud es
-$$LL(\theta)=\sum_{c}N_c\,\log l_c\big(\theta,P_{m_c}(\theta)\big).$$
+con $\delta_{t+1}\in\{(i,b,y),(i,0),\emptyset\}$ en los dos últimos casos, y para $\delta_t=\emptyset$, $l_c=\Pi(\delta_{t+1}\mid\emptyset)$. La log-verosimilitud es
+$$LL(\theta)=\sum_{c}N_c\,\log l_c\big(\theta,P_{m_c}(\theta)\big),$$
+que es igual a la verosimilitud que obtuvimos anteriormente, pero agrupada por la frecuencia de su celda:
+$$\sum_{m}\sum_{g}\sum_{t}\log l_{gmt}=\sum_c N_c\log l_c .$$
+Agrupar es exacto, no una aproximación: todas las observaciones de una celda tienen la misma contribución, y solo cambia el costo de evaluar $LL(\theta)$, que pasa a depender del número de celdas distintas y no del número de hogares.
 
-que es igual a la verosimilitud que obtuvimos anteriormente, pero agrupada por la frecuencia de su celda.
+Con la anterior verosimilitud podemos estimar nuestro modelo con reparación no observada y chatarrización indistinguible de accidentes.
 
-$$\sum_{m}\sum_{n}\sum_{t}\log l_{nmt}=\sum_c N_c\log l_c .$$
+\subsection{Identificación de la reparación no observada}
 
-Con la anterior verosimilitud podemos estimar nuestro modelo con reparación y chatarrización indistinguible de accidentes.
+Como la transición de la matriz $A$ es resultado de la reparación no observada, usamos la especificación de Hu \& Xin (2024) de la regla de transición del coeficiente de avería para poder identificar la reparación. Sus supuestos se corresponden con nuestro modelo de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Estado continuo con error aditivo} (Supuesto 2): $w'=m(j,r,w)+\eta$, con $\eta$ independiente de $r$ condicional en el estado. Por eso trabajamos con $w$ en log-momios.
+    \item \textbf{Transición estable} (Supuesto 1): $f(w'\mid j,a,w,r)$ no depende del régimen ni del tiempo.
+    \item \textbf{Variable excluida} (Supuesto 7): el precio de reparación $R_m$ mueve la probabilidad de reparar $\Pi(r=1\mid j,a,w,P_m,R_m)$, pero no la transición $f(w'\mid j,a,w,r)$. En horizonte infinito no hay variación en el tiempo de las probabilidades de elección, así que esta variable excluida es la que hace el papel que en horizonte finito hace el tiempo.
+    \item \textbf{Observabilidad parcial} (sección 6.3): se observa si el hogar mantiene o intercambia su coche, pero no si lo repara; como la decisión de reparar es la misma para quien mantuvo y para quien compró el coche, la transición observada es la mezcla $Z$ de la ecuación (6.4).
+\end{itemize}
+
+
+Hu \& Xin (2024) identifican la transición de forma no paramétrica en un primer paso. Nosotros usamos una regla de transición paramétrica, por lo que nos basta con la mezcla dentro de la verosimilitud para estimar todo en un solo paso; esto se puede relajar a una regla de transición no paramétrica con la verosimilitud propuesta en ese artículo. Dejamos la versión paramétrica para simplificar el desarrollo.
+
+Como no observamos los precios de los usados, los costos de transacción del comprador y del vendedor solo se pueden separar si hay tipos de consumidores con distinta $\mu_\tau$: subir $T_b$ en una cantidad, bajar $T_s$ en la misma cantidad y bajar todos los precios en esa cantidad entre $\mu$ deja igual a toda transacción de usados; con un solo tipo, esta dirección solo la rompen los precios fijos de los nuevos y de la chatarra. Por esto trabajamos con dos tipos de consumidores con $\mu_\tau$ distinta.
 
 
 \section{Diseño de Monte Carlo}
 
+Realizamos un experimento de Monte Carlo para probar que nuestro modelo es estimable y para responder nuestras dos preguntas. El experimento tiene tres objetivos:
+\begin{enumerate}
+    \item Verificar que el estimador de máxima verosimilitud recupera los parámetros y la decisión de reparación, y que sus errores estándar son correctos, aun sin observar la reparación.
+    \item Medir cuánta información se pierde al no observar la reparación y el motivo de salida de los coches.
+    \item Medir el sesgo de estimar el modelo de Gillingham et al. (2022), que no tiene desgaste ni reparación, con datos generados por una economía donde los hogares reparan.
+\end{enumerate}
 Realizamos un diseño de Monte Carlo para poder probar que nuestro modelo es estimable. 
 
-Generamos 3 equilibrios de una economía con dos coches $J=2$, edad máxima $\bar{a}=25$, grid de coeficiente de avería $W=70$ y 2 tipos de consumidores $\tau$. Para los parámetros estructurales $\theta$ tomamos valores similares a los resultados de la estimación en Gillingham et al. (2022) TOMAR TABLA 5 (CREO) DE GILLINGHAM MOSTRAR LOS PARÁMETROS.
+\subsection{La economía simulada}\label{sec:calibracion}
+
+Generamos 3 equilibrios de una economía con dos marcas de coches, $J=2$ (las marcas ``light brown'' y ``heavy brown'' de Gillingham et al., 2022), edad máxima $\bar{a}=25$, $\beta=0.95$ y 2 tipos de consumidores $\tau \in\{1,2\}$ (los hogares ``Low WD, Couple, Poor'' y ``Low WD, Single, Poor'' de Gillingham), con la misma masa, $f_1=f_2=1/2$.
+
+El grid del coeficiente de avería tiene $W=71$ puntos en $[-3,\,2.25]$ con paso $\Delta=\sigma_\eta/2=0.075$. Con este paso la varianza discretizada de $\eta$ sale inflada solo 2\% ($\sigma_\eta^2+\Delta^2/12$), así que los momentos de la mezcla con los que se separa la reparación casi no se deforman. El rango cubre la dispersión de $w$ en todas las edades, y verificamos en cada equilibrio que la masa de coches en los dos puntos extremos sea menor a 0.5\% \footnote{Nota al asesor: Esta calibración la deje corriendo con Claude Code para encontrar algun nivel de grid que resuelva el modelo, pero que no sea tan pesado de calcular. No sé si tomar otro criterio, me pareció razonable lo del criterio del delta, pero no tengo una justificación clara del rango de w}. Con esto, cada tipo tiene $n=J(\bar{a}-1)W+J+1=3{,}411$ estados y cada régimen tiene $J(\bar{a}-1)W=3{,}408$ precios.
+
+Los tres equilibrios corresponden a $M=3$ regímenes de precios de reparación, $R_m=R\,e^{\zeta_m}$ con $\zeta_m\in\{-0.3,\,0,\,0.3\}$: un mercado con reparación barata, el mercado base y uno con reparación cara. Hu \& Xin (2024) necesitan al menos dos; el tercero, central, permite revisar la forma de la respuesta de la reparación a su precio y es la calibración base que reportamos. Los precios de reparación son
+$$R_{\text{LB},a}=4+0.1(a-1)+6\,e^{-(a-1)/4},\qquad R_{\text{HB},a}=10+0.6(a-1)$$\footnote{Nota al asesor: Básicamente intenté generar curvas que hicieran el comportamiento que quería (una en forma de U invertida y la otra lineal), pero hay que discutir estos regímenes o cómo presentar esta información pues se me hace raro dejar las ecuaciones así, tal vez dejar la ecuación exacta en el apéndice y solo hablar de la forma de la gráfica.}
+en miles de coronas danesas. La prima de los coches jóvenes en la marca ligera hace que haya poca reparación al inicio de la vida del coche, y la poca vida restante hace que haya poca al final.
+Para los parámetros estructurales $\theta$ tomamos los valores de la estimación de Gillingham et al. (2022, apéndice F) para los parámetros que comparten ambos modelos, y calibramos los propios de nuestro modelo. La tabla \ref{tab:parametros} resume los valores.
+\pagebreak
+\begin{table}[htbp]
+\centering
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llrrl}
+\toprule
+Parámetro & Descripción & Light brown & Heavy brown & Fuente \\
+\midrule
+\multicolumn{5}{l}{\textit{Coches}}\\
+$\overline{P}_j$ & Precio del nuevo (miles DKK) & 142.33 & 275.84 & Tabla 3 \\
+$\underline{P}_j$ & Precio de chatarra (miles DKK) & 2.0 & 2.0 & propio \\
+$\alpha_{0j}$ & Accidentes: constante & $-5.6248$ & $-5.6728$ & Tabla 4 \\
+$\alpha_{1j}$ & Accidentes: edad (no reparable) & 0.1804 & 0.2020 & Tabla 4 \\
+\midrule
+\multicolumn{5}{l}{\textit{Hogares: pareja pobre / soltero pobre}}\\
+$\mu_\tau$ & Utilidad marginal del dinero & \multicolumn{2}{c}{0.1131 / 0.0941} & Tabla 7 \\
+$u_{0,\tau j}$ & Utilidad base & 3.6490 / 2.4042 & 5.1535 / 3.5823 & Tabla 8 \\
+$u_{1,\tau j}$ & Utilidad: edad & $-0.1459$ / $-0.0984$ & $-0.2196$ / $-0.1600$ & Tabla 9 \\
+$T_{b,\tau}$ & Costo del comprador & \multicolumn{2}{c}{6.5944 / 6.5457} & Tabla 10 \\
+$T^{\emptyset}_{b,\tau}$ & Costo del comprador sin coche & \multicolumn{2}{c}{1.7899 / 3.0816} & Tabla 10 \\
+\midrule
+\multicolumn{5}{l}{\textit{Comunes}}\\
+$T_s$ & Costo del vendedor & \multicolumn{2}{c}{0.9106} & Tabla 5 \\
+$\sigma_D$ & Escala de vender o chatarrizar & \multicolumn{2}{c}{0.3454} & Tabla 5 \\
+$\sigma,\ \sigma_y$ & Escalas de intercambio (fijas) & \multicolumn{2}{c}{1} & normalización \\
+$\beta$ & Factor de descuento (fijo) & \multicolumn{2}{c}{0.95} & propio \\
+\midrule
+\multicolumn{5}{l}{\textit{Desgaste y reparación (calibración propia)}}\\
+$u_w$ & Utilidad del desgaste & \multicolumn{2}{c}{$-0.2$} & propio \\
+$\kappa$ & Efecto de reparar & \multicolumn{2}{c}{0.25} & propio \\
+$\sigma_\eta$ & Desviación estándar del choque al desgaste & \multicolumn{2}{c}{0.15} & propio \\
+$\delta_j$ & Desgaste reparable anual sin reparar & \multicolumn{2}{c}{$\kappa\bar{p}=0.075$} & propio \\
+$\sigma_r$ & Escala de la decisión de reparar & \multicolumn{2}{c}{0.3} & propio \\
+$\sigma_w$ & Escala del nido de $w$ al comprar (fija) & \multicolumn{2}{c}{0.1} & propio \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Parámetros verdaderos del Monte Carlo. Las tablas se refieren al apéndice F de Gillingham et al. (2022).}
+\label{tab:parametros}
+\end{table}
+
+Algunas de las calibraciones propias merecen explicación. El efecto de reparar $\kappa=0.25$ es casi el doble de la desviación estándar del choque $\sigma_\eta=0.15$, de modo que las dos densidades de la mezcla (reparó o no reparó) quedan separadas. La pendiente por edad de Gillingham, $\alpha^G_{1j}$, se estimó con datos en los que los hogares reparan, así que mezcla las dos fuentes de deterioro: en promedio el log-momio sube $\alpha_{1j}+\delta_j-\kappa\bar{p}$ por año, donde $\bar{p}$ es una tasa de reparación de referencia. Conservamos $\alpha_{0j}=\alpha^G_{0j}$ e imponemos $\alpha_{1j}+\delta_j-\kappa\bar{p}=\alpha^G_{1j}$\footnote{Nota al asesor: Tal vez no está super clara esta parte, necesito otros ojos que me confirmen si se entiende qué está pasando aquí}, lo que deja libre cómo se reparte la pendiente. En el caso base la atribuimos toda al envejecimiento: $\alpha_{1j}=\alpha^G_{1j}$ y $\delta_j=\kappa\bar{p}$, con $\bar{p}=0.3$. Así, un coche reparado a la tasa $\bar{p}$ mantiene $E[w]=0$ a toda edad y su probabilidad de accidente sigue la curva de Gillingham; quien repara más tiene $w<0$ y quien repara menos, $w>0$, y $u_{1,\tau j}$ de Gillingham no requiere ajuste. Dos aclaraciones. Primero, $\bar{p}$ es solo un número de calibración que escogemos por fuera; la tasa de reparación de equilibrio sale del modelo, varía con $(a,w)$ y el régimen, y no tiene por qué ser $\bar{p}$. Segundo, la igualdad ignora la selección: los coches que sobreviven tienen un $w$ menor que el promedio incondicional, así que la curva observada en el modelo sube algo menos que $\alpha^G_{1j}$. Como $\delta_j<\kappa$, una reparación baja $w$ en términos absolutos, de modo que $w$ puede quedar por debajo del de un coche nuevo; lo que nunca baja es el envejecimiento $\alpha_{1j}a$. La utilidad del desgaste $u_w=-0.2$ equivale a cerca de 1.8 mil coronas al año por unidad de $w$ para la pareja pobre. La escala del nido de $w$, $\sigma_w=0.1$, es pequeña para que los precios reflejen casi exactamente el valor del desgaste; no se estima. El precio de chatarra es igual para ambas marcas.
+
+Con estos parámetros, el equilibrio del régimen base debe dar precios promedio por marca y edad que caigan de forma parecida a los de Gillingham et al. (2022), y una distribución de coches por marca y edad también parecida, promediando sobre $w$. No buscamos reproducir exactamente a Gillingham, pues la reparación cambia la economía.
+
+
+\subsection{Cálculo del equilibrio}
+
+Para cada régimen resolvemos el equilibrio con heterogeneidad hasta que el residuo sea menor a $10^{-9}$. Con $J=2$, $\bar{a}=25$, dos tipos y $W=71$, el sistema tiene $2\times3{,}411+3{,}408=10{,}230$ incógnitas por régimen. Las celdas $(j,a,w)$ en las que casi no hay oferta tienen precios sombra con poco significado económico, así que reportamos solo estadísticas ponderadas por la masa de coches.\footnote{Esto es normal cuando hay muchas celdas sin demanda, me preocupa un poco, no lo discutimos en su momento.}
+
+\subsection{Generación de los datos}
+
+En cada régimen $m$ simulamos un panel de $N=10{,}000$ hogares distintos, la mitad de cada tipo, que seguimos durante $T=4$ años. El estado inicial de cada hogar se sortea de la distribución estacionaria de su tipo en ese régimen, de forma que la distribución agregada sigue siendo la estacionaria durante todo el panel y los precios $P_m$ están fijos. Cada año simulamos, con las probabilidades del equilibrio, la decisión de intercambio, la decisión de vender o chatarrizar, la decisión de reparar, el accidente y el nuevo coeficiente de avería. Como nos interesan las transiciones, un periodo solo marca la base, por tanto, cada réplica aporta $N(T-1)M=90{,}000$ transiciones hogar-año.
+
+Del panel completo guardamos todo lo que pasó, incluyendo las variables que en la realidad no se observan, y construimos los distintos diseños borrando columnas. Así, las diferencias entre diseños se deben solo a la información y no a la muestra.
+
+\subsection{Estimadores}
+
+Sobre el mismo panel estimamos cinco modelos:
+\begin{center}
+\small
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llcc}
+\toprule
+Estimador & Modelo & Observa $r$ & Observa el motivo de salida\\
+\midrule
+Diseño 1 & Aldrette (2026) (cota superior) & sí & sí\\
+Diseño 2 & Aldrette (2026) & no & sí\\
+Diseño 3 & Aldrette (2026) (como datos reales) & no & no\\
+G. Parcial & Gillingham et al. (2022) & \multicolumn{2}{c}{ignora $w$ y $r$; no observa el motivo}\\
+G. Completa & Gillingham et al. (2022) & \multicolumn{2}{c}{ignora $w$ y $r$; observa el motivo}\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{center}
+En todos los diseños se observa, por hogar y año, el tipo, el régimen, el estado $(j,a,w)$, el resultado (mantener, vender o chatarrizar, comprar o no y qué coche con qué $w$) y el $w'$ del coche si sobrevive. Los precios de los usados nunca se observan. El diseño 1 es una verosimilitud sin mezclas: $\kappa$, $\delta_j$ y $\sigma_\eta$ salen de las transiciones de $w$ condicionales en $r$, $\sigma_r$ de cómo responde la tasa de reparación a $R_m$, y la curva de accidentes de los accidentes observados. El diseño 2 es la pregunta central: no se observa $r$ y la transición observada de $w$ es la mezcla $Z$. El diseño 3 es la verosimilitud de la sección anterior, que además mezcla accidentes y chatarrización voluntaria, como en el registro danés que usan Gillingham et al. (2022). Las comparaciones de interés son el diseño 1 contra el 2 (el costo de no observar la reparación) y el 2 contra el 3 (el costo adicional de no distinguir el motivo de salida).
+
+Para los estimadores de Gillingham, transformamos el panel al espacio de estados de su modelo (marca y edad, sin $w$ ni $r$) y estimamos su modelo con su verosimilitud ``parcial'' (la del paper, que no observa el motivo de salida) y con una verosimilitud ``completa'' que sí lo observa. Como su modelo está mal especificado para estos datos, su estimador converge a los valores pseudo-verdaderos; la diferencia entre esos valores y los verdaderos es el sesgo de ignorar la reparación.
+
+En los diseños 1 a 3 estimamos los parámetros de preferencias ($\mu_\tau$, $u_{0,\tau j}$, $u_{1,\tau j}$, $u_w$), de costos de transacción ($T_{b,\tau}$, $T^{\emptyset}_{b,\tau}$, $T_s$, $\sigma_D$), de accidentes ($\alpha_{0j}$, $\alpha_{1j}$) y de desgaste y reparación ($\delta_j$, $\kappa$, $\sigma_\eta$, $\sigma_r$), 26 parámetros en total. Están fijos $\beta$, las escalas $\sigma$, $\sigma_y$ y $\sigma_w$, los precios de los nuevos y de la chatarra y los precios de reparación, que son datos. Los parámetros que deben ser positivos ($\mu_\tau$, $\kappa$, $\sigma_\eta$, $\sigma_r$) se estiman en logaritmos.
+
+%La maximización se hace en dos etapas: primero L-BFGS (Liu \& Nocedal, 1989) y después BHHH (Berndt, Hall, Hall \& Hausman, 1974) desde el mejor punto encontrado, hasta que $\nabla LL'\,B^{-1}\nabla LL/N<10^{-9}$, donde $\nabla LL$ es el gradiente y $B$ la matriz de productos externos de las contribuciones por celda. Los errores estándar son los de BHHH. Cada evaluación de la verosimilitud resuelve los tres equilibrios, partiendo de la solución de la evaluación anterior. En la réplica 0 arrancamos desde los valores verdaderos y desde dos puntos perturbados para revisar que no haya máximos locales; en las demás, desde los valores verdaderos.
 
 
 
+\section{Resultados}
+
+\subsection{Estimación de parámetros estructurales por diseño}
 
 
+\subsection{Estimación de reparación no observada}
 
-\section{Estimación}
+
+\subsection{Sesgo}
+
+\subsection{Pruebas de robustez?}
 
 
-\section{Discusión (notas personales)}
-Motivación
-\begin{itemize}
-    \item En Gillingham miden mercado secundario, pero mandan toda la variación que sale del mercado de reparaciones
-    a accidentes fijos etc. ekisde
-    \item Manski dice que precios del mercado secundario dependen de los costos de reparación
-    \item Las decisiones de reparación son comúnmente no observadas, entonces usamos Hu \& Xin
-    \item La coyuntura climática y discusiones de obsolescencia programada planificada,
-    right to repair, entre otros, hacen importante estudiar los determinantes de la vida
-    util de los vehículos
-    \item Es de vital importancia ver el efecto que tiene el mercado de reparación en
-    el bolsillo de las personas y el mercado 
-\end{itemize}
+\section{Conclusiones}
+
 
 Extensiones
 \begin{itemize}
@@ -607,6 +816,11 @@ Extensiones
     \item Emparejar el gasto con momentos en el modelo para mejorar estimación
     \item Uso del odometro para complementar información asimétrica o mejorar la estimación de reparación
 \end{itemize}
+
+
+
+
+\printbibliography[title={Referencias}]
 
 
 \end{document}

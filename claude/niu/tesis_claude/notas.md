@@ -315,3 +315,12 @@ El texto dice "hasta donde sabemos" en ambos lugares.
 | Magnac & Thesmar; Kasahara & Shimotsu; Hu & Shum; Arcidiacono & Miller 2020; Misra & Nair; Copeland & Monnet; Gayle & Miller; Perrigne & Vuong | lista de Hu & Xin | identificación |
 | Blackwell (1965); Stokey, Lucas & Prescott (1989); Bellman (1957); Tauchen (1986); White (1982); Liu & Nocedal (1989) | conocimiento | matemáticas y métodos |
 | Swan (1970) AER; Bulow (1986) QJE | conocimiento | durabilidad (el PDF "bulow seminal" de `po` no tiene texto extraíble; supuse que es Bulow 1986) |
+
+## Revisión de literatura reestructurada (2026-11-08)
+
+- Seis subsecciones orientadas a la pregunta sobre la importancia de la reparación, con transiciones:
+  durables, mercado secundario, reparación, modelos dinámicos, equilibrio de coches, identificación.
+- Se quitó la subsección de vida útil y política: lo esencial pasó a la subsección de reparación y al
+  esquema de la introducción.
+- Correcciones: Rust (1985) y Stolyarov (2002) se ajustaron a lo que dicen sus resúmenes publicados.
+- Diez referencias nuevas. `niu/utils_tex/bib/referencias.bib` todavía no las incluye.

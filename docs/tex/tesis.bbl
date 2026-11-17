@@ -1,0 +1,2293 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{AddaCooper2000}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=0166d57132c839747ad4f6721771fe83}{%
+           family={Adda},
+           familyi={A\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1a860100163346979ad99c946c02f09d}{%
+           family={Cooper},
+           familyi={C\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{fullhash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{fullhashraw}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{bibnamehash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{authorbibnamehash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{authornamehash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{authorfullhash}{1b3362499acb2073c67cc4959edd9c67}
+      \strng{authorfullhashraw}{1b3362499acb2073c67cc4959edd9c67}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{4}
+      \field{title}{Balladurette and Juppette: A Discrete Analysis of Scrapping Subsidies}
+      \field{volume}{108}
+      \field{year}{2000}
+      \field{pages}{778\bibrangedash 806}
+      \range{pages}{29}
+    \endentry
+    \entry{AguirregabiriaMira2002}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=903cf5dde4d32a19890f325e75fdf15e}{%
+           family={Aguirregabiria},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=635ed7ce862c1f3afed2729709fb696a}{%
+           family={Mira},
+           familyi={M\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{0870631626f47886cea0174e1fad1363}
+      \strng{fullhash}{0870631626f47886cea0174e1fad1363}
+      \strng{fullhashraw}{0870631626f47886cea0174e1fad1363}
+      \strng{bibnamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorbibnamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authornamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorfullhash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorfullhashraw}{0870631626f47886cea0174e1fad1363}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{4}
+      \field{title}{Swapping the Nested Fixed Point Algorithm: A Class of Estimators for Discrete Markov Decision Models}
+      \field{volume}{70}
+      \field{year}{2002}
+      \field{pages}{1519\bibrangedash 1543}
+      \range{pages}{25}
+    \endentry
+    \entry{AguirregabiriaMira2010}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=903cf5dde4d32a19890f325e75fdf15e}{%
+           family={Aguirregabiria},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=635ed7ce862c1f3afed2729709fb696a}{%
+           family={Mira},
+           familyi={M\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{0870631626f47886cea0174e1fad1363}
+      \strng{fullhash}{0870631626f47886cea0174e1fad1363}
+      \strng{fullhashraw}{0870631626f47886cea0174e1fad1363}
+      \strng{bibnamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorbibnamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authornamehash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorfullhash}{0870631626f47886cea0174e1fad1363}
+      \strng{authorfullhashraw}{0870631626f47886cea0174e1fad1363}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Econometrics}
+      \field{number}{1}
+      \field{title}{Dynamic Discrete Choice Structural Models: A Survey}
+      \field{volume}{156}
+      \field{year}{2010}
+      \field{pages}{38\bibrangedash 67}
+      \range{pages}{30}
+    \endentry
+    \entry{Akerlof1970}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=a122c2a37c825dd64663fc145e7fc8bd}{%
+           family={Akerlof},
+           familyi={A\bibinitperiod},
+           given={G.\bibnamedelimi A.},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{fullhash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{fullhashraw}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{bibnamehash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{authorbibnamehash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{authornamehash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{authorfullhash}{a122c2a37c825dd64663fc145e7fc8bd}
+      \strng{authorfullhashraw}{a122c2a37c825dd64663fc145e7fc8bd}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Quarterly Journal of Economics}
+      \field{number}{3}
+      \field{title}{The Market for `Lemons': Quality Uncertainty and the Market Mechanism}
+      \field{volume}{84}
+      \field{year}{1970}
+      \field{pages}{488\bibrangedash 500}
+      \range{pages}{13}
+    \endentry
+    \entry{ArcidiaconoMiller2020}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=f0aaff3a3312f751082f59aa211be453}{%
+           family={Arcidiacono},
+           familyi={A\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9623778f8ebf5101b002e5fda58fba69}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={R.\bibnamedelimi A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{fullhash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{fullhashraw}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{bibnamehash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{authorbibnamehash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{authornamehash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{authorfullhash}{d2d000dfb73bf00c4672bed487e946c5}
+      \strng{authorfullhashraw}{d2d000dfb73bf00c4672bed487e946c5}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Econometrics}
+      \field{number}{2}
+      \field{title}{Identifying Dynamic Discrete Choice Models off Short Panels}
+      \field{volume}{215}
+      \field{year}{2020}
+      \field{pages}{473\bibrangedash 485}
+      \range{pages}{13}
+    \endentry
+    \entry{Bakker2014}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=a6c6260284704a3870f87ff2827631f9}{%
+           family={Bakker},
+           familyi={B\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3768cb3691d9f8be784a4b189ba55772}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d6157da6350fbbd229320713328b4fe1}{%
+           family={Huisman},
+           familyi={H\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6560929953b68306b9caba17cd1e5451}{%
+           family={Hollander},
+           familyi={H\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           prefix={den},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{71cf1dfb799c6fb0f93eaefa860f132b}
+      \strng{fullhash}{5c728b20df347dbec049fc0bfbd657a2}
+      \strng{fullhashraw}{5c728b20df347dbec049fc0bfbd657a2}
+      \strng{bibnamehash}{5c728b20df347dbec049fc0bfbd657a2}
+      \strng{authorbibnamehash}{5c728b20df347dbec049fc0bfbd657a2}
+      \strng{authornamehash}{71cf1dfb799c6fb0f93eaefa860f132b}
+      \strng{authorfullhash}{5c728b20df347dbec049fc0bfbd657a2}
+      \strng{authorfullhashraw}{5c728b20df347dbec049fc0bfbd657a2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Cleaner Production}
+      \field{title}{Products that Go Round: Exploring Product Life Extension through Design}
+      \field{volume}{69}
+      \field{year}{2014}
+      \field{pages}{10\bibrangedash 16}
+      \range{pages}{7}
+    \endentry
+    \entry{Bellman1957}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=3acba33176d80eb086ab17c2fe94f1ee}{%
+           family={Bellman},
+           familyi={B\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{fullhash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{fullhashraw}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{bibnamehash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{authorbibnamehash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{authornamehash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{authorfullhash}{3acba33176d80eb086ab17c2fe94f1ee}
+      \strng{authorfullhashraw}{3acba33176d80eb086ab17c2fe94f1ee}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dynamic Programming}
+      \field{year}{1957}
+    \endentry
+    \entry{Bento2018}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=5b946c17db9866db4cd57e93398afb63}{%
+           family={Bento},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e0974c7b47284d6610cff70b5be2af8e}{%
+           family={Roth},
+           familyi={R\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=e7a74b00bb4d110126917f99ba78dde3}{%
+           family={Zuo},
+           familyi={Z\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{1247848c46b070ac15f16953ab540cb8}
+      \strng{fullhash}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \strng{fullhashraw}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \strng{bibnamehash}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \strng{authorbibnamehash}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \strng{authornamehash}{1247848c46b070ac15f16953ab540cb8}
+      \strng{authorfullhash}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \strng{authorfullhashraw}{9879b8ae6de8b0501f5b65ba77dabbb2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Energy Journal}
+      \field{number}{1}
+      \field{title}{Vehicle Lifetime and Scrappage Behavior: Trends in the U.S. Used Car Market}
+      \field{volume}{39}
+      \field{year}{2018}
+      \field{pages}{159\bibrangedash 183}
+      \range{pages}{25}
+    \endentry
+    \entry{Berkovec1985}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=1c4ab04624202ea922dfbd83f2ee5e61}{%
+           family={Berkovec},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{fullhash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{fullhashraw}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{bibnamehash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{authorbibnamehash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{authornamehash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{authorfullhash}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \strng{authorfullhashraw}{1c4ab04624202ea922dfbd83f2ee5e61}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{New Car Sales and Used Car Stocks: A Model of the Automobile Market}
+      \field{volume}{16}
+      \field{year}{1985}
+      \field{pages}{195\bibrangedash 214}
+      \range{pages}{20}
+    \endentry
+    \entry{BLP1995}{article}{}{}
+      \name{author}{3}{ul=1}{%
+        {{hash=c39c110390d84378ee2993c2657bb477}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1631a65b1451121e05cbabc30e376051}{%
+           family={Levinsohn},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4a98d3a80e7f848ce1713b03539c616e}{%
+           family={Pakes},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c95e543928a2b01fc3096159f395a177}
+      \strng{fullhash}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \strng{fullhashraw}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \strng{bibnamehash}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \strng{authorbibnamehash}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \strng{authornamehash}{c95e543928a2b01fc3096159f395a177}
+      \strng{authorfullhash}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \strng{authorfullhashraw}{3dc3b73b19f0e92474bdf0ebd16fd298}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{4}
+      \field{title}{Automobile Prices in Market Equilibrium}
+      \field{volume}{63}
+      \field{year}{1995}
+      \field{pages}{841\bibrangedash 890}
+      \range{pages}{50}
+    \endentry
+    \entry{Berry1994}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=cc968a2bee5fee4a58e7762612c72b5d}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={S.\bibnamedelimi T.},
+           giveni={S\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{fullhash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{fullhashraw}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{bibnamehash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{authorbibnamehash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{authornamehash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{authorfullhash}{cc968a2bee5fee4a58e7762612c72b5d}
+      \strng{authorfullhashraw}{cc968a2bee5fee4a58e7762612c72b5d}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{Estimating Discrete-Choice Models of Product Differentiation}
+      \field{volume}{25}
+      \field{year}{1994}
+      \field{pages}{242\bibrangedash 262}
+      \range{pages}{21}
+    \endentry
+    \entry{Biglaiser2020}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=fc052487a8400c5789eeda722aec80c3}{%
+           family={Biglaiser},
+           familyi={B\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=6026ccfc90df3a5fa9c8628348d98cc0}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=0a58dd071a9e1b4b83d4983f1385de1a}{%
+           family={Murry},
+           familyi={M\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=288f1cb2dd384cb5e91127507559fdbc}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5aa5f7e14fe33a9efe20d73158998506}
+      \strng{fullhash}{20f4a7651d5e8f245e3badb48272e742}
+      \strng{fullhashraw}{20f4a7651d5e8f245e3badb48272e742}
+      \strng{bibnamehash}{20f4a7651d5e8f245e3badb48272e742}
+      \strng{authorbibnamehash}{20f4a7651d5e8f245e3badb48272e742}
+      \strng{authornamehash}{5aa5f7e14fe33a9efe20d73158998506}
+      \strng{authorfullhash}{20f4a7651d5e8f245e3badb48272e742}
+      \strng{authorfullhashraw}{20f4a7651d5e8f245e3badb48272e742}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{3}
+      \field{title}{Intermediaries and Product Quality in Used Car Markets}
+      \field{volume}{51}
+      \field{year}{2020}
+      \field{pages}{905\bibrangedash 933}
+      \range{pages}{29}
+    \endentry
+    \entry{Blackwell1965}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=6df1fd5208d31eea97540cb6c437a6ec}{%
+           family={Blackwell},
+           familyi={B\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{fullhash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{fullhashraw}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{bibnamehash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{authorbibnamehash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{authornamehash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{authorfullhash}{6df1fd5208d31eea97540cb6c437a6ec}
+      \strng{authorfullhashraw}{6df1fd5208d31eea97540cb6c437a6ec}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annals of Mathematical Statistics}
+      \field{number}{1}
+      \field{title}{Discounted Dynamic Programming}
+      \field{volume}{36}
+      \field{year}{1965}
+      \field{pages}{226\bibrangedash 235}
+      \range{pages}{10}
+    \endentry
+    \entry{Bulow1982}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=71636598537b3235e6ddf5d761cbc808}{%
+           family={Bulow},
+           familyi={B\bibinitperiod},
+           given={J.\bibnamedelimi I.},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{fullhash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{fullhashraw}{71636598537b3235e6ddf5d761cbc808}
+      \strng{bibnamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorbibnamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authornamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorfullhash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorfullhashraw}{71636598537b3235e6ddf5d761cbc808}
+      \field{extraname}{1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{2}
+      \field{title}{Durable-Goods Monopolists}
+      \field{volume}{90}
+      \field{year}{1982}
+      \field{pages}{314\bibrangedash 332}
+      \range{pages}{19}
+    \endentry
+    \entry{Bulow1986}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=71636598537b3235e6ddf5d761cbc808}{%
+           family={Bulow},
+           familyi={B\bibinitperiod},
+           given={J.\bibnamedelimi I.},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{fullhash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{fullhashraw}{71636598537b3235e6ddf5d761cbc808}
+      \strng{bibnamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorbibnamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authornamehash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorfullhash}{71636598537b3235e6ddf5d761cbc808}
+      \strng{authorfullhashraw}{71636598537b3235e6ddf5d761cbc808}
+      \field{extraname}{2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Quarterly Journal of Economics}
+      \field{number}{4}
+      \field{title}{An Economic Theory of Planned Obsolescence}
+      \field{volume}{101}
+      \field{year}{1986}
+      \field{pages}{729\bibrangedash 749}
+      \range{pages}{21}
+    \endentry
+    \entry{Coase1972}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b038aea8674289550c5a31f3dabf6120}{%
+           family={Coase},
+           familyi={C\bibinitperiod},
+           given={R.\bibnamedelimi H.},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{fullhash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{fullhashraw}{b038aea8674289550c5a31f3dabf6120}
+      \strng{bibnamehash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{authorbibnamehash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{authornamehash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{authorfullhash}{b038aea8674289550c5a31f3dabf6120}
+      \strng{authorfullhashraw}{b038aea8674289550c5a31f3dabf6120}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Law and Economics}
+      \field{number}{1}
+      \field{title}{Durability and Monopoly}
+      \field{volume}{15}
+      \field{year}{1972}
+      \field{pages}{143\bibrangedash 149}
+      \range{pages}{7}
+    \endentry
+    \entry{EricsonPakes1995}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=e219390ef5dcfec81a24f02a1b6814be}{%
+           family={Ericson},
+           familyi={E\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=4a98d3a80e7f848ce1713b03539c616e}{%
+           family={Pakes},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{4960425dadde41fa26f965719b588585}
+      \strng{fullhash}{4960425dadde41fa26f965719b588585}
+      \strng{fullhashraw}{4960425dadde41fa26f965719b588585}
+      \strng{bibnamehash}{4960425dadde41fa26f965719b588585}
+      \strng{authorbibnamehash}{4960425dadde41fa26f965719b588585}
+      \strng{authornamehash}{4960425dadde41fa26f965719b588585}
+      \strng{authorfullhash}{4960425dadde41fa26f965719b588585}
+      \strng{authorfullhashraw}{4960425dadde41fa26f965719b588585}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Economic Studies}
+      \field{number}{1}
+      \field{title}{Markov-Perfect Industry Dynamics: A Framework for Empirical Work}
+      \field{volume}{62}
+      \field{year}{1995}
+      \field{pages}{53\bibrangedash 82}
+      \range{pages}{30}
+    \endentry
+    \entry{EstebanShum2007}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=f12b7d3ba7a599ef4540c5c74250ca91}{%
+           family={Esteban},
+           familyi={E\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a872610aafa0617d20eb233772f65004}{%
+           family={Shum},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{fullhash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{fullhashraw}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{bibnamehash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{authorbibnamehash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{authornamehash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{authorfullhash}{621e4dbb0184229ededecc7b5e92be4f}
+      \strng{authorfullhashraw}{621e4dbb0184229ededecc7b5e92be4f}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{Durable-Goods Oligopoly with Secondary Markets: The Case of Automobiles}
+      \field{volume}{38}
+      \field{year}{2007}
+      \field{pages}{332\bibrangedash 354}
+      \range{pages}{23}
+    \endentry
+    \entry{FisherGrilichesKaysen1962}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=ad15839a264fb047244d0feadbe9ba1b}{%
+           family={Fisher},
+           familyi={F\bibinitperiod},
+           given={F.\bibnamedelimi M.},
+           giveni={F\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=99238176e4e75dc595eef9a92c97f7a7}{%
+           family={Griliches},
+           familyi={G\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=5b54807371182c7094f9b0566a6ca5d9}{%
+           family={Kaysen},
+           familyi={K\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0ebf1c6338dba5db48e7e072eb9a77c}
+      \strng{fullhash}{f41c7b8498a17838de9a92db138c279a}
+      \strng{fullhashraw}{f41c7b8498a17838de9a92db138c279a}
+      \strng{bibnamehash}{f41c7b8498a17838de9a92db138c279a}
+      \strng{authorbibnamehash}{f41c7b8498a17838de9a92db138c279a}
+      \strng{authornamehash}{d0ebf1c6338dba5db48e7e072eb9a77c}
+      \strng{authorfullhash}{f41c7b8498a17838de9a92db138c279a}
+      \strng{authorfullhashraw}{f41c7b8498a17838de9a92db138c279a}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{5}
+      \field{title}{The Costs of Automobile Model Changes since 1949}
+      \field{volume}{70}
+      \field{year}{1962}
+      \field{pages}{433\bibrangedash 451}
+      \range{pages}{19}
+    \endentry
+    \entry{Fishman1993}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=e284039cfb331859f0614fdbdbc31cb8}{%
+           family={Fishman},
+           familyi={F\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e5ca8f39da50aefe2a500229b4009a1f}{%
+           family={Gandal},
+           familyi={G\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=ef6073ab18350964659fb496f3b05211}{%
+           family={Shy},
+           familyi={S\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{bf6bc1b07ec63145b58b1fc850973ede}
+      \strng{fullhash}{ed4db424762768b8be29c0b63aa8d29b}
+      \strng{fullhashraw}{ed4db424762768b8be29c0b63aa8d29b}
+      \strng{bibnamehash}{ed4db424762768b8be29c0b63aa8d29b}
+      \strng{authorbibnamehash}{ed4db424762768b8be29c0b63aa8d29b}
+      \strng{authornamehash}{bf6bc1b07ec63145b58b1fc850973ede}
+      \strng{authorfullhash}{ed4db424762768b8be29c0b63aa8d29b}
+      \strng{authorfullhashraw}{ed4db424762768b8be29c0b63aa8d29b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Industrial Economics}
+      \field{number}{4}
+      \field{title}{Planned Obsolescence as an Engine of Technological Progress}
+      \field{volume}{41}
+      \field{year}{1993}
+      \field{pages}{361\bibrangedash 370}
+      \range{pages}{10}
+    \endentry
+    \entry{Fukasawa2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8292c40029305b7995d236d5ebb898cb}{%
+           family={Fukasawa},
+           familyi={F\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{fullhash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{fullhashraw}{8292c40029305b7995d236d5ebb898cb}
+      \strng{bibnamehash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{authorbibnamehash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{authornamehash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{authorfullhash}{8292c40029305b7995d236d5ebb898cb}
+      \strng{authorfullhashraw}{8292c40029305b7995d236d5ebb898cb}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arxiv}
+      \field{note}{Documento de trabajo}
+      \field{title}{When Do Firms Sell High Durability Products? The Case of Light Bulb Industry}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2503.23792
+      \endverb
+    \endentry
+    \entry{GavazzaLizzeriRoketskiy2014}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=e1e7494d62e68caef802db8818b9903b}{%
+           family={Gavazza},
+           familyi={G\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3c3d7892d1d428c2df4cb479d3f7045e}{%
+           family={Lizzeri},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1640a204dbe61ecfa3c62b78404db3c7}{%
+           family={Roketskiy},
+           familyi={R\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{25546e96bc48a9eaaa6b1c1f144914e8}
+      \strng{fullhash}{901fe7a6f63d5794a9374c2e97a7787f}
+      \strng{fullhashraw}{901fe7a6f63d5794a9374c2e97a7787f}
+      \strng{bibnamehash}{901fe7a6f63d5794a9374c2e97a7787f}
+      \strng{authorbibnamehash}{901fe7a6f63d5794a9374c2e97a7787f}
+      \strng{authornamehash}{25546e96bc48a9eaaa6b1c1f144914e8}
+      \strng{authorfullhash}{901fe7a6f63d5794a9374c2e97a7787f}
+      \strng{authorfullhashraw}{901fe7a6f63d5794a9374c2e97a7787f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Review}
+      \field{number}{11}
+      \field{title}{A Quantitative Analysis of the Used-Car Market}
+      \field{volume}{104}
+      \field{year}{2014}
+      \field{pages}{3668\bibrangedash 3700}
+      \range{pages}{33}
+    \endentry
+    \entry{GayleMiller2015}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=58cf1eda8278f1a903540e2dad8aea29}{%
+           family={Gayle},
+           familyi={G\bibinitperiod},
+           given={G.-L.},
+           giveni={G\bibinithyphendelim L\bibinitperiod}}}%
+        {{hash=9623778f8ebf5101b002e5fda58fba69}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={R.\bibnamedelimi A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{82bb79111194683488581d92885d1146}
+      \strng{fullhash}{82bb79111194683488581d92885d1146}
+      \strng{fullhashraw}{82bb79111194683488581d92885d1146}
+      \strng{bibnamehash}{82bb79111194683488581d92885d1146}
+      \strng{authorbibnamehash}{82bb79111194683488581d92885d1146}
+      \strng{authornamehash}{82bb79111194683488581d92885d1146}
+      \strng{authorfullhash}{82bb79111194683488581d92885d1146}
+      \strng{authorfullhashraw}{82bb79111194683488581d92885d1146}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Economic Studies}
+      \field{number}{3}
+      \field{title}{Identifying and Testing Models of Managerial Compensation}
+      \field{volume}{82}
+      \field{year}{2015}
+      \field{pages}{1074\bibrangedash 1118}
+      \range{pages}{45}
+    \endentry
+    \entry{Gillingham2022}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=cd2c567292555cbf5bfccc528b734ce4}{%
+           family={Gillingham},
+           familyi={G\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d76e998b54f6ab320e38e35c3d760a46}{%
+           family={Iskhakov},
+           familyi={I\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=f0a941bc048671b7768e1c407463d9f0}{%
+           family={Munk-Nielsen},
+           familyi={M\bibinithyphendelim N\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9c2985429819207fe6ae51bc8a820059}{%
+           family={Schjerning},
+           familyi={S\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{e39f6abb05f2d1885a627bf5d4f4a699}
+      \strng{fullhash}{ba7385797aa80814691b5528fcadfd6d}
+      \strng{fullhashraw}{ba7385797aa80814691b5528fcadfd6d}
+      \strng{bibnamehash}{ba7385797aa80814691b5528fcadfd6d}
+      \strng{authorbibnamehash}{ba7385797aa80814691b5528fcadfd6d}
+      \strng{authornamehash}{e39f6abb05f2d1885a627bf5d4f4a699}
+      \strng{authorfullhash}{ba7385797aa80814691b5528fcadfd6d}
+      \strng{authorfullhashraw}{ba7385797aa80814691b5528fcadfd6d}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{10}
+      \field{title}{Equilibrium Trade in Automobiles}
+      \field{volume}{130}
+      \field{year}{2022}
+      \field{pages}{2534\bibrangedash 2593}
+      \range{pages}{60}
+    \endentry
+    \entry{GoettlerGordon2011}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=c8a0b37c25a8e3e8754d11a6dcb0768e}{%
+           family={Goettler},
+           familyi={G\bibinitperiod},
+           given={R.\bibnamedelimi L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=51cfeb7403be0294f5dfcf5cf57f0671}{%
+           family={Gordon},
+           familyi={G\bibinitperiod},
+           given={B.\bibnamedelimi R.},
+           giveni={B\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{fullhash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{fullhashraw}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{bibnamehash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{authorbibnamehash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{authornamehash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{authorfullhash}{a330f820edd7e9be7de90ab6e8b314ab}
+      \strng{authorfullhashraw}{a330f820edd7e9be7de90ab6e8b314ab}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{6}
+      \field{title}{Does AMD Spur Intel to Innovate More?}
+      \field{volume}{119}
+      \field{year}{2011}
+      \field{pages}{1141\bibrangedash 1200}
+      \range{pages}{60}
+    \endentry
+    \entry{GowrisankaranRysman2012}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=425ac8aa38e642befbc04a07ac6f17e9}{%
+           family={Gowrisankaran},
+           familyi={G\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4381cc991a2f059fb1cb0c7a3619d96d}{%
+           family={Rysman},
+           familyi={R\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{fullhash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{fullhashraw}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{bibnamehash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{authorbibnamehash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{authornamehash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{authorfullhash}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \strng{authorfullhashraw}{ae010d36cbe3457ec1e0a92929ece8b9}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{6}
+      \field{title}{Dynamics of Consumer Demand for New Durable Goods}
+      \field{volume}{120}
+      \field{year}{2012}
+      \field{pages}{1173\bibrangedash 1219}
+      \range{pages}{47}
+    \endentry
+    \entry{GroutPark2005}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=4e663b4131758b807d4393d8d99c535c}{%
+           family={Grout},
+           familyi={G\bibinitperiod},
+           given={P.\bibnamedelimi A.},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=a938c069ca3e8695f1c7e6b0340ad0b3}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={I.-U.},
+           giveni={I\bibinithyphendelim U\bibinitperiod}}}%
+      }
+      \strng{namehash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{fullhash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{fullhashraw}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{bibnamehash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{authorbibnamehash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{authornamehash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{authorfullhash}{7180fc18ae7eb0502263e1ff3830f094}
+      \strng{authorfullhashraw}{7180fc18ae7eb0502263e1ff3830f094}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{3}
+      \field{title}{Competitive Planned Obsolescence}
+      \field{volume}{36}
+      \field{year}{2005}
+      \field{pages}{596\bibrangedash 612}
+      \range{pages}{17}
+    \endentry
+    \entry{HamiltonMacauley1999}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=e023e682cd1bb6c2bebe0b3b37e14214}{%
+           family={Hamilton},
+           familyi={H\bibinitperiod},
+           given={B.\bibnamedelimi W.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=201cccf7666c1a95701c5dc19fb96356}{%
+           family={Macauley},
+           familyi={M\bibinitperiod},
+           given={M.\bibnamedelimi K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{fullhash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{fullhashraw}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{bibnamehash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{authorbibnamehash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{authornamehash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{authorfullhash}{0cd42b551b93e4095fd17b60bcad77cf}
+      \strng{authorfullhashraw}{0cd42b551b93e4095fd17b60bcad77cf}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Industrial Economics}
+      \field{number}{3}
+      \field{title}{Heredity or Environment: Why is Automobile Longevity Increasing?}
+      \field{volume}{47}
+      \field{year}{1999}
+      \field{pages}{251\bibrangedash 261}
+      \range{pages}{11}
+    \endentry
+    \entry{HendelLizzeri1999a}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=9ad525dee4e2562150c9414a62c111f4}{%
+           family={Hendel},
+           familyi={H\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3c3d7892d1d428c2df4cb479d3f7045e}{%
+           family={Lizzeri},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{fullhash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{fullhashraw}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{bibnamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorbibnamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authornamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorfullhash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorfullhashraw}{1c4001c5d0926928069dc384d42bf42c}
+      \field{extraname}{1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{1}
+      \field{title}{Interfering with Secondary Markets}
+      \field{volume}{30}
+      \field{year}{1999}
+      \field{pages}{1\bibrangedash 21}
+      \range{pages}{21}
+    \endentry
+    \entry{HendelLizzeri1999b}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=9ad525dee4e2562150c9414a62c111f4}{%
+           family={Hendel},
+           familyi={H\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3c3d7892d1d428c2df4cb479d3f7045e}{%
+           family={Lizzeri},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{fullhash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{fullhashraw}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{bibnamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorbibnamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authornamehash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorfullhash}{1c4001c5d0926928069dc384d42bf42c}
+      \strng{authorfullhashraw}{1c4001c5d0926928069dc384d42bf42c}
+      \field{extraname}{2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Review}
+      \field{number}{5}
+      \field{title}{Adverse Selection in Durable Goods Markets}
+      \field{volume}{89}
+      \field{year}{1999}
+      \field{pages}{1097\bibrangedash 1115}
+      \range{pages}{19}
+    \endentry
+    \entry{HotzMiller1993}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=cc7d99820ac4f7f9ee17e037ea8873cd}{%
+           family={Hotz},
+           familyi={H\bibinitperiod},
+           given={V.\bibnamedelimi J.},
+           giveni={V\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=9623778f8ebf5101b002e5fda58fba69}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={R.\bibnamedelimi A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{fullhash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{fullhashraw}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{bibnamehash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{authorbibnamehash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{authornamehash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{authorfullhash}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \strng{authorfullhashraw}{15fbb18f3f6a8f16ee6fa98887634c9c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Economic Studies}
+      \field{number}{3}
+      \field{title}{Conditional Choice Probabilities and the Estimation of Dynamic Models}
+      \field{volume}{60}
+      \field{year}{1993}
+      \field{pages}{497\bibrangedash 529}
+      \range{pages}{33}
+    \endentry
+    \entry{HuXin2024}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=abca94954939cb7608a6fa0b712c8a57}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0a118ca43fdb1551ff3d17294bde33f0}{%
+           family={Xin},
+           familyi={X\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{fullhash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{fullhashraw}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{bibnamehash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{authorbibnamehash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{authornamehash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{authorfullhash}{9c761cdb7c07f46d15c151c2751e8b39}
+      \strng{authorfullhashraw}{9c761cdb7c07f46d15c151c2751e8b39}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Econometrics}
+      \field{title}{Identification and Estimation of Dynamic Structural Models with Unobserved Choices}
+      \field{volume}{242}
+      \field{year}{2024}
+      \field{pages}{105806}
+      \range{pages}{1}
+    \endentry
+    \entry{Hubbard1998}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=7e3b49ed4630e108d74209fb19b7b899}{%
+           family={Hubbard},
+           familyi={H\bibinitperiod},
+           given={T.\bibnamedelimi N.},
+           giveni={T\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{fullhash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{fullhashraw}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{bibnamehash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{authorbibnamehash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{authornamehash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{authorfullhash}{7e3b49ed4630e108d74209fb19b7b899}
+      \strng{authorfullhashraw}{7e3b49ed4630e108d74209fb19b7b899}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{An Empirical Examination of Moral Hazard in the Vehicle Inspection Market}
+      \field{volume}{29}
+      \field{year}{1998}
+      \field{pages}{406\bibrangedash 426}
+      \range{pages}{21}
+    \endentry
+    \entry{IshiharaChing2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7c58096e2131f352865916d45dc6ad14}{%
+           family={Ishihara},
+           familyi={I\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e327b6c79ce29e6f2c9569703e537587}{%
+           family={Ching},
+           familyi={C\bibinitperiod},
+           given={A.\bibnamedelimi T.},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{fullhash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{fullhashraw}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{bibnamehash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{authorbibnamehash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{authornamehash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{authorfullhash}{b548c6026b3af7dcf07344d5e2ba667e}
+      \strng{authorfullhashraw}{b548c6026b3af7dcf07344d5e2ba667e}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Marketing Science}
+      \field{number}{3}
+      \field{title}{Dynamic Demand for New and Used Durable Goods without Physical Depreciation: The Case of Japanese Video Games}
+      \field{volume}{38}
+      \field{year}{2019}
+      \field{pages}{392\bibrangedash 416}
+      \range{pages}{25}
+    \endentry
+    \entry{Iskhakov2016}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=d76e998b54f6ab320e38e35c3d760a46}{%
+           family={Iskhakov},
+           familyi={I\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a38fe2282e0ae708270c02346a36d08f}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9c2985429819207fe6ae51bc8a820059}{%
+           family={Schjerning},
+           familyi={S\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=541fb63aeb2bc485dfb1ee2c2583c1ca}{%
+           family={Seo},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{3abd46c1a56c067d78612818cabbe9a9}
+      \strng{fullhash}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \strng{fullhashraw}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \strng{bibnamehash}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \strng{authorbibnamehash}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \strng{authornamehash}{3abd46c1a56c067d78612818cabbe9a9}
+      \strng{authorfullhash}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \strng{authorfullhashraw}{c4a8d4ff3f28445b4bc8fc0e01baee1f}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{1}
+      \field{title}{Comment on `Constrained Optimization Approaches to Estimation of Structural Models'}
+      \field{volume}{84}
+      \field{year}{2016}
+      \field{pages}{365\bibrangedash 370}
+      \range{pages}{6}
+    \endentry
+    \entry{JinYangZhu2023}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9e699ad8cf70ec00bc61f656fa2e611a}{%
+           family={Jin},
+           familyi={J\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=527f0ca92e7ed462c77915036481c907}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=9c4f74447bd064e137b853534877a881}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{892faf7b1934678a2072a3f828560b99}
+      \strng{fullhash}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \strng{fullhashraw}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \strng{bibnamehash}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \strng{authorbibnamehash}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \strng{authornamehash}{892faf7b1934678a2072a3f828560b99}
+      \strng{authorfullhash}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \strng{authorfullhashraw}{0edf4091bdfc5f83a8e594223c9cb2b4}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Management Science}
+      \field{number}{2}
+      \field{title}{Right to Repair: Pricing, Welfare, and Environmental Implications}
+      \field{volume}{69}
+      \field{year}{2023}
+      \field{pages}{1017\bibrangedash 1036}
+      \range{pages}{20}
+    \endentry
+    \entry{Kennet1994}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=3347002bb5f0fb788cf4089a16a7b6da}{%
+           family={Kennet},
+           familyi={K\bibinitperiod},
+           given={D.\bibnamedelimi M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{fullhash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{fullhashraw}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{bibnamehash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{authorbibnamehash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{authornamehash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{authorfullhash}{3347002bb5f0fb788cf4089a16a7b6da}
+      \strng{authorfullhashraw}{3347002bb5f0fb788cf4089a16a7b6da}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Applied Econometrics}
+      \field{number}{4}
+      \field{title}{A Structural Model of Aircraft Engine Maintenance}
+      \field{volume}{9}
+      \field{year}{1994}
+      \field{pages}{351\bibrangedash 368}
+      \range{pages}{18}
+    \endentry
+    \entry{KonishiSandfort2002}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=63f6a3903f5ecad8d4a11f156c7ff521}{%
+           family={Konishi},
+           familyi={K\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c58fb577f6320ab6c1e4daff03d3da3b}{%
+           family={Sandfort},
+           familyi={S\bibinitperiod},
+           given={M.\bibnamedelimi T.},
+           giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{adff8e69293a69472d68fe61de99789b}
+      \strng{fullhash}{adff8e69293a69472d68fe61de99789b}
+      \strng{fullhashraw}{adff8e69293a69472d68fe61de99789b}
+      \strng{bibnamehash}{adff8e69293a69472d68fe61de99789b}
+      \strng{authorbibnamehash}{adff8e69293a69472d68fe61de99789b}
+      \strng{authornamehash}{adff8e69293a69472d68fe61de99789b}
+      \strng{authorfullhash}{adff8e69293a69472d68fe61de99789b}
+      \strng{authorfullhashraw}{adff8e69293a69472d68fe61de99789b}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Economic Dynamics and Control}
+      \field{number}{6}
+      \field{title}{Existence of Stationary Equilibrium in the Markets for New and Used Durable Goods}
+      \field{volume}{26}
+      \field{year}{2002}
+      \field{pages}{1029\bibrangedash 1052}
+      \range{pages}{24}
+    \endentry
+    \entry{LeeLee1998}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=e68a3de98ce4b8ca1127a8887a660013}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={I.\bibnamedelimi H.},
+           giveni={I\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=a38fe2282e0ae708270c02346a36d08f}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{fullhash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{fullhashraw}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{bibnamehash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{authorbibnamehash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{authornamehash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{authorfullhash}{cc468645c89e44aa5d9e6731733eebd9}
+      \strng{authorfullhashraw}{cc468645c89e44aa5d9e6731733eebd9}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Industrial Economics}
+      \field{number}{3}
+      \field{title}{A Theory of Economic Obsolescence}
+      \field{volume}{46}
+      \field{year}{1998}
+      \field{pages}{383\bibrangedash 401}
+      \range{pages}{19}
+    \endentry
+    \entry{MagnacThesmar2002}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=3817096fd19b673cde697f0dfec9d0d6}{%
+           family={Magnac},
+           familyi={M\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4172ca23c9583cfc30a833373f892cd7}{%
+           family={Thesmar},
+           familyi={T\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{fullhash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{fullhashraw}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{bibnamehash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{authorbibnamehash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{authornamehash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{authorfullhash}{c0ef1eb17a3291635b33eda35d6c3099}
+      \strng{authorfullhashraw}{c0ef1eb17a3291635b33eda35d6c3099}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{2}
+      \field{title}{Identifying Dynamic Discrete Decision Processes}
+      \field{volume}{70}
+      \field{year}{2002}
+      \field{pages}{801\bibrangedash 816}
+      \range{pages}{16}
+    \endentry
+    \entry{ManneringWinston1985}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7dc8077072b6f681dab38bb6f7e717db}{%
+           family={Mannering},
+           familyi={M\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d56f56a0bc5b988d250c895ed4ec54a9}{%
+           family={Winston},
+           familyi={W\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{fullhash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{fullhashraw}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{bibnamehash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{authorbibnamehash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{authornamehash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{authorfullhash}{5fa774c9700aaf7dd755e0b7247e211e}
+      \strng{authorfullhashraw}{5fa774c9700aaf7dd755e0b7247e211e}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{A Dynamic Empirical Analysis of Household Vehicle Ownership and Utilization}
+      \field{volume}{16}
+      \field{year}{1985}
+      \field{pages}{215\bibrangedash 236}
+      \range{pages}{22}
+    \endentry
+    \entry{Manski1983}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=a21546c10c5d0743137405eba6110674}{%
+           family={Manski},
+           familyi={M\bibinitperiod},
+           given={C.\bibnamedelimi F.},
+           giveni={C\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{a21546c10c5d0743137405eba6110674}
+      \strng{fullhash}{a21546c10c5d0743137405eba6110674}
+      \strng{fullhashraw}{a21546c10c5d0743137405eba6110674}
+      \strng{bibnamehash}{a21546c10c5d0743137405eba6110674}
+      \strng{authorbibnamehash}{a21546c10c5d0743137405eba6110674}
+      \strng{authornamehash}{a21546c10c5d0743137405eba6110674}
+      \strng{authorfullhash}{a21546c10c5d0743137405eba6110674}
+      \strng{authorfullhashraw}{a21546c10c5d0743137405eba6110674}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part B}
+      \field{number}{5}
+      \field{title}{Analysis of Equilibrium Automobile Holdings in Israel with Aggregate Discrete Choice Models}
+      \field{volume}{17}
+      \field{year}{1983}
+      \field{pages}{373\bibrangedash 389}
+      \range{pages}{17}
+    \endentry
+    \entry{ManskiGoldin1983}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=a21546c10c5d0743137405eba6110674}{%
+           family={Manski},
+           familyi={M\bibinitperiod},
+           given={C.\bibnamedelimi F.},
+           giveni={C\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=ad8b7f43d1de32e6e7d7b8907207e094}{%
+           family={Goldin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{fullhash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{fullhashraw}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{bibnamehash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{authorbibnamehash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{authornamehash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{authorfullhash}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \strng{authorfullhashraw}{2d4bf0eb2a45e6ccf13f214112522aba}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Science}
+      \field{number}{4}
+      \field{title}{An Econometric Analysis of Automobile Scrappage}
+      \field{volume}{17}
+      \field{year}{1983}
+      \field{pages}{365\bibrangedash 375}
+      \range{pages}{11}
+    \endentry
+    \entry{McFadden1973}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=aefcc3d934879d869d3b57fa0bcf9a42}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=6f5ffb4f9b0bbaa478823bdfb3005849}{%
+           family={Zarembka},
+           familyi={Z\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{bibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorbibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authornamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{editorbibnamehash}{6f5ffb4f9b0bbaa478823bdfb3005849}
+      \strng{editornamehash}{6f5ffb4f9b0bbaa478823bdfb3005849}
+      \strng{editorfullhash}{6f5ffb4f9b0bbaa478823bdfb3005849}
+      \strng{editorfullhashraw}{6f5ffb4f9b0bbaa478823bdfb3005849}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Frontiers in Econometrics}
+      \field{title}{Conditional Logit Analysis of Qualitative Choice Behavior}
+      \field{year}{1973}
+      \field{pages}{105\bibrangedash 142}
+      \range{pages}{38}
+    \endentry
+    \entry{McFadden1978}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=aefcc3d934879d869d3b57fa0bcf9a42}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \true{moreeditor}
+      \name{editor}{1}{}{%
+        {{hash=6b6178ffe3ad8969e4dd7288854ac3ef}{%
+           family={Karlqvist},
+           familyi={K\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {North-Holland}%
+      }
+      \strng{namehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{bibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorbibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authornamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{editorbibnamehash}{31cb0570bfb713d10a50b21612953a9c}
+      \strng{editornamehash}{31cb0570bfb713d10a50b21612953a9c}
+      \strng{editorfullhash}{31cb0570bfb713d10a50b21612953a9c}
+      \strng{editorfullhashraw}{31cb0570bfb713d10a50b21612953a9c}
+      \field{extraname}{2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Spatial Interaction Theory and Planning Models}
+      \field{title}{Modelling the Choice of Residential Location}
+      \field{year}{1978}
+      \field{pages}{75\bibrangedash 96}
+      \range{pages}{22}
+    \endentry
+    \entry{McFadden1981}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=aefcc3d934879d869d3b57fa0bcf9a42}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=02a9733e69b999513c2400b3c2fa377c}{%
+           family={Manski},
+           familyi={M\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=aefcc3d934879d869d3b57fa0bcf9a42}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{fullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{bibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorbibnamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authornamehash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhash}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{authorfullhashraw}{aefcc3d934879d869d3b57fa0bcf9a42}
+      \strng{editorbibnamehash}{4edcc7f5ede6964d29ca183b007ab8c5}
+      \strng{editornamehash}{4edcc7f5ede6964d29ca183b007ab8c5}
+      \strng{editorfullhash}{4edcc7f5ede6964d29ca183b007ab8c5}
+      \strng{editorfullhashraw}{4edcc7f5ede6964d29ca183b007ab8c5}
+      \field{extraname}{3}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Structural Analysis of Discrete Data}
+      \field{title}{Econometric Models of Probabilistic Choice}
+      \field{year}{1981}
+      \field{pages}{198\bibrangedash 272}
+      \range{pages}{75}
+    \endentry
+    \entry{McGrattanSchmitz1999}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=49a50d53222d11cfff425bd76af5f895}{%
+           family={McGrattan},
+           familyi={M\bibinitperiod},
+           given={E.\bibnamedelimi R.},
+           giveni={E\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=593c0a5069e1c197d8ad5e2b893e821e}{%
+           family={Schmitz},
+           familyi={S\bibinitperiod},
+           given={J.\bibnamedelimi A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{fullhash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{fullhashraw}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{bibnamehash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{authorbibnamehash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{authornamehash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{authorfullhash}{395be048c5f4fcba17dc47264dd1d7fd}
+      \strng{authorfullhashraw}{395be048c5f4fcba17dc47264dd1d7fd}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Federal Reserve Bank of Minneapolis Quarterly Review}
+      \field{number}{4}
+      \field{title}{Maintenance and Repair: Too Big to Ignore}
+      \field{volume}{23}
+      \field{year}{1999}
+      \field{pages}{2\bibrangedash 13}
+      \range{pages}{12}
+    \endentry
+    \entry{MisraNair2011}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=cef769c40f2bcb286c02207824594d92}{%
+           family={Misra},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=64828204baae1daa38629739dfa58c0d}{%
+           family={Nair},
+           familyi={N\bibinitperiod},
+           given={H.\bibnamedelimi S.},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{fullhash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{fullhashraw}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{bibnamehash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{authorbibnamehash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{authornamehash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{authorfullhash}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \strng{authorfullhashraw}{3b2239b11c3ef1281ca3119c3dd18a1f}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Quantitative Marketing and Economics}
+      \field{number}{3}
+      \field{title}{A Structural Model of Sales-Force Compensation Dynamics: Estimation and Field Implementation}
+      \field{volume}{9}
+      \field{year}{2011}
+      \field{pages}{211\bibrangedash 257}
+      \range{pages}{47}
+    \endentry
+    \entry{Parajuly2024}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=ce42bf0882e6be4fc5f136420971d354}{%
+           family={Parajuly},
+           familyi={P\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3c8e0fadac52a5ac272d8fd02cc6c59b}{%
+           family={Green},
+           familyi={G\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=90c669c081f411f39a94794438445f0e}{%
+           family={Richter},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=08d82841fe870d331e86c665ce0f7f68}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4a4b222151bfe764da5c0467d92bab1b}{%
+           family={Rückschloss},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=12297f974aa59adb93631e4e89a02da0}{%
+           family={Peeters},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ba98ee160e69b1a586ea75cea86b75dd}{%
+           family={Kuehr},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=19105e951f4e8913551eb52ac5725f28}{%
+           family={Fitzpatrick},
+           familyi={F\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{b75ac7d3cfbbb34b72437f65dff31954}
+      \strng{fullhash}{90f5b0c54136e05ef7766585318fa8c2}
+      \strng{fullhashraw}{90f5b0c54136e05ef7766585318fa8c2}
+      \strng{bibnamehash}{90f5b0c54136e05ef7766585318fa8c2}
+      \strng{authorbibnamehash}{90f5b0c54136e05ef7766585318fa8c2}
+      \strng{authornamehash}{b75ac7d3cfbbb34b72437f65dff31954}
+      \strng{authorfullhash}{90f5b0c54136e05ef7766585318fa8c2}
+      \strng{authorfullhashraw}{90f5b0c54136e05ef7766585318fa8c2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Industrial Ecology}
+      \field{number}{1}
+      \field{title}{Product Repair in a Circular Economy: Exploring Public Repair Behavior from a Systems Perspective}
+      \field{volume}{28}
+      \field{year}{2024}
+      \field{pages}{74\bibrangedash 86}
+      \range{pages}{13}
+    \endentry
+    \entry{Rust1985}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{bibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorbibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authornamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{4}
+      \field{title}{Stationary Equilibrium in a Market for Durable Assets}
+      \field{volume}{53}
+      \field{year}{1985}
+      \field{pages}{783\bibrangedash 805}
+      \range{pages}{23}
+    \endentry
+    \entry{Rust1986}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{bibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorbibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authornamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{1}
+      \field{title}{When Is It Optimal to Kill Off the Market for Used Durable Goods?}
+      \field{volume}{54}
+      \field{year}{1986}
+      \field{pages}{65\bibrangedash 86}
+      \range{pages}{22}
+    \endentry
+    \entry{Rust1987}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{bibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorbibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authornamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \field{extraname}{3}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{5}
+      \field{title}{Optimal Replacement of GMC Bus Engines: An Empirical Model of Harold Zurcher}
+      \field{volume}{55}
+      \field{year}{1987}
+      \field{pages}{999\bibrangedash 1033}
+      \range{pages}{35}
+    \endentry
+    \entry{Rust1994}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9e1f12f1ba60760155e8c2c3c045250}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=0769b5a7874a042960f707cd5bc4f7ce}{%
+           family={Engle},
+           familyi={E\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=aefcc3d934879d869d3b57fa0bcf9a42}{%
+           family={McFadden},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{fullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{bibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorbibnamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authornamehash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhash}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{authorfullhashraw}{b9e1f12f1ba60760155e8c2c3c045250}
+      \strng{editorbibnamehash}{b60dd7e0e50aca03bfbad8c5b7946fa0}
+      \strng{editornamehash}{b60dd7e0e50aca03bfbad8c5b7946fa0}
+      \strng{editorfullhash}{b60dd7e0e50aca03bfbad8c5b7946fa0}
+      \strng{editorfullhashraw}{b60dd7e0e50aca03bfbad8c5b7946fa0}
+      \field{extraname}{4}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Handbook of Econometrics}
+      \field{title}{Structural Estimation of Markov Decision Processes}
+      \field{volume}{4}
+      \field{year}{1994}
+      \field{pages}{3081\bibrangedash 3143}
+      \range{pages}{63}
+    \endentry
+    \entry{Schiraldi2011}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=6dfdda1f90a981ac8e5c43df2787817a}{%
+           family={Schiraldi},
+           familyi={S\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{fullhash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{fullhashraw}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{bibnamehash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{authorbibnamehash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{authornamehash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{authorfullhash}{6dfdda1f90a981ac8e5c43df2787817a}
+      \strng{authorfullhashraw}{6dfdda1f90a981ac8e5c43df2787817a}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{2}
+      \field{title}{Automobile Replacement: A Dynamic Structural Approach}
+      \field{volume}{42}
+      \field{year}{2011}
+      \field{pages}{266\bibrangedash 291}
+      \range{pages}{26}
+    \endentry
+    \entry{SLP1989}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=54076121fd2a2ec0e76aa2628dfed95d}{%
+           family={Stokey},
+           familyi={S\bibinitperiod},
+           given={N.\bibnamedelimi L.},
+           giveni={N\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=03c2f49b0d2db428ed94d386078c3f7c}{%
+           family={Lucas},
+           familyi={L\bibinitperiod},
+           given={R.\bibnamedelimi E.},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=439a99f9032b31e6e56631fdc7966a55}{%
+           family={Prescott},
+           familyi={P\bibinitperiod},
+           given={E.\bibnamedelimi C.},
+           giveni={E\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Harvard University Press}%
+      }
+      \strng{namehash}{1f1a76c509dcea15ab5156ea20465a70}
+      \strng{fullhash}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \strng{fullhashraw}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \strng{bibnamehash}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \strng{authorbibnamehash}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \strng{authornamehash}{1f1a76c509dcea15ab5156ea20465a70}
+      \strng{authorfullhash}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \strng{authorfullhashraw}{094dad3c8a09ea73cf8eddfcce9bc62b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Recursive Methods in Economic Dynamics}
+      \field{year}{1989}
+    \endentry
+    \entry{Stolyarov2002}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=c8ce5ad246ed0842a81bb60652d817c4}{%
+           family={Stolyarov},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{fullhash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{fullhashraw}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{bibnamehash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{authorbibnamehash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{authornamehash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{authorfullhash}{c8ce5ad246ed0842a81bb60652d817c4}
+      \strng{authorfullhashraw}{c8ce5ad246ed0842a81bb60652d817c4}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{6}
+      \field{title}{Turnover of Used Durables in a Stationary Equilibrium: Are Older Goods Traded More?}
+      \field{volume}{110}
+      \field{year}{2002}
+      \field{pages}{1390\bibrangedash 1413}
+      \range{pages}{24}
+    \endentry
+    \entry{Strausz2009}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=295a0e265da18f4d16655787c4f4353f}{%
+           family={Strausz},
+           familyi={S\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{fullhash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{fullhashraw}{295a0e265da18f4d16655787c4f4353f}
+      \strng{bibnamehash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{authorbibnamehash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{authornamehash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{authorfullhash}{295a0e265da18f4d16655787c4f4353f}
+      \strng{authorfullhashraw}{295a0e265da18f4d16655787c4f4353f}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Economic Journal}
+      \field{number}{540}
+      \field{title}{Planned Obsolescence as an Incentive Device for Unobservable Quality}
+      \field{volume}{119}
+      \field{year}{2009}
+      \field{pages}{1405\bibrangedash 1421}
+      \range{pages}{17}
+    \endentry
+    \entry{SuJudd2012}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=445c59686baabd147e98fc25cd563c09}{%
+           family={Su},
+           familyi={S\bibinitperiod},
+           given={C.-L.},
+           giveni={C\bibinithyphendelim L\bibinitperiod}}}%
+        {{hash=a0c1dbffa6ac0b33b9dca081186d0965}{%
+           family={Judd},
+           familyi={J\bibinitperiod},
+           given={K.\bibnamedelimi L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{fullhash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{fullhashraw}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{bibnamehash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{authorbibnamehash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{authornamehash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{authorfullhash}{03b73893d1c060a89f1216a878e9afa9}
+      \strng{authorfullhashraw}{03b73893d1c060a89f1216a878e9afa9}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{5}
+      \field{title}{Constrained Optimization Approaches to Estimation of Structural Models}
+      \field{volume}{80}
+      \field{year}{2012}
+      \field{pages}{2213\bibrangedash 2230}
+      \range{pages}{18}
+    \endentry
+    \entry{Swan1970}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=fe59a67c88fb7f1f72c9a7ac16be1d0a}{%
+           family={Swan},
+           familyi={S\bibinitperiod},
+           given={P.\bibnamedelimi L.},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{fullhash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{fullhashraw}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{bibnamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorbibnamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authornamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorfullhash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorfullhashraw}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Review}
+      \field{number}{5}
+      \field{title}{Durability of Consumption Goods}
+      \field{volume}{60}
+      \field{year}{1970}
+      \field{pages}{884\bibrangedash 894}
+      \range{pages}{11}
+    \endentry
+    \entry{Swan1972}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=fe59a67c88fb7f1f72c9a7ac16be1d0a}{%
+           family={Swan},
+           familyi={S\bibinitperiod},
+           given={P.\bibnamedelimi L.},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{fullhash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{fullhashraw}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{bibnamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorbibnamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authornamehash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorfullhash}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \strng{authorfullhashraw}{fe59a67c88fb7f1f72c9a7ac16be1d0a}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{3}
+      \field{title}{Optimum Durability, Second-Hand Markets, and Planned Obsolescence}
+      \field{volume}{80}
+      \field{year}{1972}
+      \field{pages}{575\bibrangedash 585}
+      \range{pages}{11}
+    \endentry
+    \entry{Waldman1993}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=267fce6fc1414e23117c86b8052a0b3e}{%
+           family={Waldman},
+           familyi={W\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{bibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorbibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authornamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \field{extraname}{1}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Quarterly Journal of Economics}
+      \field{number}{1}
+      \field{title}{A New Perspective on Planned Obsolescence}
+      \field{volume}{108}
+      \field{year}{1993}
+      \field{pages}{273\bibrangedash 283}
+      \range{pages}{11}
+    \endentry
+    \entry{Waldman1996}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=267fce6fc1414e23117c86b8052a0b3e}{%
+           family={Waldman},
+           familyi={W\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{bibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorbibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authornamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \field{extraname}{2}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{RAND Journal of Economics}
+      \field{number}{3}
+      \field{title}{Planned Obsolescence and the R\&D Decision}
+      \field{volume}{27}
+      \field{year}{1996}
+      \field{pages}{583\bibrangedash 595}
+      \range{pages}{13}
+    \endentry
+    \entry{Waldman2003}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=267fce6fc1414e23117c86b8052a0b3e}{%
+           family={Waldman},
+           familyi={W\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{fullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{bibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorbibnamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authornamehash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhash}{267fce6fc1414e23117c86b8052a0b3e}
+      \strng{authorfullhashraw}{267fce6fc1414e23117c86b8052a0b3e}
+      \field{extraname}{3}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Economic Perspectives}
+      \field{number}{1}
+      \field{title}{Durable Goods Theory for Real World Markets}
+      \field{volume}{17}
+      \field{year}{2003}
+      \field{pages}{131\bibrangedash 154}
+      \range{pages}{24}
+    \endentry
+  \enddatalist
+  \missing{LethPetersenLowMeghir2026}
+  \missing{Morita Waldman 2004}
+  \missing{Morita Waldman 2010}
+  \missing{schmalensee}
+  \missing{schneider 2012}
+  \missing{su1975}
+  \missing{taylor 1995}
+\endrefsection
+\endinput
+

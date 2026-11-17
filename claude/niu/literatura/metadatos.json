@@ -1,0 +1,5864 @@
+{
+"Bellman1957": {
+"doi": "10.1515/9781400835386",
+"titulo": "Dynamic Programming",
+"autores": [
+[
+"Bellman",
+"Richard E."
+]
+],
+"anio": 2010,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "edited-book",
+"editorial": "Princeton University Press"
+},
+"Blackwell1965": {
+"doi": "10.1214/aoms/1177700285",
+"titulo": "Discounted Dynamic Programming",
+"autores": [
+[
+"Blackwell",
+"David"
+]
+],
+"anio": 1965,
+"revista": "The Annals of Mathematical Statistics",
+"vol": "36",
+"num": "1",
+"pag": "226-235",
+"tipo": "journal-article",
+"editorial": "Institute of Mathematical Statistics"
+},
+"Rust1987": {
+"doi": "10.2307/1911259",
+"titulo": "Optimal Replacement of GMC Bus Engines: An Empirical Model of Harold Zurcher",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1987,
+"revista": "Econometrica",
+"vol": "55",
+"num": "5",
+"pag": "999-1033",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Rust1988": {
+"doi": "10.1137/0326056",
+"titulo": "Maximum Likelihood Estimation of Discrete Control Processes",
+"autores": [
+[
+"John",
+"Rust"
+]
+],
+"anio": 1988,
+"revista": "SIAM Journal on Control and Optimization",
+"vol": "26",
+"num": "5",
+"pag": "1006-1024",
+"tipo": "journal-article",
+"editorial": "Society for Industrial & Applied Mathematics (SIAM)"
+},
+"Rust1994": {
+"doi": "10.1016/s1573-4412(05)80020-0",
+"titulo": "Chapter 51 Structural estimation of markov decision processes",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1994,
+"revista": "Handbook of Econometrics",
+"vol": "",
+"num": "",
+"pag": "3081-3143",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"Rust1996": {
+"doi": "10.1016/s1574-0021(96)01016-7",
+"titulo": "Chapter 14 Numerical dynamic programming in economics",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1996,
+"revista": "Handbook of Computational Economics",
+"vol": "",
+"num": "",
+"pag": "619-729",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"Rust1997": {
+"doi": "10.2307/2171751",
+"titulo": "Using Randomization to Break the Curse of Dimensionality",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1997,
+"revista": "Econometrica",
+"vol": "65",
+"num": "3",
+"pag": "487",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Wolpin1984": {
+"doi": "10.1086/261262",
+"titulo": "An Estimable Dynamic Stochastic Model of Fertility and Child Mortality",
+"autores": [
+[
+"Wolpin",
+"Kenneth I."
+]
+],
+"anio": 1984,
+"revista": "Journal of Political Economy",
+"vol": "92",
+"num": "5",
+"pag": "852-874",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Miller1984": {
+"doi": "10.1086/261276",
+"titulo": "Job Matching and Occupational Choice",
+"autores": [
+[
+"Miller",
+"Robert A."
+]
+],
+"anio": 1984,
+"revista": "Journal of Political Economy",
+"vol": "92",
+"num": "6",
+"pag": "1086-1120",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Pakes1986": {
+"doi": "10.2307/1912835",
+"titulo": "Patents as Options: Some Estimates of the Value of Holding European Patent Stocks",
+"autores": [
+[
+"Pakes",
+"Ariel"
+]
+],
+"anio": 1986,
+"revista": "Econometrica",
+"vol": "54",
+"num": "4",
+"pag": "755",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"HotzMiller1993": {
+"doi": "10.2307/2298122",
+"titulo": "Conditional Choice Probabilities and the Estimation of Dynamic Models",
+"autores": [
+[
+"Hotz",
+"V. Joseph"
+],
+[
+"Miller",
+"Robert A."
+]
+],
+"anio": 1993,
+"revista": "The Review of Economic Studies",
+"vol": "60",
+"num": "3",
+"pag": "497-529",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"HMSS1994": {
+"doi": "10.2307/2297981",
+"titulo": "A Simulation Estimator for Dynamic Models of Discrete Choice",
+"autores": [
+[
+"Hotz",
+"V. J."
+],
+[
+"Miller",
+"R. A."
+],
+[
+"Sanders",
+"S."
+],
+[
+"Smith",
+"J."
+]
+],
+"anio": 1994,
+"revista": "The Review of Economic Studies",
+"vol": "61",
+"num": "2",
+"pag": "265-289",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"AguirregabiriaMira2002": {
+"doi": "10.1111/1468-0262.00340",
+"titulo": "Swapping the Nested Fixed Point Algorithm: A Class of Estimators for Discrete Markov Decision Models",
+"autores": [
+[
+"Aguirregabiria",
+"Victor"
+],
+[
+"Mira",
+"Pedro"
+]
+],
+"anio": 2002,
+"revista": "Econometrica",
+"vol": "70",
+"num": "4",
+"pag": "1519-1543",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"AguirregabiriaMira2007": {
+"doi": "10.1111/j.1468-0262.2007.00731.x",
+"titulo": "Sequential Estimation of Dynamic Discrete Games",
+"autores": [
+[
+"Aguirregabiria",
+"Victor"
+],
+[
+"Mira",
+"Pedro"
+]
+],
+"anio": 2007,
+"revista": "Econometrica",
+"vol": "75",
+"num": "1",
+"pag": "1-53",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"AguirregabiriaMira2010": {
+"doi": "10.1016/j.jeconom.2009.09.007",
+"titulo": "Dynamic discrete choice structural models: A survey",
+"autores": [
+[
+"Aguirregabiria",
+"Victor"
+],
+[
+"Mira",
+"Pedro"
+]
+],
+"anio": 2010,
+"revista": "Journal of Econometrics",
+"vol": "156",
+"num": "1",
+"pag": "38-67",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"KeaneWolpin1994": {
+"doi": "10.2307/2109768",
+"titulo": "The Solution and Estimation of Discrete Choice Dynamic Programming Models by Simulation and Interpolation: Monte Carlo Evidence",
+"autores": [
+[
+"Keane",
+"Michael P."
+],
+[
+"Wolpin",
+"Kenneth I."
+]
+],
+"anio": 1994,
+"revista": "The Review of Economics and Statistics",
+"vol": "76",
+"num": "4",
+"pag": "648",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"KeaneToddWolpin2011": {
+"doi": "10.1016/s0169-7218(11)00410-2",
+"titulo": "The Structural Estimation of Behavioral Models: Discrete Choice Dynamic Programming Methods and Applications",
+"autores": [
+[
+"Keane",
+"Michael P."
+],
+[
+"Todd",
+"Petra E."
+],
+[
+"Wolpin",
+"Kenneth I."
+]
+],
+"anio": 2011,
+"revista": "Handbook of Labor Economics",
+"vol": "",
+"num": "",
+"pag": "331-461",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"EcksteinWolpin1989": {
+"doi": "10.2307/145996",
+"titulo": "The Specification and Estimation of Dynamic Stochastic Discrete Choice Models: A Survey",
+"autores": [
+[
+"Eckstein",
+"Zvi"
+],
+[
+"Wolpin",
+"Kenneth I."
+]
+],
+"anio": 1989,
+"revista": "The Journal of Human Resources",
+"vol": "24",
+"num": "4",
+"pag": "562",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"SuJudd2012": {
+"doi": "10.3982/ecta7925",
+"titulo": "Constrained Optimization Approaches to Estimation of Structural Models",
+"autores": [],
+"anio": 2012,
+"revista": "Econometrica",
+"vol": "80",
+"num": "5",
+"pag": "2213-2230",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"Iskhakov2016": {
+"doi": "10.3982/ecta12605",
+"titulo": "Comment on \"Constrained Optimization Approaches to Estimation of Structural Models\"",
+"autores": [
+[
+"Iskhakov",
+"Fedor"
+],
+[
+"Lee",
+"Jinhyuk"
+],
+[
+"Rust",
+"John"
+],
+[
+"Schjerning",
+"Bertel"
+],
+[
+"Seo",
+"Kyoungwon"
+]
+],
+"anio": 2016,
+"revista": "Econometrica",
+"vol": "84",
+"num": "1",
+"pag": "365-370",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"DubeFoxSu2012": {
+"doi": "10.3982/ecta8585",
+"titulo": "Improving the Numerical Performance of Static and Dynamic Aggregate Discrete Choice Random Coefficients Demand Estimation",
+"autores": [],
+"anio": 2012,
+"revista": "Econometrica",
+"vol": "80",
+"num": "5",
+"pag": "2231-2267",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"ArcidiaconoEllickson2011": {
+"doi": "10.1146/annurev-economics-111809-125038",
+"titulo": "Practical Methods for Estimation of Dynamic Discrete Choice Models",
+"autores": [
+[
+"Arcidiacono",
+"Peter"
+],
+[
+"Ellickson",
+"Paul B."
+]
+],
+"anio": 2011,
+"revista": "Annual Review of Economics",
+"vol": "3",
+"num": "1",
+"pag": "363-394",
+"tipo": "journal-article",
+"editorial": "Annual Reviews"
+},
+"ArcidiaconoMiller2011": {
+"doi": "10.3982/ecta7743",
+"titulo": "Conditional Choice Probability Estimation of Dynamic Discrete Choice Models With Unobserved Heterogeneity",
+"autores": [],
+"anio": 2011,
+"revista": "Econometrica",
+"vol": "79",
+"num": "6",
+"pag": "1823-1867",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"ArcidiaconoMiller2020": {
+"doi": "10.1016/j.jeconom.2018.12.025",
+"titulo": "Identifying dynamic discrete choice models off short panels",
+"autores": [
+[
+"Arcidiacono",
+"Peter"
+],
+[
+"Miller",
+"Robert A."
+]
+],
+"anio": 2020,
+"revista": "Journal of Econometrics",
+"vol": "215",
+"num": "2",
+"pag": "473-485",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"MagnacThesmar2002": {
+"doi": "10.1111/1468-0262.00306",
+"titulo": "Identifying Dynamic Discrete Decision Processes",
+"autores": [
+[
+"Magnac",
+"Thierry"
+],
+[
+"Thesmar",
+"David"
+]
+],
+"anio": 2002,
+"revista": "Econometrica",
+"vol": "70",
+"num": "2",
+"pag": "801-816",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"AbbringDaljord2020": {
+"doi": "10.3982/qe1352",
+"titulo": "Identifying the discount factor in dynamic discrete choice models",
+"autores": [
+[
+"Abbring",
+"Jaap H."
+],
+[
+"Daljord",
+"Øystein"
+]
+],
+"anio": 2020,
+"revista": "Quantitative Economics",
+"vol": "11",
+"num": "2",
+"pag": "471-501",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"KSS2021": {
+"doi": "10.3982/qe1253",
+"titulo": "Identification of counterfactuals in dynamic discrete choice models",
+"autores": [
+[
+"Kalouptsidi",
+"Myrto"
+],
+[
+"Scott",
+"Paul T."
+],
+[
+"Souza-Rodrigues",
+"Eduardo"
+]
+],
+"anio": 2021,
+"revista": "Quantitative Economics",
+"vol": "12",
+"num": "2",
+"pag": "351-403",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"KSS2021b": {
+"doi": "10.1016/j.jeconom.2020.03.016",
+"titulo": "Linear IV regression estimators for structural dynamic discrete choice models",
+"autores": [
+[
+"Kalouptsidi",
+"Myrto"
+],
+[
+"Scott",
+"Paul T."
+],
+[
+"Souza-Rodrigues",
+"Eduardo"
+]
+],
+"anio": 2021,
+"revista": "Journal of Econometrics",
+"vol": "222",
+"num": "1",
+"pag": "778-804",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"NoretsTang2014": {
+"doi": "10.1093/restud/rdt050",
+"titulo": "Semiparametric Inference in Dynamic Binary Choice Models",
+"autores": [
+[
+"Norets",
+"A."
+],
+[
+"Tang",
+"X."
+]
+],
+"anio": 2014,
+"revista": "The Review of Economic Studies",
+"vol": "81",
+"num": "3",
+"pag": "1229-1262",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Norets2009": {
+"doi": "10.3982/ecta7292",
+"titulo": "Inference in Dynamic Discrete Choice Models With Serially Correlated Unobserved State Variables",
+"autores": [],
+"anio": 2009,
+"revista": "Econometrica",
+"vol": "77",
+"num": "5",
+"pag": "1665-1682",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"BBL2007": {
+"doi": "10.1111/j.1468-0262.2007.00796.x",
+"titulo": "Estimating Dynamic Models of Imperfect Competition",
+"autores": [
+[
+"Bajari",
+"Patrick"
+],
+[
+"Benkard",
+"C. Lanier"
+],
+[
+"Levin",
+"Jonathan"
+]
+],
+"anio": 2007,
+"revista": "Econometrica",
+"vol": "75",
+"num": "5",
+"pag": "1331-1370",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"POB2007": {
+"doi": "10.1111/j.1756-2171.2007.tb00073.x",
+"titulo": "Simple estimators for the parameters of discrete dynamic games (with entry/exit examples)",
+"autores": [
+[
+"Pakes",
+"Ariel"
+],
+[
+"Ostrovsky",
+"Michael"
+],
+[
+"Berry",
+"Steven"
+]
+],
+"anio": 2007,
+"revista": "The RAND Journal of Economics",
+"vol": "38",
+"num": "2",
+"pag": "373-399",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"PesendorferSD2008": {
+"doi": "10.1111/j.1467-937x.2008.00496.x",
+"titulo": "Asymptotic Least Squares Estimators for Dynamic Games",
+"autores": [
+[
+"PESENDORFER",
+"MARTIN"
+],
+[
+"SCHMIDT-DENGLER",
+"PHILIPP"
+]
+],
+"anio": 2008,
+"revista": "Review of Economic Studies",
+"vol": "75",
+"num": "3",
+"pag": "901-928",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"KasaharaShimotsu2012": {
+"doi": "10.3982/ecta8291",
+"titulo": "Sequential Estimation of Structural Models With a Fixed Point Constraint",
+"autores": [],
+"anio": 2012,
+"revista": "Econometrica",
+"vol": "80",
+"num": "5",
+"pag": "2303-2319",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"HeckmanSinger1984": {
+"doi": "10.2307/1911491",
+"titulo": "A Method for Minimizing the Impact of Distributional Assumptions in Econometric Models for Duration Data",
+"autores": [
+[
+"Heckman",
+"J."
+],
+[
+"Singer",
+"B."
+]
+],
+"anio": 1984,
+"revista": "Econometrica",
+"vol": "52",
+"num": "2",
+"pag": "271",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Das1992": {
+"doi": "10.2307/2297955",
+"titulo": "A Micro-Econometric Model of Capital Utilization and Retirement: The Case of the U.S. Cement Industry",
+"autores": [
+[
+"Das",
+"Sanghamitra"
+]
+],
+"anio": 1992,
+"revista": "The Review of Economic Studies",
+"vol": "59",
+"num": "2",
+"pag": "277",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"RustRothwell1995": {
+"doi": "10.1002/jae.3950100506",
+"titulo": "Optimal response to a shift in regulatory regime: The case of the US nuclear power industry",
+"autores": [
+[
+"Rust",
+"John"
+],
+[
+"Rothwell",
+"Geoffrey"
+]
+],
+"anio": 1995,
+"revista": "Journal of Applied Econometrics",
+"vol": "10",
+"num": "S1",
+"pag": "S75-S118",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Kennet1994": {
+"doi": "10.1002/jae.3950090405",
+"titulo": "A structural model of aircraft engine maintenance",
+"autores": [
+[
+"Kennet",
+"D. Mark"
+]
+],
+"anio": 1994,
+"revista": "Journal of Applied Econometrics",
+"vol": "9",
+"num": "4",
+"pag": "351-368",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"ImaiJainChing2009": {
+"doi": "10.3982/ecta5658",
+"titulo": "Bayesian Estimation of Dynamic Discrete Choice Models",
+"autores": [],
+"anio": 2009,
+"revista": "Econometrica",
+"vol": "77",
+"num": "6",
+"pag": "1865-1899",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"ChiongGalichonShum2016": {
+"doi": "10.3982/qe436",
+"titulo": "Duality in dynamic discrete-choice models",
+"autores": [
+[
+"Chiong",
+"Khai Xiang"
+],
+[
+"Galichon",
+"Alfred"
+],
+[
+"Shum",
+"Matt"
+]
+],
+"anio": 2016,
+"revista": "Quantitative Economics",
+"vol": "7",
+"num": "1",
+"pag": "83-115",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"Cardell1997": {
+"doi": "10.1017/s0266466600005727",
+"titulo": "Variance Components Structures for the Extreme-Value and Logistic Distributions with Application to Models of Heterogeneity",
+"autores": [
+[
+"Cardell",
+"N. Scott"
+]
+],
+"anio": 1997,
+"revista": "Econometric Theory",
+"vol": "13",
+"num": "2",
+"pag": "185-213",
+"tipo": "journal-article",
+"editorial": "Cambridge University Press (CUP)"
+},
+"Train2009": {
+"doi": "10.1017/cbo9780511805271",
+"titulo": "Discrete Choice Methods with Simulation",
+"autores": [
+[
+"Train",
+"Kenneth E."
+]
+],
+"anio": 2001,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Cambridge University Press"
+},
+"HuShum2012": {
+"doi": "10.1016/j.jeconom.2012.05.023",
+"titulo": "Nonparametric identification of dynamic models with unobserved state variables",
+"autores": [
+[
+"Hu",
+"Yingyao"
+],
+[
+"Shum",
+"Matthew"
+]
+],
+"anio": 2012,
+"revista": "Journal of Econometrics",
+"vol": "171",
+"num": "1",
+"pag": "32-44",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HuXin2024": {
+"doi": "10.1016/j.jeconom.2024.105806",
+"titulo": "Identification and estimation of dynamic structural models with unobserved choices",
+"autores": [
+[
+"Hu",
+"Yingyao"
+],
+[
+"Xin",
+"Yi"
+]
+],
+"anio": 2024,
+"revista": "Journal of Econometrics",
+"vol": "242",
+"num": "2",
+"pag": "105806",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Hu2008": {
+"doi": "10.1016/j.jeconom.2007.12.001",
+"titulo": "Identification and estimation of nonlinear models with misclassification error using instrumental variables: A general solution",
+"autores": [
+[
+"Hu",
+"Yingyao"
+]
+],
+"anio": 2008,
+"revista": "Journal of Econometrics",
+"vol": "144",
+"num": "1",
+"pag": "27-61",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HuSchennach2008": {
+"doi": "10.1111/j.0012-9682.2008.00823.x",
+"titulo": "Instrumental Variable Treatment of Nonclassical Measurement Error Models",
+"autores": [
+[
+"Hu",
+"Yingyao"
+],
+[
+"Schennach",
+"Susanne M."
+]
+],
+"anio": 2008,
+"revista": "Econometrica",
+"vol": "76",
+"num": "1",
+"pag": "195-216",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"Hu2017": {
+"doi": "10.1016/j.jeconom.2017.06.002",
+"titulo": "The econometrics of unobservables: Applications of measurement error models in empirical industrial organization and labor economics",
+"autores": [
+[
+"Hu",
+"Yingyao"
+]
+],
+"anio": 2017,
+"revista": "Journal of Econometrics",
+"vol": "200",
+"num": "2",
+"pag": "154-168",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HuSasaki2018": {
+"doi": "10.1017/s0266466617000081",
+"titulo": "CLOSED-FORM IDENTIFICATION OF DYNAMIC DISCRETE CHOICE MODELS WITH PROXIES FOR UNOBSERVED STATE VARIABLES",
+"autores": [
+[
+"Hu",
+"Yingyao"
+],
+[
+"Sasaki",
+"Yuya"
+]
+],
+"anio": 2018,
+"revista": "Econometric Theory",
+"vol": "34",
+"num": "1",
+"pag": "166-185",
+"tipo": "journal-article",
+"editorial": "Cambridge University Press (CUP)"
+},
+"HigginsJochmans2023": {
+"doi": "10.1016/j.jeconom.2023.04.006",
+"titulo": "Identification of mixtures of dynamic discrete choices",
+"autores": [
+[
+"Higgins",
+"Ayden"
+],
+[
+"Jochmans",
+"Koen"
+]
+],
+"anio": 2023,
+"revista": "Journal of Econometrics",
+"vol": "237",
+"num": "1",
+"pag": "105462",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HigginsJochmans2025": {
+"doi": "10.1017/s0266466625000027",
+"titulo": "LEARNING MARKOV PROCESSES WITH LATENT VARIABLES",
+"autores": [
+[
+"Higgins",
+"Ayden"
+],
+[
+"Jochmans",
+"Koen"
+]
+],
+"anio": 2026,
+"revista": "Econometric Theory",
+"vol": "42",
+"num": "3",
+"pag": "501-513",
+"tipo": "journal-article",
+"editorial": "Cambridge University Press (CUP)"
+},
+"KasaharaShimotsu2009": {
+"doi": "10.3982/ecta6763",
+"titulo": "Nonparametric Identification of Finite Mixture Models of Dynamic Discrete Choices",
+"autores": [],
+"anio": 2009,
+"revista": "Econometrica",
+"vol": "77",
+"num": "1",
+"pag": "135-175",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"AllmanMatiasRhodes2009": {
+"doi": "10.1214/09-aos689",
+"titulo": "Identifiability of parameters in latent structure models with many observed variables",
+"autores": [
+[
+"Allman",
+"Elizabeth S."
+],
+[
+"Matias",
+"Catherine"
+],
+[
+"Rhodes",
+"John A."
+]
+],
+"anio": 2009,
+"revista": "The Annals of Statistics",
+"vol": "37",
+"num": "6A",
+"pag": "3099-3132",
+"tipo": "journal-article",
+"editorial": "Institute of Mathematical Statistics"
+},
+"BonhommeJochmansRobin2016": {
+"doi": "10.1111/rssb.12110",
+"titulo": "Non-Parametric Estimation of Finite Mixtures from Repeated Measurements",
+"autores": [
+[
+"Bonhomme",
+"Stéphane"
+],
+[
+"Jochmans",
+"Koen"
+],
+[
+"Robin",
+"Jean-Marc"
+]
+],
+"anio": 2016,
+"revista": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+"vol": "78",
+"num": "1",
+"pag": "211-229",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"BerryCompiani2023": {
+"doi": "10.1093/restud/rdac061",
+"titulo": "An Instrumental Variable Approach to Dynamic Models",
+"autores": [
+[
+"Berry",
+"Steven T"
+],
+[
+"Compiani",
+"Giovanni"
+]
+],
+"anio": 2023,
+"revista": "The Review of Economic Studies",
+"vol": "90",
+"num": "4",
+"pag": "1724-1758",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"AGL2021": {
+"doi": "10.1016/j.jeconom.2019.07.010",
+"titulo": "Sufficient statistics for unobserved heterogeneity in structural dynamic logit models",
+"autores": [
+[
+"Aguirregabiria",
+"Victor"
+],
+[
+"Gu",
+"Jiaying"
+],
+[
+"Luo",
+"Yao"
+]
+],
+"anio": 2021,
+"revista": "Journal of Econometrics",
+"vol": "223",
+"num": "2",
+"pag": "280-311",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Rabiner1989": {
+"doi": "10.1109/5.18626",
+"titulo": "A tutorial on hidden Markov models and selected applications in speech recognition",
+"autores": [
+[
+"Rabiner",
+"L.R."
+]
+],
+"anio": 1989,
+"revista": "Proceedings of the IEEE",
+"vol": "77",
+"num": "2",
+"pag": "257-286",
+"tipo": "journal-article",
+"editorial": "Institute of Electrical and Electronics Engineers (IEEE)"
+},
+"Baum1970": {
+"doi": "10.1214/aoms/1177697196",
+"titulo": "A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains",
+"autores": [
+[
+"Baum",
+"Leonard E."
+],
+[
+"Petrie",
+"Ted"
+],
+[
+"Soules",
+"George"
+],
+[
+"Weiss",
+"Norman"
+]
+],
+"anio": 1970,
+"revista": "The Annals of Mathematical Statistics",
+"vol": "41",
+"num": "1",
+"pag": "164-171",
+"tipo": "journal-article",
+"editorial": "Institute of Mathematical Statistics"
+},
+"Dempster1977": {
+"doi": "10.1111/j.2517-6161.1977.tb01600.x",
+"titulo": "Maximum Likelihood from Incomplete Data Via the\n                    <i>EM</i>\n                    Algorithm",
+"autores": [
+[
+"Dempster",
+"A. P."
+],
+[
+"Laird",
+"N. M."
+],
+[
+"Rubin",
+"D. B."
+]
+],
+"anio": 1977,
+"revista": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+"vol": "39",
+"num": "1",
+"pag": "1-22",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Hamilton1989": {
+"doi": "10.2307/1912559",
+"titulo": "A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle",
+"autores": [
+[
+"Hamilton",
+"James D."
+]
+],
+"anio": 1989,
+"revista": "Econometrica",
+"vol": "57",
+"num": "2",
+"pag": "357",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Poirier1980": {
+"doi": "10.1016/0304-4076(80)90007-x",
+"titulo": "Partial observability in bivariate probit models",
+"autores": [
+[
+"Poirier",
+"Dale J."
+]
+],
+"anio": 1980,
+"revista": "Journal of Econometrics",
+"vol": "12",
+"num": "2",
+"pag": "209-217",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HausmanAS1998": {
+"doi": "10.1016/s0304-4076(98)00015-3",
+"titulo": "Misclassification of the dependent variable in a discrete-response setting",
+"autores": [
+[
+"Hausman",
+"J.A."
+],
+[
+"Abrevaya",
+"Jason"
+],
+[
+"Scott-Morton",
+"F.M."
+]
+],
+"anio": 1998,
+"revista": "Journal of Econometrics",
+"vol": "87",
+"num": "2",
+"pag": "239-269",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Molinari2008": {
+"doi": "10.1016/j.jeconom.2007.12.003",
+"titulo": "Partial identification of probability distributions with misclassified data",
+"autores": [
+[
+"Molinari",
+"Francesca"
+]
+],
+"anio": 2008,
+"revista": "Journal of Econometrics",
+"vol": "144",
+"num": "1",
+"pag": "81-117",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Schennach2016": {
+"doi": "10.1146/annurev-economics-080315-015058",
+"titulo": "Recent Advances in the Measurement Error Literature",
+"autores": [
+[
+"Schennach",
+"Susanne M."
+]
+],
+"anio": 2016,
+"revista": "Annual Review of Economics",
+"vol": "8",
+"num": "1",
+"pag": "341-377",
+"tipo": "journal-article",
+"editorial": "Annual Reviews"
+},
+"ChenHongNekipelov2011": {
+"doi": "10.1257/jel.49.4.901",
+"titulo": "Nonlinear Models of Measurement Errors",
+"autores": [
+[
+"Chen",
+"Xiaohong"
+],
+[
+"Hong",
+"Han"
+],
+[
+"Nekipelov",
+"Denis"
+]
+],
+"anio": 2011,
+"revista": "Journal of Economic Literature",
+"vol": "49",
+"num": "4",
+"pag": "901-937",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"CunhaHeckmanSchennach2010": {
+"doi": "10.3982/ecta6551",
+"titulo": "Estimating the Technology of Cognitive and Noncognitive Skill Formation",
+"autores": [],
+"anio": 2010,
+"revista": "Econometrica",
+"vol": "78",
+"num": "3",
+"pag": "883-931",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"PerrigneVuong2011": {
+"doi": "10.3982/ecta6954",
+"titulo": "Nonparametric Identification of a Contract Model With Adverse Selection and Moral Hazard",
+"autores": [],
+"anio": 2011,
+"revista": "Econometrica",
+"vol": "79",
+"num": "5",
+"pag": "1499-1539",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"GayleMiller2015": {
+"doi": "10.1093/restud/rdv004",
+"titulo": "Identifying and Testing Models of Managerial Compensation",
+"autores": [
+[
+"Gayle",
+"George-Levi"
+],
+[
+"Miller",
+"Robert A."
+]
+],
+"anio": 2015,
+"revista": "The Review of Economic Studies",
+"vol": "82",
+"num": "3",
+"pag": "1074-1118",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"CopelandMonnet2009": {
+"doi": "10.1111/j.1467-937x.2008.00513.x",
+"titulo": "The Welfare Effects of Incentive Schemes",
+"autores": [
+[
+"COPELAND",
+"ADAM"
+],
+[
+"MONNET",
+"CYRIL"
+]
+],
+"anio": 2009,
+"revista": "Review of Economic Studies",
+"vol": "76",
+"num": "1",
+"pag": "93-113",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"MisraNair2011": {
+"doi": "10.1007/s11129-011-9096-1",
+"titulo": "A structural model of sales-force compensation dynamics: Estimation and field implementation",
+"autores": [
+[
+"Misra",
+"Sanjog"
+],
+[
+"Nair",
+"Harikesh S."
+]
+],
+"anio": 2011,
+"revista": "Quantitative Marketing and Economics",
+"vol": "9",
+"num": "3",
+"pag": "211-257",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Hubbard1998": {
+"doi": "10.2307/2555895",
+"titulo": "An Empirical Examination of Moral Hazard in the Vehicle Inspection Market",
+"autores": [
+[
+"Hubbard",
+"Thomas N."
+]
+],
+"anio": 1998,
+"revista": "The RAND Journal of Economics",
+"vol": "29",
+"num": "2",
+"pag": "406-426",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Chen2007": {
+"doi": "10.1016/s1573-4412(07)06076-x",
+"titulo": "Chapter 76 Large Sample Sieve Estimation of Semi-Nonparametric Models",
+"autores": [
+[
+"Chen",
+"Xiaohong"
+]
+],
+"anio": 2007,
+"revista": "Handbook of Econometrics",
+"vol": "",
+"num": "",
+"pag": "5549-5632",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"Manski1983": {
+"doi": "10.1016/0191-2615(83)90004-8",
+"titulo": "Analysis of equilibrium automobile holdings in Israel with aggregate discrete choice models",
+"autores": [
+[
+"Manski",
+"Charles F."
+]
+],
+"anio": 1983,
+"revista": "Transportation Research Part B: Methodological",
+"vol": "17",
+"num": "5",
+"pag": "373-389",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"ManskiGoldin1983": {
+"doi": "10.1287/trsc.17.4.365",
+"titulo": "An Econometric Analysis of Automobile Scrappage",
+"autores": [
+[
+"Manski",
+"Charles F."
+],
+[
+"Goldin",
+"Ephraim"
+]
+],
+"anio": 1983,
+"revista": "Transportation Science",
+"vol": "17",
+"num": "4",
+"pag": "365-375",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"Berkovec1985": {
+"doi": "10.2307/2555410",
+"titulo": "New Car Sales and Used Car Stocks: A Model of the Automobile Market",
+"autores": [
+[
+"Berkovec",
+"James"
+]
+],
+"anio": 1985,
+"revista": "The RAND Journal of Economics",
+"vol": "16",
+"num": "2",
+"pag": "195-214",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"BerkovecRust1985": {
+"doi": "10.1016/0191-2615(85)90036-0",
+"titulo": "A nested logit model of automobile holdings for one vehicle households",
+"autores": [
+[
+"Berkovec",
+"James"
+],
+[
+"Rust",
+"John"
+]
+],
+"anio": 1985,
+"revista": "Transportation Research Part B: Methodological",
+"vol": "19",
+"num": "4",
+"pag": "275-285",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"ManneringWinston1985": {
+"doi": "10.2307/2555411",
+"titulo": "A Dynamic Empirical Analysis of Household Vehicle Ownership and Utilization",
+"autores": [
+[
+"Mannering",
+"Fred"
+],
+[
+"Winston",
+"Clifford"
+]
+],
+"anio": 1985,
+"revista": "The RAND Journal of Economics",
+"vol": "16",
+"num": "2",
+"pag": "215-236",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Rust1985": {
+"doi": "10.2307/1912654",
+"titulo": "Stationary Equilibrium in a Market for Durable Assets",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1985,
+"revista": "Econometrica",
+"vol": "53",
+"num": "4",
+"pag": "783-805",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Rust1986": {
+"doi": "10.2307/1914157",
+"titulo": "When is it Optimal to Kill off the Market for Used Durable Goods?",
+"autores": [
+[
+"Rust",
+"John"
+]
+],
+"anio": 1986,
+"revista": "Econometrica",
+"vol": "54",
+"num": "1",
+"pag": "65-86",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"AndersonGinsburgh1994": {
+"doi": "10.1016/0014-2921(94)90003-5",
+"titulo": "Price discrimination via second-hand markets",
+"autores": [
+[
+"Anderson",
+"Simon P."
+],
+[
+"Ginsburgh",
+"Victor A."
+]
+],
+"anio": 1994,
+"revista": "European Economic Review",
+"vol": "38",
+"num": "1",
+"pag": "23-44",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"KonishiSandfort2002": {
+"doi": "10.1016/s0165-1889(01)00008-2",
+"titulo": "Existence of stationary equilibrium in the markets for new and used durable goods",
+"autores": [
+[
+"Konishi",
+"Hideo"
+],
+[
+"Sandfort",
+"Michael T."
+]
+],
+"anio": 2002,
+"revista": "Journal of Economic Dynamics and Control",
+"vol": "26",
+"num": "6",
+"pag": "1029-1052",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Stolyarov2002": {
+"doi": "10.1086/343745",
+"titulo": "Turnover of Used Durables in a Stationary Equilibrium: Are Older Goods Traded More?",
+"autores": [
+[
+"Stolyarov",
+"Dmitriy"
+]
+],
+"anio": 2002,
+"revista": "Journal of Political Economy",
+"vol": "110",
+"num": "6",
+"pag": "1390-1413",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"EstebanShum2007": {
+"doi": "10.1111/j.1756-2171.2007.tb00071.x",
+"titulo": "Durable‐goods oligopoly with secondary markets: the case of automobiles",
+"autores": [
+[
+"Esteban",
+"Susanna"
+],
+[
+"Shum",
+"Matthew"
+]
+],
+"anio": 2007,
+"revista": "The RAND Journal of Economics",
+"vol": "38",
+"num": "2",
+"pag": "332-354",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"ChenEstebanShum2013": {
+"doi": "10.1257/aer.103.7.2911",
+"titulo": "When Do Secondary Markets Harm Firms?",
+"autores": [
+[
+"Chen",
+"Jiawei"
+],
+[
+"Esteban",
+"Susanna"
+],
+[
+"Shum",
+"Matthew"
+]
+],
+"anio": 2013,
+"revista": "American Economic Review",
+"vol": "103",
+"num": "7",
+"pag": "2911-2934",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"GavazzaLizzeriRoketskiy2014": {
+"doi": "10.1257/aer.104.11.3668",
+"titulo": "A Quantitative Analysis of the Used-Car Market",
+"autores": [
+[
+"Gavazza",
+"Alessandro"
+],
+[
+"Lizzeri",
+"Alessandro"
+],
+[
+"Roketskiy",
+"Nikita"
+]
+],
+"anio": 2014,
+"revista": "American Economic Review",
+"vol": "104",
+"num": "11",
+"pag": "3668-3700",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Gillingham2022": {
+"doi": "10.1086/720463",
+"titulo": "Equilibrium Trade in Automobiles",
+"autores": [
+[
+"Gillingham",
+"Kenneth"
+],
+[
+"Iskhakov",
+"Fedor"
+],
+[
+"Munk-Nielsen",
+"Anders"
+],
+[
+"Rust",
+"John"
+],
+[
+"Schjerning",
+"Bertel"
+]
+],
+"anio": 2022,
+"revista": "Journal of Political Economy",
+"vol": "130",
+"num": "10",
+"pag": "2534-2593",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Schiraldi2011": {
+"doi": "10.1111/j.1756-2171.2011.00133.x",
+"titulo": "Automobile replacement: a dynamic structural approach",
+"autores": [
+[
+"Schiraldi",
+"Pasquale"
+]
+],
+"anio": 2011,
+"revista": "The RAND Journal of Economics",
+"vol": "42",
+"num": "2",
+"pag": "266-291",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"AddaCooper2000": {
+"doi": "10.1086/316096",
+"titulo": "Balladurette and Juppette: A Discrete Analysis of Scrapping                         Subsidies",
+"autores": [
+[
+"Adda",
+"Jérôme"
+],
+[
+"Cooper",
+"Russell"
+]
+],
+"anio": 2000,
+"revista": "Journal of Political Economy",
+"vol": "108",
+"num": "4",
+"pag": "778-806",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Blundell2026": {
+"doi": "10.3982/qe1822",
+"titulo": "Durables and lemons: Private information and the market for cars",
+"autores": [
+[
+"Blundell",
+"Richard"
+],
+[
+"Gu",
+"Ran"
+],
+[
+"Leth-Petersen",
+"Søren"
+],
+[
+"Low",
+"Hamish"
+],
+[
+"Meghir",
+"Costas"
+]
+],
+"anio": 2026,
+"revista": "Quantitative Economics",
+"vol": "17",
+"num": "1",
+"pag": "38-91",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"Melnikov2013": {
+"doi": "10.1111/j.1465-7295.2012.00501.x",
+"titulo": "DEMAND FOR DIFFERENTIATED DURABLE PRODUCTS: THE CASE OF THE U.S. COMPUTER PRINTER MARKET",
+"autores": [
+[
+"MELNIKOV",
+"OLEG"
+]
+],
+"anio": 2013,
+"revista": "Economic Inquiry",
+"vol": "51",
+"num": "2",
+"pag": "1277-1298",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"GowrisankaranRysman2012": {
+"doi": "10.1086/669540",
+"titulo": "Dynamics of Consumer Demand for New Durable Goods",
+"autores": [
+[
+"Gowrisankaran",
+"Gautam"
+],
+[
+"Rysman",
+"Marc"
+]
+],
+"anio": 2012,
+"revista": "Journal of Political Economy",
+"vol": "120",
+"num": "6",
+"pag": "1173-1219",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Gordon2009": {
+"doi": "10.1287/mksc.1080.0448",
+"titulo": "A Dynamic Model of Consumer Replacement Cycles in the PC Processor Industry",
+"autores": [
+[
+"Gordon",
+"Brett R."
+]
+],
+"anio": 2009,
+"revista": "Marketing Science",
+"vol": "28",
+"num": "5",
+"pag": "846-867",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"Carranza2010": {
+"doi": "10.1016/j.ijindorg.2010.02.003",
+"titulo": "Product innovation and adoption in market equilibrium: The case of digital cameras",
+"autores": [
+[
+"Carranza",
+"Juan Esteban"
+]
+],
+"anio": 2010,
+"revista": "International Journal of Industrial Organization",
+"vol": "28",
+"num": "6",
+"pag": "604-618",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Nair2007": {
+"doi": "10.1007/s11129-007-9026-4",
+"titulo": "Intertemporal price discrimination with forward-looking consumers: Application to the US market for console video-games",
+"autores": [
+[
+"Nair",
+"Harikesh"
+]
+],
+"anio": 2007,
+"revista": "Quantitative Marketing and Economics",
+"vol": "5",
+"num": "3",
+"pag": "239-292",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"HendelNevo2006": {
+"doi": "10.1111/j.1468-0262.2006.00721.x",
+"titulo": "Measuring the Implications of Sales and Consumer Inventory Behavior",
+"autores": [
+[
+"Hendel",
+"Igal"
+],
+[
+"Nevo",
+"Aviv"
+]
+],
+"anio": 2006,
+"revista": "Econometrica",
+"vol": "74",
+"num": "6",
+"pag": "1637-1673",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"GoettlerGordon2011": {
+"doi": "10.1086/664615",
+"titulo": "Does AMD Spur Intel to Innovate More?",
+"autores": [
+[
+"Goettler",
+"Ronald L."
+],
+[
+"Gordon",
+"Brett R."
+]
+],
+"anio": 2011,
+"revista": "Journal of Political Economy",
+"vol": "119",
+"num": "6",
+"pag": "1141-1200",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"IshiharaChing2019": {
+"doi": "10.1287/mksc.2018.1142",
+"titulo": "Dynamic Demand for New and Used Durable Goods Without Physical Depreciation: The Case of Japanese Video Games",
+"autores": [
+[
+"Ishihara",
+"Masakazu"
+],
+[
+"Ching",
+"Andrew T."
+]
+],
+"anio": 2019,
+"revista": "Marketing Science",
+"vol": "38",
+"num": "3",
+"pag": "392-416",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"Ghose2009": {
+"doi": "10.2307/20650292",
+"titulo": "Internet Exchanges for Used Goods: An Empirical Analysis of Trade Patterns and Adverse Selection1",
+"autores": [
+[
+"Ghose",
+"Anindya"
+]
+],
+"anio": 2009,
+"revista": "MIS Quarterly",
+"vol": "33",
+"num": "2",
+"pag": "263-292",
+"tipo": "journal-article",
+"editorial": "MIS Quarterly"
+},
+"Bento2009": {
+"doi": "10.1257/aer.99.3.667",
+"titulo": "Distributional and Efficiency Impacts of Increased US Gasoline Taxes",
+"autores": [
+[
+"Bento",
+"Antonio M"
+],
+[
+"Goulder",
+"Lawrence H"
+],
+[
+"Jacobsen",
+"Mark R"
+],
+[
+"von Haefen",
+"Roger H"
+]
+],
+"anio": 2009,
+"revista": "American Economic Review",
+"vol": "99",
+"num": "3",
+"pag": "667-699",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"BusseKZ2013": {
+"doi": "10.1257/aer.103.1.220",
+"titulo": "Are Consumers Myopic? Evidence from New and Used Car Purchases",
+"autores": [
+[
+"Busse",
+"Meghan R"
+],
+[
+"Knittel",
+"Christopher R"
+],
+[
+"Zettelmeyer",
+"Florian"
+]
+],
+"anio": 2013,
+"revista": "American Economic Review",
+"vol": "103",
+"num": "1",
+"pag": "220-256",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"AllcottWozny2014": {
+"doi": "10.1162/rest_a_00419",
+"titulo": "Gasoline Prices, Fuel Economy, and the Energy Paradox",
+"autores": [
+[
+"Allcott",
+"Hunt"
+],
+[
+"Wozny",
+"Nathan"
+]
+],
+"anio": 2014,
+"revista": "Review of Economics and Statistics",
+"vol": "96",
+"num": "5",
+"pag": "779-795",
+"tipo": "journal-article",
+"editorial": "MIT Press"
+},
+"LiTimminsvH2009": {
+"doi": "10.1257/pol.1.2.113",
+"titulo": "How Do Gasoline Prices Affect Fleet Fuel Economy?",
+"autores": [
+[
+"Li",
+"Shanjun"
+],
+[
+"Timmins",
+"Christopher"
+],
+[
+"von Haefen",
+"Roger H"
+]
+],
+"anio": 2009,
+"revista": "American Economic Journal: Economic Policy",
+"vol": "1",
+"num": "2",
+"pag": "113-137",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"JacobsenVanBenthem2015": {
+"doi": "10.1257/aer.20130935",
+"titulo": "Vehicle Scrappage and Gasoline Policy",
+"autores": [
+[
+"Jacobsen",
+"Mark R."
+],
+[
+"van Benthem",
+"Arthur A."
+]
+],
+"anio": 2015,
+"revista": "American Economic Review",
+"vol": "105",
+"num": "3",
+"pag": "1312-1338",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"MianSufi2012": {
+"doi": "10.1093/qje/qjs024",
+"titulo": "The Effects of Fiscal Stimulus: Evidence from the 2009 Cash for Clunkers Program*",
+"autores": [
+[
+"Mian",
+"Atif"
+],
+[
+"Sufi",
+"Amir"
+]
+],
+"anio": 2012,
+"revista": "The Quarterly Journal of Economics",
+"vol": "127",
+"num": "3",
+"pag": "1107-1142",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"HoekstraPullerReimers2017": {
+"doi": "10.1257/app.20150172",
+"titulo": "Cash for Corollas: When Stimulus Reduces Spending",
+"autores": [
+[
+"Hoekstra",
+"Mark"
+],
+[
+"Puller",
+"Steven L."
+],
+[
+"West",
+"Jeremy"
+]
+],
+"anio": 2017,
+"revista": "American Economic Journal: Applied Economics",
+"vol": "9",
+"num": "3",
+"pag": "1-35",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Kahn1986q": {
+"doi": "10.2307/1891118",
+"titulo": "Gasoline Prices and the Used Automobile Market: A Rational Expectations Asset Price Approach",
+"autores": [
+[
+"Kahn",
+"James A."
+]
+],
+"anio": 1986,
+"revista": "The Quarterly Journal of Economics",
+"vol": "101",
+"num": "2",
+"pag": "323",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Eberly1994": {
+"doi": "10.1086/261940",
+"titulo": "Adjustment of Consumers' Durables Stocks: Evidence from Automobile Purchases",
+"autores": [
+[
+"Eberly",
+"Janice C."
+]
+],
+"anio": 1994,
+"revista": "Journal of Political Economy",
+"vol": "102",
+"num": "3",
+"pag": "403-436",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Attanasio2000": {
+"doi": "10.1111/1467-937x.00149",
+"titulo": "Consumer Durables and Inertial Behaviour: Estimation and Aggregation of (S, s) Rules for Automobile Purchases",
+"autores": [
+[
+"Attanasio",
+"O. P."
+]
+],
+"anio": 2000,
+"revista": "The Review of Economic Studies",
+"vol": "67",
+"num": "4",
+"pag": "667-696",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"GreenspanCohen1999": {
+"doi": "10.1162/003465399558300",
+"titulo": "Motor Vehicle Stocks, Scrappage, and Sales",
+"autores": [
+[
+"Greenspan",
+"Alan"
+],
+[
+"Cohen",
+"Darrel"
+]
+],
+"anio": 1999,
+"revista": "Review of Economics and Statistics",
+"vol": "81",
+"num": "3",
+"pag": "369-383",
+"tipo": "journal-article",
+"editorial": "MIT Press - Journals"
+},
+"Parks1977": {
+"doi": "10.2307/1914061",
+"titulo": "Determinants of Scrapping Rates for Postwar Vintage Automobiles",
+"autores": [
+[
+"Parks",
+"Richard W."
+]
+],
+"anio": 1977,
+"revista": "Econometrica",
+"vol": "45",
+"num": "5",
+"pag": "1099",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Walker1968": {
+"doi": "10.2307/1926820",
+"titulo": "Determinants of Auto Scrappage",
+"autores": [
+[
+"Walker",
+"Franklin V."
+]
+],
+"anio": 1968,
+"revista": "The Review of Economics and Statistics",
+"vol": "50",
+"num": "4",
+"pag": "503",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Bento2018": {
+"doi": "10.5547/01956574.39.1.aben",
+"titulo": "Vehicle Lifetime and Scrappage Behavior: Trends in the U.S. Used Car Market",
+"autores": [
+[
+"Bento",
+"Antonio"
+],
+[
+"Roth",
+"Kevin"
+],
+[
+"Zuo",
+"Yiou"
+]
+],
+"anio": 2018,
+"revista": "The Energy Journal",
+"vol": "39",
+"num": "1",
+"pag": "159-184",
+"tipo": "journal-article",
+"editorial": "SAGE Publications"
+},
+"HamiltonMacauley1999": {
+"doi": "10.1111/1467-6451.00100",
+"titulo": "Heredity or Environment: Why is Automobile Longevity Increasing?",
+"autores": [
+[
+"Hamilton",
+"Bruce W."
+],
+[
+"Macauley",
+"Molly K."
+]
+],
+"anio": 1999,
+"revista": "The Journal of Industrial Economics",
+"vol": "47",
+"num": "3",
+"pag": "251-261",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"ChevalierGoolsbee2009": {
+"doi": "10.1162/qjec.2009.124.4.1853",
+"titulo": "Are Durable Goods Consumers Forward-Looking? Evidence from College Textbooks<sup>*</sup>",
+"autores": [
+[
+"Chevalier",
+"Judith"
+],
+[
+"Goolsbee",
+"Austan"
+]
+],
+"anio": 2009,
+"revista": "Quarterly Journal of Economics",
+"vol": "124",
+"num": "4",
+"pag": "1853-1884",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Berry1994": {
+"doi": "10.2307/2555829",
+"titulo": "Estimating Discrete-Choice Models of Product Differentiation",
+"autores": [
+[
+"Berry",
+"Steven T."
+]
+],
+"anio": 1994,
+"revista": "The RAND Journal of Economics",
+"vol": "25",
+"num": "2",
+"pag": "242-262",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"BLP1995": {
+"doi": "10.2307/2171802",
+"titulo": "Automobile Prices in Market Equilibrium",
+"autores": [
+[
+"Berry",
+"Steven"
+],
+[
+"Levinsohn",
+"James"
+],
+[
+"Pakes",
+"Ariel"
+]
+],
+"anio": 1995,
+"revista": "Econometrica",
+"vol": "63",
+"num": "4",
+"pag": "841-890",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"BLP2004": {
+"doi": "10.1086/379939",
+"titulo": "Differentiated Products Demand Systems from a Combination of Micro and Macro Data: The New Car Market",
+"autores": [
+[
+"Berry",
+"Steven"
+],
+[
+"Levinsohn",
+"James"
+],
+[
+"Pakes",
+"Ariel"
+]
+],
+"anio": 2004,
+"revista": "Journal of Political Economy",
+"vol": "112",
+"num": "1",
+"pag": "68-105",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Petrin2002": {
+"doi": "10.1086/340779",
+"titulo": "Quantifying the Benefits of New Products: The Case of the Minivan",
+"autores": [
+[
+"Petrin",
+"Amil"
+]
+],
+"anio": 2002,
+"revista": "Journal of Political Economy",
+"vol": "110",
+"num": "4",
+"pag": "705-729",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"ConlonGortmaker2020": {
+"doi": "10.1111/1756-2171.12352",
+"titulo": "Best practices for differentiated products demand estimation with PyBLP",
+"autores": [
+[
+"Conlon",
+"Christopher"
+],
+[
+"Gortmaker",
+"Jeff"
+]
+],
+"anio": 2020,
+"revista": "The RAND Journal of Economics",
+"vol": "51",
+"num": "4",
+"pag": "1108-1161",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"MoralJaumandreu2007": {
+"doi": "10.1007/s10108-006-9014-y",
+"titulo": "Automobile demand, model cycle and age effects",
+"autores": [
+[
+"Moral",
+"María José"
+],
+[
+"Jaumandreu",
+"Jordi"
+]
+],
+"anio": 2007,
+"revista": "Spanish Economic Review",
+"vol": "9",
+"num": "3",
+"pag": "193-218",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"GMY2024": {
+"doi": "10.1093/qje/qjad047",
+"titulo": "The Evolution of Market Power in the U.S. Automobile Industry",
+"autores": [
+[
+"Grieco",
+"Paul L E"
+],
+[
+"Murry",
+"Charles"
+],
+[
+"Yurukoglu",
+"Ali"
+]
+],
+"anio": 2024,
+"revista": "The Quarterly Journal of Economics",
+"vol": "139",
+"num": "2",
+"pag": "1201-1253",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"GrigolonRV2018": {
+"doi": "10.1257/pol.20160078",
+"titulo": "Consumer Valuation of Fuel Costs and Tax Policy: Evidence from the European Car Market",
+"autores": [
+[
+"Grigolon",
+"Laura"
+],
+[
+"Reynaert",
+"Mathias"
+],
+[
+"Verboven",
+"Frank"
+]
+],
+"anio": 2018,
+"revista": "American Economic Journal: Economic Policy",
+"vol": "10",
+"num": "3",
+"pag": "193-225",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"LucasPrescott1971": {
+"doi": "10.2307/1909571",
+"titulo": "Investment Under Uncertainty",
+"autores": [
+[
+"Lucas",
+"Robert E."
+],
+[
+"Prescott",
+"Edward C."
+]
+],
+"anio": 1971,
+"revista": "Econometrica",
+"vol": "39",
+"num": "5",
+"pag": "659",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Hopenhayn1992": {
+"doi": "10.2307/2951541",
+"titulo": "Entry, Exit, and firm Dynamics in Long Run Equilibrium",
+"autores": [
+[
+"Hopenhayn",
+"Hugo A."
+]
+],
+"anio": 1992,
+"revista": "Econometrica",
+"vol": "60",
+"num": "5",
+"pag": "1127",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"HopenhaynPrescott1992": {
+"doi": "10.2307/2951526",
+"titulo": "Stochastic Monotonicity and Stationary Distributions for Dynamic Economies",
+"autores": [
+[
+"Hopenhayn",
+"Hugo A."
+],
+[
+"Prescott",
+"Edward C."
+]
+],
+"anio": 1992,
+"revista": "Econometrica",
+"vol": "60",
+"num": "6",
+"pag": "1387",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Huggett1993": {
+"doi": "10.1016/0165-1889(93)90024-m",
+"titulo": "The risk-free rate in heterogeneous-agent incomplete-insurance economies",
+"autores": [
+[
+"Huggett",
+"Mark"
+]
+],
+"anio": 1993,
+"revista": "Journal of Economic Dynamics and Control",
+"vol": "17",
+"num": "5-6",
+"pag": "953-969",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Aiyagari1994": {
+"doi": "10.2307/2118417",
+"titulo": "Uninsured Idiosyncratic Risk and Aggregate Saving",
+"autores": [
+[
+"Aiyagari",
+"S. R."
+]
+],
+"anio": 1994,
+"revista": "The Quarterly Journal of Economics",
+"vol": "109",
+"num": "3",
+"pag": "659-684",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Young2010": {
+"doi": "10.1016/j.jedc.2008.11.010",
+"titulo": "Solving the incomplete markets model with aggregate uncertainty using the Krusell–Smith algorithm and non-stochastic simulations",
+"autores": [
+[
+"Young",
+"Eric R."
+]
+],
+"anio": 2010,
+"revista": "Journal of Economic Dynamics and Control",
+"vol": "34",
+"num": "1",
+"pag": "36-41",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"WeintraubBVR2008": {
+"doi": "10.3982/ecta6158",
+"titulo": "Markov Perfect Industry Dynamics With Many Firms",
+"autores": [],
+"anio": 2008,
+"revista": "Econometrica",
+"vol": "76",
+"num": "6",
+"pag": "1375-1411",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"EricsonPakes1995": {
+"doi": "10.2307/2297841",
+"titulo": "Markov-Perfect Industry Dynamics: A Framework for Empirical Work",
+"autores": [
+[
+"Ericson",
+"Richard"
+],
+[
+"Pakes",
+"Ariel"
+]
+],
+"anio": 1995,
+"revista": "The Review of Economic Studies",
+"vol": "62",
+"num": "1",
+"pag": "53-82",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"DoraszelskiPakes2007": {
+"doi": "10.1016/s1573-448x(06)03030-5",
+"titulo": "Chapter 30 A Framework for Applied Dynamic Analysis in IO",
+"autores": [
+[
+"Doraszelski",
+"Ulrich"
+],
+[
+"Pakes",
+"Ariel"
+]
+],
+"anio": 2007,
+"revista": "Handbook of Industrial Organization",
+"vol": "",
+"num": "",
+"pag": "1887-1966",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"PakesMcGuire1994": {
+"doi": "10.2307/2555975",
+"titulo": "Computing Markov-Perfect Nash Equilibria: Numerical Implications of a Dynamic Differentiated Product Model",
+"autores": [
+[
+"Pakes",
+"Ariel"
+],
+[
+"McGuire",
+"Paul"
+]
+],
+"anio": 1994,
+"revista": "The RAND Journal of Economics",
+"vol": "25",
+"num": "4",
+"pag": "555",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"PakesMcGuire2001": {
+"doi": "10.1111/1468-0262.00241",
+"titulo": "Stochastic Algorithms, Symmetric Markov Perfect Equilibrium, and the 'curse' of Dimensionality",
+"autores": [
+[
+"Pakes",
+"Ariel"
+],
+[
+"McGuire",
+"Paul"
+]
+],
+"anio": 2001,
+"revista": "Econometrica",
+"vol": "69",
+"num": "5",
+"pag": "1261-1281",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"DubeHC2010": {
+"doi": "10.1287/mksc.1090.0541",
+"titulo": "Tipping and Concentration in Markets with Indirect Network Effects",
+"autores": [
+[
+"Dubé",
+"Jean-Pierre H."
+],
+[
+"Hitsch",
+"Günter J."
+],
+[
+"Chintagunta",
+"Pradeep K."
+]
+],
+"anio": 2010,
+"revista": "Marketing Science",
+"vol": "29",
+"num": "2",
+"pag": "216-249",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"HashmiVB2016": {
+"doi": "10.1162/rest_a_00494",
+"titulo": "The Relationship between Market Structure and Innovation in Industry Equilibrium: A Case Study of the Global Automobile Industry",
+"autores": [
+[
+"Hashmi",
+"Aamir Rafique"
+],
+[
+"Biesebroeck",
+"Johannes Van"
+]
+],
+"anio": 2016,
+"revista": "Review of Economics and Statistics",
+"vol": "98",
+"num": "1",
+"pag": "192-208",
+"tipo": "journal-article",
+"editorial": "MIT Press"
+},
+"Coase1972": {
+"doi": "10.1086/466731",
+"titulo": "Durability and Monopoly",
+"autores": [
+[
+"Coase",
+"R. H."
+]
+],
+"anio": 1972,
+"revista": "The Journal of Law and Economics",
+"vol": "15",
+"num": "1",
+"pag": "143-149",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Bulow1982": {
+"doi": "10.1086/261058",
+"titulo": "Durable-Goods Monopolists",
+"autores": [
+[
+"Bulow",
+"Jeremy I."
+]
+],
+"anio": 1982,
+"revista": "Journal of Political Economy",
+"vol": "90",
+"num": "2",
+"pag": "314-332",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Bulow1986": {
+"doi": "10.2307/1884176",
+"titulo": "An Economic Theory of Planned Obsolescence",
+"autores": [
+[
+"Bulow",
+"Jeremy"
+]
+],
+"anio": 1986,
+"revista": "The Quarterly Journal of Economics",
+"vol": "101",
+"num": "4",
+"pag": "729-749",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Stokey1981": {
+"doi": "10.2307/3003511",
+"titulo": "Rational Expectations and Durable Goods Pricing",
+"autores": [
+[
+"Stokey",
+"Nancy L."
+]
+],
+"anio": 1981,
+"revista": "The Bell Journal of Economics",
+"vol": "12",
+"num": "1",
+"pag": "112",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"GSW1986": {
+"doi": "10.1016/0022-0531(86)90024-4",
+"titulo": "Foundations of dynamic monopoly and the coase conjecture",
+"autores": [
+[
+"Gul",
+"Faruk"
+],
+[
+"Sonnenschein",
+"Hugo"
+],
+[
+"Wilson",
+"Robert"
+]
+],
+"anio": 1986,
+"revista": "Journal of Economic Theory",
+"vol": "39",
+"num": "1",
+"pag": "155-190",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"AusubelDeneckere1989": {
+"doi": "10.2307/1911050",
+"titulo": "Reputation in Bargaining and Durable Goods Monopoly",
+"autores": [
+[
+"Ausubel",
+"Lawrence M."
+],
+[
+"Deneckere",
+"Raymond J."
+]
+],
+"anio": 1989,
+"revista": "Econometrica",
+"vol": "57",
+"num": "3",
+"pag": "511",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Swan1971": {
+"doi": "10.2307/3003172",
+"titulo": "The Durability of Goods and Regulation of Monopoly",
+"autores": [
+[
+"Swan",
+"Peter L."
+]
+],
+"anio": 1971,
+"revista": "The Bell Journal of Economics and Management Science",
+"vol": "2",
+"num": "1",
+"pag": "347",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Swan1972": {
+"doi": "10.1086/259906",
+"titulo": "Optimum Durability, Second-Hand Markets, and Planned Obsolescence",
+"autores": [
+[
+"Swan",
+"Peter L."
+]
+],
+"anio": 1972,
+"revista": "Journal of Political Economy",
+"vol": "80",
+"num": "3, Part 1",
+"pag": "575-585",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"KleimanOphir1966": {
+"doi": "10.2307/2974440",
+"titulo": "The Durability of Durable Goods",
+"autores": [
+[
+"Kleiman",
+"E."
+],
+[
+"Ophir",
+"T."
+]
+],
+"anio": 1966,
+"revista": "The Review of Economic Studies",
+"vol": "33",
+"num": "2",
+"pag": "165",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Schmalensee1970": {
+"doi": "10.2307/3003022",
+"titulo": "Regulation and the Durability of Goods",
+"autores": [
+[
+"Schmalensee",
+"Richard"
+]
+],
+"anio": 1970,
+"revista": "The Bell Journal of Economics and Management Science",
+"vol": "1",
+"num": "1",
+"pag": "54",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"SieperSwan1973": {
+"doi": "10.2307/2296454",
+"titulo": "Monopoly and Competition in the Market for Durable Goods",
+"autores": [
+[
+"Sieper",
+"E."
+],
+[
+"Swan",
+"P. L."
+]
+],
+"anio": 1973,
+"revista": "The Review of Economic Studies",
+"vol": "40",
+"num": "3",
+"pag": "333",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"BenjaminKormendi1974": {
+"doi": "10.1086/466798",
+"titulo": "The Interrelationship between Markets for New and Used Durable Goods",
+"autores": [
+[
+"Benjamin",
+"Daniel K."
+],
+[
+"Kormendi",
+"Roger C."
+]
+],
+"anio": 1974,
+"revista": "The Journal of Law and Economics",
+"vol": "17",
+"num": "2",
+"pag": "381-401",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"BondSamuelson1984": {
+"doi": "10.2307/2555442",
+"titulo": "Durable Good Monopolies with Rational Expectations and Replacement Sales",
+"autores": [
+[
+"Bond",
+"Eric W."
+],
+[
+"Samuelson",
+"Larry"
+]
+],
+"anio": 1984,
+"revista": "The RAND Journal of Economics",
+"vol": "15",
+"num": "3",
+"pag": "336",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Waldman1993": {
+"doi": "10.2307/2118504",
+"titulo": "A New Perspective on Planned Obsolescence",
+"autores": [
+[
+"Waldman",
+"M."
+]
+],
+"anio": 1993,
+"revista": "The Quarterly Journal of Economics",
+"vol": "108",
+"num": "1",
+"pag": "273-283",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Waldman1996": {
+"doi": "10.2307/2555845",
+"titulo": "Planned Obsolescence and the R&amp;D Decision",
+"autores": [
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 1996,
+"revista": "The RAND Journal of Economics",
+"vol": "27",
+"num": "3",
+"pag": "583-595",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Waldman1997": {
+"doi": "10.1086/467366",
+"titulo": "Eliminating the Market for Secondhand Goods: An Alternative Explanation for Leasing",
+"autores": [
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 1997,
+"revista": "The Journal of Law and Economics",
+"vol": "40",
+"num": "1",
+"pag": "61-92",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Waldman2003": {
+"doi": "10.1257/089533003321164985",
+"titulo": "Durable Goods Theory for Real World Markets",
+"autores": [
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 2003,
+"revista": "Journal of Economic Perspectives",
+"vol": "17",
+"num": "1",
+"pag": "131-154",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Fishman1993": {
+"doi": "10.2307/2950597",
+"titulo": "Planned Obsolescence as an Engine of Technological Progress",
+"autores": [
+[
+"Fishman",
+"Arthur"
+],
+[
+"Gandal",
+"Neil"
+],
+[
+"Shy",
+"Oz"
+]
+],
+"anio": 1993,
+"revista": "The Journal of Industrial Economics",
+"vol": "41",
+"num": "4",
+"pag": "361-370",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"GroutPark2005": {
+"doi": "10.2139/ssrn.480666",
+"titulo": "Competitive Planned Obsolescence",
+"autores": [
+[
+"Grout",
+"Paul A."
+],
+[
+"Park",
+"In-Uck"
+]
+],
+"anio": 2003,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "posted-content",
+"editorial": "Elsevier BV"
+},
+"Strausz2009": {
+"doi": "10.1111/j.1468-0297.2009.02290.x",
+"titulo": "Planned Obsolescence as an Incentive Device for Unobservable Quality",
+"autores": [
+[
+"Strausz",
+"Roland"
+]
+],
+"anio": 2009,
+"revista": "The Economic Journal",
+"vol": "119",
+"num": "540",
+"pag": "1405-1421",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"LeeLee1998": {
+"doi": "10.1111/1467-6451.00077",
+"titulo": "A Theory of Economic Obsolescence",
+"autores": [
+[
+"Lee",
+"In Ho"
+],
+[
+"Lee",
+"Jonghwa"
+]
+],
+"anio": 1998,
+"revista": "The Journal of Industrial Economics",
+"vol": "46",
+"num": "3",
+"pag": "383-401",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Choi1994": {
+"doi": "10.2307/2950488",
+"titulo": "Network Externality, Compatibility Choice, and Planned Obsolescence",
+"autores": [
+[
+"Choi",
+"Jay Pil"
+]
+],
+"anio": 1994,
+"revista": "The Journal of Industrial Economics",
+"vol": "42",
+"num": "2",
+"pag": "167",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"EllisonFudenberg2000": {
+"doi": "10.2307/2601040",
+"titulo": "The Neo-Luddite's Lament: Excessive Upgrades in the Software Industry",
+"autores": [
+[
+"Ellison",
+"Glenn"
+],
+[
+"Fudenberg",
+"Drew"
+]
+],
+"anio": 2000,
+"revista": "The RAND Journal of Economics",
+"vol": "31",
+"num": "2",
+"pag": "253",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"FudenbergTirole1998": {
+"doi": "10.2307/2555887",
+"titulo": "Upgrades, Tradeins, and Buybacks",
+"autores": [
+[
+"Fudenberg",
+"Drew"
+],
+[
+"Tirole",
+"Jean"
+]
+],
+"anio": 1998,
+"revista": "The RAND Journal of Economics",
+"vol": "29",
+"num": "2",
+"pag": "235",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Nahm2004": {
+"doi": "10.1111/j.1530-9134.2004.00012.x",
+"titulo": "Durable‐Goods Monopoly with Endogenous Innovation",
+"autores": [
+[
+"Nahm",
+"Jae"
+]
+],
+"anio": 2004,
+"revista": "Journal of Economics &amp; Management Strategy",
+"vol": "13",
+"num": "2",
+"pag": "303-319",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Akerlof1970": {
+"doi": "10.2307/1879431",
+"titulo": "The Market for \"Lemons\": Quality Uncertainty and the Market Mechanism",
+"autores": [
+[
+"Akerlof",
+"George A."
+]
+],
+"anio": 1970,
+"revista": "The Quarterly Journal of Economics",
+"vol": "84",
+"num": "3",
+"pag": "488-500",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"HendelLizzeri1999a": {
+"doi": "10.2307/2556043",
+"titulo": "Interfering with Secondary Markets",
+"autores": [
+[
+"Hendel",
+"Igal"
+],
+[
+"Lizzeri",
+"Alessandro"
+]
+],
+"anio": 1999,
+"revista": "The RAND Journal of Economics",
+"vol": "30",
+"num": "1",
+"pag": "1-21",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"HendelLizzeri1999b": {
+"doi": "10.1257/aer.89.5.1097",
+"titulo": "Adverse Selection in Durable Goods Markets",
+"autores": [
+[
+"Hendel",
+"Igal"
+],
+[
+"Lizzeri",
+"Alessandro"
+]
+],
+"anio": 1999,
+"revista": "American Economic Review",
+"vol": "89",
+"num": "5",
+"pag": "1097-1115",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"HendelLizzeri2002": {
+"doi": "10.1086/324387",
+"titulo": "The Role of Leasing under Adverse Selection",
+"autores": [
+[
+"Hendel",
+"Igal"
+],
+[
+"Lizzeri",
+"Alessandro"
+]
+],
+"anio": 2002,
+"revista": "Journal of Political Economy",
+"vol": "110",
+"num": "1",
+"pag": "113-143",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"HLS2005": {
+"doi": "10.1111/j.1467-937x.2005.00340.x",
+"titulo": "Efficient Sorting in a Dynamic Adverse-Selection Model",
+"autores": [
+[
+"Hendel",
+"Igal"
+],
+[
+"Lizzeri",
+"Alessandro"
+],
+[
+"Siniscalchi",
+"Marciano"
+]
+],
+"anio": 2005,
+"revista": "Review of Economic Studies",
+"vol": "72",
+"num": "2",
+"pag": "467-497",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"HouseLeahy2004": {
+"doi": "10.1086/383104",
+"titulo": "An <i>sS</i> Model with Adverse Selection",
+"autores": [
+[
+"House",
+"Christopher L."
+],
+[
+"Leahy",
+"John V."
+]
+],
+"anio": 2004,
+"revista": "Journal of Political Economy",
+"vol": "112",
+"num": "3",
+"pag": "581-614",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"JohnsonWaldman2003": {
+"doi": "10.2307/1593716",
+"titulo": "Leasing, Lemons, and Buybacks",
+"autores": [
+[
+"Johnson",
+"Justin P."
+],
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 2003,
+"revista": "The RAND Journal of Economics",
+"vol": "34",
+"num": "2",
+"pag": "247",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Kinokuni2021": {
+"doi": "10.1016/j.reseneeco.2021.101242",
+"titulo": "Advance disposal fee vs. disposal fee: A monopolistic producer’s durability choice model",
+"autores": [
+[
+"Kinokuni",
+"Hiroshi"
+],
+[
+"Ohori",
+"Shuichi"
+],
+[
+"Tomoda",
+"Yasunobu"
+]
+],
+"anio": 2021,
+"revista": "Resource and Energy Economics",
+"vol": "65",
+"num": "",
+"pag": "101242",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Genesove1993": {
+"doi": "10.1086/261891",
+"titulo": "Adverse Selection in the Wholesale Used Car Market",
+"autores": [
+[
+"Genesove",
+"David"
+]
+],
+"anio": 1993,
+"revista": "Journal of Political Economy",
+"vol": "101",
+"num": "4",
+"pag": "644-665",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"EngersHartmannStern2009": {
+"doi": "10.1016/j.ijindorg.2008.08.004",
+"titulo": "Are lemons really hot potatoes?",
+"autores": [
+[
+"Engers",
+"Maxim"
+],
+[
+"Hartmann",
+"Monica"
+],
+[
+"Stern",
+"Steven"
+]
+],
+"anio": 2009,
+"revista": "International Journal of Industrial Organization",
+"vol": "27",
+"num": "2",
+"pag": "250-263",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Larsen2021": {
+"doi": "10.1093/restud/rdaa007",
+"titulo": "The Efficiency of Real-World Bargaining: Evidence from Wholesale Used-Auto Auctions",
+"autores": [
+[
+"Larsen",
+"Bradley J"
+]
+],
+"anio": 2021,
+"revista": "The Review of Economic Studies",
+"vol": "88",
+"num": "2",
+"pag": "851-882",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Biglaiser2020": {
+"doi": "10.1111/1756-2171.12344",
+"titulo": "Intermediaries and product quality in used car markets",
+"autores": [
+[
+"Biglaiser",
+"Gary"
+],
+[
+"Li",
+"Fei"
+],
+[
+"Murry",
+"Charles"
+],
+[
+"Zhou",
+"Yiyi"
+]
+],
+"anio": 2020,
+"revista": "The RAND Journal of Economics",
+"vol": "51",
+"num": "3",
+"pag": "905-933",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"LaceteraPopeSydnor2012": {
+"doi": "10.1257/aer.102.5.2206",
+"titulo": "Heuristic Thinking and Limited Attention in the Car Market",
+"autores": [
+[
+"Lacetera",
+"Nicola"
+],
+[
+"Pope",
+"Devin G"
+],
+[
+"Sydnor",
+"Justin R"
+]
+],
+"anio": 2012,
+"revista": "American Economic Review",
+"vol": "102",
+"num": "5",
+"pag": "2206-2236",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Taylor1995": {
+"doi": "10.1086/261975",
+"titulo": "The Economics of Breakdowns, Checkups, and Cures",
+"autores": [
+[
+"Taylor",
+"Curtis R."
+]
+],
+"anio": 1995,
+"revista": "Journal of Political Economy",
+"vol": "103",
+"num": "1",
+"pag": "53-74",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"DarbyKarni1973": {
+"doi": "10.1086/466756",
+"titulo": "Free Competition and the Optimal Amount of Fraud",
+"autores": [
+[
+"Darby",
+"Michael R."
+],
+[
+"Karni",
+"Edi"
+]
+],
+"anio": 1973,
+"revista": "The Journal of Law and Economics",
+"vol": "16",
+"num": "1",
+"pag": "67-88",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Wolinsky1993": {
+"doi": "10.2307/2555964",
+"titulo": "Competition in a Market for Informed Experts' Services",
+"autores": [
+[
+"Wolinsky",
+"Asher"
+]
+],
+"anio": 1993,
+"revista": "The RAND Journal of Economics",
+"vol": "24",
+"num": "3",
+"pag": "380",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"DulleckKerschbamer2006": {
+"doi": "10.1257/002205106776162717",
+"titulo": "On Doctors, Mechanics, and Computer Specialists: The Economics of Credence Goods",
+"autores": [
+[
+"Dulleck",
+"Uwe"
+],
+[
+"Kerschbamer",
+"Rudolf"
+]
+],
+"anio": 2006,
+"revista": "Journal of Economic Literature",
+"vol": "44",
+"num": "1",
+"pag": "5-42",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Schneider2012": {
+"doi": "10.1111/j.1467-6451.2012.00485.x",
+"titulo": "Agency Problems and Reputation in Expert Services: Evidence from Auto Repair",
+"autores": [
+[
+"Schneider",
+"Henry S."
+]
+],
+"anio": 2012,
+"revista": "The Journal of Industrial Economics",
+"vol": "60",
+"num": "3",
+"pag": "406-433",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Hubbard2002": {
+"doi": "10.1086/340086",
+"titulo": "How Do Consumers Motivate Experts? Reputational Incentives in an Auto Repair Market",
+"autores": [
+[
+"Hubbard",
+"Thomas N."
+]
+],
+"anio": 2002,
+"revista": "The Journal of Law and Economics",
+"vol": "45",
+"num": "2",
+"pag": "437-468",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"PetersonSchneider2014": {
+"doi": "10.1111/1756-2171.12045",
+"titulo": "Adverse selection in the used‐car market: evidence from purchase and repair patterns in the Consumer Expenditure Survey",
+"autores": [
+[
+"Peterson",
+"Jonathan R."
+],
+[
+"Schneider",
+"Henry S."
+]
+],
+"anio": 2014,
+"revista": "The RAND Journal of Economics",
+"vol": "45",
+"num": "1",
+"pag": "140-154",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Mann1992": {
+"doi": "10.1016/0167-7187(92)90048-4",
+"titulo": "Durable goods monopoly and maintenance",
+"autores": [
+[
+"Mann",
+"Duncan P."
+]
+],
+"anio": 1992,
+"revista": "International Journal of Industrial Organization",
+"vol": "10",
+"num": "1",
+"pag": "65-79",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"MoritaWaldman2004": {
+"doi": "10.1111/j.1530-9134.2004.00011.x",
+"titulo": "Durable Goods, Monopoly Maintenance, and Time Inconsistency",
+"autores": [
+[
+"Morita",
+"Hodaka"
+],
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 2004,
+"revista": "Journal of Economics &amp; Management Strategy",
+"vol": "13",
+"num": "2",
+"pag": "273-302",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"MoritaWaldman2010": {
+"doi": "10.1257/mic.2.1.230",
+"titulo": "Competition, Monopoly Maintenance, and Consumer Switching Costs",
+"autores": [
+[
+"Morita",
+"Hodaka"
+],
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 2010,
+"revista": "American Economic Journal: Microeconomics",
+"vol": "2",
+"num": "1",
+"pag": "230-255",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"CarltonWaldman2010": {
+"doi": "10.1093/jleo/ewp006",
+"titulo": "Competition, Monopoly, and Aftermarkets",
+"autores": [
+[
+"Carlton",
+"D. W."
+],
+[
+"Waldman",
+"M."
+]
+],
+"anio": 2010,
+"revista": "Journal of Law, Economics, and Organization",
+"vol": "26",
+"num": "1",
+"pag": "54-91",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"ChenRoss1993": {
+"doi": "10.1111/j.1430-9134.1993.00593.x",
+"titulo": "R<scp>efusals to</scp> D<scp>eal</scp>, P<scp>rice</scp> D<scp>iscrimination</scp>, <scp>and</scp> I<scp>ndependent</scp> S<scp>ervice</scp> O<scp>rganizations</scp>",
+"autores": [
+[
+"Chen",
+"Zhiqi"
+],
+[
+"Ross",
+"Thomas W."
+]
+],
+"anio": 1993,
+"revista": "Journal of Economics &amp; Management Strategy",
+"vol": "2",
+"num": "4",
+"pag": "593-614",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"JinYangZhu2023": {
+"doi": "10.1287/mnsc.2022.4401",
+"titulo": "Right to Repair: Pricing, Welfare, and Environmental Implications",
+"autores": [
+[
+"Jin",
+"Chen"
+],
+[
+"Yang",
+"Luyi"
+],
+[
+"Zhu",
+"Cungen"
+]
+],
+"anio": 2023,
+"revista": "Management Science",
+"vol": "69",
+"num": "2",
+"pag": "1017-1036",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"RightToRepairRRC2025": {
+"doi": "10.1007/s11149-025-09490-z",
+"titulo": "Raising rivals’ costs and right to repair laws: Separating the sheep from the goats?",
+"autores": [
+[
+"Dortz",
+"Michael"
+],
+[
+"Wagner",
+"Jeffrey"
+]
+],
+"anio": 2025,
+"revista": "Journal of Regulatory Economics",
+"vol": "68",
+"num": "1",
+"pag": "1-16",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Ozturkcan2024": {
+"doi": "10.1177/20438869231178037",
+"titulo": "The right-to-repair movement: Sustainability and consumer rights",
+"autores": [
+[
+"Ozturkcan",
+"Selcen"
+]
+],
+"anio": 2024,
+"revista": "Journal of Information Technology Teaching Cases",
+"vol": "14",
+"num": "2",
+"pag": "217-223",
+"tipo": "journal-article",
+"editorial": "SAGE Publications"
+},
+"Perzanowski2022": {
+"doi": "10.1017/9781108946926",
+"titulo": "The Right to Repair",
+"autores": [
+[
+"Perzanowski",
+"Aaron"
+]
+],
+"anio": 2022,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Cambridge University Press"
+},
+"Fachbach2022": {
+"doi": "10.1016/j.jclepro.2022.130969",
+"titulo": "Drivers of the consumers’ intention to use repair services, repair networks and to self-repair",
+"autores": [
+[
+"Fachbach",
+"Ines"
+],
+[
+"Lechner",
+"Gernot"
+],
+[
+"Reimann",
+"Marc"
+]
+],
+"anio": 2022,
+"revista": "Journal of Cleaner Production",
+"vol": "346",
+"num": "",
+"pag": "130969",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"McCollough2009": {
+"doi": "10.1111/j.1470-6431.2009.00793.x",
+"titulo": "Factors impacting the demand for repair services of household products: the disappearing repair trades and the throwaway society",
+"autores": [
+[
+"McCollough",
+"John"
+]
+],
+"anio": 2009,
+"revista": "International Journal of Consumer Studies",
+"vol": "33",
+"num": "6",
+"pag": "619-626",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Sabbaghi2016": {
+"doi": "10.1016/j.resconrec.2016.02.014",
+"titulo": "Business outcomes of product repairability: A survey-based study of consumer repair experiences",
+"autores": [
+[
+"Sabbaghi",
+"Mostafa"
+],
+[
+"Esmaeilian",
+"Behzad"
+],
+[
+"Cade",
+"Willie"
+],
+[
+"Wiens",
+"Kyle"
+],
+[
+"Behdad",
+"Sara"
+]
+],
+"anio": 2016,
+"revista": "Resources, Conservation and Recycling",
+"vol": "109",
+"num": "",
+"pag": "114-122",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Parajuly2024": {
+"doi": "10.1111/jiec.13451",
+"titulo": "Product repair in a circular economy: Exploring public repair behavior from a systems perspective",
+"autores": [
+[
+"Parajuly",
+"Keshav"
+],
+[
+"Green",
+"James"
+],
+[
+"Richter",
+"Jessika"
+],
+[
+"Johnson",
+"Michael"
+],
+[
+"Rückschloss",
+"Jana"
+],
+[
+"Peeters",
+"Jef"
+],
+[
+"Kuehr",
+"Ruediger"
+],
+[
+"Fitzpatrick",
+"Colin"
+]
+],
+"anio": 2024,
+"revista": "Journal of Industrial Ecology",
+"vol": "28",
+"num": "1",
+"pag": "74-86",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Fernandez2001": {
+"doi": "10.1016/s0140-9883(00)00066-9",
+"titulo": "Observable and unobservable determinants of replacement of home appliances",
+"autores": [
+[
+"Fernandez",
+"Viviana P."
+]
+],
+"anio": 2001,
+"revista": "Energy Economics",
+"vol": "23",
+"num": "3",
+"pag": "305-323",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"DrinkwaterHastings1967": {
+"doi": "10.2307/3007524",
+"titulo": "An Economic Replacement Model",
+"autores": [
+[
+"Drinkwater",
+"R. W."
+],
+[
+"Hastings",
+"N. A. J."
+]
+],
+"anio": 1967,
+"revista": "OR",
+"vol": "18",
+"num": "2",
+"pag": "121-138",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Neuts2000": {
+"doi": "10.1239/aap/1013540174",
+"titulo": "Repairable models with operating and repair times governed by phase type distributions",
+"autores": [
+[
+"Neuts",
+"Marcel F."
+],
+[
+"Pérez-Ocón",
+"Rafael"
+],
+[
+"Torres-Castro",
+"Inmaculada"
+]
+],
+"anio": 2000,
+"revista": "Advances in Applied Probability",
+"vol": "32",
+"num": "2",
+"pag": "468-479",
+"tipo": "journal-article",
+"editorial": "Cambridge University Press (CUP)"
+},
+"BarlowHunter1960": {
+"doi": "10.1287/opre.8.1.90",
+"titulo": "Optimum Preventive Maintenance Policies",
+"autores": [
+[
+"Barlow",
+"Richard"
+],
+[
+"Hunter",
+"Larry"
+]
+],
+"anio": 1960,
+"revista": "Operations Research",
+"vol": "8",
+"num": "1",
+"pag": "90-100",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"PierskallaVoelker1976": {
+"doi": "10.1002/nav.3800230302",
+"titulo": "A survey of maintenance models: The control and surveillance of deteriorating systems",
+"autores": [
+[
+"Pierskalla",
+"William P."
+],
+[
+"Voelker",
+"John A."
+]
+],
+"anio": 1976,
+"revista": "Naval Research Logistics Quarterly",
+"vol": "23",
+"num": "3",
+"pag": "353-388",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Wang2002": {
+"doi": "10.1016/s0377-2217(01)00197-7",
+"titulo": "A survey of maintenance policies of deteriorating systems",
+"autores": [
+[
+"Wang",
+"Hongzhou"
+]
+],
+"anio": 2002,
+"revista": "European Journal of Operational Research",
+"vol": "139",
+"num": "3",
+"pag": "469-489",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"HMMMaintenance2022": {
+"doi": "10.1016/j.ejor.2022.05.006",
+"titulo": "Hidden markov models in reliability and maintenance",
+"autores": [
+[
+"Gámiz",
+"María Luz"
+],
+[
+"Limnios",
+"Nikolaos"
+],
+[
+"Segovia-García",
+"María del Carmen"
+]
+],
+"anio": 2023,
+"revista": "European Journal of Operational Research",
+"vol": "304",
+"num": "3",
+"pag": "1242-1255",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"McGrattanSchmitz1999": {
+"doi": "10.21034/qr.2341",
+"titulo": "Maintenance and Repair: Too Big to Ignore",
+"autores": [
+[
+"McGrattan",
+"Ellen R."
+],
+[
+"Schmitz",
+"James A."
+]
+],
+"anio": 1999,
+"revista": "Quarterly Review",
+"vol": "23",
+"num": "4",
+"pag": "",
+"tipo": "journal-article",
+"editorial": "Federal Reserve Bank of Minneapolis"
+},
+"AlbonicoKP2014": {
+"doi": "10.1016/j.jedc.2013.12.008",
+"titulo": "Capital maintenance and depreciation over the business cycle",
+"autores": [
+[
+"Albonico",
+"Alice"
+],
+[
+"Kalyvitis",
+"Sarantis"
+],
+[
+"Pappa",
+"Evi"
+]
+],
+"anio": 2014,
+"revista": "Journal of Economic Dynamics and Control",
+"vol": "39",
+"num": "",
+"pag": "273-286",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"BoucekkineDM2009": {
+"doi": "10.1093/oep/gpn016",
+"titulo": "Technological progress, obsolescence, and depreciation",
+"autores": [
+[
+"Boucekkine",
+"Raouf"
+],
+[
+"del Río",
+"Fernando"
+],
+[
+"Martínez",
+"Blanca"
+]
+],
+"anio": 2009,
+"revista": "Oxford Economic Papers",
+"vol": "61",
+"num": "3",
+"pag": "440-466",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Banach1922": {
+"doi": "10.4064/fm-3-1-133-181",
+"titulo": "Sur les opérations dans les ensembles abstraits et leur application aux équations intégrales",
+"autores": [
+[
+"Banach",
+"Stefan"
+]
+],
+"anio": 1922,
+"revista": "Fundamenta Mathematicae",
+"vol": "3",
+"num": "",
+"pag": "133-181",
+"tipo": "journal-article",
+"editorial": "Institute of Mathematics, Polish Academy of Sciences"
+},
+"Howard1960": {
+"doi": "10.2307/1266484",
+"titulo": "Dynamic Programming and Markov Processes",
+"autores": [
+[
+"Beranek",
+"William"
+],
+[
+"Howard",
+"Ronald A."
+]
+],
+"anio": 1961,
+"revista": "Technometrics",
+"vol": "3",
+"num": "1",
+"pag": "120",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"PutermanBrumelle1979": {
+"doi": "10.1287/moor.4.1.60",
+"titulo": "On the Convergence of Policy Iteration in Stationary Dynamic Programming",
+"autores": [
+[
+"Puterman",
+"Martin L."
+],
+[
+"Brumelle",
+"Shelby L."
+]
+],
+"anio": 1979,
+"revista": "Mathematics of Operations Research",
+"vol": "4",
+"num": "1",
+"pag": "60-69",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"Puterman1994": {
+"doi": "10.1002/9780470316887",
+"titulo": "Markov Decision Processes",
+"autores": [
+[
+"Puterman",
+"Martin L."
+]
+],
+"anio": 1994,
+"revista": "Wiley Series in Probability and Statistics",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Wiley"
+},
+"SLP1989": {
+"doi": "10.2307/j.ctvjnrt76",
+"titulo": "Recursive Methods in Economic Dynamics",
+"autores": [
+[
+"Stokey",
+"Nancy L."
+],
+[
+"Lucas",
+"Robert E."
+],
+[
+"Prescott",
+"Edward C."
+]
+],
+"anio": 1989,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Harvard University Press"
+},
+"OrtegaRheinboldt1970": {
+"doi": "10.1137/1.9780898719468",
+"titulo": "Iterative Solution of Nonlinear Equations in Several Variables",
+"autores": [
+[
+"Ortega",
+"J. M."
+],
+[
+"Rheinboldt",
+"W. C."
+]
+],
+"anio": 2000,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Society for Industrial and Applied Mathematics"
+},
+"Kelley1995": {
+"doi": "10.1137/1.9781611970944",
+"titulo": "Iterative Methods for Linear and Nonlinear Equations",
+"autores": [
+[
+"Kelley",
+"C. T."
+]
+],
+"anio": 1995,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Society for Industrial and Applied Mathematics"
+},
+"DennisSchnabel1996": {
+"doi": "10.1137/1.9781611971200",
+"titulo": "Numerical Methods for Unconstrained Optimization and Nonlinear Equations",
+"autores": [
+[
+"Dennis",
+"J. E."
+],
+[
+"Schnabel",
+"Robert B."
+]
+],
+"anio": 1996,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Society for Industrial and Applied Mathematics"
+},
+"Broyden1965": {
+"doi": "10.1090/s0025-5718-1965-0198670-6",
+"titulo": "A class of methods for solving nonlinear simultaneous equations",
+"autores": [
+[
+"Broyden",
+"C. G."
+]
+],
+"anio": 1965,
+"revista": "Mathematics of Computation",
+"vol": "19",
+"num": "92",
+"pag": "577-593",
+"tipo": "journal-article",
+"editorial": "American Mathematical Society (AMS)"
+},
+"Anderson1965": {
+"doi": "10.1145/321296.321305",
+"titulo": "Iterative Procedures for Nonlinear Integral Equations",
+"autores": [
+[
+"Anderson",
+"Donald G."
+]
+],
+"anio": 1965,
+"revista": "Journal of the ACM",
+"vol": "12",
+"num": "4",
+"pag": "547-560",
+"tipo": "journal-article",
+"editorial": "Association for Computing Machinery (ACM)"
+},
+"WalkerNi2011": {
+"doi": "10.1137/10078356x",
+"titulo": "Anderson Acceleration for Fixed-Point Iterations",
+"autores": [
+[
+"Walker",
+"Homer F."
+],
+[
+"Ni",
+"Peng"
+]
+],
+"anio": 2011,
+"revista": "SIAM Journal on Numerical Analysis",
+"vol": "49",
+"num": "4",
+"pag": "1715-1735",
+"tipo": "journal-article",
+"editorial": "Society for Industrial & Applied Mathematics (SIAM)"
+},
+"VaradhanRoland2008": {
+"doi": "10.1111/j.1467-9469.2007.00585.x",
+"titulo": "Simple and Globally Convergent Methods for Accelerating the Convergence of Any EM Algorithm",
+"autores": [
+[
+"VARADHAN",
+"RAVI"
+],
+[
+"ROLAND",
+"CHRISTOPHE"
+]
+],
+"anio": 2008,
+"revista": "Scandinavian Journal of Statistics",
+"vol": "35",
+"num": "2",
+"pag": "335-353",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"SaadSchultz1986": {
+"doi": "10.1137/0907058",
+"titulo": "GMRES: A Generalized Minimal Residual Algorithm for Solving Nonsymmetric Linear Systems",
+"autores": [
+[
+"Saad",
+"Youcef"
+],
+[
+"Schultz",
+"Martin H."
+]
+],
+"anio": 1986,
+"revista": "SIAM Journal on Scientific and Statistical Computing",
+"vol": "7",
+"num": "3",
+"pag": "856-869",
+"tipo": "journal-article",
+"editorial": "Society for Industrial & Applied Mathematics (SIAM)"
+},
+"Stewart1994": {
+"doi": "10.1515/9780691223384",
+"titulo": "Introduction to the Numerical Solution of Markov Chains",
+"autores": [
+[
+"Stewart",
+"William J."
+]
+],
+"anio": 1995,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "edited-book",
+"editorial": "Princeton University Press"
+},
+"MeynTweedie2009": {
+"doi": "10.1017/cbo9780511626630",
+"titulo": "Markov Chains and Stochastic Stability",
+"autores": [
+[
+"Meyn",
+"Sean"
+],
+[
+"Tweedie",
+"Richard L."
+],
+[
+"Glynn",
+"Peter W."
+]
+],
+"anio": 2009,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Cambridge University Press"
+},
+"Tauchen1986": {
+"doi": "10.1016/0165-1765(86)90168-0",
+"titulo": "Finite state markov-chain approximations to univariate and vector autoregressions",
+"autores": [
+[
+"Tauchen",
+"George"
+]
+],
+"anio": 1986,
+"revista": "Economics Letters",
+"vol": "20",
+"num": "2",
+"pag": "177-181",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"TauchenHussey1991": {
+"doi": "10.2307/2938261",
+"titulo": "Quadrature-Based Methods for Obtaining Approximate Solutions to Nonlinear Asset Pricing Models",
+"autores": [
+[
+"Tauchen",
+"George"
+],
+[
+"Hussey",
+"Robert"
+]
+],
+"anio": 1991,
+"revista": "Econometrica",
+"vol": "59",
+"num": "2",
+"pag": "371",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"KopeckySuen2010": {
+"doi": "10.1016/j.red.2010.02.002",
+"titulo": "Finite state Markov-chain approximations to highly persistent processes",
+"autores": [
+[
+"Kopecky",
+"Karen A."
+],
+[
+"Suen",
+"Richard M.H."
+]
+],
+"anio": 2010,
+"revista": "Review of Economic Dynamics",
+"vol": "13",
+"num": "3",
+"pag": "701-714",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"GriewankWalther2008": {
+"doi": "10.1137/1.9780898717761",
+"titulo": "Evaluating Derivatives",
+"autores": [
+[
+"Griewank",
+"Andreas"
+],
+[
+"Walther",
+"Andrea"
+]
+],
+"anio": 2008,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Society for Industrial and Applied Mathematics"
+},
+"Blondel2022": {
+"doi": "10.52202/068431-0378",
+"titulo": "Efficient and Modular Implicit Differentiation",
+"autores": [
+[
+"Blondel",
+"Mathieu"
+],
+[
+"Berthet",
+"Quentin"
+],
+[
+"Cuturi",
+"Marco"
+],
+[
+"Frostig",
+"Roy"
+],
+[
+"Hoyer",
+"Stephan"
+],
+[
+"Llinares-Lopez",
+"Felipe"
+],
+[
+"Pedregosa",
+"Fabian"
+],
+[
+"Vert",
+"Jean-Philippe"
+]
+],
+"anio": 2022,
+"revista": "Advances in Neural Information Processing Systems 35",
+"vol": "",
+"num": "",
+"pag": "5230-5242",
+"tipo": "proceedings-article",
+"editorial": "Neural Information Processing Systems Foundation, Inc. (NeurIPS)"
+},
+"Aldrich2011": {
+"doi": "10.1016/j.jedc.2010.10.001",
+"titulo": "Tapping the supercomputer under your desk: Solving dynamic equilibrium models with graphics processors",
+"autores": [
+[
+"Aldrich",
+"Eric M."
+],
+[
+"Fernández-Villaverde",
+"Jesús"
+],
+[
+"Ronald Gallant",
+"A."
+],
+[
+"Rubio-Ramírez",
+"Juan F."
+]
+],
+"anio": 2011,
+"revista": "Journal of Economic Dynamics and Control",
+"vol": "35",
+"num": "3",
+"pag": "386-393",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"FVValencia2018": {
+"doi": "10.3386/w24561",
+"titulo": "A Practical Guide to Parallelization in Economics",
+"autores": [
+[
+"Fernández-Villaverde",
+"Jesús"
+],
+[
+"Valencia",
+"David Zarruk"
+]
+],
+"anio": 2018,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "report",
+"editorial": "National Bureau of Economic Research"
+},
+"Iskhakov2017": {
+"doi": "10.3982/qe643",
+"titulo": "The endogenous grid method for discrete-continuous dynamic choice models with (or without) taste shocks",
+"autores": [
+[
+"Iskhakov",
+"Fedor"
+],
+[
+"Jørgensen",
+"Thomas H."
+],
+[
+"Rust",
+"John"
+],
+[
+"Schjerning",
+"Bertel"
+]
+],
+"anio": 2017,
+"revista": "Quantitative Economics",
+"vol": "8",
+"num": "2",
+"pag": "317-365",
+"tipo": "journal-article",
+"editorial": "The Econometric Society"
+},
+"Broyden1970": {
+"doi": "10.1093/imamat/6.3.222",
+"titulo": "The Convergence of a Class of Double-rank Minimization Algorithms",
+"autores": [
+[
+"BROYDEN",
+"C. G."
+]
+],
+"anio": 1970,
+"revista": "IMA Journal of Applied Mathematics",
+"vol": "6",
+"num": "3",
+"pag": "222-231",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Fletcher1970": {
+"doi": "10.1093/comjnl/13.3.317",
+"titulo": "A new approach to variable metric algorithms",
+"autores": [
+[
+"Fletcher",
+"R."
+]
+],
+"anio": 1970,
+"revista": "The Computer Journal",
+"vol": "13",
+"num": "3",
+"pag": "317-322",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Goldfarb1970": {
+"doi": "10.1090/s0025-5718-1970-0258249-6",
+"titulo": "A family of variable-metric methods derived by variational means",
+"autores": [
+[
+"Goldfarb",
+"Donald"
+]
+],
+"anio": 1970,
+"revista": "Mathematics of Computation",
+"vol": "24",
+"num": "109",
+"pag": "23-26",
+"tipo": "journal-article",
+"editorial": "American Mathematical Society (AMS)"
+},
+"Shanno1970": {
+"doi": "10.1090/s0025-5718-1970-0274029-x",
+"titulo": "Conditioning of quasi-Newton methods for function minimization",
+"autores": [
+[
+"Shanno",
+"D. F."
+]
+],
+"anio": 1970,
+"revista": "Mathematics of Computation",
+"vol": "24",
+"num": "111",
+"pag": "647-656",
+"tipo": "journal-article",
+"editorial": "American Mathematical Society (AMS)"
+},
+"LiuNocedal1989": {
+"doi": "10.1007/bf01589116",
+"titulo": "On the limited memory BFGS method for large scale optimization",
+"autores": [
+[
+"Liu",
+"Dong C."
+],
+[
+"Nocedal",
+"Jorge"
+]
+],
+"anio": 1989,
+"revista": "Mathematical Programming",
+"vol": "45",
+"num": "1-3",
+"pag": "503-528",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Byrd1995": {
+"doi": "10.1137/0916069",
+"titulo": "A Limited Memory Algorithm for Bound Constrained Optimization",
+"autores": [
+[
+"Byrd",
+"Richard H."
+],
+[
+"Lu",
+"Peihuang"
+],
+[
+"Nocedal",
+"Jorge"
+],
+[
+"Zhu",
+"Ciyou"
+]
+],
+"anio": 1995,
+"revista": "SIAM Journal on Scientific Computing",
+"vol": "16",
+"num": "5",
+"pag": "1190-1208",
+"tipo": "journal-article",
+"editorial": "Society for Industrial & Applied Mathematics (SIAM)"
+},
+"Armijo1966": {
+"doi": "10.2140/pjm.1966.16.1",
+"titulo": "Minimization of functions having Lipschitz continuous first partial derivatives",
+"autores": [
+[
+"Armijo",
+"Larry"
+]
+],
+"anio": 1966,
+"revista": "Pacific Journal of Mathematics",
+"vol": "16",
+"num": "1",
+"pag": "1-3",
+"tipo": "journal-article",
+"editorial": "Mathematical Sciences Publishers"
+},
+"Wolfe1969": {
+"doi": "10.1137/1011036",
+"titulo": "Convergence Conditions for Ascent Methods",
+"autores": [
+[
+"Wolfe",
+"Philip"
+]
+],
+"anio": 1969,
+"revista": "SIAM Review",
+"vol": "11",
+"num": "2",
+"pag": "226-235",
+"tipo": "journal-article",
+"editorial": "Society for Industrial & Applied Mathematics (SIAM)"
+},
+"NocedalWright2006": {
+"doi": "10.1007/978-0-387-40065-5",
+"titulo": "Numerical Optimization",
+"autores": [
+[
+"Nocedal",
+"Jorge"
+],
+[
+"Wright",
+"Stephen J."
+]
+],
+"anio": 2006,
+"revista": "Springer Series in Operations Research and Financial Engineering",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "book",
+"editorial": "Springer New York"
+},
+"WachterBiegler2006": {
+"doi": "10.1007/s10107-004-0559-y",
+"titulo": "On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming",
+"autores": [
+[
+"Wächter",
+"Andreas"
+],
+[
+"Biegler",
+"Lorenz T."
+]
+],
+"anio": 2006,
+"revista": "Mathematical Programming",
+"vol": "106",
+"num": "1",
+"pag": "25-57",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"NelderMead1965": {
+"doi": "10.1093/comjnl/7.4.308",
+"titulo": "A Simplex Method for Function Minimization",
+"autores": [
+[
+"Nelder",
+"J. A."
+],
+[
+"Mead",
+"R."
+]
+],
+"anio": 1965,
+"revista": "The Computer Journal",
+"vol": "7",
+"num": "4",
+"pag": "308-313",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"KnittelMetaxoglou2014": {
+"doi": "10.1162/rest_a_00394",
+"titulo": "Estimation of Random-Coefficient Demand Models: Two Empiricists' Perspective",
+"autores": [
+[
+"Knittel",
+"Christopher R."
+],
+[
+"Metaxoglou",
+"Konstantinos"
+]
+],
+"anio": 2014,
+"revista": "The Review of Economics and Statistics",
+"vol": "96",
+"num": "1",
+"pag": "34-59",
+"tipo": "journal-article",
+"editorial": "MIT Press"
+},
+"NeweyMcFadden1994": {
+"doi": "10.1016/s1573-4412(05)80005-4",
+"titulo": "Chapter 36 Large sample estimation and hypothesis testing",
+"autores": [
+[
+"Newey",
+"Whitney K."
+],
+[
+"McFadden",
+"Daniel"
+]
+],
+"anio": 1994,
+"revista": "Handbook of Econometrics",
+"vol": "",
+"num": "",
+"pag": "2111-2245",
+"tipo": "book-chapter",
+"editorial": "Elsevier"
+},
+"White1982": {
+"doi": "10.2307/1912526",
+"titulo": "Maximum Likelihood Estimation of Misspecified Models",
+"autores": [
+[
+"White",
+"Halbert"
+]
+],
+"anio": 1982,
+"revista": "Econometrica",
+"vol": "50",
+"num": "1",
+"pag": "1-25",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"MurphyTopel1985": {
+"doi": "10.1080/07350015.1985.10509471",
+"titulo": "Estimation and Inference in Two-Step Econometric Models",
+"autores": [
+[
+"Murphy",
+"Kevin M."
+],
+[
+"Topel",
+"Robert H."
+]
+],
+"anio": 1985,
+"revista": "Journal of Business &amp; Economic Statistics",
+"vol": "3",
+"num": "4",
+"pag": "370-379",
+"tipo": "journal-article",
+"editorial": "Informa UK Limited"
+},
+"Bakker2014": {
+"doi": "10.1016/j.jclepro.2014.01.028",
+"titulo": "Products that go round: exploring product life extension through design",
+"autores": [
+[
+"Bakker",
+"Conny"
+],
+[
+"Wang",
+"Feng"
+],
+[
+"Huisman",
+"Jaco"
+],
+[
+"den Hollander",
+"Marcel"
+]
+],
+"anio": 2014,
+"revista": "Journal of Cleaner Production",
+"vol": "69",
+"num": "",
+"pag": "10-16",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"OguchiFuse2015": {
+"doi": "10.1021/es505245q",
+"titulo": "Regional and Longitudinal Estimation of Product Lifespan Distribution: A Case Study for Automobiles and a Simplified Estimation Method",
+"autores": [
+[
+"Oguchi",
+"Masahiro"
+],
+[
+"Fuse",
+"Masaaki"
+]
+],
+"anio": 2015,
+"revista": "Environmental Science &amp; Technology",
+"vol": "49",
+"num": "3",
+"pag": "1738-1743",
+"tipo": "journal-article",
+"editorial": "American Chemical Society (ACS)"
+},
+"RiveraLallmahomed2016": {
+"doi": "10.1080/19397038.2015.1099757",
+"titulo": "Environmental implications of planned obsolescence and product lifetime: a literature review",
+"autores": [
+[
+"Rivera",
+"Julio L."
+],
+[
+"Lallmahomed",
+"Amrine"
+]
+],
+"anio": 2016,
+"revista": "International Journal of Sustainable Engineering",
+"vol": "9",
+"num": "2",
+"pag": "119-129",
+"tipo": "journal-article",
+"editorial": "Informa UK Limited"
+},
+"Guiltinan2009": {
+"doi": "10.1007/s10551-008-9907-9",
+"titulo": "Creative Destruction and Destructive Creations: Environmental Ethics and Planned Obsolescence",
+"autores": [
+[
+"Guiltinan",
+"Joseph"
+]
+],
+"anio": 2009,
+"revista": "Journal of Business Ethics",
+"vol": "89",
+"num": "S1",
+"pag": "19-28",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Wieser2016": {
+"doi": "10.14512/gaia.25.3.5",
+"titulo": "Beyond Planned Obsolescence: Product Lifespans and the Challenges to a Circular Economy",
+"autores": [
+[
+"Wieser",
+"Harald"
+]
+],
+"anio": 2016,
+"revista": "GAIA - Ecological Perspectives for Science and Society",
+"vol": "25",
+"num": "3",
+"pag": "156-160",
+"tipo": "journal-article",
+"editorial": "Oekom Publishers GmbH"
+},
+"Satyro2018": {
+"doi": "10.1016/j.jclepro.2018.05.222",
+"titulo": "Planned obsolescence or planned resource depletion? A sustainable approach",
+"autores": [
+[
+"Satyro",
+"Walter Cardoso"
+],
+[
+"Sacomano",
+"José Benedito"
+],
+[
+"Contador",
+"José Celso"
+],
+[
+"Telles",
+"Renato"
+]
+],
+"anio": 2018,
+"revista": "Journal of Cleaner Production",
+"vol": "195",
+"num": "",
+"pag": "744-752",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Veral2022": {
+"doi": "10.52836/sayistay.1217903",
+"titulo": "PLANNED OBSOLESCENCE: A HIDDEN THREAT TO ENVIRONMENTAL SECURITY AND THE RECENT EU POLICY",
+"autores": [
+[
+"SAPMAZ VERAL",
+"Evren"
+]
+],
+"anio": 2023,
+"revista": "Sayıştay Dergisi",
+"vol": "33",
+"num": "127",
+"pag": "637-664",
+"tipo": "journal-article",
+"editorial": "Turkish Court of Accounts"
+},
+"Oraee2024": {
+"doi": "10.1016/j.clrc.2024.100174",
+"titulo": "Overcoming Premature Smartphone Obsolescence amongst Young Adults",
+"autores": [
+[
+"Oraee",
+"Atrina"
+],
+[
+"Pohl",
+"Lara"
+],
+[
+"Geurts",
+"Daniëlle"
+],
+[
+"Reichel",
+"Max"
+]
+],
+"anio": 2024,
+"revista": "Cleaner and Responsible Consumption",
+"vol": "12",
+"num": "",
+"pag": "100174",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Kuppelwieser2019": {
+"doi": "10.1016/j.jretconser.2018.11.014",
+"titulo": "Consumer responses to planned obsolescence",
+"autores": [
+[
+"Kuppelwieser",
+"Volker G."
+],
+[
+"Klaus",
+"Phil"
+],
+[
+"Manthiou",
+"Aikaterini"
+],
+[
+"Boujena",
+"Othman"
+]
+],
+"anio": 2019,
+"revista": "Journal of Retailing and Consumer Services",
+"vol": "47",
+"num": "",
+"pag": "157-165",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"AtesAcur2022": {
+"doi": "10.1016/j.jbusres.2022.07.052",
+"titulo": "Making obsolescence obsolete: Execution of digital transformation in a high-tech manufacturing SME",
+"autores": [
+[
+"Ates",
+"Aylin"
+],
+[
+"Acur",
+"Nuran"
+]
+],
+"anio": 2022,
+"revista": "Journal of Business Research",
+"vol": "152",
+"num": "",
+"pag": "336-348",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Huisman2012jie": {
+"doi": "10.1111/jiec.12012",
+"titulo": "Too Big to Fail, Too Academic to Function",
+"autores": [
+[
+"Huisman",
+"Jaco"
+]
+],
+"anio": 2013,
+"revista": "Journal of Industrial Ecology",
+"vol": "17",
+"num": "2",
+"pag": "172-174",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Schreiber2022": {
+"doi": "10.24857/rgsa.v16n2-023",
+"titulo": "ANÁLISE REFLEXIVA SOBRE O PAPEL DA PUBLICIDADE PARA CONSOLIDAR O MODELO DE OBSOLESCÊNCIA PROGRAMADA",
+"autores": [
+[
+"Schreiber",
+"Dusan"
+],
+[
+"Hupffer",
+"Haide Maria"
+],
+[
+"Gayer",
+"Suely Marisco"
+]
+],
+"anio": 2022,
+"revista": "Revista de Gestão Social e Ambiental",
+"vol": "16",
+"num": "2",
+"pag": "e03010",
+"tipo": "journal-article",
+"editorial": "RGSA- Revista de Gestao Social e Ambiental"
+},
+"Heidari2023": {
+"doi": "10.1007/s10668-022-02240-7",
+"titulo": "A dynamic model for CO2 emissions induced by urban transportation during 2005–2030, a case study of Mashhad, Iran",
+"autores": [
+[
+"Heidari",
+"Elham"
+],
+[
+"Bikdeli",
+"Sona"
+],
+[
+"Mansouri Daneshvar",
+"Mohammad Reza"
+]
+],
+"anio": 2023,
+"revista": "Environment, Development and Sustainability",
+"vol": "25",
+"num": "5",
+"pag": "4217-4236",
+"tipo": "journal-article",
+"editorial": "Springer Science and Business Media LLC"
+},
+"Leeson2020": {
+"doi": "10.1017/s1744137419000109",
+"titulo": "Logic is a harsh mistress: welfare economics for economists",
+"autores": [
+[
+"Leeson",
+"Peter T."
+]
+],
+"anio": 2020,
+"revista": "Journal of Institutional Economics",
+"vol": "16",
+"num": "2",
+"pag": "145-150",
+"tipo": "journal-article",
+"editorial": "Cambridge University Press (CUP)"
+},
+"GuptaRomano1998": {
+"doi": "10.2307/2555896",
+"titulo": "Monitoring the Principal with Multiple Agents",
+"autores": [
+[
+"Gupta",
+"Srabana"
+],
+[
+"Romano",
+"Richard E."
+]
+],
+"anio": 1998,
+"revista": "The RAND Journal of Economics",
+"vol": "29",
+"num": "2",
+"pag": "427",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"FisherGrilichesKaysen1962": {
+"doi": "10.1086/258697",
+"titulo": "The Costs of Automobile Model Changes since 1949",
+"autores": [
+[
+"Fisher",
+"Franklin M."
+],
+[
+"Griliches",
+"Zvi"
+],
+[
+"Kaysen",
+"Carl"
+]
+],
+"anio": 1962,
+"revista": "Journal of Political Economy",
+"vol": "70",
+"num": "5, Part 1",
+"pag": "433-451",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Gordon1990": {
+"doi": "10.7208/chicago/9780226304601.001.0001",
+"titulo": "The Measurement of Durable Goods Prices",
+"autores": [
+[
+"Gordon",
+"Robert J."
+]
+],
+"anio": 1990,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "University of Chicago Press"
+},
+"OhtaGriliches1976": {
+"doi": "10.4337/9781035351442.00029",
+"titulo": "Automobile Prices Revisited: Extensions of the Hedonic Hypothesis",
+"autores": [
+[
+"Ohta",
+"Makoto"
+],
+[
+"Griliches",
+"Zvi"
+]
+],
+"anio": 1998,
+"revista": "PRACTIcING ECONOMETRICS",
+"vol": "",
+"num": "",
+"pag": "415-480",
+"tipo": "book-chapter",
+"editorial": "Edward Elgar Publishing"
+},
+"Rosen1974": {
+"doi": "10.1086/260169",
+"titulo": "Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition",
+"autores": [
+[
+"Rosen",
+"Sherwin"
+]
+],
+"anio": 1974,
+"revista": "Journal of Political Economy",
+"vol": "82",
+"num": "1",
+"pag": "34-55",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Slade2006": {
+"doi": "10.4159/9780674043756",
+"titulo": "Made to Break",
+"autores": [
+[
+"Slade",
+"Giles"
+]
+],
+"anio": 2007,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "monograph",
+"editorial": "Harvard University Press"
+},
+"Stahel2010": {
+"doi": "10.1057/9780230274907",
+"titulo": "The Performance Economy",
+"autores": [
+[
+"Stahel",
+"Walter R."
+]
+],
+"anio": 2010,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "book",
+"editorial": "Palgrave Macmillan UK"
+},
+"Packard1960": {
+"doi": "10.2307/1055616",
+"titulo": "The Waste Makers",
+"autores": [
+[
+"Barnes",
+"Harry Elmer"
+],
+[
+"Packard",
+"Vance"
+]
+],
+"anio": 1961,
+"revista": "Southern Economic Journal",
+"vol": "28",
+"num": "1",
+"pag": "66",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"Cooper2010": {
+"doi": "10.4324/9781315592930",
+"titulo": "Longer Lasting Products",
+"autores": [],
+"anio": 2016,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "book",
+"editorial": "Routledge"
+},
+"Kirchherr2017": {
+"doi": "10.1016/j.resconrec.2017.09.005",
+"titulo": "Conceptualizing the circular economy: An analysis of 114 definitions",
+"autores": [
+[
+"Kirchherr",
+"Julian"
+],
+[
+"Reike",
+"Denise"
+],
+[
+"Hekkert",
+"Marko"
+]
+],
+"anio": 2017,
+"revista": "Resources, Conservation and Recycling",
+"vol": "127",
+"num": "",
+"pag": "221-232",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"Geissdoerfer2017": {
+"doi": "10.1016/j.jclepro.2016.12.048",
+"titulo": "The Circular Economy – A new sustainability paradigm?",
+"autores": [
+[
+"Geissdoerfer",
+"Martin"
+],
+[
+"Savaget",
+"Paulo"
+],
+[
+"Bocken",
+"Nancy M.P."
+],
+[
+"Hultink",
+"Erik Jan"
+]
+],
+"anio": 2017,
+"revista": "Journal of Cleaner Production",
+"vol": "143",
+"num": "",
+"pag": "757-768",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"DavisKahn2010": {
+"doi": "10.1257/pol.2.4.58",
+"titulo": "International Trade in Used Vehicles: The Environmental Consequences of NAFTA",
+"autores": [
+[
+"Davis",
+"Lucas W"
+],
+[
+"Kahn",
+"Matthew E"
+]
+],
+"anio": 2010,
+"revista": "American Economic Journal: Economic Policy",
+"vol": "2",
+"num": "4",
+"pag": "58-82",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"ChenGMW2019": {
+"doi": "10.1111/roie.12436",
+"titulo": "Trade liberalization, consumption shifting and pollution: Evidence from Mexico's used vehicle imports",
+"autores": [
+[
+"Chen",
+"Liang"
+],
+[
+"Garcia‐Medina",
+"B. Cecilia"
+],
+[
+"Wan",
+"Rui"
+]
+],
+"anio": 2019,
+"revista": "Review of International Economics",
+"vol": "27",
+"num": "5",
+"pag": "1591-1608",
+"tipo": "journal-article",
+"editorial": "Wiley"
+},
+"Davis2008": {
+"doi": "10.1086/529398",
+"titulo": "The Effect of Driving Restrictions on Air Quality in Mexico City",
+"autores": [
+[
+"Davis",
+"Lucas W."
+]
+],
+"anio": 2008,
+"revista": "Journal of Political Economy",
+"vol": "116",
+"num": "1",
+"pag": "38-81",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Oliva2015": {
+"doi": "10.1086/680936",
+"titulo": "Environmental Regulations and Corruption: Automobile Emissions in Mexico City",
+"autores": [
+[
+"Oliva",
+"Paulina"
+]
+],
+"anio": 2015,
+"revista": "Journal of Political Economy",
+"vol": "123",
+"num": "3",
+"pag": "686-724",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"GallegoMonteroSalas2013": {
+"doi": "10.1016/j.jpubeco.2013.08.007",
+"titulo": "The effect of transport policies on car use: Evidence from Latin American cities",
+"autores": [
+[
+"Gallego",
+"Francisco"
+],
+[
+"Montero",
+"Juan-Pablo"
+],
+[
+"Salas",
+"Christian"
+]
+],
+"anio": 2013,
+"revista": "Journal of Public Economics",
+"vol": "107",
+"num": "",
+"pag": "47-62",
+"tipo": "journal-article",
+"editorial": "Elsevier BV"
+},
+"KnittelSandler2018": {
+"doi": "10.1257/pol.20160508",
+"titulo": "The Welfare Impact of Second-Best Uniform-Pigouvian Taxation: Evidence from Transportation",
+"autores": [
+[
+"Knittel",
+"Christopher R."
+],
+[
+"Sandler",
+"Ryan"
+]
+],
+"anio": 2018,
+"revista": "American Economic Journal: Economic Policy",
+"vol": "10",
+"num": "4",
+"pag": "211-242",
+"tipo": "journal-article",
+"editorial": "American Economic Association"
+},
+"Schmalensee1974": {
+"doi": "10.2307/2296716",
+"titulo": "Market Structure, Durability, and Maintenance Effort",
+"autores": [
+[
+"Schmalensee",
+"Richard"
+]
+],
+"anio": 1974,
+"revista": "The Review of Economic Studies",
+"vol": "41",
+"num": "2",
+"pag": "277",
+"tipo": "journal-article",
+"editorial": "Oxford University Press (OUP)"
+},
+"Shapiro1995": {
+"doi": "10.1177/0003603x9403900104",
+"titulo": "Systems Competition and Aftermarkets: An Economic Analysis of\n                    <i>Kodak</i>",
+"autores": [
+[
+"Shapiro",
+"Carl"
+],
+[
+"Teece",
+"David J."
+]
+],
+"anio": 1994,
+"revista": "The Antitrust Bulletin",
+"vol": "39",
+"num": "1",
+"pag": "135-162",
+"tipo": "journal-article",
+"editorial": "SAGE Publications"
+},
+"Sobel1991": {
+"doi": "10.2307/2938375",
+"titulo": "Durable Goods Monopoly with Entry of New Consumers",
+"autores": [
+[
+"Sobel",
+"Joel"
+]
+],
+"anio": 1991,
+"revista": "Econometrica",
+"vol": "59",
+"num": "5",
+"pag": "1455",
+"tipo": "journal-article",
+"editorial": "JSTOR"
+},
+"LevinthalPurohit1989": {
+"doi": "10.1287/mksc.8.1.35",
+"titulo": "Durable Goods and Product Obsolescence",
+"autores": [
+[
+"Levinthal",
+"Daniel A."
+],
+[
+"Purohit",
+"Devavrat"
+]
+],
+"anio": 1989,
+"revista": "Marketing Science",
+"vol": "8",
+"num": "1",
+"pag": "35-56",
+"tipo": "journal-article",
+"editorial": "Institute for Operations Research and the Management Sciences (INFORMS)"
+},
+"Waldman1996b": {
+"doi": "10.1086/209702",
+"titulo": "Durable Goods Pricing When Quality Matters",
+"autores": [
+[
+"Waldman",
+"Michael"
+]
+],
+"anio": 1996,
+"revista": "The Journal of Business",
+"vol": "69",
+"num": "4",
+"pag": "489",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"Su1975": {
+"doi": "10.2139/ssrn.283428",
+"titulo": "Interest Rates and the Durability of Consumption Goods",
+"autores": [
+[
+"Mamaysky",
+"Harry"
+]
+],
+"anio": 2001,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "posted-content",
+"editorial": "Elsevier BV"
+},
+"DeOliveira2013b": {
+"doi": "10.1061/(asce)lm.1943-5630.0000244",
+"titulo": "Planned Obsolescence",
+"autores": [
+[
+"de Oliveira",
+"Rafael Gomes"
+]
+],
+"anio": 2013,
+"revista": "Leadership and Management in Engineering",
+"vol": "13",
+"num": "4",
+"pag": "262-264",
+"tipo": "journal-article",
+"editorial": "American Society of Civil Engineers (ASCE)"
+},
+"ChowdhuryVerma2024b": {
+"doi": "10.2139/ssrn.4494209",
+"titulo": "Walking a Tightrope: Impact of Adopting Voluntary Right-to-Repair Policy on Firm Profit and Consumer Welfare",
+"autores": [
+[
+"Chowdhury",
+"Sayan"
+],
+[
+"Verma",
+"Nishant Kumar"
+]
+],
+"anio": 2023,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "posted-content",
+"editorial": "Elsevier BV"
+},
+"KeaneWolpin1997": {
+"doi": "10.1086/262080",
+"titulo": "The Career Decisions of Young Men",
+"autores": [
+[
+"Keane",
+"Michael P."
+],
+[
+"Wolpin",
+"Kenneth I."
+]
+],
+"anio": 1997,
+"revista": "Journal of Political Economy",
+"vol": "105",
+"num": "3",
+"pag": "473-522",
+"tipo": "journal-article",
+"editorial": "University of Chicago Press"
+},
+"HuShumTanXiao2017": {
+"doi": "10.1515/jem-2015-0011",
+"titulo": "A Simple Estimator for Dynamic Models with Serially Correlated Unobservables",
+"autores": [
+[
+"Hu",
+"Yingyao"
+],
+[
+"Shum",
+"Matthew"
+],
+[
+"Tan",
+"Wei"
+],
+[
+"Xiao",
+"Ruli"
+]
+],
+"anio": 2017,
+"revista": "Journal of Econometric Methods",
+"vol": "6",
+"num": "1",
+"pag": "",
+"tipo": "journal-article",
+"editorial": "Walter de Gruyter GmbH"
+},
+"AguirregabiriaNevo2013": {
+"doi": "10.1017/cbo9781139060035.003",
+"titulo": "Recent Developments in Empirical IO: Dynamic Demand and Dynamic Games",
+"autores": [
+[
+"Aguirregabiria",
+"Victor"
+],
+[
+"Nevo",
+"Aviv"
+]
+],
+"anio": 2013,
+"revista": "Advances in Economics and Econometrics",
+"vol": "",
+"num": "",
+"pag": "53-122",
+"tipo": "book-chapter",
+"editorial": "Cambridge University Press"
+},
+"Brusselaers2020": {
+"doi": "10.1108/jeim-12-2018-0283",
+"titulo": "Economic consequences of consumer repair strategies for electrical household devices",
+"autores": [
+[
+"Brusselaers",
+"Jan"
+],
+[
+"Bracquene",
+"Ellen"
+],
+[
+"Peeters",
+"Jef"
+],
+[
+"Dams",
+"Yoko"
+]
+],
+"anio": 2020,
+"revista": "Journal of Enterprise Information Management",
+"vol": "33",
+"num": "4",
+"pag": "747-767",
+"tipo": "journal-article",
+"editorial": "Emerald"
+},
+"Zurn2025": {
+"doi": "10.2139/ssrn.4857478",
+"titulo": "Financial Incentives for the Repair of Consumer Goods: Their Role in Consumers' Repair Decision",
+"autores": [
+[
+"Etzinger",
+"Iris"
+],
+[
+"Reimann",
+"Marc"
+]
+],
+"anio": 2024,
+"revista": "",
+"vol": "",
+"num": "",
+"pag": "",
+"tipo": "posted-content",
+"editorial": "Elsevier BV"
+},
+"Borenstein2000": {
+"doi": "10.1046/j.1365-2745.1998.00285.x",
+"titulo": "Exercising Market Power in Proprietary Aftermarkets",
+"autores": [
+[
+"Borenstein",
+"Severin"
+],
+[
+"Mackie‐Mason",
+"Jeffrey K."
+],
+[
+"Netz",
+"Janet S."
+]
+],
+"anio": 2000,
+"revista": "Journal of Economics &amp; Management Strategy",
+"vol": "9",
+"num": "3",
+"pag": "157-188",
+"tipo": "journal-article",
+"editorial": "Wiley"
+}
+}

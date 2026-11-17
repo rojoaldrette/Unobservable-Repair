@@ -1,0 +1,41 @@
+% Ejemplo mínimo de referencias con .bib (biblatex + biber).
+% Compilar:  latexmk -pdf ejemplo_bib.tex
+%   o a mano: pdflatex ejemplo_bib -> biber ejemplo_bib -> pdflatex ejemplo_bib (x2)
+% En TeXstudio/VS Code: el "bibliography tool" debe ser biber, no bibtex.
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}            % comillas correctas para el idioma
+\usepackage[
+  backend=biber,
+  style=authoryear,              % Autor (Año). Alternativas: authoryear-comp, apa, numeric
+  maxcitenames=2,                % 3+ autores en el texto -> "Gillingham et al."
+  maxbibnames=99,                % en la lista se escriben todos
+  uniquename=false,
+  giveninits=true,               % nombres como iniciales
+  doi=false, url=false, isbn=false, eprint=true
+]{biblatex}
+\addbibresource{referencias.bib} % ruta relativa al .tex
+
+\begin{document}
+
+\section{Ejemplos de cita}
+
+\begin{itemize}
+  \item Entre paréntesis, \verb|\parencite|: el modelo de equilibrio de autos
+        \parencite{Gillingham2022}.
+  \item En el texto, \verb|\textcite|: \textcite{HuXin2024} identifican decisiones no observadas.
+  \item Varias a la vez: \parencite{Rust1985,Rust1987,HotzMiller1993}.
+  \item Con página o sección: \parencite[sec.~6.3]{HuXin2024};
+        con prenota y postnota: \parencite[véase][p.~1003]{Rust1987}.
+  \item Solo el año: \citeyear{Akerlof1970}; solo el autor: \citeauthor{BLP1995}.
+  \item Capítulo de libro: \textcite{Rust1994}. Libro: \textcite{NocedalWright2006}.
+        Documento de trabajo: \textcite{Fukasawa2025}.
+\end{itemize}
+
+% Para que aparezca en la lista una referencia que no se cita: \nocite{clave}
+% Para listar todo el .bib: \nocite{*}
+
+\printbibliography[title={Referencias}]  % reemplaza todo el bloque thebibliography
+
+\end{document}

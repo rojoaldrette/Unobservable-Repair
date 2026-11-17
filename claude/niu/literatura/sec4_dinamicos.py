@@ -1,0 +1,62 @@
+"""Nido 4: modelos dinámicos de elección discreta."""
+from base import F, T
+
+SEC4 = ("Modelos dinámicos de elección discreta",
+ "El marco de comportamiento de tu consumidor. Va de la utilidad aleatoria a Rust y de ahí a las aplicaciones en durables. Los modelos estáticos entran solo como antecedente, y los estimadores se quedan para el nido 6.",
+ [("Lo que tienes: el modelo de Rust", [
+   T("Rust1987", "Aportación: primer modelo estructural estimado de reemplazo óptimo, con Harold Zurcher y motores de autobús, y el algoritmo de punto fijo anidado (NFXP). Método: paro óptimo regenerativo, errores de valor extremo y máxima verosimilitud. Contexto: es la plantilla de tu decisión y el puente con el nido de reparación; en él, a diferencia del tuyo, el reemplazo se observa y no hay mercado.", "Rust-OptimalReplacementGMC-1987.pdf"),
+   T("NotasRust", "Aportación: exposición didáctica de Rust (1987) y de la estimación CCP. Método: notas de curso. Contexto: sirven para estudiar, no para citar.", "rust explicacion.pdf"),
+  ]),
+  ("Lo que tienes: antecedente estático", [
+   T("Berry1994", "Aportación: invierte las participaciones de mercado para recuperar la utilidad media y tratar la endogeneidad del precio. Método: logit y logit anidado con instrumentos. Contexto: fundacional de la demanda de productos diferenciados; ignora la durabilidad, lo que motiva el salto a modelos dinámicos.", "Berry1994.pdf", True),
+   T("BLP1995", "Aportación: estima demanda con coeficientes aleatorios y oferta oligopólica con datos agregados. Método: contracción, GMM e instrumentos de características, con autos de EE. UU. Contexto: referencia obligada para autos; en Gillingham et al. no hacen falta sus instrumentos porque no hay características no observadas correlacionadas con el precio.", "BerryLevinsohnPakes1995.pdf"),
+   T("MoralJaumandreu2007", "Aportación: efectos de edad del modelo y cambio de elasticidades-precio durante su ciclo. Método: elección discreta con datos de España. Contexto: es el efecto edad del lado de la demanda de nuevos; complementa tu dimensión de edad.", "Automobile demand, model cycle and age effects.pdf"),
+  ]),
+  ("Lo que tienes: demanda dinámica de durables", [
+   T("AddaCooperWP", "Aportación: la dinámica agregada de ventas viene sobre todo de choques a la probabilidad de reemplazo, no de la distribución de edades. Método: elección discreta dinámica a nivel hogar y agregada, comparada con ARMA y VAR. Contexto: es uno de los primeros en vincular decisión individual de reemplazo y agregados de autos.", "Adda y Cooper Dynamics of Car sales.pdf"),
+   T("GowrisankaranRysman2012", "Aportación: demanda dinámica con heterogeneidad persistente y compras repetidas; la elasticidad de largo plazo difiere de la de corto. Método: extensión dinámica de BLP con videocámaras. Contexto: muestra lo que se sesga si se ignora la dinámica, argumento paralelo al de ignorar la reparación.", "Gowrisankaran-DynamicsConsumerDemand-2012.pdf"),
+   T("IshiharaChing2019", "Aportación: cuantifica el efecto del mercado de usados sobre ganancias y bienestar. Método: demanda dinámica estructural con videojuegos japoneses sin depreciación física. Contexto: es el caso opuesto al tuyo: sin deterioro, la reparación no tendría ningún papel.", "Ishihara-DynamicDemandNew-2019.pdf"),
+  ]),
+  ("Lo que falta: utilidad aleatoria", [
+   F("McFadden1973", "Aportación: deriva el logit condicional desde la utilidad aleatoria. Método: teoría y estimación. Contexto: base de las probabilidades de elección de tu modelo.", True),
+   F("McFadden1978", "Aportación: introduce el modelo de valor extremo generalizado y el logit anidado. Método: teoría con aplicación a localización residencial. Contexto: es la base de tus parámetros sigma.", True),
+   F("McFadden1981", "Aportación: sistematiza los modelos probabilísticos y su consistencia con utilidad aleatoria, incluida la función log-sum. Método: teoría. Contexto: es la referencia de tu fórmula de valor esperado."),
+   F("Cardell1997", "Aportación: nuevas distribuciones que simplifican las estructuras de componentes de varianza con valor extremo. Método: teoría de probabilidad. Contexto: justifica el logit anidado como componentes de varianza, útil para tus sigmas."),
+   F("Train2009", "Aportación: manual de métodos de elección discreta y simulación. Método: libro. Contexto: es la referencia general para logit, GEV y modelos mixtos."),
+  ]),
+  ("Lo que falta: fundamentos y revisiones", [
+   F("Rust1988", "Aportación: plantea el problema inverso de control estocástico y da fundamento a la independencia condicional. Método: teoría de procesos de control discretos. Contexto: es el supuesto que usa tu verosimilitud y que Hu y Xin mantienen en parte.", True),
+   F("Rust1994", "Aportación: capítulo de referencia sobre estimación de procesos de decisión de Markov. Método: revisión teórica. Contexto: formaliza los supuestos y problemas de identificación que el nido 6 retoma.", True),
+   F("Wolpin1984", "Aportación: modelo dinámico de fertilidad con supervivencia incierta. Método: programación dinámica integrada con máxima verosimilitud, con datos de Malasia. Contexto: de los primeros en estimar con solución completa, igual que tu enfoque."),
+   F("Miller1984", "Aportación: emparejamiento laboral con distintos tipos de ocupación, que genera un perfil de carrera. Método: modelo tipo bandido estimado con panel. Contexto: antecedente de la familia CCP."),
+   F("Pakes1986", "Aportación: estima el valor de las patentes a partir de sus renovaciones. Método: paro óptimo con incertidumbre, estimado por simulación. Contexto: es un caso de pagar por mantener vivo un activo, parecido en estructura a reparar."),
+   F("KeaneWolpin1997", "Aportación: un modelo extendido de capital humano ajusta los datos de educación, trabajo y ocupación. Método: solución completa con tipos finitos, datos NLSY. Contexto: aplicación clásica que ya citas por sus tipos latentes."),
+   F("KeaneToddWolpin2011", "Aportación: revisa métodos y aplicaciones de programación dinámica discreta. Método: revisión. Contexto: muestra las aplicaciones más allá de IO."),
+   F("EcksteinWolpin1989", "Aportación: revisión temprana de especificación y estimación de modelos dinámicos estocásticos. Método: revisión. Contexto: útil para la historia del campo. OpenAlex asocia a su DOI un resumen de otro artículo, así que usa solo el título y la revista."),
+   F("AguirregabiriaMira2010", "Aportación: panorama de modelos estructurales dinámicos. Método: revisión. Contexto: es el mapa más útil del campo para tu revisión.", True),
+   F("AddaCooper2003", "Aportación: manual de programación dinámica aplicada, con un capítulo de bienes durables. Método: libro. Contexto: es útil para enseñar el puente entre durables y programación dinámica."),
+  ]),
+  ("Lo que falta: capital que se deteriora", [
+   F("Das1992", "Aportación: decide si operar, parar o retirar hornos de cemento. Método: programación dinámica estocástica discreta con datos de EE. UU. Contexto: es una aplicación temprana a capital que se deteriora, muy parecida a la lógica de mantener o retirar.", True),
+   F("Kennet1994", "Aportación: modelo de mantenimiento de motores de avión que no explica las historias antes de la desregulación, pero sí después. Método: paro óptimo regenerativo con 42 historias de motores. Contexto: es la aplicación más cercana a Rust en mantenimiento; ya la citas.", True),
+   F("RustRothwell1995", "Aportación: evalúa la respuesta de centrales nucleares a un cambio de régimen regulatorio tras Three Mile Island. Método: modelo dinámico con datos mensuales. Contexto: es decisión de operar y mantener capital bajo política, análoga a tus contrafactuales."),
+  ]),
+  ("Lo que falta: demanda de autos y durables", [
+   F("BLP2004", "Aportación: los datos de segunda elección identifican mejor los patrones de sustitución de autos. Método: coeficientes aleatorios con datos micro. Contexto: es útil como referencia sobre datos que identifican."),
+   F("Petrin2002", "Aportación: agrega momentos micro a datos de mercado para medir el valor de un producto nuevo, la minivan. Método: BLP con información demográfica. Contexto: muestra cómo mejorar la identificación con datos adicionales."),
+   F("ConlonGortmaker2020", "Aportación: reúne buenas prácticas de estimación y sus experimentos cambian conclusiones previas sobre óptimos múltiples. Método: Monte Carlo y réplicas con PyBLP. Contexto: es un modelo de cómo presentar pruebas numéricas."),
+   F("GMY2024", "Aportación: evolución del poder de mercado en autos de EE. UU. Método: demanda y oferta tipo BLP con datos micro. Contexto: es la referencia reciente de este mercado."),
+   F("Melnikov2013", "Aportación: la compra de durables como paro óptimo con expectativas sobre calidad futura. Método: demanda dinámica con impresoras. Contexto: un antecedente de demanda dinámica agregada."),
+   F("Gordon2009", "Aportación: separa adopción y reemplazo en los ciclos de compra. Método: demanda dinámica con procesadores. Contexto: el reemplazo es la decisión que tu reparación pospone.", True),
+   F("Carranza2010", "Aportación: innovación y adopción de cámaras digitales en equilibrio de mercado. Método: demanda dinámica. Contexto: otro caso de durables de rápida obsolescencia."),
+   F("Nair2007", "Aportación: discriminación intertemporal con consumidores prospectivos. Método: modelo dinámico con videojuegos. Contexto: conecta el problema de Coase con estimación estructural."),
+   F("HendelNevo2006", "Aportación: la dinámica de inventarios implica que los modelos estáticos sesgan las elasticidades. Método: demanda dinámica de bienes almacenables. Contexto: su lógica de sesgo por ignorar una decisión dinámica se parece a tu pregunta."),
+   F("AguirregabiriaNevo2013", "Aportación: panorama de demanda dinámica y juegos dinámicos. Método: revisión. Contexto: enlaza este nido con la oferta dinámica del nido 5.", True),
+   F("ChevalierGoolsbee2009", "Aportación: los estudiantes actúan con visión de futuro y expectativas racionales sobre revisiones de libros. Método: dos bases nuevas con datos de libros de texto. Contexto: es evidencia del supuesto de agentes prospectivos en durables."),
+   F("ManneringWinston1985", "Aportación: modelo dinámico de tenencia y uso de vehículos en torno a la crisis energética de 1979, con fuerte lealtad de marca. Método: elección discreta con panel de hogares. Contexto: antecedente de Gillingham et al."),
+   F("BerkovecRust1985", "Aportación: logit anidado de tenencia de vehículos por hogar. Método: elección discreta. Contexto: antecedente de los árboles de decisión con autos.", True),
+   F("Eberly1994", "Aportación: la compra de durables sigue una regla (S,s) para cerca de la mitad de los hogares. Método: prueba directa con datos de hogares y agregación. Contexto: da fundamento a los costos de transacción."),
+   F("Attanasio2000", "Aportación: estima y agrega reglas (S,s) en la compra de automóviles. Método: microdatos de hogares. Contexto: es una forma reducida de la inercia que tu modelo genera con costos de transacción."),
+   F("AddaCooper2000", "Aportación: subsidios franceses al chatarreo adelantan ventas y tienen efectos de corto plazo. Método: elección discreta dinámica. Contexto: es una aplicación de política previa a Schiraldi (2011).", True),
+  ])],
+ "Transición al equilibrio. Hasta aquí los precios están dados para el agente. En un mercado de autos eso no basta: si muchos hogares reparan más, cambian la calidad de los usados, sus precios y las decisiones de todos. Por eso hace falta cerrar el modelo con un equilibrio.")

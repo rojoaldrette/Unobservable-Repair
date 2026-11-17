@@ -1,0 +1,283 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[margin=2.5cm]{geometry}
+\title{Cálculo del equilibrio: Newton conjunto con jacobiano exacto\\ y precios sombra en celdas sin oferta}
+\author{Notas de apoyo a la tesis (versión de Claude)}
+\date{Noviembre 2026}
+
+% Explica la subsección "Cálculo del equilibrio" de tesis_claude/tesis.tex.
+% Código de referencia: claude/niu/modelo_tesis/equilibrio.py y utils.py (jacobian).
+
+\begin{document}
+\maketitle
+
+\section{El problema que se resuelve}
+
+Para un régimen de precios de reparación $R$ fijo, el equilibrio con dos tipos (Teorema 1 y
+sección de consumidores heterogéneos) consiste en encontrar
+$$z=(EV_1,\,EV_2,\,P)\in\mathbb{R}^{2n+J(\bar a-1)W}$$
+tal que $F(z)=0$, con
+$$F(z)=\begin{pmatrix}
+EV_1-\Gamma_1(EV_1;P,R)\\[2pt]
+EV_2-\Gamma_2(EV_2;P,R)\\[2pt]
+\log D(P,EV_1,EV_2)-\log S(P,EV_1,EV_2)
+\end{pmatrix}.$$
+Los dos primeros bloques son las ecuaciones de Bellman de cada tipo ($n$ ecuaciones cada uno) y
+el tercero es el vaciado de mercado celda por celda ($J(\bar a-1)W$ ecuaciones). La distribución
+estacionaria $q_\tau$ no es incógnita: dados $(EV_\tau,P)$ se calculan las probabilidades de
+elección, con ellas $\Omega_\tau$ y $A_\tau$, y $q_\tau$ se obtiene por recursión en
+la edad. Por eso $D$ y $S$ dependen de $EV$ además de $P$:
+$$D=\sum_\tau f_\tau D_\tau\big(P,q_\tau(EV_\tau,P)\big),\qquad
+S=\sum_\tau f_\tau S_\tau\big(P,q_\tau(EV_\tau,P)\big).$$
+Con $J=2$, $\bar a=25$ y $W=71$: $n=3{,}411$, hay $3{,}408$ precios y $10{,}230$ incógnitas.
+
+\paragraph{Por qué $\log D-\log S$ y no $D-S$.} Las masas por celda van de $10^{-2}$ a $10^{-12}$.
+Con $D-S$, una celda con masa $10^{-12}$ ya cumple cualquier tolerancia aunque su demanda sea
+el doble de su oferta. En logaritmos el residuo es un error relativo, igual de exigente en todas
+las celdas, y la tolerancia $\max|F|<10^{-9}$ tiene el mismo significado en todos los bloques.
+
+\section{El método de Newton}
+
+Newton linealiza $F$ alrededor del punto actual y resuelve el sistema lineal:
+$$F(z_k)+F_z(z_k)\,\Delta z=0\quad\Longrightarrow\quad
+z_{k+1}=z_k-F_z(z_k)^{-1}F(z_k),$$
+donde $F_z$ es la matriz jacobiana de $10{,}230\times10{,}230$. Cerca de la solución, si $F_z$ es
+invertible ahí, la convergencia es cuadrática: $\|z_{k+1}-z^*\|\le C\|z_k-z^*\|^2$. En la práctica,
+el número de dígitos correctos se duplica en cada paso ($10^{-2}\to10^{-4}\to10^{-8}\to10^{-16}$), así que
+desde un buen punto de arranque bastan pocas iteraciones.
+
+\paragraph{Relación con Newton--Kantorovich.} En la sección de Bellman de la tesis, Newton--Kantorovich
+es exactamente Newton aplicado solo al primer bloque con $P$ fijo:
+$EV_{k+1}=EV_k-[\mathbb I-\Gamma'(EV_k)]^{-1}(EV_k-\Gamma(EV_k))$. El Newton conjunto hace lo mismo
+pero mueve $EV$ y $P$ a la vez, usando todos los bloques del jacobiano.
+
+\paragraph{Por qué conjunto y no anidado.} La alternativa natural es anidar: para cada $P$ resolver
+$EV(P)$ y luego buscar $P$ con $ED(P,EV(P))=0$. El lazo externo necesita
+$\mathrm dEV/\mathrm dP=-[\mathbb I-\Gamma_{EV}]^{-1}\Gamma_P$, es decir, las mismas derivadas del
+jacobiano conjunto. Si en cambio el lazo externo es un tanteo (subir el precio donde hay exceso
+de demanda), la convergencia es lineal y lenta, porque los precios de las $3{,}408$ celdas están muy
+acoplados (un coche $(j,a,w)$ compite con sus vecinos en $a$ y $w$). Newton conjunto usa todo el
+acoplamiento de una vez y no requiere resolver $EV$ con precisión en cada paso.
+
+\section{La estructura del jacobiano}
+
+Ordenando las incógnitas como $(EV_1,EV_2,P)$,
+$$F_z=\begin{pmatrix}
+\mathbb I-\Gamma_{1,EV} & 0 & -\Gamma_{1,P}\\
+0 & \mathbb I-\Gamma_{2,EV} & -\Gamma_{2,P}\\
+G_{EV_1} & G_{EV_2} & G_P
+\end{pmatrix},\qquad G=\log D-\log S.$$
+Los ceros aparecen porque el Bellman de un tipo no depende del $EV$ del otro: los tipos solo se
+conectan a través de los precios. Los bloques de Bellman tienen forma cerrada.
+
+\subsection{Bloque $\Gamma_{EV}$: la matriz de transición}
+
+El resultado clave es la propiedad de Williams--Daly--Zachary del log-sum: la derivada de
+$I(\lambda,\chi_1,\dots,\chi_m)$ respecto a $\chi_k$ es la probabilidad de escoger $k$ dentro del nido,
+$$\frac{\partial I}{\partial\chi_k}=\frac{\exp(\chi_k/\lambda)}{\sum_l\exp(\chi_l/\lambda)}.$$
+Aplicando la regla de la cadena a lo largo del árbol, la derivada de $EV(x)$ respecto al valor de
+una hoja $d$ es la probabilidad incondicional de esa hoja, $\Pi(d\mid x)$. $EV$ entra a las hojas
+solo a través de $\beta EV(\emptyset)$ y de los $v_r(h)$:
+$$\frac{\partial v_r(h)}{\partial EV(x')}=\beta\Big[s(h)\,\mathbb 1\{x'=(j,\bar a)\}+(1-s(h))f(w'\mid j,a,w,r)\,\mathbb 1\{x'=(j,a+1,w')\}\Big].$$
+Juntando,
+$$\frac{\partial\Gamma(x)}{\partial EV(x')}=\beta\sum_{h}\Pi(h\mid x)\sum_r\Pi(r\mid h)\,[QA]_{h,x'}
+=\beta\,[\Omega\,Q\,A]_{x,x'}.$$
+Es decir, $\Gamma_{EV}=\beta\,\Omega QA$, como dice la tesis. Como $\Omega QA$ es estocástica,
+$\|\Gamma_{EV}\|_\infty=\beta<1$ y el bloque $\mathbb I-\beta\,\Omega QA$ siempre es invertible
+(es la misma razón por la que $\Gamma$ es contracción).
+
+\subsection{Bloque $\Gamma_P$: el exceso de oferta individual}
+
+Con $EV$ fijo, $P$ entra a las hojas en dos lugares: en el valor de vender el coche propio,
+$\nu_0(x)=\mu_\tau P_{x}-T_s$, y en el de comprar un usado, $B_r(h)=\dots-\mu_\tau P_h$. Por la misma
+propiedad del log-sum, para un usado $h$,
+$$\frac{\partial\Gamma(x)}{\partial P_h}=\mu_\tau\Big[\mathbb 1\{h=x\}\,\big(1-\Pi(K\mid x)\big)\big(1-\Pi(D=1\mid x)\big)
+-\Pi(\text{comprar }h\mid x)\Big].$$
+El primer término es la probabilidad de que el dueño de $x$ lo venda (justo el factor de $S_x$) y el
+segundo la de que compre $h$. Así, la fila $x$ de $\Gamma_P$ es $\mu_\tau$ por el exceso de oferta
+esperado del hogar en $x$: subir el precio de un coche beneficia a quien lo vende y perjudica a quien
+lo compra, en proporción a la probabilidad de cada cosa. La derivada no tiene términos de
+$\partial\Pi/\partial P$ por el teorema de la envolvente.
+
+\subsection{Bloque de mercado $G$: el difícil}
+
+$G$ depende de $(EV,P)$ por dos vías: las probabilidades de elección (directamente en $D$ y $S$) y
+la distribución $q_\tau$. Las derivadas de las probabilidades sí tienen todos los términos de un
+logit anidado. Por ejemplo, en el nido de $y$,
+$\partial\Pi(y\mid i,b)/\partial B(y')=\Pi(y\mid i,b)\big(\mathbb 1\{y=y'\}-\Pi(y'\mid i,b)\big)/\sigma_w$,
+y esto se multiplica a lo largo de los niveles del árbol. La parte de $q$ sale de diferenciar la
+condición de estacionariedad:
+$$q=q\,\Omega QA,\ q\mathbf 1=1\quad\Longrightarrow\quad\mathrm dq\,(\mathbb I-\Omega QA)=q\,\mathrm d(\Omega QA),\ \ \mathrm dq\,\mathbf 1=0,$$
+donde $\mathrm d(\Omega QA)=\mathrm d\Omega\,QA+\Omega Q\,\mathrm dA$ a su vez depende de las derivadas de todas las probabilidades de elección.
+Escribir esto a mano es posible pero largo y propenso a errores.
+
+\section{Cómo se calcula el jacobiano en el código}
+
+En \texttt{modelo\_tesis/equilibrio.py} el jacobiano no se programa a mano: se calcula con
+\textbf{diferenciación automática en modo directo} (\texttt{utils.jacobian}). La idea:
+\begin{enumerate}
+  \item \texttt{jax.linearize} evalúa $F(z)$ una vez y guarda la linealización, una función
+  $v\mapsto F_z(z)\,v$ (producto jacobiano-vector) que aplica la regla de la cadena operación por
+  operación sobre el mismo código que calcula $F$.
+  \item Evaluando ese producto en los vectores canónicos $e_1,\dots,e_{10230}$ se obtiene cada
+  columna de $F_z$. Se hace por bloques de 256 columnas (\texttt{jac\_chunk}) vectorizados en GPU,
+  así que son 40 bloques y la memoria es $O(256\times10{,}230)$ por bloque.
+  \item El paso es $\Delta z=-F_z^{-1}F$ con una factorización densa
+  (\texttt{jnp.linalg.solve}). La matriz ocupa $10{,}230^2\times8$ bytes $\approx 0.84$ GB y la factorización cuesta
+  del orden de $10^{12}$ operaciones, por eso se hace en GPU.
+\end{enumerate}
+Este jacobiano es \textbf{exacto}: coincide con las fórmulas analíticas de la sección anterior hasta
+el error de redondeo de la máquina (el código usa doble precisión). No es una aproximación por
+diferencias finitas. La diferencia importa: con diferencias finitas
+$[F(z+he_i)-F(z)]/h$ el error es del orden $h+\varepsilon_{\text{máq}}/h\approx10^{-8}$, y un Newton
+con ese jacobiano se estanca justo alrededor de la tolerancia de $10^{-9}$ que pedimos.
+
+\paragraph{Sobre la palabra ``analítico'' en la tesis.} La tesis dice ``jacobiano analítico''. Es
+correcto en el sentido de que son las derivadas exactas de las fórmulas del modelo, pero el lector
+podría entender que están programadas a mano. Una redacción más precisa sería: ``con el jacobiano
+exacto, obtenido por diferenciación automática (los bloques de Bellman coinciden con las expresiones
+cerradas $\Gamma_{EV}=\beta\,\Omega QA$ y la derivada de $\Gamma$ respecto a $P$ es el exceso de oferta
+individual)''.
+
+\section{Lo que hace robusto al solver}
+
+Newton puro solo converge si arranca cerca de la solución. El código (\texttt{solve}) agrega:
+\begin{description}
+  \item[Arranque.] Precios que caen 13\% al año desde el precio del nuevo, con piso en el de
+  chatarra e iguales en $w$: $P_{jaw}=\max(\overline P_j\,0.87^a,\underline P_j)$. Dado ese $P$,
+  500 aproximaciones sucesivas para cada $EV_\tau$.
+  \item[Tope al paso en precios.] Si el paso propuesto cambia algún precio en más de 150 mil DKK,
+  se reescala todo el paso. Evita que una linealización mala mande precios a valores absurdos.
+  \item[Búsqueda de línea.] Se prueba $z+\lambda\Delta z$ con $\lambda=1,\tfrac12,\tfrac14,\dots$
+  (hasta 25 veces) y se acepta el primero que baje $\|F\|_2$ y sea finito. Lejos de la solución
+  da pasos cortos y seguros; cerca, $\lambda=1$ y la convergencia vuelve a ser cuadrática.
+  \item[Rescate.] Si ningún $\lambda$ baja el residuo, se dejan fijos los precios y se vuelve a
+  resolver $EV$ con aproximaciones sucesivas antes de intentar otro paso de Newton.
+  \item[Criterio de paro.] $\max|F|<10^{-9}$: en Bellman, un error de $10^{-9}$ utils; en
+  mercado, un error relativo de $10^{-9}$ entre demanda y oferta en cada celda.
+  \item[Arranque en caliente entre regímenes.] Primero se resuelve el régimen central
+  ($\zeta=0$) desde cero, y los otros arrancan desde la solución de su vecino.
+\end{description}
+
+\paragraph{En la estimación.} Cada evaluación de la verosimilitud en un $\theta$ nuevo necesita el
+equilibrio. Ahí (\texttt{solve\_chord}) se reutiliza la inversa del jacobiano de un $\theta$ cercano
+(Newton ``de cuerda'': cada paso cuesta una evaluación de $F$ y un producto matriz-vector), partiendo
+del predictor $z+\tfrac{\mathrm dz}{\mathrm d\theta}\Delta\theta$, con
+$\tfrac{\mathrm dz}{\mathrm d\theta}=-F_z^{-1}F_\theta$ por el teorema de la función implícita. Si la
+cuerda deja de reducir el residuo, se refactoriza. La misma $F_z^{-1}$ da las derivadas de la
+verosimilitud respecto a $\theta$ sin diferenciar a través de las iteraciones del solver.
+
+\section{Precios sombra en celdas casi sin oferta}
+
+La tesis dice: \emph{``Las celdas $(j,a,w)$ en las que casi no hay oferta tienen precios sombra con
+poco significado económico, así que reportamos solo estadísticas ponderadas por la masa de coches.''}
+Aquí se desarrolla.
+
+\subsection{Qué celdas son}
+
+Hay celdas $(j,a,w)$ a las que casi ningún coche llega. Por ejemplo, $w$ muy lejos de 0 en edades
+jóvenes: un coche nuevo nace con $w=0$ y en uno o dos años el desgaste no lo puede llevar al extremo
+del grid. Si la transición de $w$ fuera la normal discretizada sin más, esas celdas tendrían masa
+exactamente 0 (o $10^{-300}$). El código pone un piso: $F\leftarrow(1-\varepsilon_F)F+\varepsilon_F/W$ con
+$\varepsilon_F=10^{-10}$, para que ninguna celda tenga masa cero y $\log S$ esté definido. La masa
+de esas celdas queda del orden de $\varepsilon_F/W\approx10^{-12}$: viene del piso numérico, no de la economía.
+
+\subsection{Por qué su precio sale alto}
+
+En el logit, la demanda de una celda nunca es cero: cualquier comprador elige el coche $(j,a,w)$
+con probabilidad positiva, $\Pi(y\mid i,b)\propto\exp\big(B(y)/\sigma_w\big)$, con $B(y)$ que
+incluye $-\mu_\tau P_{jay}$. Al precio ``natural'' (el de sus vecinos) la demanda de la celda es del
+orden de la de sus vecinos, por ejemplo $10^{-4}$, mientras que la oferta es $10^{-12}$. Para vaciar
+el mercado, el precio tiene que subir hasta que la probabilidad de comprarla caiga por el mismo
+factor. Como la oferta está acotada por la masa ($S\le q$), casi todo el ajuste lo hace la demanda,
+y en el nido de $y$ esto requiere aproximadamente
+$$\frac{\mu_\tau\,\Delta P}{\sigma_w}\approx\log\frac{D_{\text{natural}}}{S}
+\quad\Longrightarrow\quad
+\Delta P\approx\frac{\sigma_w}{\mu_\tau}\log\frac{D_{\text{natural}}}{S}.$$
+Con $\sigma_w=0.1$, $\mu\approx0.1$ y una razón de $10^{8}$, $\Delta P\approx18$ mil DKK por encima de lo que
+valdría un coche parecido. (Es un orden de magnitud ilustrativo: el ajuste real reparte el cambio entre
+los niveles del árbol y entre tipos.)
+
+\subsection{Por qué ``poco significado económico''}
+
+\begin{enumerate}
+  \item \textbf{Lo fija un artefacto numérico.} El precio depende de $\log(1/S)$, y $S$ depende de
+  $\varepsilon_F$. Si $\varepsilon_F$ bajara de $10^{-10}$ a $10^{-20}$, con los mismos
+  parámetros el precio subiría unos $\frac{\sigma_w}{\mu}\log(10^{10})\approx23$ mil DKK más. Cuando $\varepsilon_F\to0$,
+  el precio de equilibrio de esa celda diverge: con demanda logit no existe un precio finito que haga
+  la demanda igual a cero. Un precio que cambia al mover una constante numérica no dice nada sobre
+  el mercado.
+  \item \textbf{Es un precio sombra, no un precio de transacción.} En el sentido de Hicks (``precio
+  virtual''), es el precio al que la demanda de un bien que no existe sería igual a su oferta nula.
+  Con una demanda con precio de corte (choke price) sería el precio de reserva del comprador marginal.
+  Con logit ese precio es infinito y el piso solo lo vuelve finito. Prácticamente nadie compra ni vende
+  a ese precio: se intercambian $\sim10^{-12}$ coches.
+  \item \textbf{Depende de la cola de los choques.} Que un coche que nadie tiene ``se demande'' un
+  poco es consecuencia de los choques de valor extremo, que dan probabilidad positiva a cualquier
+  alternativa. Es un supuesto de conveniencia, no una predicción sobre esas celdas.
+  \item \textbf{No afecta al resto del equilibrio.} Esos precios entran al valor de los demás hogares
+  solo con probabilidades minúsculas: la de llegar a esa celda ($\approx\varepsilon_F/W$) y la de
+  comprarla (que es baja justo porque el precio es alto). Su efecto sobre $EV$, $q$ y los demás precios
+  es del orden de $10^{-12}$ por decenas de utils, despreciable. Las celdas con masa, que son las que
+  importan para la verosimilitud y los contrafactuales, tienen precios bien determinados.
+  \item \textbf{Pueden verse raros.} Por lo anterior, un coche $(j,a,w)$ en una celda vacía puede salir
+  más caro que el mismo coche con menos desgaste o menos edad. No es una contradicción del modelo: es
+  el precio que raciona una demanda residual sobre una oferta casi nula.
+\end{enumerate}
+
+\subsection{Qué tan grande es el problema en el equilibrio base}
+
+Con el equilibrio guardado en \texttt{output/modelo\_tesis/teoria/base} (régimen central, con el $R$
+de esa corrida; residuo $\max|F|=3\times10^{-13}$), agregando los dos tipos:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Masa relativa de la celda & \% de celdas & Masa total & Transacciones\\
+\midrule
+$<10^{-12}$ & 6.1 & $2.5\times10^{-11}$ & $6.4\times10^{-11}$\\
+$<10^{-8}$  & 10.2 & $2.3\times10^{-7}$ & $4.7\times10^{-7}$\\
+$<10^{-6}$  & 21.6 & $1.2\times10^{-4}$ & $2.3\times10^{-4}$\\
+$<10^{-4}$  & 59.0 & $3.8\times10^{-2}$ & $5.9\times10^{-2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Masa y transacciones como fracción del total de coches activos y del total de ventas.
+El síntoma más visible está en las edades jóvenes: un coche de un año de la marca ligera
+($\overline P=142.3$) en una celda de $w$ extremo y vacía tiene precio de hasta 299.7 mil DKK, y uno de la
+marca pesada ($\overline P=275.8$), hasta 485.8. Es decir, el usado vacío ``cuesta'' el doble que el nuevo.
+En las celdas con masa relativa mayor a $10^{-6}$, el rango de un año es $[132.9,168.0]$ y $[245.3,286.9]$,
+y el promedio ponderado por masa es 140.7 y 257.3. En un panel de $90{,}000$ transiciones, las celdas
+con masa relativa menor a $10^{-8}$ aportan en promedio $90{,}000\times4.7\times10^{-7}\approx0.04$
+observaciones por réplica.
+
+Un fenómeno distinto, que no viene del piso: en las edades más viejas ($a=20$ y $a=24$), incluso en
+celdas con masa, el precio no es monótono en $w$ (por ejemplo, 17 de 59 diferencias consecutivas van
+``al revés'' en $a=24$ de la marca ligera). Ahí el rango de precios es estrecho ($[19.4,25.6]$) porque el
+coche está a uno o pocos años de la terminal y $w$ casi no cambia su valor. Conviene revisarlo por
+separado.
+
+\subsection{Consecuencia para lo que se reporta}
+
+Un promedio simple sobre las $W$ celdas de $(j,a)$ daría el mismo peso a una celda con $10^{-2}$ de
+masa que a una con $10^{-12}$, y los precios sombra contaminarían el promedio. Por eso
+\texttt{by\_age} reporta
+$$\bar P^{\text{stock}}_{ja}=\frac{\sum_w q_{jaw}P_{jaw}}{\sum_w q_{jaw}},\qquad
+\bar P^{\text{trans}}_{ja}=\frac{\sum_w S_{jaw}P_{jaw}}{\sum_w S_{jaw}},$$
+ponderados por el número de coches en circulación o por el de transacciones. En ambos, una celda
+con masa $10^{-12}$ pesa $10^{-12}$, así que estos promedios solo reflejan los precios que de verdad
+se pagan.
+
+\paragraph{Redacción sugerida para la tesis.} ``Hay celdas $(j,a,w)$ a las que casi ningún coche
+llega, como desgastes extremos en edades jóvenes, con oferta del orden del piso numérico de la transición
+de $w$. Como la demanda logit nunca es cero, su precio de equilibrio es el que raciona una demanda
+residual sobre una oferta casi nula: es alto, depende de ese piso y casi no se intercambia a él.
+Por eso reportamos precios promedio ponderados por la masa de coches o de transacciones, en los que
+esas celdas no pesan.''
+
+\end{document}

@@ -1,0 +1,1067 @@
+% Generado por claude/niu/literatura/generar.py a partir de catalogo.py. Edita catalogo.py o este archivo.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{lmodern,microtype,enumitem,amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.55em,topsep=0.4em,label={}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
+\sloppy
+\title{Mapa de literatura para la tesis:\\ equilibrio del mercado de autos con reparación no observada}
+\author{Preparado por Claude para Rodrigo Aldrette}
+\date{8 de noviembre de 2026}
+\begin{document}
+\maketitle
+
+\section*{Cómo leer este documento}
+Clasifiqué 72 obras de tu carpeta \texttt{po} y agregué 248 que faltan. La parte I sigue las seis subsecciones de la revisión, orientadas a tu pregunta: qué tanto importa la reparación en estos modelos. La parte II guarda lo que se cita en otro lado (métodos, motivación) o no se cita. Cada sección termina con lo que falta y, en la parte I, con una transición hacia la siguiente.
+
+\begin{itemize}
+\item $\star$ Prioridad: las 77 faltantes que más te conviene leer primero.
+\item $\dagger$ Ya aparece en la bibliografía actualizada de la versión de Claude de la tesis (\texttt{claude/niu/tesis\_claude/tesis.tex}).
+\item $\ddagger$ PDF escaneado sin texto extraíble: verifiqué la portada, pero el resumen viene de lo que sé de la obra.
+\end{itemize}
+
+\textbf{Qué tan fiable es cada parte.}
+\begin{itemize}
+\item \textbf{Existencia:} los datos con \texttt{doi:} se descargaron de Crossref y su título se comparó con la obra buscada. Los demás enlaces llevan entre paréntesis cómo se comprobaron. Quedan sin enlace dos reportes neerlandeses y dos documentos sin publicación, tomados de tus propios PDF.
+\item \textbf{Resúmenes de lo que tienes:} salen de leer resumen o primeras páginas de cada PDF, no el artículo completo.
+\item \textbf{Resúmenes de lo que falta:} cuando existe, cotejé el resumen publicado en OpenAlex (unas 180 de las 320 obras, contando ambos grupos). Del resto, salen de mi conocimiento y de búsquedas web. En ningún caso leí el texto completo. Revisa cualquier afirmación específica antes de citarla.
+\item \textbf{Contexto:} es mi lectura de cómo se relaciona la obra con tu tesis, no algo que diga el autor.
+\item \textbf{Páginas:} «desde p.» indica que solo pude confirmar la página inicial; completa el rango antes de citar.
+\item \textbf{Enlaces:} el DOI asegura que la obra existe, pero puede pedirte acceso institucional.
+\end{itemize}
+\tableofcontents
+\clearpage
+\part{Las seis subsecciones de la revisión de literatura}
+\section{Bienes durables y durabilidad}
+Punto de partida de la revisión. Esta literatura pregunta quién decide cuánto dura un bien y qué pierde o gana el productor con esa decisión. Ya no es tu pregunta central, así que basta con dos o tres párrafos: la obsolescencia programada queda como un caso particular de la durabilidad elegida por la empresa.
+
+\subsection*{Monopolio durable y compromiso: lo que tienes}
+\addcontentsline{toc}{subsection}{Monopolio durable y compromiso: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,$\ddagger$\,Bulow, J. I. (1982). ``Durable-Goods Monopolists''. \textit{Journal of Political Economy} 90(2), 314--332. \href{https://doi.org/10.1086/261058}{\texttt{doi:10.1086/261058}}\\
+Aportación: el monopolista que vende compite con el mercado de segunda mano que él mismo crea; si no puede rentar ni comprometerse, produce bienes menos durables. Método: modelo teórico de dos periodos. Contexto: traduce la intuición de Coase a un resultado sobre durabilidad y es la referencia con la que dialoga Morita y Waldman (2004) al agregar mantenimiento.\\
+{\footnotesize Archivo: \texttt{Durable Goods Monopolists.pdf}}
+\item $\dagger$\,Gul, F., H. Sonnenschein y R. Wilson (1986). ``Foundations of dynamic monopoly and the coase conjecture''. \textit{Journal of Economic Theory} 39(1), 155--190. \href{https://doi.org/10.1016/0022-0531(86)90024-4}{\texttt{doi:10.1016/0022-0531(86)90024-4}}\\
+Aportación: formaliza la conjetura de Coase: al acortar el periodo entre ofertas, los precios caen hasta la valoración mínima. Método: equilibrios perfectos en subjuegos con un continuo de compradores y estrategias estacionarias. Contexto: es el resultado formal de referencia de la teoría del monopolio durable; en tu modelo no opera, porque la oferta de nuevos es exógena.\\
+{\footnotesize Archivo: \texttt{CoaseConjecture.pdf}}
+\item $\dagger$\,Orbach, B. Y. (2004). ``The Durapolist Puzzle: Monopoly Power in Durable-Goods Markets''. \textit{Yale Journal on Regulation} 21(1), 67--118. \href{https://openyls.law.yale.edu/handle/20.500.13051/8128}{\texttt{openyls.law.yale.edu/handle/20.500.13051/8128}} \textit{(PDF en tu carpeta; título del enlace no comprobable automáticamente)}\\
+Aportación: marco general del problema del durapolista y sus implicaciones legales. Método: análisis conceptual y jurídico. Contexto: sirve como puente entre la teoría y el debate de competencia; úsalo para ordenar ideas más que como resultado formal.\\
+{\footnotesize Archivo: \texttt{The Durapolist Puzzle Monopoly Power in.pdf}}
+\item $\dagger$\,Waldman, M. (2003). ``Durable Goods Theory for Real World Markets''. \textit{Journal of Economic Perspectives} 17(1), 131--154. \href{https://doi.org/10.1257/089533003321164985}{\texttt{doi:10.1257/089533003321164985}}\\
+Aportación: reúne los avances de los años setenta sobre durabilidad óptima (Swan), inconsistencia temporal (Coase) y selección adversa (Akerlof), y evalúa su utilidad para mercados reales. Método: ensayo panorámico. Contexto: es la mejor entrada a la sección y su bibliografía ayuda a rastrear los antecedentes sobre mantenimiento.\\
+{\footnotesize Archivo: \texttt{00 Durable goods theory for real world Waldman.pdf}}
+\end{itemize}
+
+\subsection*{Durabilidad elegida y obsolescencia: lo que tienes}
+\addcontentsline{toc}{subsection}{Durabilidad elegida y obsolescencia: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Swan, P. L. (1972). ``Optimum Durability, Second-Hand Markets, and Planned Obsolescence''. \textit{Journal of Political Economy} 80(3, Part 1), 575--585. \href{https://doi.org/10.1086/259906}{\texttt{doi:10.1086/259906}}\\
+Aportación: bajo ciertas condiciones, la durabilidad elegida es independiente de la estructura de mercado, incluso con mercado de segunda mano. Método: teoría con servicios del bien como objeto de la demanda. Contexto: casi toda la literatura posterior discute qué supuesto de este resultado falla; es el contrapunto clásico de Bulow.\\
+{\footnotesize Archivo: \texttt{Swan-OptimumDurabilitySecondHand-1972.pdf}}
+\item $\dagger$\,$\ddagger$\,Bulow, J. (1986). ``An Economic Theory of Planned Obsolescence''. \textit{The Quarterly Journal of Economics} 101(4), 729--749. \href{https://doi.org/10.2307/1884176}{\texttt{doi:10.2307/1884176}}\\
+Aportación: explica por qué un monopolista desea vidas útiles antieconómicamente cortas y por qué un oligopolista tiene además un incentivo estratégico. Método: modelo de monopolio y oligopolio con durabilidad elegida. Contexto: es la referencia fundacional de la obsolescencia programada; basta citarla una vez, porque tu pregunta ya no va por ahí.\\
+{\footnotesize Archivo: \texttt{bulow seminal.pdf}}
+\item $\dagger$\,Waldman, M. (1993). ``A New Perspective on Planned Obsolescence''. \textit{The Quarterly Journal of Economics} 108(1), 273--283. \href{https://doi.org/10.2307/2118504}{\texttt{doi:10.2307/2118504}}\\
+Aportación: al introducir mejoras, la empresa puede sobreinvertir en volver obsoletas las unidades anteriores. Método: modelo de inconsistencia temporal con mejoras tecnológicas. Contexto: mueve la obsolescencia de la durabilidad física a la tecnología, un canal distinto del deterioro que tú modelas.\\
+{\footnotesize Archivo: \texttt{Waldman-NewPerspectivePlanned-1993.pdf}}
+\item $\dagger$\,Waldman, M. (1996). ``Planned Obsolescence and the R\&D Decision''. \textit{The RAND Journal of Economics} 27(3), 583--595. \href{https://doi.org/10.2307/2555845}{\texttt{doi:10.2307/2555845}}\\
+Aportación: si vende en vez de rentar, el monopolista elige una I+D que maximiza la ganancia corriente pero no la total. Método: inconsistencia temporal aplicada a la decisión de I+D. Contexto: extiende el problema de compromiso a la innovación; es lateral a tu tesis.\\
+{\footnotesize Archivo: \texttt{Planned Ob and R\&D.pdf}}
+\item $\dagger$\,Fishman, A., N. Gandal y O. Shy (1993). ``Planned Obsolescence as an Engine of Technological Progress''. \textit{The Journal of Industrial Economics} 41(4), 361--370. \href{https://doi.org/10.2307/2950597}{\texttt{doi:10.2307/2950597}}\\
+Aportación: la obsolescencia programada puede ser condición necesaria del progreso tecnológico y puede preferirse a productos longevos con innovación lenta. Método: modelo de mercado competitivo con generaciones. Contexto: matiza la lectura puramente negativa de la vida útil corta; útil para no presentar más durabilidad como siempre mejor.\\
+{\footnotesize Archivo: \texttt{Fishman-PlannedObsolescenceEngine-1993.pdf}}
+\item $\dagger$\,Grout, P. A. e I.-U. Park (2005). ``Competitive Planned Obsolescence''. \textit{RAND Journal of Economics} 36(3), 596--612. \href{https://www.jstor.org/stable/4135231}{\texttt{www.jstor.org/stable/4135231}} \textit{(portada del PDF en tu carpeta)}\\
+Aportación: encuentra incentivos a la obsolescencia aun en competencia, para reducir el problema de lemons. Método: modelo teórico competitivo. Contexto: muestra que el resultado no depende del poder de mercado y conecta durabilidad con información en mercados de usados.\\
+{\footnotesize Archivo: \texttt{competitive PO.pdf}}
+\item $\dagger$\,Strausz, R. (2009). ``Planned Obsolescence as an Incentive Device for Unobservable Quality''. \textit{The Economic Journal} 119(540), 1405--1421. \href{https://doi.org/10.1111/j.1468-0297.2009.02290.x}{\texttt{doi:10.1111/j.1468-0297.2009.02290.x}}\\
+Aportación: la obsolescencia aumenta la frecuencia de recompra y permite castigar antes la baja calidad, así que funciona como incentivo. Método: juego repetido con reputación y calidad multidimensional. Contexto: implica una disyuntiva entre durabilidad y otros atributos no observables. Tienes la versión de trabajo de 2006.\\
+{\footnotesize Archivo: \texttt{Planned Obsolescence and the Provision of.pdf}}
+\item $\dagger$\,Lee, I. H. y J. Lee (1998). ``A Theory of Economic Obsolescence''. \textit{The Journal of Industrial Economics} 46(3), 383--401. \href{https://doi.org/10.1111/1467-6451.00077}{\texttt{doi:10.1111/1467-6451.00077}}\\
+Aportación: una generación nueva vuelve económicamente obsoleta a la anterior aunque siga funcionando, lo que obliga a discriminar por valoración e historial de compra. Método: juego entre monopolista y consumidores. Contexto: separa vida económica y vida física, distinción útil para interpretar tu edad terminal.\\
+{\footnotesize Archivo: \texttt{A THEORY OF ECONOMIC OBSOLESCENCE.pdf}}
+\item Kinokuni, H., S. Ohori e Y. Tomoda (2021). ``Advance disposal fee vs. disposal fee: A monopolistic producer’s durability choice model''. \textit{Resource and Energy Economics} 65, 101242. \href{https://doi.org/10.1016/j.reseneeco.2021.101242}{\texttt{doi:10.1016/j.reseneeco.2021.101242}}\\
+Aportación: compara cobrar la tarifa de desecho al comprar o al desechar y su efecto en durabilidad y bienestar. Método: monopolio durable con desecho ilegal. Contexto: lleva la durabilidad al final de la vida del bien; relevante solo si discutes política de disposición.\\
+{\footnotesize Archivo: \texttt{Advance disposal fee vs. disposal fee.pdf}}
+\end{itemize}
+
+\subsection*{Evidencia sobre durabilidad: lo que tienes}
+\addcontentsline{toc}{subsection}{Evidencia sobre durabilidad: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Fisher, F. M., Z. Griliches y C. Kaysen (1962). ``The Costs of Automobile Model Changes since 1949''. \textit{Journal of Political Economy} 70(5, Part 1), 433--451. \href{https://doi.org/10.1086/258697}{\texttt{doi:10.1086/258697}}\\
+Aportación: estima el costo de los cambios de modelo de autos en los años cincuenta. Método: contrafactual que mantiene las especificaciones de 1949. Contexto: uno de los primeros trabajos empíricos sobre la decisión de producto de la industria automotriz; da profundidad histórica a una evidencia que sigue siendo escasa.\\
+{\footnotesize Archivo: \texttt{Fisher-CostsAutomobileModel-1962.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: fundamentos y conjetura de Coase}
+\addcontentsline{toc}{subsection}{Lo que falta: fundamentos y conjetura de Coase}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Coase, R. H. (1972). ``Durability and Monopoly''. \textit{The Journal of Law and Economics} 15(1), 143--149. \href{https://doi.org/10.1086/466731}{\texttt{doi:10.1086/466731}}\\
+Aportación: el monopolista durable compite con sus propias ventas futuras, lo que erosiona su poder de mercado. Método: argumento verbal. Contexto: artículo fundacional del que parte la sección; ya lo citas en tu tesis.
+\item Stokey, N. L. (1981). ``Rational Expectations and Durable Goods Pricing''. \textit{The Bell Journal of Economics} 12(1), 112--128. \href{https://doi.org/10.2307/3003511}{\texttt{doi:10.2307/3003511}}\\
+Aportación: examina el monopolio durable con expectativas racionales y muestra que exigir expectativas continuas en el acervo da un equilibrio único. Método: modelos en tiempo discreto y continuo. Contexto: precursor formal de Gul, Sonnenschein y Wilson (1986).
+\item Ausubel, L. M. y R. J. Deneckere (1989). ``Reputation in Bargaining and Durable Goods Monopoly''. \textit{Econometrica} 57(3), desde p. 511. \href{https://doi.org/10.2307/1911050}{\texttt{doi:10.2307/1911050}}\\
+Aportación: en horizonte infinito, cualquier pago del vendedor entre cero y el monopolio estático se sostiene en equilibrio al reducir el periodo, lo que revierte la conjetura de Coase. Método: teorema de folk en un juego de negociación. Contexto: marca los límites del resultado de Coase.
+\item Bond, E. W. y L. Samuelson (1984). ``Durable Good Monopolies with Rational Expectations and Replacement Sales''. \textit{The RAND Journal of Economics} 15(3), 336--345. \href{https://doi.org/10.2307/2555442}{\texttt{doi:10.2307/2555442}}\\
+Aportación: con depreciación hay ventas de reposición, y el monopolista puede mantener un acervo menor que el competitivo. Método: modelo de monopolio con bien que se deprecia. Contexto: es de los primeros en mostrar que la depreciación cambia el problema de Coase, y tu tesis agrega que esa depreciación puede controlarla el dueño.
+\item Sobel, J. (1991). ``Durable Goods Monopoly with Entry of New Consumers''. \textit{Econometrica} 59(5), 1455--1485. \href{https://doi.org/10.2307/2938375}{\texttt{doi:10.2307/2938375}}\\
+Aportación: con cohortes nuevas cada periodo, hay equilibrios con muchos niveles de ganancia y el vendedor alcanza la ganancia de compromiso con precio estático constante. Método: juego dinámico con entrada de consumidores. Contexto: un ambiente estacionario con flujo de compradores, cercano en espíritu al tuyo.
+\end{itemize}
+
+\subsection*{Lo que falta: durabilidad y estructura de mercado}
+\addcontentsline{toc}{subsection}{Lo que falta: durabilidad y estructura de mercado}
+\begin{itemize}
+\item Kleiman, E. y T. Ophir (1966). ``The Durability of Durable Goods''. \textit{The Review of Economic Studies} 33(2), 165--178. \href{https://doi.org/10.2307/2974440}{\texttt{doi:10.2307/2974440}}\\
+Aportación: trabajo temprano sobre la durabilidad elegida por el productor. Método: teoría. Contexto: referencia histórica previa al debate de Swan; cítala solo si haces un recorrido histórico.
+\item Levhari, D. y T. N. Srinivasan (1969). ``Durability of Consumption Goods: Competition versus Monopoly''. \textit{American Economic Review} 59(1), 102--107. \href{https://ideas.repec.org/a/aea/aecrev/v59y1969i1p102-07.html}{\texttt{ideas.repec.org/a/aea/aecrev/v59y1969i1p102-07.html}} \textit{(RePEc)}\\
+Aportación: compara durabilidad en monopolio y competencia. Método: teoría de precios con bienes de consumo durables. Contexto: representa la visión previa a Swan, según la cual el monopolio reduce la durabilidad.
+\item Schmalensee, R. (1970). ``Regulation and the Durability of Goods''. \textit{The Bell Journal of Economics and Management Science} 1(1), 54--64. \href{https://doi.org/10.2307/3003022}{\texttt{doi:10.2307/3003022}}\\
+Aportación: con deterioro a tasa constante y mercado perfecto de usados, el monopolista produce bienes que se deterioran más rápido y su regulación tiene efectos ambiguos. Método: equilibrio competitivo y monopólico con rendimientos constantes. Contexto: su continuación, Schmalensee (1974), agrega mantenimiento.
+\item $\star$\,$\dagger$\,Swan, P. L. (1970). ``Durability of Consumption Goods''. \textit{American Economic Review} 60(5), 884--894. \href{https://ideas.repec.org/a/aea/aecrev/v60y1970i5p884-94.html}{\texttt{ideas.repec.org/a/aea/aecrev/v60y1970i5p884-94.html}} \textit{(RePEc)}\\
+Aportación: versión original del resultado de independencia. Método: teoría de costo mínimo de proveer servicios. Contexto: es el punto de referencia de toda la sección y ya aparece en tu tesis.
+\item Swan, P. L. (1971). ``The Durability of Goods and Regulation of Monopoly''. \textit{The Bell Journal of Economics and Management Science} 2(1), 347--357. \href{https://doi.org/10.2307/3003172}{\texttt{doi:10.2307/3003172}}\\
+Aportación: como toda empresa minimiza el costo de proveer un servicio, monopolio y competencia eligen la misma durabilidad; también con funciones de deterioro generales. Método: teoría. Contexto: amplía el resultado de independencia y su relación con la regulación.
+\item Sieper, E. y P. L. Swan (1973). ``Monopoly and Competition in the Market for Durable Goods''. \textit{The Review of Economic Studies} 40(3), 333--351. \href{https://doi.org/10.2307/2296454}{\texttt{doi:10.2307/2296454}}\\
+Aportación: generaliza el resultado de independencia en el mercado de durables. Método: teoría de monopolio y competencia. Contexto: Waldman (2003) lo incluye entre los tres avances clave de Swan.
+\item $\dagger$\,Su, T. T. (1975). ``Durability of Consumption Goods Reconsidered''. \textit{American Economic Review} 65(1), 148--157. \href{https://ideas.repec.org/a/aea/aecrev/v65y1975i1p148-57.html}{\texttt{ideas.repec.org/a/aea/aecrev/v65y1975i1p148-57.html}} \textit{(RePEc)}\\
+Aportación: reexamina la durabilidad y da condiciones en que falla el resultado de Swan. Método: teoría. Contexto: la literatura secundaria lo cita junto con Schmalensee (1974) como de los primeros en introducir el mantenimiento en este marco; conviene leerlo para el nido de reparación.
+\item Waldman, M. (1996). ``Durable Goods Pricing When Quality Matters''. \textit{The Journal of Business} 69(4), 489--510. \href{https://doi.org/10.1086/209702}{\texttt{doi:10.1086/209702}}\\
+Aportación: el precio de las unidades viejas limita lo que la empresa cobra por las nuevas, por lo que elige durabilidad subóptima y puede incluso eliminar el mercado de segunda mano. Método: monopolio con calidad que se deteriora. Contexto: une durabilidad y mercado secundario, y prepara la sección siguiente.
+\end{itemize}
+
+\subsection*{Lo que falta: obsolescencia tecnológica y evidencia estructural}
+\addcontentsline{toc}{subsection}{Lo que falta: obsolescencia tecnológica y evidencia estructural}
+\begin{itemize}
+\item Levinthal, D. A. y D. Purohit (1989). ``Durable Goods and Product Obsolescence''. \textit{Marketing Science} 8(1), 35--56. \href{https://doi.org/10.1287/mksc.8.1.35}{\texttt{doi:10.1287/mksc.8.1.35}}\\
+Aportación: la expectativa de un producto mejorado reduce lo que se paga hoy; analiza la estrategia de ventas del monopolista. Método: teoría de introducción de generaciones. Contexto: obsolescencia por expectativas, separada del deterioro físico.
+\item Choi, J. P. (1994). ``Network Externality, Compatibility Choice, and Planned Obsolescence''. \textit{The Journal of Industrial Economics} 42(2), desde p. 167. \href{https://doi.org/10.2307/2950488}{\texttt{doi:10.2307/2950488}}\\
+Aportación: teoría de obsolescencia basada en tecnologías incompatibles y externalidades de red. Método: monopolio dinámico. Contexto: canal ajeno a los autos; basta como ejemplo de por qué dejaste de lado esta rama.
+\item Ellison, G. y D. Fudenberg (2000). ``The Neo-Luddite's Lament: Excessive Upgrades in the Software Industry''. \textit{The RAND Journal of Economics} 31(2), desde p. 253. \href{https://doi.org/10.2307/2601040}{\texttt{doi:10.2307/2601040}}\\
+Aportación: un monopolista de software puede introducir demasiadas actualizaciones por compromiso y heterogeneidad. Método: teoría con compatibilidad hacia atrás. Contexto: obsolescencia en bienes digitales, lejos de tu mecanismo.
+\item Fudenberg, D. y J. Tirole (1998). ``Upgrades, Tradeins, and Buybacks''. \textit{The RAND Journal of Economics} 29(2), desde p. 235. \href{https://doi.org/10.2307/2555887}{\texttt{doi:10.2307/2555887}}\\
+Aportación: precios de generaciones traslapadas, con recompras cuando hay mercado secundario y descuentos cuando no. Método: monopolio dinámico. Contexto: compara explícitamente bienes con y sin segunda mano.
+\item Nahm, J. (2004). ``Durable-Goods Monopoly with Endogenous Innovation''. \textit{Journal of Economics \& Management Strategy} 13(2), 303--319. \href{https://doi.org/10.1111/j.1530-9134.2004.00012.x}{\texttt{doi:10.1111/j.1530-9134.2004.00012.x}}\\
+Aportación: la inconsistencia temporal en I+D depende de si sigue vendiéndose el modelo anterior. Método: monopolio durable con innovación. Contexto: complemento técnico de Waldman (1996).
+\item $\star$\,$\dagger$\,Fukasawa, T. (2025). ``When Do Firms Sell High Durability Products? The Case of Light Bulb Industry''. Documento de trabajo, arXiv:2503.23792. \href{https://arxiv.org/abs/2503.23792}{\texttt{arxiv.org/abs/2503.23792}} \textit{(arXiv)}\\
+Aportación: estudia si las empresas tienen incentivos a eliminar productos de alta durabilidad. Método: oligopolio dinámico estructural en focos. Contexto: es de las pocas estimaciones estructurales de durabilidad del lado de la oferta y muestra el espejo de tu problema; aparece en tu reporte Elicit y en la tesis, pero no tienes el PDF.
+\end{itemize}
+
+\medskip
+\noindent\textit{Transición al mercado secundario. En esta literatura la durabilidad la elige la empresa, y varios resultados dependen de cómo compiten las unidades usadas con las nuevas. Para seguir el argumento hay que abrir ese mercado y preguntar quién conserva cada coche a lo largo de su vida.}
+
+\section{Mercado secundario}
+Aquí va la teoría y los mecanismos: por qué se comercian bienes usados, cómo se asignan entre consumidores y qué hace la información. Los modelos cuantitativos de autos quedan para el nido 5, porque de ellos sale directamente tu modelo.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item $\dagger$\,$\ddagger$\,Hendel, I. y A. Lizzeri (1999). ``Adverse Selection in Durable Goods Markets''. \textit{American Economic Review} 89(5), 1097--1115. \href{https://doi.org/10.1257/aer.89.5.1097}{\texttt{doi:10.1257/aer.89.5.1097}}\\
+Aportación: en un modelo dinámico de selección adversa, el mercado de usados nunca se cierra, el volumen puede ser grande y las distorsiones son menores de lo pensado; las marcas poco fiables se deprecian más rápido. Método: teoría con implicaciones comprobables. Contexto: tu modelo supone información simétrica sobre w, así que este es el trabajo que justifica dejar la selección adversa como extensión. Tienes el NBER 6194.\\
+{\footnotesize Archivo: \texttt{Adverse selection in durable goods markets.pdf}}
+\item $\dagger$\,Ghose, A. (2009). ``Internet Exchanges for Used Goods: An Empirical Analysis of Trade Patterns and Adverse Selection1''. \textit{MIS Quarterly} 33(2), 263--292. \href{https://doi.org/10.2307/20650292}{\texttt{doi:10.2307/20650292}}\\
+Aportación: separa la incertidumbre sobre el producto de la incertidumbre sobre el vendedor y busca selección adversa en mercados electrónicos de usados. Método: panel de cinco meses de Amazon con análisis del texto de reputación. Contexto: fuera de los autos, pero ilustra cómo medir calidad no observada de un usado.\\
+{\footnotesize Archivo: \texttt{Internet exchanges.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: equilibrio y asignación}
+\addcontentsline{toc}{subsection}{Lo que falta: equilibrio y asignación}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Rust, J. (1985). ``Stationary Equilibrium in a Market for Durable Assets''. \textit{Econometrica} 53(4), 783--805. \href{https://doi.org/10.2307/1912654}{\texttt{doi:10.2307/1912654}}\\
+Aportación: primer equilibrio estacionario con mercados primario, secundario y de chatarra para un bien que se deteriora estocásticamente, con información perfecta y sin costos de transacción; prueba existencia y muestra que los precios son precios sombra de un problema de paro óptimo. Método: teoría de equilibrio. Contexto: es el antecedente directo de tu concepto de equilibrio y del de Gillingham et al.
+\item $\dagger$\,Rust, J. (1986). ``When is it Optimal to Kill off the Market for Used Durable Goods?''. \textit{Econometrica} 54(1), 65--86. \href{https://doi.org/10.2307/1914157}{\texttt{doi:10.2307/1914157}}\\
+Aportación: analiza cuándo conviene al monopolista eliminar el mercado de usados. Método: teoría. Contexto: mismo autor y objeto que Rust (1985), visto desde la oferta.
+\item $\dagger$\,Anderson, S. P. y V. A. Ginsburgh (1994). ``Price discrimination via second-hand markets''. \textit{European Economic Review} 38(1), 23--44. \href{https://doi.org/10.1016/0014-2921(94)90003-5}{\texttt{doi:10.1016/0014-2921(94)90003-5}}\\
+Aportación: el mercado de segunda mano permite discriminar precios entre consumidores con distinta valoración por lo nuevo. Método: teoría. Contexto: es la razón por la que tus tipos heterogéneos de consumidor generan intercambio.
+\item $\star$\,$\dagger$\,Konishi, H. y M. T. Sandfort (2002). ``Existence of stationary equilibrium in the markets for new and used durable goods''. \textit{Journal of Economic Dynamics and Control} 26(6), 1029--1052. \href{https://doi.org/10.1016/s0165-1889(01)00008-2}{\texttt{doi:10.1016/s0165-1889(01)00008-2}}\\
+Aportación: prueba la existencia de equilibrio estacionario en mercados de durables nuevos y usados con consumidores heterogéneos. Método: teoría de existencia. Contexto: respaldo teórico si quieres discutir la existencia de tu equilibrio.
+\item $\dagger$\,Stolyarov, D. (2002). ``Turnover of Used Durables in a Stationary Equilibrium: Are Older Goods Traded More?''. \textit{Journal of Political Economy} 110(6), 1390--1413. \href{https://doi.org/10.1086/343745}{\texttt{doi:10.1086/343745}}\\
+Aportación: con costos de transacción, la probabilidad de reventa es no monótona en la edad: el volumen es bajo al inicio y a la mitad de la vida del bien. Método: modelo dinámico de equilibrio, contrastado con datos de autos de EE. UU. Contexto: predice el patrón de intercambio por edad que tu modelo también genera, y puede servir de prueba de ajuste.
+\item Benjamin, D. K. y R. C. Kormendi (1974). ``The Interrelationship between Markets for New and Used Durable Goods''. \textit{The Journal of Law and Economics} 17(2), 381--401. \href{https://doi.org/10.1086/466798}{\texttt{doi:10.1086/466798}}\\
+Aportación: interrelación de los mercados de nuevos y usados. Método: teoría. Contexto: de los primeros en tratar ambos mercados como un sistema.
+\item Liebowitz, S. J. (1982). ``Durability, Market Structure, and New-Used Goods Models''. \textit{American Economic Review} 72(4), 816--824. \href{https://ideas.repec.org/a/aea/aecrev/v72y1982i4p816-24.html}{\texttt{ideas.repec.org/a/aea/aecrev/v72y1982i4p816-24.html}} \textit{(RePEc)}\\
+Aportación: revisa la durabilidad y la estructura de mercado con modelos de bienes nuevos y usados. Método: teoría. Contexto: enlaza el debate de Swan con el mercado secundario.
+\item Waldman, M. (1997). ``Eliminating the Market for Secondhand Goods: An Alternative Explanation for Leasing''. \textit{The Journal of Law and Economics} 40(1), 61--92. \href{https://doi.org/10.1086/467366}{\texttt{doi:10.1086/467366}}\\
+Aportación: un papel de rentar en exclusiva, como hicieron IBM o Xerox, fue eliminar el mercado de segunda mano. Método: teoría con ejemplos históricos. Contexto: documenta qué tan molesto es el mercado secundario para el productor.
+\item $\star$\,$\dagger$\,Hendel, I. y A. Lizzeri (1999). ``Interfering with Secondary Markets''. \textit{The RAND Journal of Economics} 30(1), 1--21. \href{https://doi.org/10.2307/2556043}{\texttt{doi:10.2307/2556043}}\\
+Aportación: integra cuatro formas de interferir con el mercado secundario; con heterogeneidad en la valoración de la calidad, el monopolista no provee durabilidad socialmente óptima, en contraste con Swan. Método: teoría. Contexto: es el puente más directo entre el nido 1 y este.
+\end{itemize}
+
+\subsection*{Lo que falta: selección adversa e información}
+\addcontentsline{toc}{subsection}{Lo que falta: selección adversa e información}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Akerlof, G. A. (1970). ``The Market for "Lemons": Quality Uncertainty and the Market Mechanism''. \textit{The Quarterly Journal of Economics} 84(3), 488--500. \href{https://doi.org/10.2307/1879431}{\texttt{doi:10.2307/1879431}}\\
+Aportación: la información privada sobre calidad puede destruir mercados, con los autos usados como ejemplo. Método: modelo teórico. Contexto: fundacional; lo que tu tesis supone ausente y Blundell et al. (2026) cuantifican.
+\item Hendel, I. y A. Lizzeri (2002). ``The Role of Leasing under Adverse Selection''. \textit{Journal of Political Economy} 110(1), 113--143. \href{https://doi.org/10.1086/324387}{\texttt{doi:10.1086/324387}}\\
+Aportación: los contratos de arrendamiento afectan las asignaciones solo si hay selección adversa, lo que explica mayor rotación de autos arrendados. Método: teoría contrastada con patrones del mercado. Contexto: otra institución que responde a calidad no observada.
+\item Hendel, I., A. Lizzeri y M. Siniscalchi (2005). ``Efficient Sorting in a Dynamic Adverse-Selection Model''. \textit{Review of Economic Studies} 72(2), 467--497. \href{https://doi.org/10.1111/j.1467-937x.2005.00340.x}{\texttt{doi:10.1111/j.1467-937x.2005.00340.x}}\\
+Aportación: el número de veces que cambió de manos un bien señala su calidad y se puede alcanzar una asignación eficiente pese a la asimetría. Método: teoría. Contexto: alternativa teórica a la idea de que la información asimétrica distorsiona mucho.
+\item $\dagger$\,House, C. L. y J. V. Leahy (2004). ``An sS Model with Adverse Selection''. \textit{Journal of Political Economy} 112(3), 581--614. \href{https://doi.org/10.1086/383104}{\texttt{doi:10.1086/383104}}\\
+Aportación: la selección adversa actúa como costo fijo de ajuste en un modelo (S,s) y pierde importancia conforme el durable envejece. Método: teoría de ajuste. Contexto: refuerza que la información importa más en coches jóvenes.
+\item Johnson, J. P. y M. Waldman (2003). ``Leasing, Lemons, and Buybacks''. \textit{The RAND Journal of Economics} 34(2), desde p. 247. \href{https://doi.org/10.2307/1593716}{\texttt{doi:10.2307/1593716}}\\
+Aportación: el arrendamiento y las recompras reducen la selección adversa y aumentan la eficiencia del mercado de usados. Método: modelo competitivo de nuevos y usados. Contexto: complementa a Hendel y Lizzeri (2002).
+\item Bond, E. W. (1982). ``A Direct Test of the `Lemons' Model: The Market for Used Pickup Trucks''. \textit{American Economic Review} 72(4), 836--840. \href{https://ideas.repec.org/a/aea/aecrev/v72y1982i4p836-40.html}{\texttt{ideas.repec.org/a/aea/aecrev/v72y1982i4p836-40.html}} \textit{(RePEc)}\\
+Aportación: prueba directa de lemons con camionetas: no encuentra más reparaciones en las que se revendieron. Método: comparación de necesidades de mantenimiento en una encuesta. Contexto: usa precisamente la reparación como medida de calidad, igual que Peterson y Schneider (2014).
+\item Genesove, D. (1993). ``Adverse Selection in the Wholesale Used Car Market''. \textit{Journal of Political Economy} 101(4), 644--665. \href{https://doi.org/10.1086/261891}{\texttt{doi:10.1086/261891}}\\
+Aportación: compara distribuidores de nuevos y de usados en subastas mayoristas y encuentra evidencia débil de selección adversa. Método: encuesta y precios de subasta. Contexto: parte de la evidencia que hace razonable tu supuesto de simetría como primera aproximación.
+\item Engers, M., M. Hartmann y S. Stern (2009). ``Are lemons really hot potatoes?''. \textit{International Journal of Industrial Organization} 27(2), 250--263. \href{https://doi.org/10.1016/j.ijindorg.2008.08.004}{\texttt{doi:10.1016/j.ijindorg.2008.08.004}}\\
+Aportación: examina si los coches que resultan malos se revenden más rápido. Método: análisis de duración de la tenencia. Contexto: el vínculo entre calidad y venta que tu mezcla de decisiones captura por otro canal.
+\item Larsen, B. J. (2021). ``The Efficiency of Real-World Bargaining: Evidence from Wholesale Used-Auto Auctions''. \textit{The Review of Economic Studies} 88(2), 851--882. \href{https://doi.org/10.1093/restud/rdaa007}{\texttt{doi:10.1093/restud/rdaa007}}\\
+Aportación: cuantifica la eficiencia de la negociación con información incompleta bilateral. Método: unas 265,000 negociaciones tras subastas mayoristas de autos. Contexto: fricciones del mercado real de usados, resumidas en tus costos de transacción.
+\item $\dagger$\,Biglaiser, G., F. Li, C. Murry e Y. Zhou (2020). ``Intermediaries and product quality in used car markets''. \textit{The RAND Journal of Economics} 51(3), 905--933. \href{https://doi.org/10.1111/1756-2171.12344}{\texttt{doi:10.1111/1756-2171.12344}}\\
+Aportación: los coches vendidos por distribuidores tienen mayor calidad y se revenden menos; hay evidencia tanto de reducción de asimetría como de emparejamiento. Método: datos de transacciones y modelo. Contexto: tu modelo no tiene intermediarios, y este trabajo indica qué se pierde.
+\item Lacetera, N., D. G. Pope y J. R. Sydnor (2012). ``Heuristic Thinking and Limited Attention in the Car Market''. \textit{American Economic Review} 102(5), 2206--2236. \href{https://doi.org/10.1257/aer.102.5.2206}{\texttt{doi:10.1257/aer.102.5.2206}}\\
+Aportación: los precios caen de forma discontinua en umbrales de 10,000 millas por sesgo del dígito izquierdo. Método: más de 22 millones de transacciones mayoristas. Contexto: muestra lo sensible que es el precio a un indicador observable de desgaste.
+\end{itemize}
+
+\medskip
+\noindent\textit{Transición a la reparación. Estos trabajos resumen la calidad de un usado en su edad, a veces en un estado exógeno, y en casi todos el dueño no puede cambiar ese estado. Sin embargo, parte de la calidad de un usado la produce quien lo mantiene. Esa decisión es el centro del siguiente nido.}
+
+\section{Reparación y mantenimiento}
+El nido central de tu pregunta. La reparación aparece como oferta del productor, como problema de información con el taller, como canal de la vida útil en forma reducida o como política. La búsqueda no encontró ningún modelo estructural de equilibrio del mercado de autos en el que el consumidor elija reparar; escríbelo como «no encontré», no como «no existe», hasta revisarlo con tu asesor.
+
+\subsection*{Reemplazo y fiabilidad: lo que tienes}
+\addcontentsline{toc}{subsection}{Reemplazo y fiabilidad: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Drinkwater, R. W. y N. A. J. Hastings (1967). ``An Economic Replacement Model''. \textit{OR} 18(2), 121--138. \href{https://doi.org/10.2307/3007524}{\texttt{doi:10.2307/3007524}}\\
+Aportación: teoría de límites de reparación para decidir si reparar o reemplazar vehículos militares. Método: simulación y distribuciones de costos de reparación. Contexto: precursor operativo de Rust (1987) y prueba de que la decisión de reparar se estudió primero en investigación de operaciones.\\
+{\footnotesize Archivo: \texttt{An Economic Replacement Model.pdf}}
+\item Neuts, M. F., R. Pérez-Ocón e I. Torres-Castro (2000). ``Repairable models with operating and repair times governed by phase type distributions''. \textit{Advances in Applied Probability} 32(2), 468--479. \href{https://doi.org/10.1239/aap/1013540174}{\texttt{doi:10.1239/aap/1013540174}}\\
+Aportación: dispositivo con fallas reparables, fallas no reparables y desgaste. Método: procesos de distribución tipo fase. Contexto: análogo de ingeniería a tu transición hacia terminal; sirve para pensar la forma de s, no como referencia económica central.\\
+{\footnotesize Archivo: \texttt{Neuts-RepairableModelsOperating-2000.pdf}}
+\item Fernández, V. (1998). ``Un modelo de duración estructural para el reemplazo de bienes durables''. \textit{Cuadernos de Economía} 35(105), 237--254. \href{https://www.jstor.org/stable/23830511}{\texttt{www.jstor.org/stable/23830511}} \textit{(portada del PDF en tu carpeta)}\\
+Aportación: relaciona el reemplazo con costos de operación y características de durables. Método: duración estructural con microdatos de hogares. Contexto: de los pocos antecedentes en español y a nivel hogar; aproxima con duración lo que tú resuelves con programación dinámica.\\
+{\footnotesize Archivo: \texttt{modelo duracion estructural y reemplazo.pdf}}
+\end{itemize}
+
+\subsection*{Reparación aplicada: lo que tienes}
+\addcontentsline{toc}{subsection}{Reparación aplicada: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Hamilton, B. W. y M. K. Macauley (1999). ``Heredity or Environment: Why is Automobile Longevity Increasing?''. \textit{The Journal of Industrial Economics} 47(3), 251--261. \href{https://doi.org/10.1111/1467-6451.00100}{\texttt{doi:10.1111/1467-6451.00100}}\\
+Aportación: descompone el aumento de longevidad de autos de 1950 a 1991 y atribuye todo el aumento a factores externos al coche, no a su durabilidad inherente. Método: modelos de chatarreo por vintage. Contexto: es el antecedente empírico más cercano a tu tesis, pero cuidado al citarlo: el artículo menciona accidentes y refacciones más baratas como ejemplos y dice que especula sobre la causa. En tu carpeta está el DP de RFF de 1998.\\
+{\footnotesize Archivo: \texttt{competition and car longevity.pdf}}
+\item $\dagger$\,Jin, C., L. Yang y C. Zhu (2023). ``Right to Repair: Pricing, Welfare, and Environmental Implications''. \textit{Management Science} 69(2), 1017--1036. \href{https://doi.org/10.1287/mnsc.2022.4401}{\texttt{doi:10.1287/mnsc.2022.4401}}\\
+Aportación: el derecho a reparar puede subir precios y dañar a consumidores o al medio ambiente, porque el fabricante responde en el mercado del producto. Método: modelo analítico de fijación de precios. Contexto: te recuerda que tu contrafactual con oferta exógena no captura esta respuesta; dilo al interpretar cambios en el precio de reparación.\\
+{\footnotesize Archivo: \texttt{jin-et-al-2022-right-to-repair.pdf}}
+\item Sabbaghi, M., B. Esmaeilian, W. Cade, K. Wiens y S. Behdad (2016). ``Business outcomes of product repairability: A survey-based study of consumer repair experiences''. \textit{Resources, Conservation and Recycling} 109, 114--122. \href{https://doi.org/10.1016/j.resconrec.2016.02.014}{\texttt{doi:10.1016/j.resconrec.2016.02.014}}\\
+Aportación: la experiencia de reparación afecta la recompra y la recomendación. Método: probit ordenado bivariado con 8,403 consumidores. Contexto: indica que reparar tiene efectos comerciales, aunque en electrónicos y no en autos.\\
+{\footnotesize Archivo: \texttt{Business Outcomes of Product Repairability.pdf}}
+\item $\dagger$\,Parajuly, K., J. Green, J. Richter, M. Johnson, J. Rückschloss, J. Peeters, R. Kuehr y C. Fitzpatrick (2024). ``Product repair in a circular economy: Exploring public repair behavior from a systems perspective''. \textit{Journal of Industrial Ecology} 28(1), 74--86. \href{https://doi.org/10.1111/jiec.13451}{\texttt{doi:10.1111/jiec.13451}}\\
+Aportación: factores de conducta, técnicos y económicos detrás de la reparación pública de electrónicos. Método: encuesta a 922 voluntarios de 14 países. Contexto: muestra que la decisión no depende solo del precio; sirve como advertencia sobre tu supuesto de una variable excluida limpia.\\
+{\footnotesize Archivo: \texttt{Product repair in a circular economy.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: teoría de mantenimiento y durabilidad}
+\addcontentsline{toc}{subsection}{Lo que falta: teoría de mantenimiento y durabilidad}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Schmalensee, R. (1974). ``Market Structure, Durability, and Maintenance Effort''. \textit{The Review of Economic Studies} 41(2), 277--287. \href{https://doi.org/10.2307/2296716}{\texttt{doi:10.2307/2296716}}\\
+Aportación: estudia juntos estructura de mercado, durabilidad y esfuerzo de mantenimiento. Método: teoría en el marco de Swan. Contexto: la literatura secundaria lo identifica, junto con Su (1975), como de los primeros en introducir el mantenimiento. No confirmé su resultado principal: léelo primero, porque es tu antecedente teórico más antiguo.
+\item $\star$\,$\dagger$\,Mann, D. P. (1992). ``Durable goods monopoly and maintenance''. \textit{International Journal of Industrial Organization} 10(1), 65--79. \href{https://doi.org/10.1016/0167-7187(92)90048-4}{\texttt{doi:10.1016/0167-7187(92)90048-4}}\\
+Aportación: lleva el mantenimiento al problema del monopolista durable. Método: teoría. Contexto: trabajos posteriores sobre monopolio y mantenimiento lo citan como referencia. No encontré resumen publicado, así que revisa su resultado antes de citarlo.
+\item $\star$\,$\dagger$\,Morita, H. y M. Waldman (2004). ``Durable Goods, Monopoly Maintenance, and Time Inconsistency''. \textit{Journal of Economics \& Management Strategy} 13(2), 273--302. \href{https://doi.org/10.1111/j.1530-9134.2004.00011.x}{\texttt{doi:10.1111/j.1530-9134.2004.00011.x}}\\
+Aportación: monopolizar el mantenimiento reduce o elimina la inconsistencia temporal, de manera parecida a rentar. Método: teoría en dos ambientes, cercanos a Bulow (1982) y a Hendel y Lizzeri (1999). Contexto: es el vínculo más claro entre Coase y reparación, y deja ver que el precio de reparar puede ser una variable estratégica.
+\item $\star$\,$\dagger$\,Morita, H. y M. Waldman (2010). ``Competition, Monopoly Maintenance, and Consumer Switching Costs''. \textit{American Economic Journal: Microeconomics} 2(1), 230--255. \href{https://doi.org/10.1257/mic.2.1.230}{\texttt{doi:10.1257/mic.2.1.230}}\\
+Aportación: si el mantenimiento no se monopoliza, con costos de cambio algunos consumidores mantienen unidades que sería más eficiente reemplazar. Método: teoría de competencia. Contexto: trata directamente la disyuntiva entre mantener y reemplazar, la misma que tiene tu dueño de coche.
+\item Carlton, D. W. y M. Waldman (2010). ``Competition, Monopoly, and Aftermarkets''. \textit{Journal of Law, Economics, and Organization} 26(1), 54--91. \href{https://doi.org/10.1093/jleo/ewp006}{\texttt{doi:10.1093/jleo/ewp006}}\\
+Aportación: monopolizar un mercado posterior como la reparación con frecuencia no reduce el bienestar. Método: tres modelos teóricos. Contexto: matiza la idea de que un mantenimiento caro siempre perjudica, útil al discutir política.
+\item Borenstein, S., J. K. Mackie-Mason y J. S. Netz (2000). ``Exercising Market Power in Proprietary Aftermarkets''. \textit{Journal of Economics \& Management Strategy} 9(3), 157--188. \href{https://doi.org/10.1046/j.1365-2745.1998.00285.x}{\texttt{doi:10.1046/j.1365-2745.1998.00285.x}}\\
+Aportación: el precio en el mercado posterior excede el costo marginal aunque compita el mercado del equipo. Método: teoría de competencia y monopolio. Contexto: explica por qué tu precio de reparación podría no ser competitivo. Su DOI tiene un prefijo atípico: ábrelo antes de citarlo.
+\item Shapiro, C. y D. J. Teece (1994). ``Systems Competition and Aftermarkets: An Economic Analysis of Kodak''. \textit{The Antitrust Bulletin} 39(1), 135--162. \href{https://doi.org/10.1177/0003603x9403900104}{\texttt{doi:10.1177/0003603x9403900104}}\\
+Aportación: revisa los mercados posteriores y su tratamiento antimonopolio tras el caso Kodak. Método: análisis económico y jurídico. Contexto: marco del debate de competencia en reparación.
+\item Chen, Z. y T. W. Ross (1993). ``Refusals to Deal, Price Discrimination, and Independent Service Organizations''. \textit{Journal of Economics \& Management Strategy} 2(4), 593--614. \href{https://doi.org/10.1111/j.1430-9134.1993.00593.x}{\texttt{doi:10.1111/j.1430-9134.1993.00593.x}}\\
+Aportación: negarse a vender refacciones protege una discriminación de precios: las reparaciones caras seleccionan a los usuarios intensivos. Método: teoría. Contexto: ofrece una razón económica para precios de reparación heterogéneos.
+\end{itemize}
+
+\subsection*{Lo que falta: información e incentivos en el taller}
+\addcontentsline{toc}{subsection}{Lo que falta: información e incentivos en el taller}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Taylor, C. R. (1995). ``The Economics of Breakdowns, Checkups, and Cures''. \textit{Journal of Political Economy} 103(1), 53--74. \href{https://doi.org/10.1086/261975}{\texttt{doi:10.1086/261975}}\\
+Aportación: un bien puede estar sano, enfermo o fallado, y solo el experto distingue los dos primeros; surgen revisiones gratuitas, procrastinación estratégica y contratos de mantenimiento. Método: teoría de contratos. Contexto: es muy cercano a tu estado s, con una diferencia clave: en tu modelo el dueño conoce el estado del coche.
+\item $\dagger$\,Darby, M. R. y E. Karni (1973). ``Free Competition and the Optimal Amount of Fraud''. \textit{The Journal of Law and Economics} 16(1), 67--88. \href{https://doi.org/10.1086/466756}{\texttt{doi:10.1086/466756}}\\
+Aportación: introduce los bienes de confianza, cuya calidad no se verifica ni después de usarlos. Método: teoría. Contexto: es la referencia fundacional para decir que la reparación es difícil de observar incluso para el dueño.
+\item Wolinsky, A. (1993). ``Competition in a Market for Informed Experts' Services''. \textit{The RAND Journal of Economics} 24(3), desde p. 380. \href{https://doi.org/10.2307/2555964}{\texttt{doi:10.2307/2555964}}\\
+Aportación: la búsqueda de segundas opiniones y la reputación disciplinan a los expertos. Método: teoría de organización de mercados. Contexto: da microfundamentos al mercado de reparación que tu modelo trata como un precio.
+\item Dulleck, U. y R. Kerschbamer (2006). ``On Doctors, Mechanics, and Computer Specialists: The Economics of Credence Goods''. \textit{Journal of Economic Literature} 44(1), 5--42. \href{https://doi.org/10.1257/002205106776162717}{\texttt{doi:10.1257/002205106776162717}}\\
+Aportación: ordena cuándo los expertos tienen incentivos a explotar la información y qué tipos de fraude aparecen. Método: revisión y modelo unificador. Contexto: entrada recomendada a esta rama.
+\item $\star$\,$\dagger$\,Schneider, H. S. (2012). ``Agency Problems and Reputation in Expert Services: Evidence from Auto Repair''. \textit{The Journal of Industrial Economics} 60(3), 406--433. \href{https://doi.org/10.1111/j.1467-6451.2012.00485.x}{\texttt{doi:10.1111/j.1467-6451.2012.00485.x}}\\
+Aportación: el subtratamiento y el sobretratamiento son generalizados y ser cliente recurrente no mejora significativamente los resultados. Método: experimento de campo con visitas encubiertas a talleres con un auto de prueba. Contexto: es evidencia de que lo pagado no es igual al estado reparado, algo que importa para tu dinámica de s.
+\item $\star$\,$\dagger$\,Hubbard, T. N. (1998). ``An Empirical Examination of Moral Hazard in the Vehicle Inspection Market''. \textit{The RAND Journal of Economics} 29(2), 406--426. \href{https://doi.org/10.2307/2555895}{\texttt{doi:10.2307/2555895}}\\
+Aportación: los incentivos llevan a los inspectores a ayudar a pasar los vehículos en mercados de diagnóstico y cura. Método: datos de transacciones de inspecciones de emisiones en California. Contexto: muestra lo difícil que es observar el estado real del auto.
+\item Hubbard, T. N. (2002). ``How Do Consumers Motivate Experts? Reputational Incentives in an Auto Repair Market''. \textit{The Journal of Law and Economics} 45(2), 437--468. \href{https://doi.org/10.1086/340086}{\texttt{doi:10.1086/340086}}\\
+Aportación: los consumidores vuelven 30\% más a donde aprobaron antes; la demanda responde a la tasa de reprobación. Método: datos de inspecciones en California. Contexto: acompaña a Hubbard (1998) y a Oliva (2015) como evidencia del lado de la verificación.
+\end{itemize}
+
+\subsection*{Lo que falta: evidencia sobre reparación, chatarreo y vida útil}
+\addcontentsline{toc}{subsection}{Lo que falta: evidencia sobre reparación, chatarreo y vida útil}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Peterson, J. R. y H. S. Schneider (2014). ``Adverse selection in the used-car market: evidence from purchase and repair patterns in the Consumer Expenditure Survey''. \textit{The RAND Journal of Economics} 45(1), 140--154. \href{https://doi.org/10.1111/1756-2171.12045}{\texttt{doi:10.1111/1756-2171.12045}}\\
+Aportación: trata el coche como un conjunto de partes, algunas con información simétrica y otras no, y encuentra selección adversa por transmisión y motor. Método: rotación y patrones de reparación con la Consumer Expenditure Survey y Consumer Reports. Contexto: es de los pocos con datos de reparación de autos usados y puede orientar tu calibración.
+\item $\star$\,$\dagger$\,Manski, C. F. y E. Goldin (1983). ``An Econometric Analysis of Automobile Scrappage''. \textit{Transportation Science} 17(4), 365--375. \href{https://doi.org/10.1287/trsc.17.4.365}{\texttt{doi:10.1287/trsc.17.4.365}}\\
+Aportación: un usado se chatarrea cuando su precio neto del costo de reparar cae por debajo del valor de chatarra; encuentran una relación inversa fuerte entre precio y chatarreo. Método: modelo econométrico con tasas por marca, modelo y vintage en Israel en 1979. Contexto: es la formulación temprana más clara del papel de la reparación en la vida útil y la mejor cita para tu hueco.
+\item $\star$\,Parks, R. W. (1977). ``Determinants of Scrapping Rates for Postwar Vintage Automobiles''. \textit{Econometrica} 45(5), 1099--1115. \href{https://doi.org/10.2307/1914061}{\texttt{doi:10.2307/1914061}}\\
+Aportación: estudia los determinantes de las tasas de chatarreo por vintage en la posguerra. Método: especificación logística por edad. Contexto: la literatura posterior lo usa para enlazar precios de reparación y chatarreo, pero solo lo confirmé de forma indirecta; revísalo antes de atribuirle resultados.
+\item Walker, F. V. (1968). ``Determinants of Auto Scrappage''. \textit{The Review of Economics and Statistics} 50(4), desde p. 503. \href{https://doi.org/10.2307/1926820}{\texttt{doi:10.2307/1926820}}\\
+Aportación: determinantes del chatarreo de autos. Método: series de tiempo agregadas. Contexto: precursor de Parks (1977); suele incluir el costo de reparación entre los determinantes, pero no pude confirmarlo en la fuente.
+\item Greenspan, A. y D. Cohen (1999). ``Motor Vehicle Stocks, Scrappage, and Sales''. \textit{Review of Economics and Statistics} 81(3), 369--383. \href{https://doi.org/10.1162/003465399558300}{\texttt{doi:10.1162/003465399558300}}\\
+Aportación: pronostica ventas modelando por separado el acervo y el chatarreo, con supuestos sobre precios de nuevos, costos de reparación y retiros. Método: series de tiempo para EE. UU. Contexto: la reparación entra como predictor agregado.
+\item $\star$\,$\dagger$\,McGrattan, E. R. y J. A. Schmitz (1999). ``Maintenance and Repair: Too Big to Ignore''. \textit{Federal Reserve Bank of Minneapolis Quarterly Review} 23(4), 2--13. \href{https://www.minneapolisfed.org/research/quarterly-review/maintenance-and-repair-too-big-to-ignore}{\texttt{www.minneapolisfed.org/research/quarterly-review/maintenance-a…}} \textit{(Fed de Minneapolis)}\\
+Aportación: el mantenimiento y la reparación son grandes y su inclusión cambia respuestas cuantitativas de modelos agregados. Método: encuesta de Canadá poco utilizada. Contexto: es casi tu argumento a nivel macro y la mejor cita para justificar que la reparación importa.
+\item Albonico, A., S. Kalyvitis y E. Pappa (2014). ``Capital maintenance and depreciation over the business cycle''. \textit{Journal of Economic Dynamics and Control} 39, 273--286. \href{https://doi.org/10.1016/j.jedc.2013.12.008}{\texttt{doi:10.1016/j.jedc.2013.12.008}}\\
+Aportación: mantenimiento del capital y depreciación endógena en el ciclo. Método: modelo macroeconómico estimado. Contexto: otra rama que endogeniza la depreciación.
+\item Boucekkine, R., F. del Río y B. Martínez (2009). ``Technological progress, obsolescence, and depreciation''. \textit{Oxford Economic Papers} 61(3), 440--466. \href{https://doi.org/10.1093/oep/gpn016}{\texttt{doi:10.1093/oep/gpn016}}\\
+Aportación: la vida del capital es endógena y depende de los costos de mantenimiento y del tipo de progreso técnico. Método: modelo de capital por vintages. Contexto: un análogo macro de tu vida útil endógena.
+\item Fernandez, V. P. (2001). ``Observable and unobservable determinants of replacement of home appliances''. \textit{Energy Economics} 23(3), 305--323. \href{https://doi.org/10.1016/s0140-9883(00)00066-9}{\texttt{doi:10.1016/s0140-9883(00)00066-9}}\\
+Aportación: reemplazo de aparatos con determinantes observables y no observables. Método: duración. Contexto: continúa a Fernández (1998) y agrega heterogeneidad no observada.
+\item Brusselaers, J., E. Bracquene, J. Peeters e Y. Dams (2020). ``Economic consequences of consumer repair strategies for electrical household devices''. \textit{Journal of Enterprise Information Management} 33(4), 747--767. \href{https://doi.org/10.1108/jeim-12-2018-0283}{\texttt{doi:10.1108/jeim-12-2018-0283}}\\
+Aportación: la estrategia de reparación cambia el costo anual de poseer electrodomésticos. Método: costo de ciclo de vida con Monte Carlo. Contexto: un ejemplo contable, sin decisión estructural, de lo que tu modelo endogeniza.
+\item Fachbach, I., G. Lechner y M. Reimann (2022). ``Drivers of the consumers’ intention to use repair services, repair networks and to self-repair''. \textit{Journal of Cleaner Production} 346, 130969. \href{https://doi.org/10.1016/j.jclepro.2022.130969}{\texttt{doi:10.1016/j.jclepro.2022.130969}}\\
+Aportación: determinantes de la intención de usar servicios de reparación. Método: revisión y encuesta de intención. Contexto: fuera de autos; sirve para motivar qué mueve la demanda de reparación.
+\item Etzinger, I. y M. Reimann (2024). ``Financial Incentives for the Repair of Consumer Goods: Their Role in Consumers' Repair Decision''. Documento de trabajo SSRN. \href{https://doi.org/10.2139/ssrn.4857478}{\texttt{doi:10.2139/ssrn.4857478}}\\
+Aportación: incentivos financieros y decisión de reparar, con evidencia de consumidores. Método: estudio de consumidores. Contexto: uno de los pocos que relaciona precio y reparación. Versión SSRN: comprueba si ya se publicó.
+\item McCollough, J. (2009). ``Factors impacting the demand for repair services of household products: the disappearing repair trades and the throwaway society''. \textit{International Journal of Consumer Studies} 33(6), 619--626. \href{https://doi.org/10.1111/j.1470-6431.2009.00793.x}{\texttt{doi:10.1111/j.1470-6431.2009.00793.x}}\\
+Aportación: factores detrás de la caída de la demanda de reparación y del oficio en EE. UU. Método: series de tiempo. Contexto: relaciona el precio relativo de reparar con su declive, justo el canal de tu variable excluida.
+\end{itemize}
+
+\subsection*{Lo que falta: derecho a reparar}
+\addcontentsline{toc}{subsection}{Lo que falta: derecho a reparar}
+\begin{itemize}
+\item $\star$\,Dortz, M. y J. Wagner (2025). ``Raising rivals’ costs and right to repair laws: Separating the sheep from the goats?''. \textit{Journal of Regulatory Economics} 68(1), 1--16. \href{https://doi.org/10.1007/s11149-025-09490-z}{\texttt{doi:10.1007/s11149-025-09490-z}}\\
+Aportación: el derecho a reparar reduce los costos de los rivales y aumenta la competencia en reparación; la amenaza regulatoria puede elevar el bienestar. Método: teoría microeconómica con simulación. Contexto: complementa a Jin et al. (2023) y su lectura de política es más favorable.
+\item Chowdhury, S. y N. K. Verma (2023). ``Walking a Tightrope: Impact of Adopting Voluntary Right-to-Repair Policy on Firm Profit and Consumer Welfare''. Documento de trabajo SSRN. \href{https://doi.org/10.2139/ssrn.4494209}{\texttt{doi:10.2139/ssrn.4494209}}\\
+Aportación: efecto de adoptar voluntariamente el derecho a reparar en ganancias y bienestar. Método: modelo teórico. Contexto: versión SSRN; compara con los modelos anteriores.
+\item Ozturkcan, S. (2024). ``The right-to-repair movement: Sustainability and consumer rights''. \textit{Journal of Information Technology Teaching Cases} 14(2), 217--223. \href{https://doi.org/10.1177/20438869231178037}{\texttt{doi:10.1177/20438869231178037}}\\
+Aportación: describe cómo reaccionaron las marcas de teléfonos al movimiento por el derecho a reparar. Método: caso docente. Contexto: sirve para ejemplificar, no como evidencia.
+\item Perzanowski, A. (2022). \textit{The Right to Repair}. Cambridge University Press. \href{https://doi.org/10.1017/9781108946926}{\texttt{doi:10.1017/9781108946926}}\\
+Aportación: historia y análisis jurídico de cómo las empresas restringen la reparación. Método: libro. Contexto: es la referencia general para motivar la política en la introducción.
+\item $\star$\,Unión Europea (2024). Directiva (UE) 2024/1799 relativa a normas comunes para promover la reparación de bienes. \href{https://eur-lex.europa.eu/eli/dir/2024/1799/oj}{\texttt{eur-lex.europa.eu/eli/dir/2024/1799/oj}} \textit{(EUR-Lex)}\\
+Aportación: norma europea que promueve la reparación de bienes. Método: legislación. Contexto: motiva tu contrafactual de precio de reparación; cítala en la introducción.
+\item Unión Europea (2024). Reglamento (UE) 2024/1781 sobre requisitos de diseño ecológico para productos sostenibles. \href{https://eur-lex.europa.eu/eli/reg/2024/1781/oj}{\texttt{eur-lex.europa.eu/eli/reg/2024/1781/oj}} \textit{(EUR-Lex)}\\
+Aportación: fija requisitos de ecodiseño, incluidas durabilidad y reparabilidad. Método: legislación. Contexto: acompaña a la directiva en la motivación.
+\end{itemize}
+
+\subsection*{Lo que falta: mantenimiento en ingeniería}
+\addcontentsline{toc}{subsection}{Lo que falta: mantenimiento en ingeniería}
+\begin{itemize}
+\item Barlow, R. y L. Hunter (1960). ``Optimum Preventive Maintenance Policies''. \textit{Operations Research} 8(1), 90--100. \href{https://doi.org/10.1287/opre.8.1.90}{\texttt{doi:10.1287/opre.8.1.90}}\\
+Aportación: determina políticas óptimas de mantenimiento preventivo. Método: teoría de renovación. Contexto: fundacional en confiabilidad; da el lenguaje de falla y mantenimiento que tu modelo usa.
+\item Pierskalla, W. P. y J. A. Voelker (1976). ``A survey of maintenance models: The control and surveillance of deteriorating systems''. \textit{Naval Research Logistics Quarterly} 23(3), 353--388. \href{https://doi.org/10.1002/nav.3800230302}{\texttt{doi:10.1002/nav.3800230302}}\\
+Aportación: revisa modelos de inspección, reparación y reemplazo con deterioro. Método: revisión. Contexto: muestra lo desarrollada que estaba esta literatura fuera de la economía.
+\item Wang, H. (2002). ``A survey of maintenance policies of deteriorating systems''. \textit{European Journal of Operational Research} 139(3), 469--489. \href{https://doi.org/10.1016/s0377-2217(01)00197-7}{\texttt{doi:10.1016/s0377-2217(01)00197-7}}\\
+Aportación: revisa políticas de mantenimiento de sistemas que se deterioran. Método: revisión. Contexto: versión más actual que la anterior.
+\item $\star$\,Gámiz, M. L., N. Limnios y M. D. C. Segovia-García (2023). ``Hidden markov models in reliability and maintenance''. \textit{European Journal of Operational Research} 304(3), 1242--1255. \href{https://doi.org/10.1016/j.ejor.2022.05.006}{\texttt{doi:10.1016/j.ejor.2022.05.006}}\\
+Aportación: usa modelos ocultos de Markov cuando el estado del sistema no se observa directamente y solo hay indicadores. Método: modelos ocultos de Markov en confiabilidad. Contexto: es un paralelo de tu verosimilitud en otra disciplina, aunque ahí lo oculto es el estado y en tu caso la decisión.
+\end{itemize}
+
+\medskip
+\noindent\textit{Transición a los modelos dinámicos. La teoría da motivos para que la reparación importe y la evidencia sugiere que mueve la vida útil, pero falta un marco que trate la reparación como decisión dinámica de un agente que compara hoy y mañana. Rust (1987) es el puente natural: el modelo fundacional de elección discreta dinámica trata del mantenimiento de motores de autobús.}
+
+\section{Modelos dinámicos de elección discreta}
+El marco de comportamiento de tu consumidor. Va de la utilidad aleatoria a Rust y de ahí a las aplicaciones en durables. Los modelos estáticos entran solo como antecedente, y los estimadores se quedan para el nido 6.
+
+\subsection*{Lo que tienes: el modelo de Rust}
+\addcontentsline{toc}{subsection}{Lo que tienes: el modelo de Rust}
+\begin{itemize}
+\item $\dagger$\,Rust, J. (1987). ``Optimal Replacement of GMC Bus Engines: An Empirical Model of Harold Zurcher''. \textit{Econometrica} 55(5), 999--1033. \href{https://doi.org/10.2307/1911259}{\texttt{doi:10.2307/1911259}}\\
+Aportación: primer modelo estructural estimado de reemplazo óptimo, con Harold Zurcher y motores de autobús, y el algoritmo de punto fijo anidado (NFXP). Método: paro óptimo regenerativo, errores de valor extremo y máxima verosimilitud. Contexto: es la plantilla de tu decisión y el puente con el nido de reparación; en él, a diferencia del tuyo, el reemplazo se observa y no hay mercado.\\
+{\footnotesize Archivo: \texttt{Rust-OptimalReplacementGMC-1987.pdf}}
+\item Notas de curso sin autor identificado: ``Lecture Notes: Single-Agent Dynamics''. \textit{(solo en tu carpeta)}\\
+Aportación: exposición didáctica de Rust (1987) y de la estimación CCP. Método: notas de curso. Contexto: sirven para estudiar, no para citar.\\
+{\footnotesize Archivo: \texttt{rust explicacion.pdf}}
+\end{itemize}
+
+\subsection*{Lo que tienes: antecedente estático}
+\addcontentsline{toc}{subsection}{Lo que tienes: antecedente estático}
+\begin{itemize}
+\item $\dagger$\,$\ddagger$\,Berry, S. T. (1994). ``Estimating Discrete-Choice Models of Product Differentiation''. \textit{The RAND Journal of Economics} 25(2), 242--262. \href{https://doi.org/10.2307/2555829}{\texttt{doi:10.2307/2555829}}\\
+Aportación: invierte las participaciones de mercado para recuperar la utilidad media y tratar la endogeneidad del precio. Método: logit y logit anidado con instrumentos. Contexto: fundacional de la demanda de productos diferenciados; ignora la durabilidad, lo que motiva el salto a modelos dinámicos.\\
+{\footnotesize Archivo: \texttt{Berry1994.pdf}}
+\item $\dagger$\,Berry, S., J. Levinsohn y A. Pakes (1995). ``Automobile Prices in Market Equilibrium''. \textit{Econometrica} 63(4), 841--890. \href{https://doi.org/10.2307/2171802}{\texttt{doi:10.2307/2171802}}\\
+Aportación: estima demanda con coeficientes aleatorios y oferta oligopólica con datos agregados. Método: contracción, GMM e instrumentos de características, con autos de EE. UU. Contexto: referencia obligada para autos; en Gillingham et al. no hacen falta sus instrumentos porque no hay características no observadas correlacionadas con el precio.\\
+{\footnotesize Archivo: \texttt{BerryLevinsohnPakes1995.pdf}}
+\item $\dagger$\,Moral, M. J. y J. Jaumandreu (2007). ``Automobile demand, model cycle and age effects''. \textit{Spanish Economic Review} 9(3), 193--218. \href{https://doi.org/10.1007/s10108-006-9014-y}{\texttt{doi:10.1007/s10108-006-9014-y}}\\
+Aportación: efectos de edad del modelo y cambio de elasticidades-precio durante su ciclo. Método: elección discreta con datos de España. Contexto: es el efecto edad del lado de la demanda de nuevos; complementa tu dimensión de edad.\\
+{\footnotesize Archivo: \texttt{Automobile demand, model cycle and age effects.pdf}}
+\end{itemize}
+
+\subsection*{Lo que tienes: demanda dinámica de durables}
+\addcontentsline{toc}{subsection}{Lo que tienes: demanda dinámica de durables}
+\begin{itemize}
+\item Adda, J. y R. Cooper (2000). ``The Dynamics of Car Sales: A Discrete Choice Approach''. NBER Working Paper 7785. \href{https://www.nber.org/papers/w7785}{\texttt{www.nber.org/papers/w7785}} \textit{(NBER)}\\
+Aportación: la dinámica agregada de ventas viene sobre todo de choques a la probabilidad de reemplazo, no de la distribución de edades. Método: elección discreta dinámica a nivel hogar y agregada, comparada con ARMA y VAR. Contexto: es uno de los primeros en vincular decisión individual de reemplazo y agregados de autos.\\
+{\footnotesize Archivo: \texttt{Adda y Cooper Dynamics of Car sales.pdf}}
+\item $\dagger$\,Gowrisankaran, G. y M. Rysman (2012). ``Dynamics of Consumer Demand for New Durable Goods''. \textit{Journal of Political Economy} 120(6), 1173--1219. \href{https://doi.org/10.1086/669540}{\texttt{doi:10.1086/669540}}\\
+Aportación: demanda dinámica con heterogeneidad persistente y compras repetidas; la elasticidad de largo plazo difiere de la de corto. Método: extensión dinámica de BLP con videocámaras. Contexto: muestra lo que se sesga si se ignora la dinámica, argumento paralelo al de ignorar la reparación.\\
+{\footnotesize Archivo: \texttt{Gowrisankaran-DynamicsConsumerDemand-2012.pdf}}
+\item $\dagger$\,Ishihara, M. y A. T. Ching (2019). ``Dynamic Demand for New and Used Durable Goods Without Physical Depreciation: The Case of Japanese Video Games''. \textit{Marketing Science} 38(3), 392--416. \href{https://doi.org/10.1287/mksc.2018.1142}{\texttt{doi:10.1287/mksc.2018.1142}}\\
+Aportación: cuantifica el efecto del mercado de usados sobre ganancias y bienestar. Método: demanda dinámica estructural con videojuegos japoneses sin depreciación física. Contexto: es el caso opuesto al tuyo: sin deterioro, la reparación no tendría ningún papel.\\
+{\footnotesize Archivo: \texttt{Ishihara-DynamicDemandNew-2019.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: utilidad aleatoria}
+\addcontentsline{toc}{subsection}{Lo que falta: utilidad aleatoria}
+\begin{itemize}
+\item $\star$\,$\dagger$\,McFadden, D. (1973). ``Conditional Logit Analysis of Qualitative Choice Behavior''. En P. Zarembka (ed.), \textit{Frontiers in Econometrics}, 105--142. Academic Press. \href{https://eml.berkeley.edu/reprints/mcfadden/zarembka.pdf}{\texttt{eml.berkeley.edu/reprints/mcfadden/zarembka.pdf}} \textit{(PDF)}\\
+Aportación: deriva el logit condicional desde la utilidad aleatoria. Método: teoría y estimación. Contexto: base de las probabilidades de elección de tu modelo.
+\item $\star$\,$\dagger$\,McFadden, D. (1978). ``Modelling the Choice of Residential Location''. En A. Karlqvist et al. (eds.), \textit{Spatial Interaction Theory and Planning Models}, 75--96. North-Holland. \href{https://openlibrary.org/works/OL19141696W}{\texttt{openlibrary.org/works/OL19141696W}} \textit{(volumen en Open Library)}\\
+Aportación: introduce el modelo de valor extremo generalizado y el logit anidado. Método: teoría con aplicación a localización residencial. Contexto: es la base de tus parámetros sigma.
+\item $\dagger$\,McFadden, D. (1981). ``Econometric Models of Probabilistic Choice''. En C. Manski y D. McFadden (eds.), \textit{Structural Analysis of Discrete Data}, 198--272. MIT Press. \href{https://eml.berkeley.edu/~mcfadden/discrete.html}{\texttt{eml.berkeley.edu/~mcfadden/discrete.html}} \textit{(libro en línea)}\\
+Aportación: sistematiza los modelos probabilísticos y su consistencia con utilidad aleatoria, incluida la función log-sum. Método: teoría. Contexto: es la referencia de tu fórmula de valor esperado.
+\item Cardell, N. S. (1997). ``Variance Components Structures for the Extreme-Value and Logistic Distributions with Application to Models of Heterogeneity''. \textit{Econometric Theory} 13(2), 185--213. \href{https://doi.org/10.1017/s0266466600005727}{\texttt{doi:10.1017/s0266466600005727}}\\
+Aportación: nuevas distribuciones que simplifican las estructuras de componentes de varianza con valor extremo. Método: teoría de probabilidad. Contexto: justifica el logit anidado como componentes de varianza, útil para tus sigmas.
+\item Train, K. E. (2001). \textit{Discrete Choice Methods with Simulation}. Cambridge University Press. \href{https://doi.org/10.1017/cbo9780511805271}{\texttt{doi:10.1017/cbo9780511805271}}\\
+Aportación: manual de métodos de elección discreta y simulación. Método: libro. Contexto: es la referencia general para logit, GEV y modelos mixtos.
+\end{itemize}
+
+\subsection*{Lo que falta: fundamentos y revisiones}
+\addcontentsline{toc}{subsection}{Lo que falta: fundamentos y revisiones}
+\begin{itemize}
+\item $\star$\,Rust, J. (1988). ``Maximum Likelihood Estimation of Discrete Control Processes''. \textit{SIAM Journal on Control and Optimization} 26(5), 1006--1024. \href{https://doi.org/10.1137/0326056}{\texttt{doi:10.1137/0326056}}\\
+Aportación: plantea el problema inverso de control estocástico y da fundamento a la independencia condicional. Método: teoría de procesos de control discretos. Contexto: es el supuesto que usa tu verosimilitud y que Hu y Xin mantienen en parte.
+\item $\star$\,$\dagger$\,Rust, J. (1994). ``Structural estimation of markov decision processes''. En \textit{Handbook of Econometrics}, 3081--3143. \href{https://doi.org/10.1016/s1573-4412(05)80020-0}{\texttt{doi:10.1016/s1573-4412(05)80020-0}}\\
+Aportación: capítulo de referencia sobre estimación de procesos de decisión de Markov. Método: revisión teórica. Contexto: formaliza los supuestos y problemas de identificación que el nido 6 retoma.
+\item Wolpin, K. I. (1984). ``An Estimable Dynamic Stochastic Model of Fertility and Child Mortality''. \textit{Journal of Political Economy} 92(5), 852--874. \href{https://doi.org/10.1086/261262}{\texttt{doi:10.1086/261262}}\\
+Aportación: modelo dinámico de fertilidad con supervivencia incierta. Método: programación dinámica integrada con máxima verosimilitud, con datos de Malasia. Contexto: de los primeros en estimar con solución completa, igual que tu enfoque.
+\item Miller, R. A. (1984). ``Job Matching and Occupational Choice''. \textit{Journal of Political Economy} 92(6), 1086--1120. \href{https://doi.org/10.1086/261276}{\texttt{doi:10.1086/261276}}\\
+Aportación: emparejamiento laboral con distintos tipos de ocupación, que genera un perfil de carrera. Método: modelo tipo bandido estimado con panel. Contexto: antecedente de la familia CCP.
+\item Pakes, A. (1986). ``Patents as Options: Some Estimates of the Value of Holding European Patent Stocks''. \textit{Econometrica} 54(4), desde p. 755. \href{https://doi.org/10.2307/1912835}{\texttt{doi:10.2307/1912835}}\\
+Aportación: estima el valor de las patentes a partir de sus renovaciones. Método: paro óptimo con incertidumbre, estimado por simulación. Contexto: es un caso de pagar por mantener vivo un activo, parecido en estructura a reparar.
+\item $\dagger$\,Keane, M. P. y K. I. Wolpin (1997). ``The Career Decisions of Young Men''. \textit{Journal of Political Economy} 105(3), 473--522. \href{https://doi.org/10.1086/262080}{\texttt{doi:10.1086/262080}}\\
+Aportación: un modelo extendido de capital humano ajusta los datos de educación, trabajo y ocupación. Método: solución completa con tipos finitos, datos NLSY. Contexto: aplicación clásica que ya citas por sus tipos latentes.
+\item Keane, M. P., P. E. Todd y K. I. Wolpin (2011). ``The Structural Estimation of Behavioral Models: Discrete Choice Dynamic Programming Methods and Applications''. En \textit{Handbook of Labor Economics}, 331--461. \href{https://doi.org/10.1016/s0169-7218(11)00410-2}{\texttt{doi:10.1016/s0169-7218(11)00410-2}}\\
+Aportación: revisa métodos y aplicaciones de programación dinámica discreta. Método: revisión. Contexto: muestra las aplicaciones más allá de IO.
+\item Eckstein, Z. y K. I. Wolpin (1989). ``The Specification and Estimation of Dynamic Stochastic Discrete Choice Models: A Survey''. \textit{The Journal of Human Resources} 24(4), desde p. 562. \href{https://doi.org/10.2307/145996}{\texttt{doi:10.2307/145996}}\\
+Aportación: revisión temprana de especificación y estimación de modelos dinámicos estocásticos. Método: revisión. Contexto: útil para la historia del campo. OpenAlex asocia a su DOI un resumen de otro artículo, así que usa solo el título y la revista.
+\item $\star$\,$\dagger$\,Aguirregabiria, V. y P. Mira (2010). ``Dynamic discrete choice structural models: A survey''. \textit{Journal of Econometrics} 156(1), 38--67. \href{https://doi.org/10.1016/j.jeconom.2009.09.007}{\texttt{doi:10.1016/j.jeconom.2009.09.007}}\\
+Aportación: panorama de modelos estructurales dinámicos. Método: revisión. Contexto: es el mapa más útil del campo para tu revisión.
+\item Adda, J. y R. Cooper (2003). \textit{Dynamic Economics: Quantitative Methods and Applications}. MIT Press. \href{https://openlibrary.org/works/OL21833189W}{\texttt{openlibrary.org/works/OL21833189W}} \textit{(Open Library)}\\
+Aportación: manual de programación dinámica aplicada, con un capítulo de bienes durables. Método: libro. Contexto: es útil para enseñar el puente entre durables y programación dinámica.
+\end{itemize}
+
+\subsection*{Lo que falta: capital que se deteriora}
+\addcontentsline{toc}{subsection}{Lo que falta: capital que se deteriora}
+\begin{itemize}
+\item $\star$\,Das, S. (1992). ``A Micro-Econometric Model of Capital Utilization and Retirement: The Case of the U.S. Cement Industry''. \textit{The Review of Economic Studies} 59(2), desde p. 277. \href{https://doi.org/10.2307/2297955}{\texttt{doi:10.2307/2297955}}\\
+Aportación: decide si operar, parar o retirar hornos de cemento. Método: programación dinámica estocástica discreta con datos de EE. UU. Contexto: es una aplicación temprana a capital que se deteriora, muy parecida a la lógica de mantener o retirar.
+\item $\star$\,$\dagger$\,Kennet, D. M. (1994). ``A structural model of aircraft engine maintenance''. \textit{Journal of Applied Econometrics} 9(4), 351--368. \href{https://doi.org/10.1002/jae.3950090405}{\texttt{doi:10.1002/jae.3950090405}}\\
+Aportación: modelo de mantenimiento de motores de avión que no explica las historias antes de la desregulación, pero sí después. Método: paro óptimo regenerativo con 42 historias de motores. Contexto: es la aplicación más cercana a Rust en mantenimiento; ya la citas.
+\item Rust, J. y G. Rothwell (1995). ``Optimal response to a shift in regulatory regime: The case of the US nuclear power industry''. \textit{Journal of Applied Econometrics} 10(S1), S75--S118. \href{https://doi.org/10.1002/jae.3950100506}{\texttt{doi:10.1002/jae.3950100506}}\\
+Aportación: evalúa la respuesta de centrales nucleares a un cambio de régimen regulatorio tras Three Mile Island. Método: modelo dinámico con datos mensuales. Contexto: es decisión de operar y mantener capital bajo política, análoga a tus contrafactuales.
+\end{itemize}
+
+\subsection*{Lo que falta: demanda de autos y durables}
+\addcontentsline{toc}{subsection}{Lo que falta: demanda de autos y durables}
+\begin{itemize}
+\item Berry, S., J. Levinsohn y A. Pakes (2004). ``Differentiated Products Demand Systems from a Combination of Micro and Macro Data: The New Car Market''. \textit{Journal of Political Economy} 112(1), 68--105. \href{https://doi.org/10.1086/379939}{\texttt{doi:10.1086/379939}}\\
+Aportación: los datos de segunda elección identifican mejor los patrones de sustitución de autos. Método: coeficientes aleatorios con datos micro. Contexto: es útil como referencia sobre datos que identifican.
+\item Petrin, A. (2002). ``Quantifying the Benefits of New Products: The Case of the Minivan''. \textit{Journal of Political Economy} 110(4), 705--729. \href{https://doi.org/10.1086/340779}{\texttt{doi:10.1086/340779}}\\
+Aportación: agrega momentos micro a datos de mercado para medir el valor de un producto nuevo, la minivan. Método: BLP con información demográfica. Contexto: muestra cómo mejorar la identificación con datos adicionales.
+\item Conlon, C. y J. Gortmaker (2020). ``Best practices for differentiated products demand estimation with PyBLP''. \textit{The RAND Journal of Economics} 51(4), 1108--1161. \href{https://doi.org/10.1111/1756-2171.12352}{\texttt{doi:10.1111/1756-2171.12352}}\\
+Aportación: reúne buenas prácticas de estimación y sus experimentos cambian conclusiones previas sobre óptimos múltiples. Método: Monte Carlo y réplicas con PyBLP. Contexto: es un modelo de cómo presentar pruebas numéricas.
+\item Grieco, P. L. E., C. Murry y A. Yurukoglu (2024). ``The Evolution of Market Power in the U.S. Automobile Industry''. \textit{The Quarterly Journal of Economics} 139(2), 1201--1253. \href{https://doi.org/10.1093/qje/qjad047}{\texttt{doi:10.1093/qje/qjad047}}\\
+Aportación: evolución del poder de mercado en autos de EE. UU. Método: demanda y oferta tipo BLP con datos micro. Contexto: es la referencia reciente de este mercado.
+\item Melnikov, O. (2013). ``Demand for Differentiated Durable Products: the Case of the U.S. Computer Printer Market''. \textit{Economic Inquiry} 51(2), 1277--1298. \href{https://doi.org/10.1111/j.1465-7295.2012.00501.x}{\texttt{doi:10.1111/j.1465-7295.2012.00501.x}}\\
+Aportación: la compra de durables como paro óptimo con expectativas sobre calidad futura. Método: demanda dinámica con impresoras. Contexto: un antecedente de demanda dinámica agregada.
+\item $\star$\,Gordon, B. R. (2009). ``A Dynamic Model of Consumer Replacement Cycles in the PC Processor Industry''. \textit{Marketing Science} 28(5), 846--867. \href{https://doi.org/10.1287/mksc.1080.0448}{\texttt{doi:10.1287/mksc.1080.0448}}\\
+Aportación: separa adopción y reemplazo en los ciclos de compra. Método: demanda dinámica con procesadores. Contexto: el reemplazo es la decisión que tu reparación pospone.
+\item Carranza, J. E. (2010). ``Product innovation and adoption in market equilibrium: The case of digital cameras''. \textit{International Journal of Industrial Organization} 28(6), 604--618. \href{https://doi.org/10.1016/j.ijindorg.2010.02.003}{\texttt{doi:10.1016/j.ijindorg.2010.02.003}}\\
+Aportación: innovación y adopción de cámaras digitales en equilibrio de mercado. Método: demanda dinámica. Contexto: otro caso de durables de rápida obsolescencia.
+\item Nair, H. (2007). ``Intertemporal price discrimination with forward-looking consumers: Application to the US market for console video-games''. \textit{Quantitative Marketing and Economics} 5(3), 239--292. \href{https://doi.org/10.1007/s11129-007-9026-4}{\texttt{doi:10.1007/s11129-007-9026-4}}\\
+Aportación: discriminación intertemporal con consumidores prospectivos. Método: modelo dinámico con videojuegos. Contexto: conecta el problema de Coase con estimación estructural.
+\item Hendel, I. y A. Nevo (2006). ``Measuring the Implications of Sales and Consumer Inventory Behavior''. \textit{Econometrica} 74(6), 1637--1673. \href{https://doi.org/10.1111/j.1468-0262.2006.00721.x}{\texttt{doi:10.1111/j.1468-0262.2006.00721.x}}\\
+Aportación: la dinámica de inventarios implica que los modelos estáticos sesgan las elasticidades. Método: demanda dinámica de bienes almacenables. Contexto: su lógica de sesgo por ignorar una decisión dinámica se parece a tu pregunta.
+\item $\star$\,Aguirregabiria, V. y A. Nevo (2013). ``Recent Developments in Empirical IO: Dynamic Demand and Dynamic Games''. En \textit{Advances in Economics and Econometrics}, 53--122. \href{https://doi.org/10.1017/cbo9781139060035.003}{\texttt{doi:10.1017/cbo9781139060035.003}}\\
+Aportación: panorama de demanda dinámica y juegos dinámicos. Método: revisión. Contexto: enlaza este nido con la oferta dinámica del nido 5.
+\item Chevalier, J. y A. Goolsbee (2009). ``Are Durable Goods Consumers Forward-Looking? Evidence from College Textbooks*''. \textit{Quarterly Journal of Economics} 124(4), 1853--1884. \href{https://doi.org/10.1162/qjec.2009.124.4.1853}{\texttt{doi:10.1162/qjec.2009.124.4.1853}}\\
+Aportación: los estudiantes actúan con visión de futuro y expectativas racionales sobre revisiones de libros. Método: dos bases nuevas con datos de libros de texto. Contexto: es evidencia del supuesto de agentes prospectivos en durables.
+\item $\dagger$\,Mannering, F. y C. Winston (1985). ``A Dynamic Empirical Analysis of Household Vehicle Ownership and Utilization''. \textit{The RAND Journal of Economics} 16(2), 215--236. \href{https://doi.org/10.2307/2555411}{\texttt{doi:10.2307/2555411}}\\
+Aportación: modelo dinámico de tenencia y uso de vehículos en torno a la crisis energética de 1979, con fuerte lealtad de marca. Método: elección discreta con panel de hogares. Contexto: antecedente de Gillingham et al.
+\item $\star$\,Berkovec, J. y J. Rust (1985). ``A nested logit model of automobile holdings for one vehicle households''. \textit{Transportation Research Part B: Methodological} 19(4), 275--285. \href{https://doi.org/10.1016/0191-2615(85)90036-0}{\texttt{doi:10.1016/0191-2615(85)90036-0}}\\
+Aportación: logit anidado de tenencia de vehículos por hogar. Método: elección discreta. Contexto: antecedente de los árboles de decisión con autos.
+\item Eberly, J. C. (1994). ``Adjustment of Consumers' Durables Stocks: Evidence from Automobile Purchases''. \textit{Journal of Political Economy} 102(3), 403--436. \href{https://doi.org/10.1086/261940}{\texttt{doi:10.1086/261940}}\\
+Aportación: la compra de durables sigue una regla (S,s) para cerca de la mitad de los hogares. Método: prueba directa con datos de hogares y agregación. Contexto: da fundamento a los costos de transacción.
+\item Attanasio, O. P. (2000). ``Consumer Durables and Inertial Behaviour: Estimation and Aggregation of (S, s) Rules for Automobile Purchases''. \textit{The Review of Economic Studies} 67(4), 667--696. \href{https://doi.org/10.1111/1467-937x.00149}{\texttt{doi:10.1111/1467-937x.00149}}\\
+Aportación: estima y agrega reglas (S,s) en la compra de automóviles. Método: microdatos de hogares. Contexto: es una forma reducida de la inercia que tu modelo genera con costos de transacción.
+\item $\star$\,$\dagger$\,Adda, J. y R. Cooper (2000). ``Balladurette and Juppette: A Discrete Analysis of Scrapping Subsidies''. \textit{Journal of Political Economy} 108(4), 778--806. \href{https://doi.org/10.1086/316096}{\texttt{doi:10.1086/316096}}\\
+Aportación: subsidios franceses al chatarreo adelantan ventas y tienen efectos de corto plazo. Método: elección discreta dinámica. Contexto: es una aplicación de política previa a Schiraldi (2011).
+\end{itemize}
+
+\medskip
+\noindent\textit{Transición al equilibrio. Hasta aquí los precios están dados para el agente. En un mercado de autos eso no basta: si muchos hogares reparan más, cambian la calidad de los usados, sus precios y las decisiones de todos. Por eso hace falta cerrar el modelo con un equilibrio.}
+
+\section{Equilibrio estructural del mercado de autos}
+De aquí sale tu modelo. Los precios de los usados son endógenos y vacían el mercado, y las decisiones de los hogares se agregan en una distribución de coches. La sección cierra diciendo qué decisión les falta a estos modelos.
+
+\subsection*{Lo que tienes: modelos de equilibrio}
+\addcontentsline{toc}{subsection}{Lo que tienes: modelos de equilibrio}
+\begin{itemize}
+\item $\dagger$\,Gillingham, K., F. Iskhakov, A. Munk-Nielsen, J. Rust y B. Schjerning (2022). ``Equilibrium Trade in Automobiles''. \textit{Journal of Political Economy} 130(10), 2534--2593. \href{https://doi.org/10.1086/720463}{\texttt{doi:10.1086/720463}}\\
+Aportación: modelo tratable de equilibrio estacionario con consumidores heterogéneos y un algoritmo rápido y robusto; concluye que Dinamarca podría recaudar más reduciendo el impuesto al registro. Método: estimación con casi 39 millones de transiciones de propiedad en Dinamarca. Contexto: es el modelo que extiendes y le falta precisamente una decisión explícita de reparar. Tienes también el NBER 25840.\\
+{\footnotesize Archivo: \texttt{Gillingham Rust et al TradeAutos (2019).pdf; rust2019.pdf}}
+\item $\dagger$\,Schiraldi, P. (2011). ``Automobile replacement: a dynamic structural approach''. \textit{The RAND Journal of Economics} 42(2), 266--291. \href{https://doi.org/10.1111/j.1756-2171.2011.00133.x}{\texttt{doi:10.1111/j.1756-2171.2011.00133.x}}\\
+Aportación: procedimiento explícito para estimar costos de transacción con nuevos y usados, a partir de quienes conservan y quienes compran un tipo de auto. Método: coeficientes aleatorios con paro óptimo dinámico, aplicado a subsidios de chatarreo en Italia. Contexto: tu nota de identificación de costos de transacción dialoga con esta estrategia.\\
+{\footnotesize Archivo: \texttt{The RAND J of Economics - 2011 - Schiraldi.pdf}}
+\item $\dagger$\,Gavazza, A., A. Lizzeri y N. Roketskiy (2014). ``A Quantitative Analysis of the Used-Car Market''. \textit{American Economic Review} 104(11), 3668--3700. \href{https://doi.org/10.1257/aer.104.11.3668}{\texttt{doi:10.1257/aer.104.11.3668}}\\
+Aportación: los costos de transacción afectan mucho el volumen, la asignación y el mercado primario, aunque el efecto agregado en bienestar es relativamente pequeño. Método: modelo calibrado a EE. UU. y Francia con heterogeneidad en la disposición a pagar. Contexto: es el referente para preguntar cuánto importa una fricción en equilibrio, igual que tú con la reparación. Tienes dos versiones.\\
+{\footnotesize Archivo: \texttt{Gavazza-QuantitativeAnalysisUsedCar-2014.pdf}}
+\item $\dagger$\,Esteban, S. y M. Shum (2007). ``Durable-goods oligopoly with secondary markets: the case of automobiles''. \textit{The RAND Journal of Economics} 38(2), 332--354. \href{https://doi.org/10.1111/j.1756-2171.2007.tb00071.x}{\texttt{doi:10.1111/j.1756-2171.2007.tb00071.x}}\\
+Aportación: mide la importancia competitiva del mercado secundario para los fabricantes. Método: oligopolio dinámico estimado con 20 años de datos de autos. Contexto: tiene la oferta endógena que tu modelo deja fuera. Tienes dos versiones.\\
+{\footnotesize Archivo: \texttt{Esteban-DurableGoodsOligopolySecondary-2007.pdf}}
+\item $\dagger$\,Chen, J., S. Esteban y M. Shum (2013). ``When Do Secondary Markets Harm Firms?''. \textit{American Economic Review} 103(7), 2911--2934. \href{https://doi.org/10.1257/aer.103.7.2911}{\texttt{doi:10.1257/aer.103.7.2911}}\\
+Aportación: abrir el mercado secundario reduce 35\% las ganancias de fabricantes en su calibración, menos si cae el acervo de usados, por ejemplo si los productos son menos durables. Método: oligopolio dinámico durable con costos de transacción. Contexto: conecta durabilidad y equilibrio, y sugiere que tu reparación también importaría para la oferta.\\
+{\footnotesize Archivo: \texttt{chen esteban 2013.pdf}}
+\end{itemize}
+
+\subsection*{Lo que tienes: oferta dinámica}
+\addcontentsline{toc}{subsection}{Lo que tienes: oferta dinámica}
+\begin{itemize}
+\item $\dagger$\,Ericson, R. y A. Pakes (1995). ``Markov-Perfect Industry Dynamics: A Framework for Empirical Work''. \textit{The Review of Economic Studies} 62(1), 53--82. \href{https://doi.org/10.2307/2297841}{\texttt{doi:10.2307/2297841}}\\
+Aportación: marco de industria con entrada, salida e incertidumbre específica por empresa. Método: equilibrio de Markov perfecto con expectativas racionales y ergodicidad. Contexto: es la base si algún día endogeneizas la oferta; en tu modelo actual la oferta es exógena.\\
+{\footnotesize Archivo: \texttt{ericson \& Pakes 1995 Markov.pdf}}
+\item $\dagger$\,Goettler, R. L. y B. R. Gordon (2011). ``Does AMD Spur Intel to Innovate More?''. \textit{Journal of Political Economy} 119(6), 1141--1200. \href{https://doi.org/10.1086/664615}{\texttt{doi:10.1086/664615}}\\
+Aportación: la competencia de AMD reduce la tasa de innovación 4.2\%, pero sin AMD cae el excedente. Método: oligopolio dinámico con durables e innovación endógena, estimado. Contexto: muestra cómo se estima oferta dinámica con durables.\\
+{\footnotesize Archivo: \texttt{GoettlerGordon2011.pdf}}
+\item Dubé, J.-P. H., G. J. Hitsch y P. K. Chintagunta (2010). ``Tipping and Concentration in Markets with Indirect Network Effects''. \textit{Marketing Science} 29(2), 216--249. \href{https://doi.org/10.1287/mksc.1090.0541}{\texttt{doi:10.1287/mksc.1090.0541}}\\
+Aportación: mide el tipping por efectos de red indirectos. Método: demanda y equilibrio dinámico en consolas de videojuegos. Contexto: es metodológicamente útil y lejano en el tema; cítalo poco.\\
+{\footnotesize Archivo: \texttt{Dub-TippingConcentrationMarkets-2010.pdf}}
+\item Hashmi, A. R. y J. V. Biesebroeck (2016). ``The Relationship between Market Structure and Innovation in Industry Equilibrium: A Case Study of the Global Automobile Industry''. \textit{Review of Economics and Statistics} 98(1), 192--208. \href{https://doi.org/10.1162/rest\_a\_00494}{\texttt{doi:10.1162/rest\_a\_00494}}\\
+Aportación: relación de equilibrio entre estructura de mercado e innovación en autos. Método: juego dinámico estimado, con patentes como proxy. Contexto: oferta dinámica en tu misma industria.\\
+{\footnotesize Archivo: \texttt{Hashmi-RELATIONSHIPMARKETSTRUCTURE-2016.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: equilibrio de autos}
+\addcontentsline{toc}{subsection}{Lo que falta: equilibrio de autos}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Manski, C. F. (1983). ``Analysis of equilibrium automobile holdings in Israel with aggregate discrete choice models''. \textit{Transportation Research Part B: Methodological} 17(5), 373--389. \href{https://doi.org/10.1016/0191-2615(83)90004-8}{\texttt{doi:10.1016/0191-2615(83)90004-8}}\\
+Aportación: análisis de equilibrio de la tenencia de autos en Israel. Método: elección discreta agregada. Contexto: de los primeros equilibrios numéricos de este mercado.
+\item $\star$\,$\dagger$\,Berkovec, J. (1985). ``New Car Sales and Used Car Stocks: A Model of the Automobile Market''. \textit{The RAND Journal of Economics} 16(2), 195--214. \href{https://doi.org/10.2307/2555410}{\texttt{doi:10.2307/2555410}}\\
+Aportación: equilibrio general de corto plazo que combina demanda de elección discreta, producción de nuevos y chatarreo. Método: estimación y simulación de 1978 a 1990. Contexto: pionero con heterogeneidad amplia y antecedente directo de Gillingham et al.
+\item $\star$\,$\dagger$\,Blundell, R., R. Gu, S. Leth-Petersen, H. Low y C. Meghir (2026). ``Durables and lemons: Private information and the market for cars''. \textit{Quantitative Economics} 17(1), 38--91. \href{https://doi.org/10.3982/qe1822}{\texttt{doi:10.3982/qe1822}}\\
+Aportación: estima que la penalización por lemons es 12\% del precio en el primer año de tenencia y cae después. Método: equilibrio de tenencia de autos con información privada y registros de Dinamarca. Contexto: es el trabajo más cercano en espíritu: toma el mismo tipo de modelo y agrega algo no observado sobre la calidad, pero no modela la reparación.
+\item Gillingham, K., F. Iskhakov, A. Munk-Nielsen, J. Rust y B. Schjerning (2018). ``A Dynamic Model of Vehicle Ownership, Type Choice, and Usage''. Borrador, conferencia AEA 2018. \href{https://www.aeaweb.org/conference/2018/preliminary/paper/B6dbT2kD}{\texttt{www.aeaweb.org/conference/2018/preliminary/paper/B6dbT2kD}} \textit{(AEA)}\\
+Aportación: versión con uso del vehículo y tipo de auto. Método: modelo dinámico de tenencia, tipo y uso. Contexto: sirve para ver lo que quedó fuera de la versión de 2022.
+\item Bento, A. M., L. H. Goulder, M. R. Jacobsen y R. H. von Haefen (2009). ``Distributional and Efficiency Impacts of Increased US Gasoline Taxes''. \textit{American Economic Review} 99(3), 667--699. \href{https://doi.org/10.1257/aer.99.3.667}{\texttt{doi:10.1257/aer.99.3.667}}\\
+Aportación: impactos de impuestos a la gasolina en un modelo que une nuevos, usados y chatarra con hogares y autos heterogéneos. Método: estimación conjunta de tenencia y kilómetros. Contexto: una alternativa de equilibrio orientada a política.
+\end{itemize}
+
+\subsection*{Lo que falta: equilibrio estacionario y distribuciones}
+\addcontentsline{toc}{subsection}{Lo que falta: equilibrio estacionario y distribuciones}
+\begin{itemize}
+\item Lucas, R. E. y E. C. Prescott (1971). ``Investment Under Uncertainty''. \textit{Econometrica} 39(5), desde p. 659. \href{https://doi.org/10.2307/1909571}{\texttt{doi:10.2307/1909571}}\\
+Aportación: equilibrio recursivo con expectativas racionales. Método: teoría. Contexto: es el origen de la técnica.
+\item Hopenhayn, H. A. (1992). ``Entry, Exit, and Firm Dynamics in Long Run Equilibrium''. \textit{Econometrica} 60(5), desde p. 1127. \href{https://doi.org/10.2307/2951541}{\texttt{doi:10.2307/2951541}}\\
+Aportación: equilibrio estacionario con entrada, salida y heterogeneidad. Método: teoría. Contexto: es la analogía natural de empresas que nacen y mueren con tus coches.
+\item $\star$\,Hopenhayn, H. A. y E. C. Prescott (1992). ``Stochastic Monotonicity and Stationary Distributions for Dynamic Economies''. \textit{Econometrica} 60(6), desde p. 1387. \href{https://doi.org/10.2307/2951526}{\texttt{doi:10.2307/2951526}}\\
+Aportación: existencia y estabilidad de distribuciones invariantes en procesos monótonos. Método: punto fijo de Knaster-Tarski y supermodularidad. Contexto: útil para hablar de tu distribución estacionaria q.
+\item Huggett, M. (1993). ``The risk-free rate in heterogeneous-agent incomplete-insurance economies''. \textit{Journal of Economic Dynamics and Control} 17(5-6), 953--969. \href{https://doi.org/10.1016/0165-1889(93)90024-m}{\texttt{doi:10.1016/0165-1889(93)90024-m}}\\
+Aportación: equilibrio estacionario con agentes heterogéneos, donde un precio vacía el mercado dada una distribución. Método: cálculo numérico. Contexto: misma estructura de solución que la tuya, en otro mercado.
+\item Aiyagari, S. R. (1994). ``Uninsured Idiosyncratic Risk and Aggregate Saving''. \textit{The Quarterly Journal of Economics} 109(3), 659--684. \href{https://doi.org/10.2307/2118417}{\texttt{doi:10.2307/2118417}}\\
+Aportación: modelo de crecimiento con ahorro precautorio y restricciones de liquidez. Método: análisis cualitativo y cuantitativo. Contexto: referente clásico de la distribución estacionaria de agentes.
+\item $\star$\,Young, E. R. (2010). ``Solving the incomplete markets model with aggregate uncertainty using the Krusell–Smith algorithm and non-stochastic simulations''. \textit{Journal of Economic Dynamics and Control} 34(1), 36--41. \href{https://doi.org/10.1016/j.jedc.2008.11.010}{\texttt{doi:10.1016/j.jedc.2008.11.010}}\\
+Aportación: simula la distribución sin Monte Carlo mediante un histograma. Método: método numérico. Contexto: es la misma idea de tu matriz de transición.
+\end{itemize}
+
+\subsection*{Lo que falta: oligopolio dinámico}
+\addcontentsline{toc}{subsection}{Lo que falta: oligopolio dinámico}
+\begin{itemize}
+\item Pakes, A. y P. McGuire (1994). ``Computing Markov-Perfect Nash Equilibria: Numerical Implications of a Dynamic Differentiated Product Model''. \textit{The RAND Journal of Economics} 25(4), desde p. 555. \href{https://doi.org/10.2307/2555975}{\texttt{doi:10.2307/2555975}}\\
+Aportación: algoritmo para calcular equilibrios de Markov perfectos con productos diferenciados. Método: numérico. Contexto: es el punto de partida para calcular este tipo de equilibrios.
+\item Pakes, A. y P. McGuire (2001). ``Stochastic Algorithms, Symmetric Markov Perfect Equilibrium, and the 'curse' of Dimensionality''. \textit{Econometrica} 69(5), 1261--1281. \href{https://doi.org/10.1111/1468-0262.00241}{\texttt{doi:10.1111/1468-0262.00241}}\\
+Aportación: algoritmo estocástico que no está atado a la maldición de dimensionalidad. Método: aproximación con promedios de resultados pasados. Contexto: sería relevante con oferta endógena.
+\item Doraszelski, U. y A. Pakes (2007). ``A Framework for Applied Dynamic Analysis in IO''. En \textit{Handbook of Industrial Organization}, 1887--1966. \href{https://doi.org/10.1016/s1573-448x(06)03030-5}{\texttt{doi:10.1016/s1573-448x(06)03030-5}}\\
+Aportación: marco para aplicar modelos dinámicos de organización industrial. Método: revisión. Contexto: es el manual de referencia.
+\item $\star$\,Bajari, P., C. L. Benkard y J. Levin (2007). ``Estimating Dynamic Models of Imperfect Competition''. \textit{Econometrica} 75(5), 1331--1370. \href{https://doi.org/10.1111/j.1468-0262.2007.00796.x}{\texttt{doi:10.1111/j.1468-0262.2007.00796.x}}\\
+Aportación: estima juegos dinámicos en dos etapas con controles discretos y continuos. Método: distancia mínima simulada. Contexto: es la opción si estimas oferta sin resolver el juego.
+\item Pakes, A., M. Ostrovsky y S. Berry (2007). ``Simple estimators for the parameters of discrete dynamic games (with entry/exit examples)''. \textit{The RAND Journal of Economics} 38(2), 373--399. \href{https://doi.org/10.1111/j.1756-2171.2007.tb00073.x}{\texttt{doi:10.1111/j.1756-2171.2007.tb00073.x}}\\
+Aportación: estima costos de entrada y salida con promedios muestrales de valores. Método: dos etapas no paramétricas. Contexto: alternativa simple al anterior.
+\item Pesendorfer, M. y P. Schmidt-Dengler (2008). ``Asymptotic Least Squares Estimators for Dynamic Games''. \textit{Review of Economic Studies} 75(3), 901--928. \href{https://doi.org/10.1111/j.1467-937x.2008.00496.x}{\texttt{doi:10.1111/j.1467-937x.2008.00496.x}}\\
+Aportación: marco de mínimos cuadrados asintóticos que unifica a Hotz y Miller y Aguirregabiria y Mira. Método: teoría de estimación y Monte Carlo. Contexto: ayuda a ver en qué difieren esos estimadores.
+\item Aguirregabiria, V. y P. Mira (2007). ``Sequential Estimation of Dynamic Discrete Games''. \textit{Econometrica} 75(1), 1--53. \href{https://doi.org/10.1111/j.1468-0262.2007.00731.x}{\texttt{doi:10.1111/j.1468-0262.2007.00731.x}}\\
+Aportación: estimación pseudo-máximo-verosímil de juegos dinámicos, atendiendo equilibrios múltiples. Método: secuencial (NPL). Contexto: extiende a juegos el método del nido 6.
+\item Weintraub, G. Y., C. L. Benkard y B. Van Roy (2008). ``Markov Perfect Industry Dynamics With Many Firms''. \textit{Econometrica} 76(6), 1375--1411. \href{https://doi.org/10.3982/ecta6158}{\texttt{doi:10.3982/ecta6158}}\\
+Aportación: concepto de equilibrio simplificado para industrias con muchas empresas. Método: equilibrio oblivious. Contexto: útil si piensas en muchas marcas.
+\end{itemize}
+
+\medskip
+\noindent\textit{Transición a la estimación. Estos modelos resuelven el equilibrio y sus autores lo llevan a datos observando las transiciones de los coches, pero no observan todo lo que hacen los hogares. Si la reparación ocurre en talleres sin registro, no basta con agregarla al modelo: hay que decir cómo se identifica sin observarla, lo que lleva al último nido.}
+
+\section{Identificación y estimación con decisiones no observadas}
+Tu aportación metodológica. El orden importa: métodos base, identificación, estados no observados y, al final, decisiones no observadas, que es tu caso. Conviene mantener separadas las dos últimas: un estado oculto no es lo mismo que una decisión oculta.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Hu, Y. e Y. Xin (2024). ``Identification and estimation of dynamic structural models with unobserved choices''. \textit{Journal of Econometrics} 242(2), 105806. \href{https://doi.org/10.1016/j.jeconom.2024.105806}{\texttt{doi:10.1016/j.jeconom.2024.105806}}\\
+Aportación: identificación no paramétrica de CCP y transiciones cuando la decisión no se observa, con extensión a observabilidad parcial. Método: variable de estado continua con regresión no paramétrica y error aditivo independiente de la decisión; estimación por tamices con Monte Carlo. Contexto: es la estrategia de tu tesis, y en tu caso la variable excluida es el precio de reparación.\\
+{\footnotesize Archivo: \texttt{unobs\_choice.pdf}}
+\item $\dagger$\,Arcidiacono, P. y R. A. Miller (2011). ``Conditional Choice Probability Estimation of Dynamic Discrete Choice Models With Unobserved Heterogeneity''. \textit{Econometrica} 79(6), 1823--1867. \href{https://doi.org/10.3982/ecta7743}{\texttt{doi:10.3982/ecta7743}}\\
+Aportación: adapta el algoritmo EM para incorporar heterogeneidad no observada, fija o markoviana, en estimadores CCP. Método: EM con dependencia finita y Monte Carlo. Contexto: es la alternativa natural a tu máxima verosimilitud de solución completa.\\
+{\footnotesize Archivo: \texttt{ccp\_econometrica.pdf}}
+\item $\dagger$\,Rabiner, L. (1989). ``A tutorial on hidden Markov models and selected applications in speech recognition''. \textit{Proceedings of the IEEE} 77(2), 257--286. \href{https://doi.org/10.1109/5.18626}{\texttt{doi:10.1109/5.18626}}\\
+Aportación: tutorial de modelos ocultos de Markov. Método: algoritmos forward-backward, Viterbi y Baum-Welch. Contexto: es el referente computacional de tu verosimilitud con reparación latente.\\
+{\footnotesize Archivo: \texttt{A Tutorial on Hidden Markov Models and.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: métodos base}
+\addcontentsline{toc}{subsection}{Lo que falta: métodos base}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Hotz, V. J. y R. A. Miller (1993). ``Conditional Choice Probabilities and the Estimation of Dynamic Models''. \textit{The Review of Economic Studies} 60(3), 497--529. \href{https://doi.org/10.2307/2298122}{\texttt{doi:10.2307/2298122}}\\
+Aportación: los valores se pueden escribir en función de las CCP, sin resolver el modelo. Método: inversión y estimación no paramétrica. Contexto: es la base de la familia CCP; en tu caso no se pueden calcular CCP directas porque la reparación no se observa.
+\item Hotz, V. J., R. A. Miller, S. Sanders y J. Smith (1994). ``A Simulation Estimator for Dynamic Models of Discrete Choice''. \textit{The Review of Economic Studies} 61(2), 265--289. \href{https://doi.org/10.2307/2297981}{\texttt{doi:10.2307/2297981}}\\
+Aportación: estimador CCS que usa simulación para modelos sin estados terminales. Método: teoría de procesos empíricos. Contexto: extiende a Hotz y Miller.
+\item $\star$\,$\dagger$\,Aguirregabiria, V. y P. Mira (2002). ``Swapping the Nested Fixed Point Algorithm: A Class of Estimators for Discrete Markov Decision Models''. \textit{Econometrica} 70(4), 1519--1543. \href{https://doi.org/10.1111/1468-0262.00340}{\texttt{doi:10.1111/1468-0262.00340}}\\
+Aportación: NPL intercambia los ciclos del NFXP y produce el estimador de máxima verosimilitud con menos iteraciones de política. Método: pseudoverosimilitud anidada. Contexto: es el punto intermedio entre solución completa y CCP.
+\item Kasahara, H. y K. Shimotsu (2012). ``Sequential Estimation of Structural Models With a Fixed Point Constraint''. \textit{Econometrica} 80(5), 2303--2319. \href{https://doi.org/10.3982/ecta8291}{\texttt{doi:10.3982/ecta8291}}\\
+Aportación: NPL puede no converger si el mapeo de punto fijo no es una contracción local, y proponen alternativas. Método: teoría de convergencia. Contexto: advertencia útil si consideras estimación secuencial.
+\item Keane, M. P. y K. I. Wolpin (1994). ``The Solution and Estimation of Discrete Choice Dynamic Programming Models by Simulation and Interpolation: Monte Carlo Evidence''. \textit{The Review of Economics and Statistics} 76(4), desde p. 648. \href{https://doi.org/10.2307/2109768}{\texttt{doi:10.2307/2109768}}\\
+Aportación: aproxima la solución con integración Monte Carlo en un subconjunto de estados e interpolación. Método: numérico. Contexto: es la opción cuando el espacio de estados no cabe en memoria.
+\item Arcidiacono, P. y P. B. Ellickson (2011). ``Practical Methods for Estimation of Dynamic Discrete Choice Models''. \textit{Annual Review of Economics} 3(1), 363--394. \href{https://doi.org/10.1146/annurev-economics-111809-125038}{\texttt{doi:10.1146/annurev-economics-111809-125038}}\\
+Aportación: guía práctica de estimadores CCP con estados no observados. Método: revisión. Contexto: es la lectura más rápida sobre esta familia.
+\item $\star$\,$\dagger$\,Su, C.-L. y K. L. Judd (2012). ``Constrained Optimization Approaches to Estimation of Structural Models''. \textit{Econometrica} 80(5), 2213--2230. \href{https://doi.org/10.3982/ecta7925}{\texttt{doi:10.3982/ecta7925}}\\
+Aportación: estimar con restricciones (MPEC) da los mismos estimadores que NFXP y puede ser más rápido. Método: optimización con restricciones y Monte Carlo sobre Zurcher. Contexto: es el punto de partida del debate sobre tu método.
+\item $\star$\,$\dagger$\,Iskhakov, F., J. Lee, J. Rust, B. Schjerning y K. Seo (2016). ``Comment on "Constrained Optimization Approaches to Estimation of Structural Models"''. \textit{Econometrica} 84(1), 365--370. \href{https://doi.org/10.3982/ecta12605}{\texttt{doi:10.3982/ecta12605}}\\
+Aportación: con Newton-Kantorovich, NFXP rinde igual que MPEC en muestras chicas, a diferencia de lo que sugería la comparación con aproximaciones sucesivas. Método: réplica de Su y Judd. Contexto: respalda directamente tu solver SA más Newton.
+\item Dubé, J.-P., J. T. Fox y C.-L. Su (2012). ``Improving the Numerical Performance of Static and Dynamic Aggregate Discrete Choice Random Coefficients Demand Estimation''. \textit{Econometrica} 80(5), 2231--2267. \href{https://doi.org/10.3982/ecta8585}{\texttt{doi:10.3982/ecta8585}}\\
+Aportación: lleva MPEC a la demanda agregada y documenta errores por tolerancias laxas en el punto fijo. Método: teoría y Monte Carlo. Contexto: justifica que trabajes con tolerancias estrictas.
+\item Imai, S., N. Jain y A. Ching (2009). ``Bayesian Estimation of Dynamic Discrete Choice Models''. \textit{Econometrica} 77(6), 1865--1899. \href{https://doi.org/10.3982/ecta5658}{\texttt{doi:10.3982/ecta5658}}\\
+Aportación: resuelve y estima a la vez, con una carga comparable a la de un modelo estático. Método: MCMC bayesiano. Contexto: otra forma de evitar el ciclo anidado.
+\end{itemize}
+
+\subsection*{Lo que falta: identificación general}
+\addcontentsline{toc}{subsection}{Lo que falta: identificación general}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Magnac, T. y D. Thesmar (2002). ``Identifying Dynamic Discrete Decision Processes''. \textit{Econometrica} 70(2), 801--816. \href{https://doi.org/10.1111/1468-0262.00306}{\texttt{doi:10.1111/1468-0262.00306}}\\
+Aportación: la utilidad no está identificada de forma no paramétrica sin fijar la distribución de choques, el descuento y una utilidad de referencia. Método: ecuaciones de Bellman como condiciones de momentos. Contexto: es el resultado base para justificar tus normalizaciones y tu beta.
+\item $\star$\,Abbring, J. H. y Ø. Daljord (2020). ``Identifying the discount factor in dynamic discrete choice models''. \textit{Quantitative Economics} 11(2), 471--501. \href{https://doi.org/10.3982/qe1352}{\texttt{doi:10.3982/qe1352}}\\
+Aportación: una restricción de exclusión en utilidades da un conjunto finito de factores de descuento. Método: condición de momentos interpretable. Contexto: relevante porque tú fijas beta en 0.95.
+\item $\star$\,Kalouptsidi, M., P. T. Scott y E. Souza-Rodrigues (2021). ``Identification of counterfactuals in dynamic discrete choice models''. \textit{Quantitative Economics} 12(2), 351--403. \href{https://doi.org/10.3982/qe1253}{\texttt{doi:10.3982/qe1253}}\\
+Aportación: aunque el modelo no esté identificado, ciertos contrafactuales sí lo están. Método: marco general de contrafactuales. Contexto: es directamente aplicable a tus experimentos con el precio de reparación.
+\item Kalouptsidi, M., P. T. Scott y E. Souza-Rodrigues (2021). ``Linear IV regression estimators for structural dynamic discrete choice models''. \textit{Journal of Econometrics} 222(1), 778--804. \href{https://doi.org/10.1016/j.jeconom.2020.03.016}{\texttt{doi:10.1016/j.jeconom.2020.03.016}}\\
+Aportación: con paneles cortos se puede estimar por regresión lineal con instrumentos. Método: IV con estados exógenos. Contexto: una forma simple de estimar, si tus datos lo permitieran.
+\item $\star$\,$\dagger$\,Arcidiacono, P. y R. A. Miller (2020). ``Identifying dynamic discrete choice models off short panels''. \textit{Journal of Econometrics} 215(2), 473--485. \href{https://doi.org/10.1016/j.jeconom.2018.12.025}{\texttt{doi:10.1016/j.jeconom.2018.12.025}}\\
+Aportación: identificación con paneles cortos y sin datos del futuro. Método: teoría. Contexto: pertinente porque tu panel Monte Carlo tiene pocos años.
+\item Norets, A. y X. Tang (2014). ``Semiparametric Inference in Dynamic Binary Choice Models''. \textit{The Review of Economic Studies} 81(3), 1229--1262. \href{https://doi.org/10.1093/restud/rdt050}{\texttt{doi:10.1093/restud/rdt050}}\\
+Aportación: inferencia sin suponer la distribución de los estados no observados; el supuesto paramétrico afecta los pagos estimados. Método: bayesiano con identificación parcial, sobre Rust. Contexto: mide lo que cuesta suponer valor extremo.
+\item Norets, A. (2009). ``Inference in Dynamic Discrete Choice Models With Serially Correlated Unobserved State Variables''. \textit{Econometrica} 77(5), 1665--1682. \href{https://doi.org/10.3982/ecta7292}{\texttt{doi:10.3982/ecta7292}}\\
+Aportación: inferencia con estados no observados serialmente correlacionados. Método: MCMC bayesiano y algoritmo de solución eficiente. Contexto: el caso que excluye la independencia condicional.
+\item Chiong, K. X., A. Galichon y M. Shum (2016). ``Duality in dynamic discrete-choice models''. \textit{Quantitative Economics} 7(1), 83--115. \href{https://doi.org/10.3982/qe436}{\texttt{doi:10.3982/qe436}}\\
+Aportación: dualidad entre CCP y pagos, con la identificación como problema de transporte. Método: análisis convexo y programación lineal. Contexto: alternativa sin suponer logit.
+\end{itemize}
+
+\subsection*{Lo que falta: estados y tipos no observados}
+\addcontentsline{toc}{subsection}{Lo que falta: estados y tipos no observados}
+\begin{itemize}
+\item Heckman, J. y B. Singer (1984). ``A Method for Minimizing the Impact of Distributional Assumptions in Econometric Models for Duration Data''. \textit{Econometrica} 52(2), desde p. 271. \href{https://doi.org/10.2307/1911491}{\texttt{doi:10.2307/1911491}}\\
+Aportación: estimador no paramétrico de la distribución de no observables en modelos de duración. Método: máxima verosimilitud no paramétrica. Contexto: es el origen de los tipos discretos.
+\item $\star$\,$\dagger$\,Kasahara, H. y K. Shimotsu (2009). ``Nonparametric Identification of Finite Mixture Models of Dynamic Discrete Choices''. \textit{Econometrica} 77(1), 135--175. \href{https://doi.org/10.3982/ecta6763}{\texttt{doi:10.3982/ecta6763}}\\
+Aportación: identificación no paramétrica de mezclas finitas de elección dinámica, en función del largo del panel y la variación de covariables. Método: teoría de identificación. Contexto: relevante para tus tipos de consumidor.
+\item $\star$\,$\dagger$\,Hu, Y. y M. Shum (2012). ``Nonparametric identification of dynamic models with unobserved state variables''. \textit{Journal of Econometrics} 171(1), 32--44. \href{https://doi.org/10.1016/j.jeconom.2012.05.023}{\texttt{doi:10.1016/j.jeconom.2012.05.023}}\\
+Aportación: identifica modelos con un estado no observado que cambia en el tiempo. Método: errores de medición con pocos periodos. Contexto: es el antecedente directo de Hu y Xin; aquí lo oculto es un estado.
+\item $\star$\,Hu, Y. (2008). ``Identification and estimation of nonlinear models with misclassification error using instrumental variables: A general solution''. \textit{Journal of Econometrics} 144(1), 27--61. \href{https://doi.org/10.1016/j.jeconom.2007.12.001}{\texttt{doi:10.1016/j.jeconom.2007.12.001}}\\
+Aportación: identificación con errores de clasificación e instrumentos mediante descomposición de valores propios. Método: teoría. Contexto: es la técnica de fondo de los resultados de Hu.
+\item $\star$\,Hu, Y. y S. M. Schennach (2008). ``Instrumental Variable Treatment of Nonclassical Measurement Error Models''. \textit{Econometrica} 76(1), 195--216. \href{https://doi.org/10.1111/j.0012-9682.2008.00823.x}{\texttt{doi:10.1111/j.0012-9682.2008.00823.x}}\\
+Aportación: identificación de errores no clásicos con variable latente continua usando instrumentos. Método: descomposición en valores y funciones propias. Contexto: generaliza a Hu (2008).
+\item $\star$\,Hu, Y. (2017). ``The econometrics of unobservables: Applications of measurement error models in empirical industrial organization and labor economics''. \textit{Journal of Econometrics} 200(2), 154--168. \href{https://doi.org/10.1016/j.jeconom.2017.06.002}{\texttt{doi:10.1016/j.jeconom.2017.06.002}}\\
+Aportación: revisa el uso de errores de medición en organización industrial y trabajo. Método: revisión. Contexto: es la mejor entrada al tema.
+\item Hu, Y. e Y. Sasaki (2018). ``Closed-form Identification of Dynamic Discrete Choice Models with Proxies for Unobserved State Variables''. \textit{Econometric Theory} 34(1), 166--185. \href{https://doi.org/10.1017/s0266466617000081}{\texttt{doi:10.1017/s0266466617000081}}\\
+Aportación: identificación en forma cerrada con un proxy de un estado continuo no observado. Método: solución explícita de ecuaciones integrales. Contexto: pariente cercano si tu w se mide con ruido.
+\item Hu, Y., M. Shum, W. Tan y R. Xiao (2017). ``A Simple Estimator for Dynamic Models with Serially Correlated Unobservables''. \textit{Journal of Econometric Methods} 6(1). \href{https://doi.org/10.1515/jem-2015-0011}{\texttt{doi:10.1515/jem-2015-0011}}\\
+Aportación: estimador no iterativo de modelos con no observables serialmente correlacionados. Método: manipulación de matrices con soporte discreto. Contexto: alternativa práctica, aplicable a tu rejilla discreta.
+\item Higgins, A. y K. Jochmans (2023). ``Identification of mixtures of dynamic discrete choices''. \textit{Journal of Econometrics} 237(1), 105462. \href{https://doi.org/10.1016/j.jeconom.2023.04.006}{\texttt{doi:10.1016/j.jeconom.2023.04.006}}\\
+Aportación: identifica mezclas de elecciones dinámicas con paneles cortos. Método: teoría de identificación. Contexto: complementa a Kasahara y Shimotsu (2009).
+\item Higgins, A. y K. Jochmans (2026). ``Learning Markov Processes with Latent Variables''. \textit{Econometric Theory} 42(3), 501--513. \href{https://doi.org/10.1017/s0266466625000027}{\texttt{doi:10.1017/s0266466625000027}}\\
+Aportación: identifica una cadena de Markov bivariada cuando solo se observa una variable, con cuatro o más periodos consecutivos. Método: teoría de identificación. Contexto: se parece a tu estructura; conviene revisarlo como vía alternativa.
+\item Allman, E. S., C. Matias y J. A. Rhodes (2009). ``Identifiability of parameters in latent structure models with many observed variables''. \textit{The Annals of Statistics} 37(6A), 3099--3132. \href{https://doi.org/10.1214/09-aos689}{\texttt{doi:10.1214/09-aos689}}\\
+Aportación: enfoque general de identificabilidad de modelos latentes a partir del teorema de Kruskal. Método: argumentos algebraicos. Contexto: fundamento estadístico de estos resultados.
+\item Bonhomme, S., K. Jochmans y J.-M. Robin (2016). ``Non-Parametric Estimation of Finite Mixtures from Repeated Measurements''. \textit{Journal of the Royal Statistical Society Series B: Statistical Methodology} 78(1), 211--229. \href{https://doi.org/10.1111/rssb.12110}{\texttt{doi:10.1111/rssb.12110}}\\
+Aportación: estimadores no paramétricos de mezclas finitas con medidas repetidas. Método: identificación constructiva en dos etapas. Contexto: da una versión estimable.
+\item Berry, S. T. y G. Compiani (2023). ``An Instrumental Variable Approach to Dynamic Models''. \textit{The Review of Economic Studies} 90(4), 1724--1758. \href{https://doi.org/10.1093/restud/rdac061}{\texttt{doi:10.1093/restud/rdac061}}\\
+Aportación: identificación con no observables serialmente correlacionados usando variables instrumentales. Método: IV generalizadas en dos etapas. Contexto: otra forma de tratar la endogeneidad de los estados.
+\item Aguirregabiria, V., J. Gu e Y. Luo (2021). ``Sufficient statistics for unobserved heterogeneity in structural dynamic logit models''. \textit{Journal of Econometrics} 223(2), 280--311. \href{https://doi.org/10.1016/j.jeconom.2019.07.010}{\texttt{doi:10.1016/j.jeconom.2019.07.010}}\\
+Aportación: estadísticos suficientes para heterogeneidad no observada en logit dinámico. Método: teoría de estimación. Contexto: trata los no observados sin resolver el problema completo.
+\item Cunha, F., J. J. Heckman y S. M. Schennach (2010). ``Estimating the Technology of Cognitive and Noncognitive Skill Formation''. \textit{Econometrica} 78(3), 883--931. \href{https://doi.org/10.3982/ecta6551}{\texttt{doi:10.3982/ecta6551}}\\
+Aportación: identificación no paramétrica de factores no lineales, aplicada a formación de habilidades. Método: factores latentes. Contexto: muestra el mismo tipo de herramienta en otra aplicación.
+\end{itemize}
+
+\subsection*{Lo que falta: maximización con datos incompletos y error de medición}
+\addcontentsline{toc}{subsection}{Lo que falta: maximización con datos incompletos y error de medición}
+\begin{itemize}
+\item $\star$\,Baum, L. E., T. Petrie, G. Soules y N. Weiss (1970). ``A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains''. \textit{The Annals of Mathematical Statistics} 41(1), 164--171. \href{https://doi.org/10.1214/aoms/1177697196}{\texttt{doi:10.1214/aoms/1177697196}}\\
+Aportación: origen del algoritmo de maximización para cadenas de Markov ocultas. Método: teoría. Contexto: es el fundamento de tu recursión.
+\item $\star$\,Dempster, A. P., N. M. Laird y D. B. Rubin (1977). ``Maximum Likelihood from Incomplete Data Via the EM Algorithm''. \textit{Journal of the Royal Statistical Society Series B: Statistical Methodology} 39(1), 1--22. \href{https://doi.org/10.1111/j.2517-6161.1977.tb01600.x}{\texttt{doi:10.1111/j.2517-6161.1977.tb01600.x}}\\
+Aportación: formula el algoritmo EM y prueba el comportamiento monótono de la verosimilitud. Método: teoría general para datos incompletos. Contexto: es la referencia para cualquier estimación con reparación latente.
+\item Hamilton, J. D. (1989). ``A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle''. \textit{Econometrica} 57(2), desde p. 357. \href{https://doi.org/10.2307/1912559}{\texttt{doi:10.2307/1912559}}\\
+Aportación: infiere cambios de régimen no observados y estima por máxima verosimilitud. Método: filtro de Markov. Contexto: es la versión econométrica de la recursión de filtrado de tu verosimilitud.
+\item Hausman, J., J. Abrevaya y F. Scott-Morton (1998). ``Misclassification of the dependent variable in a discrete-response setting''. \textit{Journal of Econometrics} 87(2), 239--269. \href{https://doi.org/10.1016/s0304-4076(98)00015-3}{\texttt{doi:10.1016/s0304-4076(98)00015-3}}\\
+Aportación: consecuencias e identificación con error de clasificación en la variable dependiente. Método: teoría y paramétrico flexible. Contexto: tu keep/repair es casi una clasificación errónea extrema.
+\item Molinari, F. (2008). ``Partial identification of probability distributions with misclassified data''. \textit{Journal of Econometrics} 144(1), 81--117. \href{https://doi.org/10.1016/j.jeconom.2007.12.003}{\texttt{doi:10.1016/j.jeconom.2007.12.003}}\\
+Aportación: identificación parcial con datos mal clasificados. Método: cotas. Contexto: es el marco si tuvieras que relajar tus supuestos.
+\item Schennach, S. M. (2016). ``Recent Advances in the Measurement Error Literature''. \textit{Annual Review of Economics} 8(1), 341--377. \href{https://doi.org/10.1146/annurev-economics-080315-015058}{\texttt{doi:10.1146/annurev-economics-080315-015058}}\\
+Aportación: revisa métodos no lineales con datos mal medidos. Método: revisión. Contexto: complementa a Hu (2017).
+\item Chen, X., H. Hong y D. Nekipelov (2011). ``Nonlinear Models of Measurement Errors''. \textit{Journal of Economic Literature} 49(4), 901--937. \href{https://doi.org/10.1257/jel.49.4.901}{\texttt{doi:10.1257/jel.49.4.901}}\\
+Aportación: revisa modelos no lineales con errores clásicos y no clásicos, y mala clasificación. Método: revisión. Contexto: útil como panorama.
+\item Chen, X. (2007). ``Large Sample Sieve Estimation of Semi-Nonparametric Models''. En \textit{Handbook of Econometrics}, 5549--5632. \href{https://doi.org/10.1016/s1573-4412(07)06076-x}{\texttt{doi:10.1016/s1573-4412(07)06076-x}}\\
+Aportación: teoría de estimación por tamices. Método: revisión de semi-no-paramétricos. Contexto: es el estimador que propone Hu y Xin, distinto de tu versión paramétrica.
+\end{itemize}
+
+\subsection*{Lo que falta: decisiones y acciones ocultas}
+\addcontentsline{toc}{subsection}{Lo que falta: decisiones y acciones ocultas}
+\begin{itemize}
+\item $\star$\,Poirier, D. J. (1980). ``Partial observability in bivariate probit models''. \textit{Journal of Econometrics} 12(2), 209--217. \href{https://doi.org/10.1016/0304-4076(80)90007-x}{\texttt{doi:10.1016/0304-4076(80)90007-x}}\\
+Aportación: observabilidad parcial en probit bivariado. Método: máxima verosimilitud. Contexto: es un antecedente lejano de ver keep/trade pero no reparar.
+\item $\dagger$\,Perrigne, I. y Q. Vuong (2011). ``Nonparametric Identification of a Contract Model With Adverse Selection and Moral Hazard''. \textit{Econometrica} 79(5), 1499--1539. \href{https://doi.org/10.3982/ecta6954}{\texttt{doi:10.3982/ecta6954}}\\
+Aportación: identifica un contrato con selección adversa y riesgo moral, incluida la desutilidad del esfuerzo. Método: identificación no paramétrica. Contexto: otro caso de acción oculta; usa una relación entre esfuerzo y observables.
+\item $\dagger$\,Gayle, G.-L. y R. A. Miller (2015). ``Identifying and Testing Models of Managerial Compensation''. \textit{The Review of Economic Studies} 82(3), 1074--1118. \href{https://doi.org/10.1093/restud/rdv004}{\texttt{doi:10.1093/restud/rdv004}}\\
+Aportación: restricciones de contratos óptimos que dan identificación por conjuntos con acciones ocultas. Método: cotas y métodos semiparamétricos. Contexto: compensación ejecutiva; aquí la teoría del contrato da la identificación.
+\item $\dagger$\,Copeland, A. y C. Monnet (2009). ``The Welfare Effects of Incentive Schemes''. \textit{Review of Economic Studies} 76(1), 93--113. \href{https://doi.org/10.1111/j.1467-937x.2008.00513.x}{\texttt{doi:10.1111/j.1467-937x.2008.00513.x}}\\
+Aportación: los incentivos aumentan 12\% la productividad del trabajador promedio. Método: decisión dinámica de esfuerzo con registros de una empresa. Contexto: su identificación se apoya en el esquema de pago.
+\item $\dagger$\,Misra, S. y H. S. Nair (2011). ``A structural model of sales-force compensation dynamics: Estimation and field implementation''. \textit{Quantitative Marketing and Economics} 9(3), 211--257. \href{https://doi.org/10.1007/s11129-011-9096-1}{\texttt{doi:10.1007/s11129-011-9096-1}}\\
+Aportación: esfuerzo no observado de vendedores en un modelo dinámico estructural. Método: estimación con datos de compensación. Contexto: se apoya en un supuesto propio de su aplicación, como señala Hu y Xin.
+\end{itemize}
+
+\medskip
+\noindent\textit{Cierre. El recorrido llega a tu aportación doble: del lado del modelo, reparar es una decisión dentro de un equilibrio del mercado de autos; del lado econométrico, esa decisión se identifica sin observarla, con el precio de reparación como variable excluida. Con eso puedes preguntar cuánto importa la reparación, comparando el modelo con y sin ella.}
+
+\part{Material de apoyo, fuera de la revisión}
+\section{Métodos numéricos: puntos fijos, optimización e inferencia}
+No abras una subsección de esto en la revisión. Cita estas obras donde describes lo que hace tu código: «Cálculo del equilibrio», «Estimadores» y el apéndice de maximización.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item Bradley, S. P., A. C. Hax y T. L. Magnanti (1977). ``Dynamic Programming''. Cap. 11 de \textit{Applied Mathematical Programming}. Addison-Wesley. \href{https://web.mit.edu/15.053/www/AMP-Chapter-11.pdf}{\texttt{web.mit.edu/15.053/www/AMP-Chapter-11.pdf}} \textit{(MIT)}\\
+Aportación: introducción a programación dinámica con y sin incertidumbre. Método: capítulo de libro de texto con ejemplos. Contexto: material de estudio; es lo único de esta área en tu carpeta.\\
+{\footnotesize Archivo: \texttt{mit DP.pdf}}
+\end{itemize}
+
+\subsection*{Punto fijo y programación dinámica: lo que falta}
+\addcontentsline{toc}{subsection}{Punto fijo y programación dinámica: lo que falta}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Bellman, R. (1957). \textit{Dynamic Programming}. Princeton University Press (reimpr. 2010). \href{https://doi.org/10.1515/9781400835386}{\texttt{doi:10.1515/9781400835386}}\\
+Aportación: principio de optimalidad y programación dinámica. Método: libro. Contexto: es fundacional para tu ecuación de Bellman.
+\item $\star$\,Banach, S. (1922). ``Sur les opérations dans les ensembles abstraits et leur application aux équations intégrales''. \textit{Fundamenta Mathematicae} 3, 133--181. \href{https://doi.org/10.4064/fm-3-1-133-181}{\texttt{doi:10.4064/fm-3-1-133-181}}\\
+Aportación: teorema de la contracción. Método: análisis funcional. Contexto: justifica tus aproximaciones sucesivas.
+\item $\star$\,$\dagger$\,Blackwell, D. (1965). ``Discounted Dynamic Programming''. \textit{The Annals of Mathematical Statistics} 36(1), 226--235. \href{https://doi.org/10.1214/aoms/1177700285}{\texttt{doi:10.1214/aoms/1177700285}}\\
+Aportación: condiciones de contracción para programación dinámica descontada. Método: teoría. Contexto: da la prueba de que tu operador T es contracción.
+\item Howard, R. A. (1960). \textit{Dynamic Programming and Markov Processes}. MIT Press. \href{https://openlibrary.org/works/OL31511043W}{\texttt{openlibrary.org/works/OL31511043W}} \textit{(Open Library)}\\
+Aportación: iteración de políticas. Método: libro. Contexto: antecedente de tu paso de Newton.
+\item $\star$\,Puterman, M. L. y S. L. Brumelle (1979). ``On the Convergence of Policy Iteration in Stationary Dynamic Programming''. \textit{Mathematics of Operations Research} 4(1), 60--69. \href{https://doi.org/10.1287/moor.4.1.60}{\texttt{doi:10.1287/moor.4.1.60}}\\
+Aportación: la iteración de políticas equivale a Newton-Kantorovich aplicado a la ecuación de la programación dinámica. Método: análisis abstracto con tasas y cotas de error. Contexto: justifica teóricamente tu paso NK.
+\item Puterman, M. L. (1994). \textit{Markov Decision Processes}. Wiley. \href{https://doi.org/10.1002/9780470316887}{\texttt{doi:10.1002/9780470316887}}\\
+Aportación: tratado estándar de procesos de decisión de Markov. Método: libro. Contexto: referencia general.
+\item $\star$\,$\dagger$\,Stokey, N. L., R. E. Lucas y E. C. Prescott (1989). \textit{Recursive Methods in Economic Dynamics}. Harvard University Press. \href{https://doi.org/10.2307/j.ctvjnrt76}{\texttt{doi:10.2307/j.ctvjnrt76}}\\
+Aportación: métodos recursivos en economía, con contracción y distribuciones invariantes. Método: libro. Contexto: referencia general que ya citas.
+\item $\star$\,Rust, J. (1996). ``Numerical dynamic programming in economics''. En \textit{Handbook of Computational Economics}, 619--729. \href{https://doi.org/10.1016/s1574-0021(96)01016-7}{\texttt{doi:10.1016/s1574-0021(96)01016-7}}\\
+Aportación: revisión de programación dinámica numérica en economía. Método: capítulo de manual. Contexto: explica por qué combinar aproximaciones sucesivas y Newton.
+\item Rust, J. (1997). ``Using Randomization to Break the Curse of Dimensionality''. \textit{Econometrica} 65(3), desde p. 487. \href{https://doi.org/10.2307/2171751}{\texttt{doi:10.2307/2171751}}\\
+Aportación: la aleatorización rompe la maldición de dimensionalidad para una clase de problemas discretos. Método: algoritmos aleatorios. Contexto: útil si tu rejilla de s creciera mucho.
+\item Iskhakov, F., T. H. Jørgensen, J. Rust y B. Schjerning (2017). ``The endogenous grid method for discrete-continuous dynamic choice models with (or without) taste shocks''. \textit{Quantitative Economics} 8(2), 317--365. \href{https://doi.org/10.3982/qe643}{\texttt{doi:10.3982/qe643}}\\
+Aportación: los choques de valor extremo suavizan los problemas con elecciones discretas y continuas. Método: rejilla endógena. Contexto: relevante si agregas decisiones continuas, como cuánto reparar.
+\item $\star$\,Judd, K. L. (1998). \textit{Numerical Methods in Economics}. MIT Press. \href{https://openlibrary.org/works/OL1856113W}{\texttt{openlibrary.org/works/OL1856113W}} \textit{(Open Library)}\\
+Aportación: manual de métodos numéricos en economía. Método: libro. Contexto: referencia general.
+\item Miranda, M. J. y P. L. Fackler (2002). \textit{Applied Computational Economics and Finance}. MIT Press. \href{https://openlibrary.org/works/OL16939199W}{\texttt{openlibrary.org/works/OL16939199W}} \textit{(Open Library)}\\
+Aportación: manual aplicado de economía computacional. Método: libro. Contexto: alternativa práctica a Judd.
+\end{itemize}
+
+\subsection*{Ecuaciones no lineales y aceleración: lo que falta}
+\addcontentsline{toc}{subsection}{Ecuaciones no lineales y aceleración: lo que falta}
+\begin{itemize}
+\item Ortega, J. M. y W. C. Rheinboldt (1970). \textit{Iterative Solution of Nonlinear Equations in Several Variables}. Society for Industrial and Applied Mathematics. \href{https://doi.org/10.1137/1.9780898719468}{\texttt{doi:10.1137/1.9780898719468}}\\
+Aportación: convergencia de Newton y métodos iterativos. Método: libro. Contexto: es la referencia teórica de tu solver.
+\item Kelley, C. T. (1995). \textit{Iterative Methods for Linear and Nonlinear Equations}. Society for Industrial and Applied Mathematics. \href{https://doi.org/10.1137/1.9781611970944}{\texttt{doi:10.1137/1.9781611970944}}\\
+Aportación: Newton inexacto y métodos iterativos para sistemas. Método: libro. Contexto: es la opción si el jacobiano denso de tu equilibrio crece.
+\item Dennis, J. E. y R. B. Schnabel (1996). \textit{Numerical Methods for Unconstrained Optimization and Nonlinear Equations}. Society for Industrial and Applied Mathematics. \href{https://doi.org/10.1137/1.9781611971200}{\texttt{doi:10.1137/1.9781611971200}}\\
+Aportación: Newton, cuasi-Newton y globalización con búsqueda lineal. Método: libro. Contexto: manual para tu solver de precios.
+\item $\star$\,Broyden, C. G. (1965). ``A class of methods for solving nonlinear simultaneous equations''. \textit{Mathematics of Computation} 19(92), 577--593. \href{https://doi.org/10.1090/s0025-5718-1965-0198670-6}{\texttt{doi:10.1090/s0025-5718-1965-0198670-6}}\\
+Aportación: método cuasi-Newton para sistemas sin derivadas. Método: numérico. Contexto: alternativa a recalcular el jacobiano en tu Newton.
+\item Anderson, D. G. (1965). ``Iterative Procedures for Nonlinear Integral Equations''. \textit{Journal of the ACM} 12(4), 547--560. \href{https://doi.org/10.1145/321296.321305}{\texttt{doi:10.1145/321296.321305}}\\
+Aportación: aceleración de iteraciones para ecuaciones no lineales. Método: numérico. Contexto: es el origen de la aceleración de Anderson.
+\item Walker, H. F. y P. Ni (2011). ``Anderson Acceleration for Fixed-Point Iterations''. \textit{SIAM Journal on Numerical Analysis} 49(4), 1715--1735. \href{https://doi.org/10.1137/10078356x}{\texttt{doi:10.1137/10078356x}}\\
+Aportación: formulación moderna de la aceleración de Anderson. Método: numérico. Contexto: es fácil de añadir a tu iteración de punto fijo.
+\item Varadhan, R. y C. Roland (2008). ``Simple and Globally Convergent Methods for Accelerating the Convergence of Any EM Algorithm''. \textit{Scandinavian Journal of Statistics} 35(2), 335--353. \href{https://doi.org/10.1111/j.1467-9469.2007.00585.x}{\texttt{doi:10.1111/j.1467-9469.2007.00585.x}}\\
+Aportación: SQUAREM acelera EM manteniendo su estabilidad. Método: esquemas iterativos. Contexto: útil si estimas con EM.
+\item Saad, Y. y M. H. Schultz (1986). ``GMRES: A Generalized Minimal Residual Algorithm for Solving Nonsymmetric Linear Systems''. \textit{SIAM Journal on Scientific and Statistical Computing} 7(3), 856--869. \href{https://doi.org/10.1137/0907058}{\texttt{doi:10.1137/0907058}}\\
+Aportación: GMRES resuelve sistemas minimizando el residuo en un subespacio de Krylov. Método: numérico. Contexto: permite un Newton sin jacobiano denso.
+\end{itemize}
+
+\subsection*{Cadenas de Markov y discretización: lo que falta}
+\addcontentsline{toc}{subsection}{Cadenas de Markov y discretización: lo que falta}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Tauchen, G. (1986). ``Finite state markov-chain approximations to univariate and vector autoregressions''. \textit{Economics Letters} 20(2), 177--181. \href{https://doi.org/10.1016/0165-1765(86)90168-0}{\texttt{doi:10.1016/0165-1765(86)90168-0}}\\
+Aportación: discretiza procesos autorregresivos en cadenas finitas. Método: numérico. Contexto: es la referencia base para discretizar eta y tu dinámica de s.
+\item Tauchen, G. y R. Hussey (1991). ``Quadrature-Based Methods for Obtaining Approximate Solutions to Nonlinear Asset Pricing Models''. \textit{Econometrica} 59(2), desde p. 371. \href{https://doi.org/10.2307/2938261}{\texttt{doi:10.2307/2938261}}\\
+Aportación: discretización por cuadratura para modelos de expectativas racionales. Método: numérico. Contexto: alternativa a Tauchen (1986).
+\item Kopecky, K. A. y R. M. Suen (2010). ``Finite state Markov-chain approximations to highly persistent processes''. \textit{Review of Economic Dynamics} 13(3), 701--714. \href{https://doi.org/10.1016/j.red.2010.02.002}{\texttt{doi:10.1016/j.red.2010.02.002}}\\
+Aportación: compara métodos para procesos muy persistentes. Método: numérico. Contexto: pertinente si tu proceso de w es persistente.
+\item Stewart, W. J. (1994). \textit{Introduction to the Numerical Solution of Markov Chains}. Princeton University Press. \href{https://doi.org/10.1515/9780691223384}{\texttt{doi:10.1515/9780691223384}}\\
+Aportación: solución numérica de cadenas de Markov, incluida la distribución estacionaria. Método: libro. Contexto: es la referencia para calcular tu q.
+\item Meyn, S., R. L. Tweedie y P. W. Glynn (2009). \textit{Markov Chains and Stochastic Stability}. Cambridge University Press. \href{https://doi.org/10.1017/cbo9780511626630}{\texttt{doi:10.1017/cbo9780511626630}}\\
+Aportación: estabilidad y ergodicidad de cadenas de Markov. Método: libro. Contexto: es la referencia teórica de tu distribución estacionaria.
+\end{itemize}
+
+\subsection*{Diferenciación automática y cómputo: lo que falta}
+\addcontentsline{toc}{subsection}{Diferenciación automática y cómputo: lo que falta}
+\begin{itemize}
+\item Griewank, A. y A. Walther (2008). \textit{Evaluating Derivatives}. Society for Industrial and Applied Mathematics. \href{https://doi.org/10.1137/1.9780898717761}{\texttt{doi:10.1137/1.9780898717761}}\\
+Aportación: tratado de diferenciación algorítmica. Método: libro. Contexto: es la referencia teórica de la autodiferenciación.
+\item Baydin, A. G., B. A. Pearlmutter, A. A. Radul y J. M. Siskind (2018). ``Automatic Differentiation in Machine Learning: A Survey''. \textit{Journal of Machine Learning Research} 18(153), 1--43. \href{https://www.jmlr.org/papers/v18/17-468.html}{\texttt{www.jmlr.org/papers/v18/17-468.html}} \textit{(JMLR)}\\
+Aportación: revisa la diferenciación automática. Método: revisión. Contexto: es una introducción accesible.
+\item Bradbury, J., R. Frostig, P. Hawkins, M. J. Johnson, C. Leary, D. Maclaurin et al. (2018). \textit{JAX: Composable Transformations of Python+NumPy Programs}. Software. \href{https://github.com/jax-ml/jax}{\texttt{github.com/jax-ml/jax}} \textit{(GitHub)}\\
+Aportación: transformaciones componibles de programas numéricos. Método: software. Contexto: es la biblioteca que usa tu código.
+\item $\star$\,Blondel, M., Q. Berthet, M. Cuturi, R. Frostig, S. Hoyer, F. Llinares-López, F. Pedregosa y J.-P. Vert (2022). ``Efficient and Modular Implicit Differentiation''. \textit{Advances in Neural Information Processing Systems} 35, 5230--5242. \href{https://arxiv.org/abs/2105.15183}{\texttt{arxiv.org/abs/2105.15183}} \textit{(arXiv)}\\
+Aportación: diferenciación implícita modular de soluciones de optimización. Método: software y teoría. Contexto: es el origen de jaxopt y se relaciona con tu gradiente por la función implícita.
+\item Aldrich, E. M., J. Fernández-Villaverde, A. Ronald Gallant y J. F. Rubio-Ramírez (2011). ``Tapping the supercomputer under your desk: Solving dynamic equilibrium models with graphics processors''. \textit{Journal of Economic Dynamics and Control} 35(3), 386--393. \href{https://doi.org/10.1016/j.jedc.2010.10.001}{\texttt{doi:10.1016/j.jedc.2010.10.001}}\\
+Aportación: resolver equilibrios dinámicos con GPU. Método: numérico. Contexto: justifica llevar tus corridas a GPU.
+\item Fernández-Villaverde, J. y D. Z. Valencia (2018). ``A Practical Guide to Parallelization in Economics''. Documento de trabajo NBER. \href{https://doi.org/10.3386/w24561}{\texttt{doi:10.3386/w24561}}\\
+Aportación: guía práctica de paralelización en economía. Método: comparación de lenguajes y hardware. Contexto: referencia práctica.
+\end{itemize}
+
+\subsection*{Optimización: lo que falta}
+\addcontentsline{toc}{subsection}{Optimización: lo que falta}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Berndt, E., B. Hall, R. Hall y J. Hausman (1974). ``Estimation and Inference in Nonlinear Structural Models''. \textit{Annals of Economic and Social Measurement} 3(4), 653--665. \href{https://www.nber.org/chapters/c10206}{\texttt{www.nber.org/chapters/c10206}} \textit{(NBER)}\\
+Aportación: algoritmo que aproxima la hessiana con el producto de scores. Método: numérico. Contexto: es tu segunda etapa de maximización.
+\item Broyden, C. G. (1970). ``The Convergence of a Class of Double-rank Minimization Algorithms''. \textit{IMA Journal of Applied Mathematics} 6(3), 222--231. \href{https://doi.org/10.1093/imamat/6.3.222}{\texttt{doi:10.1093/imamat/6.3.222}}\\
+Aportación: nuevo algoritmo de minimización, uno de los cuatro de BFGS. Método: numérico. Contexto: cita los cuatro juntos.
+\item Fletcher, R. (1970). ``A new approach to variable metric algorithms''. \textit{The Computer Journal} 13(3), 317--322. \href{https://doi.org/10.1093/comjnl/13.3.317}{\texttt{doi:10.1093/comjnl/13.3.317}}\\
+Aportación: enfoque de métrica variable sin búsqueda lineal exacta. Método: numérico. Contexto: segundo de los cuatro de BFGS.
+\item Goldfarb, D. (1970). ``A family of variable-metric methods derived by variational means''. \textit{Mathematics of Computation} 24(109), 23--26. \href{https://doi.org/10.1090/s0025-5718-1970-0258249-6}{\texttt{doi:10.1090/s0025-5718-1970-0258249-6}}\\
+Aportación: método de métrica variable de rango dos por un enfoque variacional. Método: numérico. Contexto: tercero de los cuatro de BFGS.
+\item Shanno, D. F. (1970). ``Conditioning of quasi-Newton methods for function minimization''. \textit{Mathematics of Computation} 24(111), 647--656. \href{https://doi.org/10.1090/s0025-5718-1970-0274029-x}{\texttt{doi:10.1090/s0025-5718-1970-0274029-x}}\\
+Aportación: mejor condicionamiento de la aproximación a la hessiana inversa. Método: numérico. Contexto: cuarto de los cuatro de BFGS.
+\item $\star$\,$\dagger$\,Liu, D. C. y J. Nocedal (1989). ``On the limited memory BFGS method for large scale optimization''. \textit{Mathematical Programming} 45(1-3), 503--528. \href{https://doi.org/10.1007/bf01589116}{\texttt{doi:10.1007/bf01589116}}\\
+Aportación: L-BFGS, el método de memoria limitada. Método: numérico. Contexto: es tu primera etapa de maximización.
+\item Byrd, R. H., P. Lu, J. Nocedal y C. Zhu (1995). ``A Limited Memory Algorithm for Bound Constrained Optimization''. \textit{SIAM Journal on Scientific Computing} 16(5), 1190--1208. \href{https://doi.org/10.1137/0916069}{\texttt{doi:10.1137/0916069}}\\
+Aportación: L-BFGS-B añade cotas simples. Método: numérico. Contexto: es la opción si restringes parámetros.
+\item Armijo, L. (1966). ``Minimization of functions having Lipschitz continuous first partial derivatives''. \textit{Pacific Journal of Mathematics} 16(1), 1--3. \href{https://doi.org/10.2140/pjm.1966.16.1}{\texttt{doi:10.2140/pjm.1966.16.1}}\\
+Aportación: regla de búsqueda lineal. Método: numérico. Contexto: se aplica al tamaño de paso de tu optimizador.
+\item Wolfe, P. (1969). ``Convergence Conditions for Ascent Methods''. \textit{SIAM Review} 11(2), 226--235. \href{https://doi.org/10.1137/1011036}{\texttt{doi:10.1137/1011036}}\\
+Aportación: condiciones generales para los pasos de descenso. Método: numérico. Contexto: complementa a Armijo.
+\item $\star$\,$\dagger$\,Nocedal, J. y S. J. Wright (2006). \textit{Numerical Optimization}. Springer New York. \href{https://doi.org/10.1007/978-0-387-40065-5}{\texttt{doi:10.1007/978-0-387-40065-5}}\\
+Aportación: manual estándar de optimización. Método: libro. Contexto: referencia general.
+\item Wächter, A. y L. T. Biegler (2006). ``On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming''. \textit{Mathematical Programming} 106(1), 25--57. \href{https://doi.org/10.1007/s10107-004-0559-y}{\texttt{doi:10.1007/s10107-004-0559-y}}\\
+Aportación: Ipopt, método de punto interior. Método: numérico. Contexto: es lo que usarías si estimaras con MPEC.
+\item Nelder, J. A. y R. Mead (1965). ``A Simplex Method for Function Minimization''. \textit{The Computer Journal} 7(4), 308--313. \href{https://doi.org/10.1093/comjnl/7.4.308}{\texttt{doi:10.1093/comjnl/7.4.308}}\\
+Aportación: simplex sin derivadas. Método: numérico. Contexto: lo menciona la literatura de estimación, aunque tú tienes gradiente exacto.
+\item Knittel, C. R. y K. Metaxoglou (2014). ``Estimation of Random-Coefficient Demand Models: Two Empiricists' Perspective''. \textit{The Review of Economics and Statistics} 96(1), 34--59. \href{https://doi.org/10.1162/rest\_a\_00394}{\texttt{doi:10.1162/rest\_a\_00394}}\\
+Aportación: los optimizadores y arranques cambian estimaciones y predicciones de demanda. Método: diseño exhaustivo de optimización. Contexto: justifica tus múltiples arranques.
+\end{itemize}
+
+\subsection*{Inferencia: lo que falta}
+\addcontentsline{toc}{subsection}{Inferencia: lo que falta}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Newey, W. K. y D. McFadden (1994). ``Large sample estimation and hypothesis testing''. En \textit{Handbook of Econometrics}, 2111--2245. \href{https://doi.org/10.1016/s1573-4412(05)80005-4}{\texttt{doi:10.1016/s1573-4412(05)80005-4}}\\
+Aportación: teoría asintótica de estimadores extremos. Método: capítulo de manual. Contexto: es la referencia de tus errores estándar.
+\item $\star$\,$\dagger$\,White, H. (1982). ``Maximum Likelihood Estimation of Misspecified Models''. \textit{Econometrica} 50(1), 1--25. \href{https://doi.org/10.2307/1912526}{\texttt{doi:10.2307/1912526}}\\
+Aportación: máxima verosimilitud mal especificada y varianza sándwich. Método: teoría. Contexto: es clave para estimar Gillingham sin reparación con datos que sí la tienen.
+\item Murphy, K. M. y R. H. Topel (1985). ``Estimation and Inference in Two-Step Econometric Models''. \textit{Journal of Business \& Economic Statistics} 3(4), 370--379. \href{https://doi.org/10.1080/07350015.1985.10509471}{\texttt{doi:10.1080/07350015.1985.10509471}}\\
+Aportación: corrige errores estándar de estimación en dos pasos. Método: teoría. Contexto: relevante si estimas por etapas.
+\item $\dagger$\,Wooldridge, J. M. (2010). \textit{Econometric Analysis of Cross Section and Panel Data}, 2a. ed. MIT Press. \href{https://openlibrary.org/works/OL5962178W}{\texttt{openlibrary.org/works/OL5962178W}} \textit{(Open Library)}\\
+Aportación: manual de panel y máxima verosimilitud. Método: libro. Contexto: referencia general.
+\end{itemize}
+
+\section{Política de vehículos, chatarreo y México}
+Motiva la pregunta en la introducción. No necesita subsección propia, salvo que tus contrafactuales vayan por aquí. La parte de México puede dar relevancia local a la tesis.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item Heidari, E., S. Bikdeli y M. R. Mansouri Daneshvar (2023). ``A dynamic model for CO2 emissions induced by urban transportation during 2005–2030, a case study of Mashhad, Iran''. \textit{Environment, Development and Sustainability} 25(5), 4217--4236. \href{https://doi.org/10.1007/s10668-022-02240-7}{\texttt{doi:10.1007/s10668-022-02240-7}}\\
+Aportación: proyecta emisiones de transporte urbano en Mashhad. Método: dinámica de sistemas. Contexto: es lejano a tu marco; no hace falta citarlo.\\
+{\footnotesize Archivo: \texttt{A\_dynamic\_model\_for\_CO2\_emissions.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta: chatarreo y política}
+\addcontentsline{toc}{subsection}{Lo que falta: chatarreo y política}
+\begin{itemize}
+\item $\star$\,$\dagger$\,Jacobsen, M. R. y A. A. van Benthem (2015). ``Vehicle Scrappage and Gasoline Policy''. \textit{American Economic Review} 105(3), 1312--1338. \href{https://doi.org/10.1257/aer.20130935}{\texttt{doi:10.1257/aer.20130935}}\\
+Aportación: elasticidad de chatarreo de -0.7, y entre 13 y 16\% del ahorro de combustible se fuga por usados. Método: precios de gasolina y usados. Contexto: muestra lo que importa la vida útil en política y que el chatarreo responde al precio.
+\item $\dagger$\,Bento, A., K. Roth e Y. Zuo (2018). ``Vehicle Lifetime and Scrappage Behavior: Trends in the U.S. Used Car Market''. \textit{The Energy Journal} 39(1), 159--184. \href{https://doi.org/10.5547/01956574.39.1.aben}{\texttt{doi:10.5547/01956574.39.1.aben}}\\
+Aportación: la vida media de los autos en EE. UU. pasó de 12.2 a 15.6 años; elasticidad de chatarreo de -0.4. Método: datos nacionales de 1969 a 2014. Contexto: tendencia que Hamilton y Macauley (1999) también documentan y que tu modelo ayuda a interpretar.
+\item Mian, A. y A. Sufi (2012). ``The Effects of Fiscal Stimulus: Evidence from the 2009 Cash for Clunkers Program*''. \textit{The Quarterly Journal of Economics} 127(3), 1107--1142. \href{https://doi.org/10.1093/qje/qjs024}{\texttt{doi:10.1093/qje/qjs024}}\\
+Aportación: Cash for Clunkers indujo unos 370,000 autos en dos meses, y luego se revirtió casi por completo. Método: variación entre ciudades. Contexto: evidencia de política sobre el reemplazo, que tu modelo captaría.
+\item Hoekstra, M., S. L. Puller y J. West (2017). ``Cash for Corollas: When Stimulus Reduces Spending''. \textit{American Economic Journal: Applied Economics} 9(3), 1--35. \href{https://doi.org/10.1257/app.20150172}{\texttt{doi:10.1257/app.20150172}}\\
+Aportación: más de la mitad de los subsidios fue a quienes igual iban a comprar y, en neto, se redujo el gasto. Método: discontinuidad de regresión. Contexto: muestra las limitaciones de subsidiar el reemplazo; subsidiar la reparación es la alternativa natural.
+\item Li, S., C. Timmins y R. H. von Haefen (2009). ``How Do Gasoline Prices Affect Fleet Fuel Economy?''. \textit{American Economic Journal: Economic Policy} 1(2), 113--137. \href{https://doi.org/10.1257/pol.1.2.113}{\texttt{doi:10.1257/pol.1.2.113}}\\
+Aportación: la gasolina más cara desplaza compras y acelera el chatarreo de autos ineficientes. Método: registros en 20 áreas urbanas. Contexto: otro precio que mueve la vida útil.
+\item Busse, M. R., C. R. Knittel y F. Zettelmeyer (2013). ``Are Consumers Myopic? Evidence from New and Used Car Purchases''. \textit{American Economic Review} 103(1), 220--256. \href{https://doi.org/10.1257/aer.103.1.220}{\texttt{doi:10.1257/aer.103.1.220}}\\
+Aportación: hay poca evidencia de miopía frente al gasto en combustible. Método: precios de equilibrio y tasas implícitas. Contexto: apoya tu supuesto de agentes prospectivos.
+\item Allcott, H. y N. Wozny (2014). ``Gasoline Prices, Fuel Economy, and the Energy Paradox''. \textit{Review of Economics and Statistics} 96(5), 779--795. \href{https://doi.org/10.1162/rest\_a\_00419}{\texttt{doi:10.1162/rest\_a\_00419}}\\
+Aportación: los consumidores valoran 1 dólar de gasto futuro como 0.76 de precio. Método: precios relativos y variación de gasolina. Contexto: matiza el anterior.
+\item Kahn, J. A. (1986). ``Gasoline Prices and the Used Automobile Market: A Rational Expectations Asset Price Approach''. \textit{The Quarterly Journal of Economics} 101(2), desde p. 323. \href{https://doi.org/10.2307/1891118}{\texttt{doi:10.2307/1891118}}\\
+Aportación: los choques en la gasolina mueven los precios de usados como activos. Método: modelo de valoración, 1972 a 1981. Contexto: sustenta que los usados se comporten como activos.
+\item Grigolon, L., M. Reynaert y F. Verboven (2018). ``Consumer Valuation of Fuel Costs and Tax Policy: Evidence from the European Car Market''. \textit{American Economic Journal: Economic Policy} 10(3), 193--225. \href{https://doi.org/10.1257/pol.20160078}{\texttt{doi:10.1257/pol.20160078}}\\
+Aportación: con heterogeneidad en kilómetros, los impuestos a combustible superan a los de producto. Método: datos por producto en Europa. Contexto: complementa los contrafactuales fiscales de Gillingham et al.
+\item $\star$\,Knittel, C. R. y R. Sandler (2018). ``The Welfare Impact of Second-Best Uniform-Pigouvian Taxation: Evidence from Transportation''. \textit{American Economic Journal: Economic Policy} 10(4), 211--242. \href{https://doi.org/10.1257/pol.20160508}{\texttt{doi:10.1257/pol.20160508}}\\
+Aportación: con externalidades heterogéneas, el impuesto indirecto funciona mal. Método: aplicación a gasolina y contaminación. Contexto: esa heterogeneidad depende en parte del estado y la edad de los autos.
+\end{itemize}
+
+\subsection*{Lo que falta: México y América Latina}
+\addcontentsline{toc}{subsection}{Lo que falta: México y América Latina}
+\begin{itemize}
+\item $\star$\,Davis, L. W. y M. E. Kahn (2010). ``International Trade in Used Vehicles: The Environmental Consequences of NAFTA''. \textit{American Economic Journal: Economic Policy} 2(4), 58--82. \href{https://doi.org/10.1257/pol.2.4.58}{\texttt{doi:10.1257/pol.2.4.58}}\\
+Aportación: más de 2.5 millones de usados exportados de EE. UU. a México; las emisiones medias caen, pero las totales aumentan porque en México se retiran poco. Método: datos a nivel vehículo. Contexto: es el enlace más claro entre vida útil y México.
+\item $\star$\,Chen, L., B. C. Garcia-Medina y R. Wan (2019). ``Trade liberalization, consumption shifting and pollution: Evidence from Mexico's used vehicle imports''. \textit{Review of International Economics} 27(5), 1591--1608. \href{https://doi.org/10.1111/roie.12436}{\texttt{doi:10.1111/roie.12436}}\\
+Aportación: las importaciones de usados reducen emisiones por el efecto técnico. Método: datos de importación y registro. Contexto: matiza a Davis y Kahn (2010).
+\item Chen, L., B. C. Garcia-Medina y R. Wan (2022). ``Trade Liberalization, Consumption Shifting and Pollution: Evidence from Mexico's Used Vehicle Imports''. Documento de trabajo 2022-02, Banco de México. \href{https://ideas.repec.org/p/bdm/wpaper/2022-02.html}{\texttt{ideas.repec.org/p/bdm/wpaper/2022-02.html}} \textit{(RePEc)}\\
+Aportación: desplazamiento de consumo y contaminación con usados importados. Método: datos de México. Contexto: es la versión del Banco de México, cercana a la anterior; no la cites como evidencia independiente.
+\item $\star$\,Davis, L. W. (2008). ``The Effect of Driving Restrictions on Air Quality in Mexico City''. \textit{Journal of Political Economy} 116(1), 38--81. \href{https://doi.org/10.1086/529398}{\texttt{doi:10.1086/529398}}\\
+Aportación: Hoy No Circula no mejora el aire y aumentó el número de autos en circulación. Método: datos de alta frecuencia. Contexto: muestra cómo responde el parque vehicular de la Ciudad de México a la política.
+\item $\star$\,Oliva, P. (2015). ``Environmental Regulations and Corruption: Automobile Emissions in Mexico City''. \textit{Journal of Political Economy} 123(3), 686--724. \href{https://doi.org/10.1086/680936}{\texttt{doi:10.1086/680936}}\\
+Aportación: revela trampa en verificación vehicular a partir de la varianza de las lecturas. Método: método estadístico con datos de centros de verificación. Contexto: es evidencia mexicana de que el estado del coche es difícil de observar; además, detecta conducta oculta con datos, como tu tesis.
+\item Gallego, F., J.-P. Montero y C. Salas (2013). ``The effect of transport policies on car use: Evidence from Latin American cities''. \textit{Journal of Public Economics} 107, 47--62. \href{https://doi.org/10.1016/j.jpubeco.2013.08.007}{\texttt{doi:10.1016/j.jpubeco.2013.08.007}}\\
+Aportación: políticas de transporte y uso de autos en ciudades latinoamericanas. Método: análisis de política. Contexto: amplía la mirada regional.
+\end{itemize}
+
+\section{Medio ambiente, economía circular y crítica de la obsolescencia}
+Contexto y motivación. Tiene poco peso económico, así que conviene citarlo poco; es de donde salía tu pregunta anterior.
+
+\subsection*{Vida útil y extensión: lo que tienes}
+\addcontentsline{toc}{subsection}{Vida útil y extensión: lo que tienes}
+\begin{itemize}
+\item $\dagger$\,Bakker, C., F. Wang, J. Huisman y M. den Hollander (2014). ``Products that go round: exploring product life extension through design''. \textit{Journal of Cleaner Production} 69, 10--16. \href{https://doi.org/10.1016/j.jclepro.2014.01.028}{\texttt{doi:10.1016/j.jclepro.2014.01.028}}\\
+Aportación: extender la vida útil de refrigeradores y laptops es preferible pese a ganancias de eficiencia. Método: análisis de impactos ambientales en el tiempo. Contexto: es el argumento ambiental de reparar, pero con otros productos. Tienes dos copias.\\
+{\footnotesize Archivo: \texttt{Bakker.pdf}}
+\item Stahel, W. R. (2010). \textit{The Performance Economy}. Palgrave Macmillan UK. \href{https://doi.org/10.1057/9780230274907}{\texttt{doi:10.1057/9780230274907}}\\
+Aportación: economía del desempeño: vender servicios en lugar de productos. Método: libro conceptual. Contexto: marco general, no resultado citable.\\
+{\footnotesize Archivo: \texttt{THE\_PERFORMANCE\_ECONOMY1.pdf}}
+\end{itemize}
+
+\subsection*{Crítica y revisión: lo que tienes}
+\addcontentsline{toc}{subsection}{Crítica y revisión: lo que tienes}
+\begin{itemize}
+\item $\ddagger$\,Slade, G. (2006). \textit{Made to Break}. Harvard University Press. \href{https://doi.org/10.4159/9780674043756}{\texttt{doi:10.4159/9780674043756}}\\
+Aportación: historia de la obsolescencia en EE. UU. en el siglo XX. Método: historia de la tecnología. Contexto: sirve para motivar el tema.\\
+{\footnotesize Archivo: \texttt{slade-g-made-to-break-2007.pdf}}
+\item Rivera, J. L. y A. Lallmahomed (2016). ``Environmental implications of planned obsolescence and product lifetime: a literature review''. \textit{International Journal of Sustainable Engineering} 9(2), 119--129. \href{https://doi.org/10.1080/19397038.2015.1099757}{\texttt{doi:10.1080/19397038.2015.1099757}}\\
+Aportación: implicaciones ambientales de la obsolescencia y la vida del producto. Método: revisión de literatura. Contexto: buena entrada a esta rama.\\
+{\footnotesize Archivo: \texttt{Environmental implications of planned obsolescence.pdf}}
+\item Guiltinan, J. (2009). ``Creative Destruction and Destructive Creations: Environmental Ethics and Planned Obsolescence''. \textit{Journal of Business Ethics} 89(S1), 19--28. \href{https://doi.org/10.1007/s10551-008-9907-9}{\texttt{doi:10.1007/s10551-008-9907-9}}\\
+Aportación: por qué funciona la obsolescencia y sus responsabilidades éticas. Método: ensayo de ética de negocios. Contexto: lejano a tu tema.\\
+{\footnotesize Archivo: \texttt{Guiltinan-CreativeDestructionDestructive-2009.pdf}}
+\item Wieser, H. (2016). ``Beyond Planned Obsolescence: Product Lifespans and the Challenges to a Circular Economy''. \textit{GAIA - Ecological Perspectives for Science and Society} 25(3), 156--160. \href{https://doi.org/10.14512/gaia.25.3.5}{\texttt{doi:10.14512/gaia.25.3.5}}\\
+Aportación: prohibir la obsolescencia y la economía circular no bastan; hacen falta medidas de suficiencia. Método: ensayo a partir de una campaña de telefonía. Contexto: pone en duda la centralidad del término, lo que ayuda a justificar tu cambio de pregunta.\\
+{\footnotesize Archivo: \texttt{Beyond PO.pdf}}
+\item Satyro, W. C., J. B. Sacomano, J. C. Contador y R. Telles (2018). ``Planned obsolescence or planned resource depletion? A sustainable approach''. \textit{Journal of Cleaner Production} 195, 744--752. \href{https://doi.org/10.1016/j.jclepro.2018.05.222}{\texttt{doi:10.1016/j.jclepro.2018.05.222}}\\
+Aportación: propone mecanismos como el diseño para consumo rápido. Método: revisión, datos secundarios y ejemplos de campo. Contexto: otro panorama sobre el tema.\\
+{\footnotesize Archivo: \texttt{Planned obsolescence or planned resource depletion.pdf}}
+\item Sapmaz Veral, E. (2023). ``Planned Obsolescence: a Hidden Threat to Environmental Security and the Recent Eu Policy''. \textit{Sayıştay Dergisi} 33(127), 637--664. \href{https://doi.org/10.52836/sayistay.1217903}{\texttt{doi:10.52836/sayistay.1217903}}\\
+Aportación: la obsolescencia como amenaza ambiental y evaluación de la política de la UE. Método: revisión. Contexto: útil para la motivación regulatoria.\\
+{\footnotesize Archivo: \texttt{Planned Obsolescence A Hidden Threat.pdf}}
+\item Schreiber, D., H. M. Hupffer y S. M. Gayer (2022). ``Análise Reflexiva Sobre O Papel Da Publicidade Para Consolidar O Modelo De Obsolescência Programada''. \textit{Revista de Gestão Social e Ambiental} 16(2), e03010. \href{https://doi.org/10.24857/rgsa.v16n2-023}{\texttt{doi:10.24857/rgsa.v16n2-023}}\\
+Aportación: papel de la publicidad en la percepción de obsolescencia. Método: enfoque hermenéutico sin datos. Contexto: fuera de tu marco.\\
+{\footnotesize Archivo: \texttt{REFLECTIVE\_ANALYSIS\_ON\_THE\_ROLE\_OF\_ADVER.pdf}}
+\end{itemize}
+
+\subsection*{Consumidores y residuos: lo que tienes}
+\addcontentsline{toc}{subsection}{Consumidores y residuos: lo que tienes}
+\begin{itemize}
+\item Kuppelwieser, V. G., P. Klaus, A. Manthiou y O. Boujena (2019). ``Consumer responses to planned obsolescence''. \textit{Journal of Retailing and Consumer Services} 47, 157--165. \href{https://doi.org/10.1016/j.jretconser.2018.11.014}{\texttt{doi:10.1016/j.jretconser.2018.11.014}}\\
+Aportación: la obsolescencia daña el valor percibido y la disposición a pagar. Método: tres estudios de consumidores. Contexto: sugiere que la durabilidad percibida pesa en la demanda.\\
+{\footnotesize Archivo: \texttt{Consumer\_responses\_to\_planned\_obsolescen.pdf}}
+\item Oraee, A., L. Pohl, D. Geurts y M. Reichel (2024). ``Overcoming Premature Smartphone Obsolescence amongst Young Adults''. \textit{Cleaner and Responsible Consumption} 12, 100174. \href{https://doi.org/10.1016/j.clrc.2024.100174}{\texttt{doi:10.1016/j.clrc.2024.100174}}\\
+Aportación: determinantes del reemplazo prematuro de teléfonos en jóvenes. Método: entrevistas y encuesta con teorías de actividad e instalación. Contexto: señala que el reemplazo no responde solo a fallas.\\
+{\footnotesize Archivo: \texttt{premature smarthphone.pdf}}
+\item Dupré, M., M. Jahnich, V. Ramirez, G. Boulbry y É. Ferreira (2016). \textit{The Influence of Lifespan Labelling on Consumers}. Comité Económico y Social Europeo. \href{https://hal.science/hal-04535706}{\texttt{hal.science/hal-04535706}} \textit{(portada de tu PDF)}\\
+Aportación: efectos de etiquetar la vida útil. Método: experimentos para el Comité Económico y Social Europeo. Contexto: una política de información distinta de la de precios.\\
+{\footnotesize Archivo: \texttt{The influence of lifespan on consumers.pdf}}
+\item Huisman, J. (2013). ``Too Big to Fail, Too Academic to Function''. \textit{Journal of Industrial Ecology} 17(2), 172--174. \href{https://doi.org/10.1111/jiec.12012}{\texttt{doi:10.1111/jiec.12012}}\\
+Aportación: la responsabilidad individual del productor no incentiva el diseño para reciclaje. Método: columna de opinión. Contexto: lateral, solo para discusión.\\
+{\footnotesize Archivo: \texttt{Too big to fail.pdf}}
+\item Huisman, J., M. van der Maesen, R. J. J. Eijsbouts, F. Wang, C. P. Baldé y C. A. Wielenga (2012). \textit{The Dutch WEEE Flows}. United Nations University. \textit{(cita tomada de la portada de tu PDF)}\\
+Aportación: flujos de residuos electrónicos y vidas útiles en Países Bajos. Método: balance de masa. Contexto: dato de contexto de electrónicos.\\
+{\footnotesize Archivo: \texttt{Report The Dutch WEEE Flows 2010.pdf}}
+\item Baldé, C. P., S. van den Brink, V. Forti, A. van der Schalk y F. Hopstaken (2020). \textit{The Dutch WEEE Flows 2020: What Happened between 2010 and 2018}. UNU/UNITAR. \textit{(cita tomada de la portada de tu PDF)}\\
+Aportación: actualiza los flujos anteriores para 2010--2018. Método: el mismo balance. Contexto: continuación del reporte anterior.\\
+{\footnotesize Archivo: \texttt{Dutch\_WEEE\_flows\_ENGNL1.pdf}}
+\item Mongardini, J. y A. Radzikowski (2020). ``Global Smartphone Sales May Have Peaked: What Next?''. IMF Working Paper 20/70. \href{https://doi.org/10.5089/9781513545851.001}{\texttt{doi:10.5089/9781513545851.001}} \textit{(DOI en la portada de tu PDF)}\\
+Aportación: las ventas globales de teléfonos pudieron alcanzar su máximo. Método: análisis de datos para el FMI. Contexto: los ciclos de reemplazo se alargan, pero en otro mercado.\\
+{\footnotesize Archivo: \texttt{Global\_Smartphones\_Sales\_May\_Have\_Peaked.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta}
+\addcontentsline{toc}{subsection}{Lo que falta}
+\begin{itemize}
+\item $\star$\,Cooper, T. (ed.) (2010). \textit{Longer Lasting Products}. Routledge. \href{https://doi.org/10.4324/9781315592930}{\texttt{doi:10.4324/9781315592930}}\\
+Aportación: referencia sobre productos duraderos, con la definición de obsolescencia que cita Wieser. Método: libro editado. Contexto: la mejor cita si necesitas definir el término.
+\item Packard, V. (1960). \textit{The Waste Makers}. David McKay. \href{https://openlibrary.org/works/OL3533448W}{\texttt{openlibrary.org/works/OL3533448W}} \textit{(Open Library)}\\
+Aportación: crítica popular de la obsolescencia. Método: ensayo. Contexto: es el origen del debate público.
+\item Kirchherr, J., D. Reike y M. Hekkert (2017). ``Conceptualizing the circular economy: An analysis of 114 definitions''. \textit{Resources, Conservation and Recycling} 127, 221--232. \href{https://doi.org/10.1016/j.resconrec.2017.09.005}{\texttt{doi:10.1016/j.resconrec.2017.09.005}}\\
+Aportación: sistematiza 114 definiciones de economía circular. Método: codificación en 17 dimensiones. Contexto: útil si usas el término.
+\item Geissdoerfer, M., P. Savaget, N. M. Bocken y E. J. Hultink (2017). ``The Circular Economy – A new sustainability paradigm?''. \textit{Journal of Cleaner Production} 143, 757--768. \href{https://doi.org/10.1016/j.jclepro.2016.12.048}{\texttt{doi:10.1016/j.jclepro.2016.12.048}}\\
+Aportación: relación entre economía circular y sostenibilidad. Método: revisión. Contexto: complementa la anterior.
+\item Forti, V., C. P. Baldé, R. Kuehr y G. Bel (2020). \textit{The Global E-waste Monitor 2020}. UNU/UNITAR/ITU/ISWA. \href{https://ewastemonitor.info/gem-2020/}{\texttt{ewastemonitor.info/gem-2020/}} \textit{(sitio oficial)}\\
+Aportación: datos globales de residuos electrónicos. Método: reporte estadístico. Contexto: dato de motivación.
+\end{itemize}
+
+\section{Medición de precios, calidad y vida útil}
+Sirve para calibrar precios de reparación y supervivencia, y para una futura estimación con datos.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item Gordon, R. J. (1990). ``Introduction and Summary of Findings''. Cap. 1 de \textit{The Measurement of Durable Goods Prices}, 3--39. University of Chicago Press. \href{http://www.nber.org/chapters/c8309}{\texttt{www.nber.org/chapters/c8309}} \textit{(NBER)}\\
+Aportación: nuevos índices de durables que crecen más lento que los oficiales. Método: resumen del libro. Contexto: muestra por qué ajustar por calidad cambia las conclusiones.\\
+{\footnotesize Archivo: \texttt{01 Introduction and meth.pdf}}
+\item Gordon, R. J. (1990). ``Conceptual Issues in the Measurement of Price and Quality Changes''. Cap. 2 de \textit{The Measurement of Durable Goods Prices}, 40--78. University of Chicago Press. \href{http://www.nber.org/chapters/c8310}{\texttt{www.nber.org/chapters/c8310}} \textit{(NBER)}\\
+Aportación: teoría de medición de calidad y precios. Método: desarrollo conceptual. Contexto: da el marco teórico de los capítulos siguientes.\\
+{\footnotesize Archivo: \texttt{03 Conceptual Issues in the.pdf}}
+\item Gordon, R. J. (1990). ``The Methodology of Quality Adjustment''. Cap. 3 de \textit{The Measurement of Durable Goods Prices}, 79--110. University of Chicago Press. \href{http://www.nber.org/chapters/c8311}{\texttt{www.nber.org/chapters/c8311}} \textit{(NBER)}\\
+Aportación: métodos prácticos de ajuste por calidad. Método: hedónicos y comparaciones. Contexto: útil si construyes un índice de precios.\\
+{\footnotesize Archivo: \texttt{04 Meth of quality adjustment.pdf}}
+\item Gordon, R. J. (1990). ``New and Used Automobiles''. Cap. 8 de \textit{The Measurement of Durable Goods Prices}, 321--382. University of Chicago Press. \href{http://www.nber.org/chapters/c8316}{\texttt{www.nber.org/chapters/c8316}} \textit{(NBER)}\\
+Aportación: índices de autos nuevos y usados. Método: hedónicos con datos de usados. Contexto: es el capítulo pertinente; tienes también los de aeronaves, equipo eléctrico, computadoras y electrodomésticos.\\
+{\footnotesize Archivo: \texttt{09 New and used auto.pdf}}
+\item Oguchi, M. y M. Fuse (2015). ``Regional and Longitudinal Estimation of Product Lifespan Distribution: A Case Study for Automobiles and a Simplified Estimation Method''. \textit{Environmental Science \& Technology} 49(3), 1738--1743. \href{https://doi.org/10.1021/es505245q}{\texttt{doi:10.1021/es505245q}}\\
+Aportación: distribuciones de vida útil de autos en 17 países. Método: perfiles de edad en uso y un método simplificado. Contexto: es una fuente directa para calibrar tu supervivencia.\\
+{\footnotesize Archivo: \texttt{Regional and Longitudinal Estimation.pdf}}
+\end{itemize}
+
+\subsection*{Lo que falta}
+\addcontentsline{toc}{subsection}{Lo que falta}
+\begin{itemize}
+\item $\star$\,Griliches, Z. (1961). ``Hedonic Price Indexes for Automobiles: An Econometric Analysis of Quality Change''. En \textit{The Price Statistics of the Federal Government}, 173--196. NBER. \href{https://www.nber.org/chapters/c6492}{\texttt{www.nber.org/chapters/c6492}} \textit{(NBER)}\\
+Aportación: precios hedónicos de autos. Método: regresión de precios sobre características. Contexto: es un método para limpiar el precio de reparación por composición.
+\item Rosen, S. (1974). ``Hedonic Prices and Implicit Markets: Product Differentiation in Pure Competition''. \textit{Journal of Political Economy} 82(1), 34--55. \href{https://doi.org/10.1086/260169}{\texttt{doi:10.1086/260169}}\\
+Aportación: teoría de precios hedónicos. Método: equilibrio con productos diferenciados. Contexto: fundamento del anterior.
+\item Ohta, M. y Z. Griliches (1976). ``Automobile Prices Revisited: Extensions of the Hedonic Hypothesis''. En N. Terleckyj (ed.), \textit{Household Production and Consumption}, 325--398. NBER. \href{https://doi.org/10.4337/9781035351442.00029}{\texttt{doi:10.4337/9781035351442.00029}} \textit{(Crossref (reimpresión))}\\
+Aportación: precios de autos usados y extensión de la hipótesis hedónica. Método: hedónicos. Contexto: conecta hedónicos y usados.
+\end{itemize}
+
+\section{Documentos periféricos: probablemente no los cites}
+Los reviso para que sepas qué son, pero no aportan a tu pregunta.
+
+\subsection*{Lo que tienes}
+\addcontentsline{toc}{subsection}{Lo que tienes}
+\begin{itemize}
+\item Leeson, P. T. (2020). ``Logic is a harsh mistress: welfare economics for economists''. \textit{Journal of Institutional Economics} 16(2), 145--150. \href{https://doi.org/10.1017/s1744137419000109}{\texttt{doi:10.1017/s1744137419000109}}\\
+Aportación: argumenta que toda institución observada es eficiente. Método: ensayo. Contexto: solo serviría para una discusión filosófica de bienestar.\\
+{\footnotesize Archivo: \texttt{Logic\_is\_a\_Harsh\_Mistress (welfare).pdf}}
+\item Gupta, S. y R. E. Romano (1998). ``Monitoring the Principal with Multiple Agents''. \textit{The RAND Journal of Economics} 29(2), 427--442. \href{https://doi.org/10.2307/2555896}{\texttt{doi:10.2307/2555896}}\\
+Aportación: contratos de presupuesto balanceado que resuelven el doble riesgo moral. Método: teoría de contratos. Contexto: sin relación directa.\\
+{\footnotesize Archivo: \texttt{Gupta-MonitoringPrincipalMultiple-1998.pdf}}
+\item Atalay, E., A. Hortaçsu, N. Kimmel y C. Syverson (2025). ``Why Is Manufacturing Productivity Growth So Low?''. NBER Working Paper 34264. \href{https://www.nber.org/papers/w34264}{\texttt{www.nber.org/papers/w34264}} \textit{(NBER)}\\
+Aportación: el bajo crecimiento manufacturero subestima mejoras de calidad. Método: comparación de deflactores. Contexto: lejano a tu tema, salvo por medición de calidad.\\
+{\footnotesize Archivo: \texttt{TFP manufacture.pdf}}
+\item Ates, A. y N. Acur (2022). ``Making obsolescence obsolete: Execution of digital transformation in a high-tech manufacturing SME''. \textit{Journal of Business Research} 152, 336--348. \href{https://doi.org/10.1016/j.jbusres.2022.07.052}{\texttt{doi:10.1016/j.jbusres.2022.07.052}}\\
+Aportación: obsolescencia organizacional y capacidades dinámicas en una pyme. Método: estudio de caso cualitativo. Contexto: no trata de la obsolescencia de producto.\\
+{\footnotesize Archivo: \texttt{Making\_obsolescence\_obsolete.pdf}}
+\item de Oliveira, R. G. (2013). ``Planned Obsolescence''. \textit{Leadership and Management in Engineering} 13(4), 262--264. \href{https://doi.org/10.1061/(asce)lm.1943-5630.0000244}{\texttt{doi:10.1061/(asce)lm.1943-5630.0000244}}\\
+Aportación: obsolescencia como analogía de carreras en ingeniería. Método: columna de opinión. Contexto: sin relación.\\
+{\footnotesize Archivo: \texttt{de-oliveira-2013-planned-obsolescence.pdf}}
+\item Elicit (s.f.). ``Repairability Decisions in Dynamic Oligopoly -- Report''. \textit{(solo en tu carpeta)}\\
+Reporte generado por IA con solo dos estudios. No es una fuente citable; úsalo como pista.\\
+{\footnotesize Archivo: \texttt{Elicit - Repairability Decisions in Dynamic Oligopoly - Report.pdf}}
+\end{itemize}
+
+\appendix
+\section{Qué dejé fuera de la clasificación}
+\begin{itemize}
+\item \textbf{Trabajo tuyo, no literatura:} \texttt{Materia Julen/}, \texttt{Proyecto Aurora stuff/}, \texttt{output/} y \texttt{Fuentes/Thesis\_presentation.pdf}.
+\item \textbf{Datos y fichas:} \texttt{Manual\_usuario\_EVSM.pdf} (escaneado, no lo pude leer) y el folleto comercial del \textit{IDC Mobile Phone Tracker}.
+\item \textbf{Capítulos de Gordon (1990) resumidos en conjunto:} prefacio, aeronaves, equipo eléctrico, computadoras y electrodomésticos.
+\item \textbf{Copias duplicadas:} las versiones repetidas de Moral y Jaumandreu; Arcidiacono y Miller; Gavazza et al.; Esteban y Shum; Gillingham et al.; y Bakker et al. Aparecen una sola vez.
+\end{itemize}
+\end{document}

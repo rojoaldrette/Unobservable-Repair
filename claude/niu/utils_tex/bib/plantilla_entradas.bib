@@ -1,0 +1,69 @@
+% Plantillas para copiar y llenar. Campos opcionales marcados con %.
+% Autores: "Apellido, Nombre and Apellido, Nombre"  (siempre "and", nunca "y" ni comas entre autores).
+% Más de los que caben: "... and others" -> "et al.".
+% Apellidos compuestos o institucionales entre llaves: {Banco de México}, {van Benthem}, A. A.
+% Acentos: UTF-8 directo (Rückschloss) funciona con biber; {\"u} funciona siempre.
+
+@article{ClaveArticulo2024,
+  author    = {Apellido, N. and Apellido2, M.},
+  year      = {2024},
+  title     = {Título del artículo},
+  journal   = {Nombre de la Revista},
+  volume    = {10},
+  number    = {2},          % opcional
+  pages     = {100--120},   % doble guion
+  doi       = {10.xxxx/xxxxx}, % opcional
+}
+
+@book{ClaveLibro2010,
+  author    = {Apellido, N.},
+  year      = {2010},
+  title     = {Título del Libro},
+  edition   = {2},          % opcional, solo el número
+  publisher = {Editorial},
+  address   = {Ciudad},     % opcional
+}
+
+@incollection{ClaveCapitulo1994,
+  author    = {Apellido, N.},
+  editor    = {Editor, A. and Editor2, B.},
+  year      = {1994},
+  title     = {Título del capítulo},
+  booktitle = {Título del libro / Handbook},
+  volume    = {4},          % opcional
+  pages     = {3081--3143},
+  publisher = {Elsevier},
+}
+
+@techreport{ClaveDocTrabajo2023,
+  author      = {Apellido, N.},
+  year        = {2023},
+  title       = {Título del documento de trabajo},
+  institution = {Banco de México},
+  type        = {Documento de investigación},
+  number      = {2023-01},
+}
+
+@misc{ClaveArxiv2025,
+  author     = {Apellido, N.},
+  year       = {2025},
+  title      = {Título},
+  note       = {Documento de trabajo},
+  eprint     = {2503.23792},
+  eprinttype = {arxiv},
+}
+
+@phdthesis{ClaveTesis2020,
+  author    = {Apellido, N.},
+  year      = {2020},
+  title     = {Título de la tesis},
+  school    = {El Colegio de México},
+}
+
+@online{ClaveDatos2024,
+  author    = {{Instituto Nacional de Estadística y Geografía}},
+  year      = {2024},
+  title     = {Nombre de la base de datos},
+  url       = {https://www.inegi.org.mx/},
+  urldate   = {2026-11-08},
+}
