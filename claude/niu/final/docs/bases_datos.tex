@@ -1,0 +1,584 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{fancyvrb}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{hyperref}
+
+\newcommand{\col}[1]{\texttt{#1}}
+\newcommand{\archivo}[1]{\textbf{\texttt{#1}}}
+\fvset{fontsize=\footnotesize,frame=single,framesep=2mm}
+
+\title{Bases de datos del modelo y del Monte Carlo\\
+\large Qué se genera, cómo leerlo y qué gráficas salen}
+\author{Notas de Claude para Rodrigo}
+\date{18 de noviembre de 2026}
+
+\sloppy
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Panorama}
+
+Todo se escribe en \texttt{claude/niu/final/output/modelo\_tesis/}, en dos carpetas:
+
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{lll}
+\toprule
+Carpeta & La genera & Qué hay\\
+\midrule
+\texttt{teoria/<tag>/} & \texttt{teoria.py} & El equilibrio \emph{verdadero} de los 3 regímenes y un panel simulado.\\
+\texttt{montecarlo/<tag>/} & \texttt{montecarlo.py}, \texttt{por\_edad\_mc.py} & Las estimaciones de cada réplica y el equilibrio en cada $\hat\theta$.\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\paragraph{Orden para correr en GPU.}
+\begin{Verbatim}
+cd claude/niu/final/modelo_tesis
+python -u teoria.py --tag R_LB --guardar_panel -v       # 1. equilibrio verdadero
+python -u montecarlo.py --reps 0:50                     # 2. estimaciones (o en dos GPUs)
+python -u montecarlo.py --summarize                     # 3. tabla resumen
+python -u por_edad_mc.py --reps 0:50                    # 4. equilibrio en cada theta estimado
+\end{Verbatim}
+\texttt{montecarlo.py} y \texttt{por\_edad\_mc.py} buscan el equilibrio verdadero en
+\texttt{teoria/R\_LB/}. Por eso el paso 1 usa \texttt{--tag R\_LB}; si usas otro tag, pásalo
+con \texttt{--desde <tag>}.
+
+\paragraph{Convenciones que se repiten en todos los archivos.}
+\begin{itemize}
+  \item \col{regimen}: 0, 1, 2 $\leftrightarrow$ $\zeta=-0.3,\,0,\,+0.3$ (reparación barata,
+  base, cara). El régimen 1 es el base.
+  \item \col{j}: marca. 0 = light brown, 1 = heavy brown.
+  \item \col{a}: edad del coche, $1,\dots,24$. En el panel, $a=0$ es terminal y $a=-1$ sin coche.
+  \item \col{tipo}, o \col{t} en los nombres de parámetros: 0 = pareja pobre, 1 = soltero pobre.
+  \item Precios en miles de coronas danesas (DKK). Utilidades en utils.
+  \item \col{q}: fracción de la masa de hogares. Suma 1 sobre \emph{todos} los estados,
+  incluidos sin coche y terminal, así que $\sum_{j,a}q<1$.
+  \item Todo se promedia sobre los dos tipos con pesos $f=(1/2,1/2)$, salvo que se diga otra cosa.
+\end{itemize}
+
+\paragraph{Sobre los ejemplos.} Las filas de \texttt{teoria/} vienen de una corrida
+\emph{de prueba} con la especificación nueva (\texttt{teoria.py --prueba}: $\bar a=10$, grid
+de $w$ chico). Las del Monte Carlo vienen del MC de octubre (\texttt{claude/niu/output/}), que
+tiene el mismo formato. Con la especificación nueva solo cambian dos cosas: ya no existe el
+parámetro \col{tc\_sell\_inspect}, y \col{delta} ahora vale 0.075. Los números de los
+ejemplos son ilustrativos y están redondeados; los archivos traen precisión completa.
+
+\paragraph{Leer en R.}
+\begin{Verbatim}
+library(tidyverse)
+base <- "claude/niu/final/output/modelo_tesis"
+mc   <- file.path(base, "montecarlo", "base")
+par  <- list.files(mc, "^parametros_reps.*\\.csv$", full.names = TRUE) |>
+          map_dfr(read_csv) |> filter(mejor)
+\end{Verbatim}
+En Python: \texttt{pd.concat(pd.read\_csv(f) for f in glob.glob(...))}.
+
+% ===========================================================================
+\section{Equilibrio verdadero: \texttt{teoria/<tag>/}}
+
+\subsection{\archivo{resumen.csv}: agregados de mercado por régimen}
+
+Hay una fila por régimen y una más con Gillingham resuelto en los mismos parámetros
+(\col{regimen = gillingham}).
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{ll}
+\toprule
+Columna & Significado\\
+\midrule
+\col{zeta} & $\zeta$ del régimen ($R_m=R\,e^{\zeta}$)\\
+\col{ok}, \col{iters}, \col{segundos} & convergencia y tiempo del solver\\
+\col{sin\_coche} & fracción de hogares sin coche\\
+\col{compra\_nuevo}, \col{compra\_usado} & fracción de hogares que compran un nuevo / un usado al año\\
+\col{reparacion} & reparaciones por coche en circulación al año\\
+\col{chatarreo\_endogeno} & chatarreos voluntarios por coche al año\\
+\col{accidentes} & accidentes por coche al año\\
+\col{edad\_media} & edad media del parque\\
+\col{w\_medio} & desgaste medio del parque\\
+\col{masa\_borde\_w} & masa en los dos extremos del grid de $w$ (debe ser $<0.5\%$)\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rrrrrrrrrr}
+\toprule
+regimen & zeta & sin\_coche & compra\_nuevo & compra\_usado & reparacion & chatarreo\_end. & accidentes & w\_medio & masa\_borde\_w\\
+\midrule
+0 & $-0.3$ & 0.435 & 0.059 & 0.187 & 0.182 & 0.0072 & 0.0094 & 0.136 & 0.0044\\
+1 & $0.0$ & 0.442 & 0.058 & 0.188 & 0.109 & 0.0072 & 0.0103 & 0.232 & 0.0057\\
+2 & $0.3$ & 0.447 & 0.058 & 0.188 & 0.052 & 0.0071 & 0.0110 & 0.303 & 0.0076\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Se lee así: cuando la reparación es más cara, se repara menos, el parque está más desgastado
+y hay más accidentes. Este es el mecanismo de la variable excluida. (En la prueba el grid es
+chico y \col{masa\_borde\_w} pasa de 0.5\%; en la corrida completa hay que revisarlo.)
+
+\subsection{\archivo{por\_edad.csv}: el equilibrio por marca y edad}
+
+Una fila por régimen $\times$ marca $\times$ edad. Ya está promediado sobre $w$ y tipos.
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{p{3.3cm}p{11.5cm}}
+\toprule
+Columna & Significado\\
+\midrule
+\col{q} & masa de hogares que empieza el año con un coche $(j,a)$\\
+\col{P\_stock} & precio medio, ponderado por los coches que existen (sobre $w$)\\
+\col{P\_transaccion} & precio medio, ponderado por los coches que se ofrecen en venta (el que ``vería'' un comprador)\\
+\col{keep} & Pr(mantener)\\
+\col{reparar} & Pr(reparar) promedio (0 en la edad $\bar a-1$)\\
+\col{w\_medio} & desgaste medio de los coches de esa edad\\
+\col{q\_gill}, \col{P\_gill}, \col{keep\_gill} & lo mismo en el modelo de Gillingham con los mismos parámetros (igual en los 3 regímenes)\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rrrrrrrrrrrr}
+\toprule
+regimen & j & a & q & P\_stock & P\_trans. & keep & reparar & w\_medio & q\_gill & P\_gill & keep\_gill\\
+\midrule
+0 & 0 & 1 & 0.0512 & 137.58 & 137.63 & 0.685 & 0.225 & 0.075 & 0.0514 & 136.73 & 0.704\\
+0 & 0 & 2 & 0.0510 & 121.45 & 121.52 & 0.678 & 0.253 & 0.093 & 0.0512 & 119.99 & 0.703\\
+0 & 0 & 3 & 0.0507 & 105.52 & 105.58 & 0.674 & 0.267 & 0.105 & 0.0509 & 103.67 & 0.702\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+En la edad 1, \col{w\_medio}$=0.075=\delta$: el coche nació en $w=0$ y le tocó un año de
+desgaste sin reparación (los nuevos no se reparan).
+
+\subsection{\archivo{panel\_resumen.csv}: lo que se ve en el panel simulado}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rrrrrrr}
+\toprule
+regimen & hogar\_anios & sin\_coche & tasa\_reparacion & accidentes\_por\_coche & chatarreo\_endogeno & compra\\
+\midrule
+0 & 8000 & 0.437 & 0.223 & 0.0102 & 0.0073 & 0.250\\
+1 & 8000 & 0.449 & 0.140 & 0.0116 & 0.0073 & 0.248\\
+2 & 8000 & 0.457 & 0.062 & 0.0120 & 0.0067 & 0.245\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Sirve para validar que el panel reproduce al modelo. Ojo: aquí \col{tasa\_reparacion} es la
+tasa entre los coches que \emph{pueden} repararse; en \texttt{resumen.csv} es por coche en
+circulación. Por eso los números no coinciden.
+
+\subsection{\archivo{panel.csv.gz}: los microdatos (solo con \texttt{--guardar\_panel})}
+
+Una fila por hogar y año. Es lo único que tiene la reparación verdadera de cada coche.
+
+\begin{center}\small
+\begin{longtable}{p{3.6cm}p{11.2cm}}
+\toprule
+Columna & Significado\\
+\midrule
+\col{regimen}, \col{tipo}, \col{id}, \col{k} & hogar (\col{id} es único dentro de cada régimen) y año $k=0,\dots,3$\\
+\col{j}, \col{a}, \col{w} & estado al \emph{inicio} del año, antes de comerciar. $a=0$: terminal; $j=a=w=-1$: sin coche\\
+\col{o} & qué pasó con el estado inicial (ver abajo)\\
+\col{j\_h}, \col{d\_h}, \col{w\_h} & tenencia después de comerciar: el coche que maneja este año. $d_h=0$: nuevo; $-1$: sin coche\\
+\col{r} & reparó la tenencia este año: 1/0; $-1$ si no aplica (sin coche, nuevo o edad $\bar a-1$)\\
+\col{accidente} & la tenencia se descompuso este año\\
+\col{chatarreo\_endogeno} & se deshizo de un coche activo y lo chatarrizó por decisión propia\\
+\col{x}, \col{h} & los mismos estados como índice en el vector de estados (solo para la verosimilitud)\\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\paragraph{Ojo: \col{w} y \col{w\_h} son el \emph{índice} del grid, no el valor.} El valor es
+\[
+w = \texttt{w\_min} + \texttt{índice}\times\texttt{w\_step},
+\]
+que en la corrida completa es $-3+0.075\times\text{índice}$ (índice $0,\dots,70$; $w=0$ es el
+índice 40). En la prueba es $-1.5+0.15\times\text{índice}$. Los valores están en
+\texttt{config.json}.
+
+\paragraph{Códigos de \col{o}.}
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{clll}
+\toprule
+\col{o} & Coche activo & Coche terminal & Sin coche\\
+\midrule
+0 & mantener & --- & ---\\
+1 & vender y quedarse sin coche & --- & quedarse sin coche\\
+2 & chatarrizar y quedarse sin coche & chatarra y sin coche & ---\\
+3 & vender y comprar otro & --- & comprar\\
+4 & chatarrizar y comprar otro & chatarra y comprar & ---\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rrrrrrrrrrrrr}
+\toprule
+regimen & tipo & id & k & j & a & w & o & j\_h & d\_h & w\_h & r & accidente\\
+\midrule
+0 & 0 & 0 & 0 & $-1$ & $-1$ & $-1$ & 1 & $-1$ & $-1$ & $-1$ & $-1$ & 0\\
+0 & 0 & 0 & 1 & $-1$ & $-1$ & $-1$ & 3 & 1 & 1 & 11 & 0 & 0\\
+0 & 0 & 0 & 2 & 1 & 2 & 13 & 1 & $-1$ & $-1$ & $-1$ & $-1$ & 0\\
+0 & 0 & 0 & 3 & $-1$ & $-1$ & $-1$ & 3 & 0 & 3 & 15 & 0 & 0\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+La historia del hogar 0:
+\begin{itemize}
+  \item Año 0: no tiene coche y sigue sin coche.
+  \item Año 1: compra un heavy brown de 1 año ($w$ índice 11) y no lo repara.
+  \item Año 2: empieza con ese coche, ahora de 2 años con $w$ índice 13 (el desgaste subió),
+  lo vende y se queda sin coche.
+  \item Año 3: compra un light brown de 3 años.
+\end{itemize}
+La transición de un año a otro es: la tenencia $(j_h,d_h,w_h)$ y la decisión $r$ del año $k$
+dan el estado $(j,a,w)$ del año $k+1$, salvo que haya habido accidente.
+
+\subsection{Otros archivos de \texttt{teoria/}}
+\begin{itemize}
+  \item \archivo{gill\_por\_edad.csv} (\col{j, a, q, P, keep}) y
+  \archivo{gill\_resumen.json}: Gillingham en los mismos parámetros. Ya vienen pegados en
+  \texttt{por\_edad.csv} y \texttt{resumen.csv}.
+  \item \archivo{equilibrios.npz}, \archivo{config.json}: precios y $EV$ completos de cada
+  régimen, y parámetros. No son para graficar directamente. Si quieres el precio por $w$
+  (no solo el promedio por edad), pídemelo y lo exporto a CSV.
+\end{itemize}
+
+% ===========================================================================
+\section{Monte Carlo: \texttt{montecarlo/<tag>/}}
+
+Los archivos llevan el rango de réplicas en el nombre (\texttt{reps0-24}, \texttt{reps25-49},
+\dots) porque se corren en bloques, en dos GPUs. Hay que juntarlos. Los que terminan en
+\texttt{\_faltantes} son re-estimaciones de las que fallaron: si un par (réplica, estimador)
+aparece dos veces, quédate con el del archivo \texttt{\_faltantes}.
+
+\paragraph{Estimadores} (columna \col{estimador}):
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{lll}
+\toprule
+\col{estimador} & Modelo & Qué observa\\
+\midrule
+\col{diseno\_1} & tesis & $r$ y el motivo de salida (cota superior)\\
+\col{diseno\_2} & tesis & el motivo de salida, no $r$\\
+\col{diseno\_3} & tesis & ni $r$ ni el motivo (como los datos reales)\\
+\col{gill\_parcial} & Gillingham & no ve $w$, $r$ ni el motivo (la verosimilitud del paper)\\
+\col{gill\_completa} & Gillingham & no ve $w$ ni $r$; sí el motivo\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\subsection{\archivo{parametros\_reps*.csv} y \archivo{gill\_parametros\_reps*.csv}: la base principal}
+
+Una fila por réplica $\times$ estimador $\times$ arranque $\times$ parámetro.
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{ll}
+\toprule
+Columna & Significado\\
+\midrule
+\col{rep} & réplica (también es la semilla)\\
+\col{arranque}, \col{mejor} & punto inicial; \col{mejor = True} es la estimación que cuenta. \textbf{Filtra siempre por \col{mejor}.}\\
+\col{parametro} & nombre (ver abajo)\\
+\col{verdad}, \col{estimado}, \col{se} & valor verdadero, estimación y error estándar (BHHH), en escala natural\\
+\col{ll}, \col{convergio} & log-verosimilitud y convergencia (iguales en todas las filas de una estimación)\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rllrlrrrrl}
+\toprule
+rep & estimador & arranque & mejor & parametro & verdad & estimado & se & ll & convergio\\
+\midrule
+1 & diseno\_1 & 0 & True & mu\_t0 & 0.1131 & 0.1110 & 0.0030 & $-357598.6$ & True\\
+1 & diseno\_1 & 0 & True & mu\_t1 & 0.0941 & 0.0929 & 0.0027 & $-357598.6$ & True\\
+1 & diseno\_1 & 0 & True & u0\_t0\_j0 & 3.6490 & 3.6255 & 0.0545 & $-357598.6$ & True\\
+1 & gill\_parcial & 0 & True & mu\_t0 & 0.1131 & 0.0511 & 0.0049 & $-145797.9$ & True\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+La última fila muestra el sesgo de Gillingham: estima $\mu$ en menos de la mitad del valor
+verdadero.
+
+\paragraph{Los 26 parámetros del modelo de la tesis} (los nombres siguen el patrón
+\col{nombre\_t<tipo>\_j<marca>}):
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{lll}
+\toprule
+Grupo & Nombres en el CSV & Tesis\\
+\midrule
+Preferencias & \col{mu\_t0, mu\_t1} & $\mu_\tau$\\
+ & \col{u0\_t0\_j0, u0\_t0\_j1, u0\_t1\_j0, u0\_t1\_j1} & $u_{0,\tau j}$\\
+ & \col{u1\_t0\_j0, \dots, u1\_t1\_j1} & $u_{1,\tau j}$\\
+ & \col{u\_w} & $u_w$\\
+Transacción & \col{tc\_buy\_t0, tc\_buy\_t1} & $T_{b,\tau}$\\
+ & \col{tc\_buy\_nocar\_t0, tc\_buy\_nocar\_t1} & $T^\emptyset_{b,\tau}$\\
+ & \col{tc\_sell}, \col{sigma\_sell} & $T_s$, $\sigma_D$\\
+Accidentes & \col{acc\_int\_j0, acc\_int\_j1}, \col{acc\_age\_j0, acc\_age\_j1} & $\alpha_{0j}$, $\alpha_{1j}$\\
+Reparación & \col{delta\_j0, delta\_j1}, \col{kappa}, \col{sigma\_eta}, \col{sigma\_rep} & $\delta_j$, $\kappa$, $\sigma_\eta$, $\sigma_r$\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Gillingham comparte 20 (todos menos \col{u\_w} y los 5 de reparación). Esos 20 son
+los que se comparan entre los cinco estimadores.
+
+\subsection{\archivo{resumen\_reps*.csv} y \archivo{gill\_resumen\_reps*.csv}: una fila por estimación}
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{p{4.2cm}p{10.6cm}}
+\toprule
+Columna & Significado\\
+\midrule
+\col{ll}, \col{n\_obs}, \col{n\_celdas} & log-verosimilitud, transiciones (90,000) y celdas distintas\\
+\col{convergio}, \col{n\_eval}, \col{n\_fail}, \col{segundos} & diagnóstico del optimizador\\
+\col{cuerda}, \col{refact}, \col{newton}, \col{cond\_B} & diagnóstico del solver de equilibrio y número de condición de BHHH (no son para la tesis)\\
+\col{P\_rmse} & error cuadrático medio de los precios de equilibrio en $\hat\theta$ contra los verdaderos (miles de DKK, ponderado por la masa de coches)\\
+\col{reparacion\_verdad}, \col{reparacion\_est} & tasa agregada de reparación verdadera y la que implica $\hat\theta$\\
+\midrule
+\multicolumn{2}{l}{\textit{Solo en \texttt{gill\_resumen}:}}\\
+\col{sin\_coche\_est}, \col{compra\_nuevo\_est}, \dots & los agregados de mercado que implica el $\hat\theta$ de Gillingham (se comparan con \texttt{teoria/resumen.csv})\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rlrrrrrr}
+\toprule
+rep & estimador & ll & n\_celdas & segundos & P\_rmse & reparacion\_verdad & reparacion\_est\\
+\midrule
+1 & diseno\_1 & $-357598.6$ & 48713 & 139.6 & 0.464 & 0.2760 & 0.2770\\
+1 & diseno\_2 & $-338913.2$ & 45753 & 124.2 & 0.529 & 0.2760 & 0.2751\\
+1 & diseno\_3 & $-334719.5$ & 45239 & 99.7 & 0.744 & 0.2760 & 0.2756\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Las \col{ll} no se comparan entre diseños, porque cada diseño tiene datos distintos.
+
+\subsection{\archivo{resumen\_mc.csv}: la tabla ya resumida (\texttt{--summarize})}
+
+Una fila por estimador $\times$ parámetro, con columnas \col{verdad, media, sesgo, sesgo\_rel,
+sd, se\_mediano, rmse, cobertura, reps}. La \col{cobertura} es la fracción de réplicas en que
+$\hat\theta\pm1.96\,se$ contiene la verdad. Ejemplo (de una prueba de una sola réplica, por
+eso \col{sd} está vacía):
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{llrrrrrrrr}
+\toprule
+estimador & parametro & verdad & media & sesgo & sesgo\_rel & se\_mediano & rmse & cobertura & reps\\
+\midrule
+diseno\_1 & mu\_t0 & 0.1131 & 0.0953 & $-0.0178$ & $-0.157$ & 0.0158 & 0.0178 & 1.0 & 1\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Si haces tus propias tablas desde \texttt{parametros\_reps*.csv}, no necesitas este archivo.
+
+\subsection{\archivo{por\_edad\_mc.csv} y \archivo{gill\_por\_edad\_mc.csv}: el equilibrio en cada $\hat\theta$}
+
+Son las mismas columnas que \texttt{teoria/por\_edad.csv} (sin las de Gillingham), más
+\col{rep} y \col{estimador}. Las filas con \col{rep = -1} y \col{estimador = verdad} (o
+\col{gill\_verdad}) son la verdad. La versión de Gillingham no tiene régimen ni reparación:
+\col{rep, estimador, j, a, q, P, keep}.
+
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rlrrrrrrrrr}
+\toprule
+rep & estimador & regimen & j & a & q & P\_stock & P\_trans. & keep & reparar & w\_medio\\
+\midrule
+$-1$ & verdad & 0 & 0 & 1 & 0.0291 & 140.49 & 140.53 & 0.672 & 0.443 & 0.075\\
+$-1$ & verdad & 0 & 0 & 2 & 0.0289 & 128.70 & 128.77 & 0.663 & 0.498 & 0.039\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Con esto se dibuja, para cada edad, la verdad contra la banda de las 50 réplicas: precios,
+reparación y distribución \emph{implicados} por cada estimador.
+
+\subsection{\archivo{fallas\_reps*.csv}}
+\col{rep, diseno, arranque, error}: las estimaciones que no terminaron. Sirve para reportar
+cuántas réplicas hay por estimador.
+
+\subsection{\archivo{inferencia\_reparacion\_reps*.csv.gz}: qué tanto se infiere $r$ de cada coche}
+
+Este archivo responde la pregunta de la tesis observación por observación. Cada observación
+es un coche que un hogar tuvo en el año $k$ y que se \emph{podía} reparar (usado de edad
+$1,\dots,\bar a-2$), junto con lo que pasó en el año $k+1$. Para cada una, el archivo trae la
+reparación verdadera y la probabilidad de que haya reparado según el modelo, con tres
+niveles de información:
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{lp{6.2cm}p{6.2cm}}
+\toprule
+Columna & Qué es & Fórmula\\
+\midrule
+\col{prior} & Pr(reparar) antes de ver el año siguiente: la CCP & $p=\Pi(r=1\mid j,a,w)$\\
+\col{post\_d2} & después de ver lo que ve el diseño 2: el $w'$ del coche si sobrevive & $\dfrac{p\,f(w'\mid r=1)}{p\,f(w'\mid r=1)+(1-p)\,f(w'\mid r=0)}$; si hubo accidente, $=p$\\
+\col{post\_d3} & después de ver lo que ve el diseño 3: si el coche se chatarrizó no se ve ni el $w'$ ni si fue accidente & la misma regla de Bayes con la mezcla de la verosimilitud del diseño 3; si no se chatarrizó, $=$ \col{post\_d2}\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+Es la regla de Bayes aplicada a la mezcla $Z$ de la verosimilitud. Las probabilidades se
+calculan con cada estimador (\col{estimador}): \col{verdad} usa $\theta$ verdadero (lo mejor
+que se puede inferir) y \col{diseno\_1/2/3} usan el $\hat\theta$ de ese diseño.
+Para estudiar el diseño 2, usa \col{estimador = diseno\_2} con \col{post\_d2}; para el
+diseño 3, \col{diseno\_3} con \col{post\_d3}.
+
+\paragraph{Está agregado por celdas.} Todas las observaciones con el mismo régimen, tipo,
+coche $(j,a,w)$, $w'$ y resultado tienen exactamente las mismas probabilidades, así que se
+guardan juntas: \col{n} es cuántas observaciones hay en la celda y \col{n\_r1} cuántas
+repararon de verdad. No se pierde nada. Para cualquier promedio, pondera por \col{n}; para
+volver a una fila por observación, usa \texttt{tidyr::uncount(n)}, aunque crece mucho.
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{ll}
+\toprule
+Columna & Significado\\
+\midrule
+\col{rep}, \col{estimador} & réplica y con qué $\theta$ se calcularon las probabilidades\\
+\col{regimen}, \col{tipo} & como siempre\\
+\col{j}, \col{a}, \col{w} & el coche que se podía reparar (\col{w} es índice del grid)\\
+\col{accidente} & 1 si el coche se descompuso (entonces \col{w\_next} $=-1$)\\
+\col{w\_next} & índice del $w'$ con el que llegó al año siguiente\\
+\col{o}, \col{salida} & resultado del año siguiente (códigos de la sección 2.4); \col{salida} $=1$ si se chatarrizó\\
+\col{n}, \col{n\_r1} & observaciones en la celda y cuántas repararon de verdad\\
+\col{prior}, \col{post\_d2}, \col{post\_d3} & las tres probabilidades de arriba\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+Ejemplo de la prueba de humo (grid chico, $w=-1.5+0.15\times$índice):
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rlrrrrrrrrrrrrrr}
+\toprule
+rep & estimador & regimen & tipo & j & a & w & accidente & w\_next & o & salida & n & n\_r1 & prior & post\_d2 & post\_d3\\
+\midrule
+0 & verdad & 0 & 0 & 0 & 1 & 8 & 0 & 5 & 0 & 0 & 1 & 1 & 0.238 & 0.951 & 0.951\\
+0 & verdad & 0 & 0 & 0 & 1 & 8 & 0 & 7 & 0 & 0 & 1 & 1 & 0.238 & 0.465 & 0.465\\
+0 & verdad & 0 & 0 & 0 & 1 & 8 & 0 & 9 & 1 & 0 & 1 & 0 & 0.238 & 0.039 & 0.039\\
+0 & verdad & 0 & 0 & 0 & 1 & 8 & 0 & 11 & 0 & 0 & 1 & 0 & 0.238 & 0.002 & 0.002\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Se lee así: un light brown de 1 año con $w$ en el índice 8 tenía 24\% de probabilidad de ser
+reparado. Si al año siguiente aparece con el desgaste más bajo (índice 5), casi seguro se
+reparó (95\%). Si aparece con el desgaste más alto (11), casi seguro no se reparó (0.2\%).
+Si su desgaste bajó un poco (7), el dato es ambiguo (47\%).
+
+\paragraph{Tamaño.} Unas decenas de miles de celdas por réplica y estimador. Las 50 réplicas
+son algunos millones de filas, en un archivo comprimido de algunos cientos de MB a lo más.
+Léelo con \texttt{readr::read\_csv}, que descomprime solo.
+
+% ===========================================================================
+\section{Gráficas}
+
+\subsection{Las que hice para el MC de octubre}
+
+Están en \texttt{claude/niu/output/modelo\_tesis/reportes/mc\_base/} y las hace
+\texttt{claude/niu/analisis/reporte\_mc.py}. Ese script apunta a las salidas viejas; lo copio
+a \texttt{final/} cuando tengas el MC nuevo, si lo quieres usar de base.
+
+\begin{center}\small
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{p{3.4cm}p{3.6cm}p{7.6cm}}
+\toprule
+Figura & Base & Qué muestra\\
+\midrule
+fig1 sesgo & \texttt{parametros} + \texttt{gill\_parametros} & Sesgo relativo medio de los 20 parámetros comunes (21 en el MC de octubre, que tenía \col{tc\_sell\_inspect}), por estimador. Gillingham contra los tres diseños, con un zoom a los diseños e IC 95\% del sesgo medio.\\
+fig2 reparación & \texttt{parametros} & Distribución entre réplicas de $\hat\kappa,\hat\sigma_\eta,\hat\sigma_r,\hat u_w,\hat\delta_j$ por diseño, con la verdad marcada.\\
+fig3 cobertura & \texttt{parametros} & Cobertura del IC 95\% por parámetro y estimador, con la banda binomial de lo esperable con 50 réplicas.\\
+fig4 errores estándar & \texttt{parametros} & sd entre réplicas contra el $se$ mediano: si caen en la diagonal, los errores estándar son correctos.\\
+fig5 fallas & \texttt{resumen}, \texttt{fallas} & Qué (réplica, diseño) no tienen estimación.\\
+fig6 precios por edad & \texttt{por\_edad\_mc} & Precio por edad y marca: verdad (línea) contra la media y la banda 5--95\% de las réplicas, por estimador.\\
+fig7 reparación por edad & \texttt{por\_edad\_mc} & Pr(reparar) por edad; solo diseños, porque Gillingham no repara.\\
+fig8 distribución & \texttt{por\_edad\_mc} & $q(j,a)$ por edad.\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+
+\subsection{Otras que podrían salir}
+
+\paragraph{Del equilibrio verdadero (\texttt{teoria/}): el modelo.}
+\begin{enumerate}
+  \item \textbf{Respuesta de la reparación a su precio.} Pr(reparar) por edad, una línea por
+  régimen (\texttt{por\_edad.csv}). Es la figura de la variable excluida: muestra que $R$
+  mueve la reparación, y en qué edades más.
+  \item \textbf{Desgaste medio por edad y régimen} (\col{w\_medio}). Muestra cómo la reparación
+  barata mantiene los coches menos desgastados.
+  \item \textbf{Modelo contra Gillingham.} Precio y $q$ por edad contra \col{P\_gill} y
+  \col{q\_gill}. Responde si nuestra economía se parece a la danesa.
+  \item \textbf{Precio de transacción contra precio de stock.} La diferencia indica qué coches
+  se venden: si los que se venden están más desgastados que el promedio.
+  \item \textbf{Agregados por régimen} (\texttt{resumen.csv}): reparación, accidentes,
+  chatarreo y edad media contra $\zeta$.
+\end{enumerate}
+
+\paragraph{Del panel (\texttt{panel.csv.gz}): la identificación, vista en los datos.}
+\begin{enumerate}
+  \setcounter{enumi}{5}
+  \item \textbf{La mezcla de Hu \& Xin.} Histograma de $w_{k+1}-w_{h,k}$ para coches que
+  sobreviven, separado por $r=0$ y $r=1$. Salen dos normales centradas en $\delta$ y
+  $\delta-\kappa$. Junto, el histograma sin separar, que es lo que ve el econometrista en los
+  diseños 2 y 3. Es la mejor figura para explicar qué se identifica.
+  \item \textbf{La misma mezcla en los tres regímenes.} El peso de cada normal cambia con $R$
+  y las dos densidades no se mueven. Es el Supuesto 7 en una figura.
+  \item \textbf{Reparación contra desgaste:} tasa de $r=1$ por valor de $w$ (y edad). Muestra
+  quién repara.
+  \item \textbf{Accidentes por edad y por $w$:} tasa observada contra la curva
+  $s(j,a,w)$.
+  \item \textbf{Distribución de $w$ por edad} (violines o percentiles): cómo se dispersa el
+  desgaste con los años.
+\end{enumerate}
+
+\paragraph{Del Monte Carlo: los resultados.}
+\begin{enumerate}
+  \setcounter{enumi}{10}
+  \item \textbf{El costo de no observar $r$.} Para cada parámetro, el cociente
+  $sd(\text{diseño }2)/sd(\text{diseño }1)$ y $sd(\text{diseño }3)/sd(\text{diseño }1)$.
+  Es la pregunta 2 de la tesis en una sola figura (barras por parámetro).
+  \item \textbf{Correlación entre $\hat\kappa$ y $\hat\sigma_\eta$} (o $\hat\kappa$ y
+  $\hat\delta_j$) a través de las réplicas: dispersión por diseño. Sin $r$, la mezcla hace que
+  se compensen; la elipse se alarga.
+  \item \textbf{Tasa de reparación estimada contra verdadera} por réplica
+  (\col{reparacion\_est} contra \col{reparacion\_verdad} en \texttt{resumen\_reps}).
+  \item \textbf{Error en precios por diseño} (\col{P\_rmse}): no observar $r$ ni el motivo,
+  ¿cuánto empeora los precios implicados?
+  \item \textbf{Lo que Gillingham ``cree'' del mercado:} agregados implicados por su
+  $\hat\theta$ (\texttt{gill\_resumen}, columnas \col{*\_est}) contra los verdaderos
+  (\texttt{teoria/resumen.csv}). Por ejemplo: atribuye a chatarreo voluntario lo que en
+  realidad es desgaste.
+  \item \textbf{Disposición a pagar en DKK:} $u_0/\mu$ y $T_b/\mu$ estimados contra los
+  verdaderos. Son más interpretables que los parámetros en utils, y el sesgo de Gillingham en
+  $\mu$ se nota más.
+\end{enumerate}
+
+\paragraph{De la inferencia de $r$ (\texttt{inferencia\_reparacion}): qué tanto se infiere la
+reparación de cada coche.}
+\begin{enumerate}
+  \setcounter{enumi}{16}
+  \item \textbf{Curvas ROC.} Para cada estimador y nivel de información (\col{prior},
+  \col{post\_d2}, \col{post\_d3}), la tasa de verdaderos positivos contra la de falsos
+  positivos al mover el umbral. Los positivos de una celda son \col{n\_r1} y los negativos
+  \col{n}$-$\col{n\_r1}. El área bajo la curva (AUC) resume en un número cuánto se infiere $r$.
+  Comparar \col{prior} con \col{post\_d2} muestra cuánto informa ver $w'$.
+  \item \textbf{Calibración.} Agrupa por deciles de la probabilidad y grafica la probabilidad
+  media contra la tasa real \col{n\_r1}/\col{n}. Con \col{verdad} cae en la diagonal; con
+  $\hat\theta$, la distancia a la diagonal es el error de estimación.
+  \item \textbf{Costo de la estimación.} AUC (o Brier) con \col{verdad} contra con
+  \col{diseno\_2} y \col{diseno\_3}, réplica por réplica: ¿se pierde capacidad de inferir $r$
+  por no conocer $\theta$?
+  \item \textbf{Qué observaciones son ambiguas.} \col{post\_d2} contra \col{w\_next}$-$\col{w},
+  coloreado por el $r$ verdadero: los coches cuyo desgaste cambió cerca del punto medio entre
+  $\delta$ y $\delta-\kappa$ son los que no se pueden clasificar.
+  \item \textbf{Lo que se pierde en las salidas.} Entre las celdas con \col{salida = 1},
+  \col{post\_d3} contra \col{post\_d2}: cuánto se pierde por no ver el $w'$ de los coches
+  chatarrizados (el costo del diseño 3 frente al 2, observación por observación).
+  \item \textbf{Inferencia por edad y régimen.} AUC o Brier por \col{a} y por \col{regimen}.
+\end{enumerate}
+
+\end{document}

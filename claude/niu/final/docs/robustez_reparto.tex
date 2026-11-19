@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[margin=2.5cm]{geometry}
+
+\newtheorem*{resultado}{Resultado}
+
+\title{La prueba de robustez del reparto de la pendiente de accidentes}
+\author{Notas de Claude para Rodrigo}
+\date{17 de noviembre de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Explico qué era la prueba de robustez $\alpha_1=\alpha_1^G/2$, por qué se propuso y qué
+descubrí al revisarla con cuidado: con nuestra especificación, cambiar el reparto de la
+pendiente equivale a cambiar un poco $u_1$, la pendiente de la utilidad en la edad. Por eso
+esa prueba casi no prueba nada. Corrijo lo que te dije en el chat (que ``reparar vale más''
+en esa variante): no es así. Al final está la pregunta que necesito que contestes.
+\end{abstract}
+
+\section{Dos fuentes de deterioro}
+
+En la tesis la probabilidad de accidente es
+\[
+s(j,a,w)=\Lambda\big(\alpha_{0j}+\alpha_{1j}\,a+w\big),
+\qquad
+w_{t+1}=w_t+\delta_j-\kappa\,r_t+\eta_t .
+\]
+El log-momio del accidente tiene dos partes que crecen con los años:
+\begin{itemize}
+  \item \textbf{Envejecimiento} $\alpha_{1j}a$: sube $\alpha_{1j}$ cada año y la reparación no
+  lo toca.
+  \item \textbf{Desgaste} $w$: sube $\delta_j$ cada año en que no se repara; una reparación lo
+  baja $\kappa$.
+\end{itemize}
+
+Gillingham et al.\ solo tienen la curva $\Lambda(\alpha^G_{0j}+\alpha^G_{1j}a)$: una sola
+pendiente $\alpha^G_{1j}$ (0.1804 en light brown, 0.2020 en heavy brown). Esa pendiente se
+estimó con coches reales, que se reparan, así que ya mezcla las dos partes.
+
+\section{El problema: una ecuación y dos incógnitas}
+
+Si un coche se repara con una tasa $\bar p$, su log-momio sube en promedio
+\[
+\alpha_{1j}+\delta_j-\kappa\bar p \quad\text{por año.}
+\]
+Para que nuestra economía se parezca a la de Gillingham pedimos que esto sea igual a
+$\alpha^G_{1j}$:
+\begin{equation}\label{eq:cal}
+\alpha_{1j}+\delta_j-\kappa\bar p=\alpha^G_{1j}.
+\end{equation}
+Es una sola ecuación para dos números, $\alpha_{1j}$ y $\delta_j$. Hay muchas formas de repartir
+la pendiente. Las escribo con un parámetro $\lambda\in[0,1]$, la fracción de la pendiente de
+Gillingham que se le atribuye al desgaste reparable:
+\[
+\alpha_{1j}=(1-\lambda)\,\alpha^G_{1j},
+\qquad
+\delta_j=\kappa\bar p+\lambda\,\alpha^G_{1j}.
+\]
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & $\lambda$ & $\alpha_1$ (light brown) & $\delta$ (light brown)\\
+\midrule
+Caso base (el que está en el código y la tesis) & 0 & 0.1804 & 0.075\\
+Robustez propuesta en octubre & 1/2 & 0.0902 & 0.165\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+La idea de la robustez era: como el reparto no lo dicen los datos de Gillingham, sino que lo
+elegimos nosotros, hay que revisar que los resultados del Monte Carlo no dependan de esa
+elección.
+
+\section{Lo que encontré: el reparto casi no cambia la economía}
+
+Primero un ejemplo. Tomo un coche light brown y calculo cuánto sube su log-momio por año
+(sin el choque $\eta$):
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & $\lambda=0$ & $\lambda=1/2$\\
+\midrule
+Nunca se repara: $\alpha_1+\delta$ & $0.1804+0.075=0.255$ & $0.0902+0.165=0.255$\\
+Se repara cada año: $\alpha_1+\delta-\kappa$ & $0.255-0.25=0.005$ & $0.255-0.25=0.005$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Es lo mismo. La razón es que $\alpha_1+\delta$ no depende de $\lambda$, y lo que hace la
+reparación ($-\kappa$) tampoco. Lo único que cambia es \emph{qué número llamamos} $w$.
+
+\begin{resultado}
+Tomemos la misma historia de reparaciones y de choques $\eta$. Si $w^0$ es el desgaste en el
+caso base y $w^\lambda$ el de la variante, entonces
+\[
+w^\lambda_a=w^0_a+\lambda\,\alpha^G_{1j}\,a .
+\]
+Por lo tanto:
+\begin{enumerate}
+  \item La probabilidad de accidente es idéntica:
+  $\alpha_0+(1-\lambda)\alpha^G_1a+w^\lambda_a=\alpha_0+\alpha^G_1a+w^0_a$.
+  \item El efecto de reparar y el precio de reparar son idénticos.
+  \item La única diferencia está en la utilidad, porque $u_w\,w$ entra en ella:
+  \[
+  u_1a+u_w\,w^\lambda_a=\big(u_1+u_w\lambda\alpha^G_{1j}\big)a+u_w\,w^0_a .
+  \]
+\end{enumerate}
+Es decir, el modelo con reparto $\lambda$ es el modelo base con
+$u_1\to u_1+u_w\lambda\alpha^G_{1j}$, después de renombrar $w$. Si $u_w=0$, son exactamente
+el mismo modelo, salvo la discretización del grid.
+\end{resultado}
+
+\noindent
+\textit{Demostración.} Los coches nuevos nacen en $w=0$ en los dos casos. Cada año
+$w^\lambda$ sube $\delta^\lambda=\delta^0+\lambda\alpha^G_1$ y $w^0$ sube $\delta^0$, con la
+misma reparación y el mismo $\eta$. Así que la diferencia crece exactamente
+$\lambda\alpha^G_1$ por año. Los puntos 1 a 3 se siguen de sustituir. \qed
+
+\medskip
+Con los números de la calibración ($u_w=-0.2$, $\lambda=1/2$), el cambio en $u_1$ es
+$-0.2\times0.09\approx-0.018$ en light brown. La pareja pobre pasa de $u_1=-0.146$ a $-0.164$:
+la utilidad cae un poco más rápido con la edad. Las decisiones de reparar, los precios por
+historia del coche y la información de la mezcla para identificar $r$ son los mismos.
+
+\paragraph{Corrección de lo que te dije.} En el chat escribí que en la variante ``una parte
+mayor del deterioro se puede reparar y reparar vale más''. Es falso: lo que una reparación
+quita ($\kappa$) es igual en los dos casos, y lo que se acumula sin reparar ($\alpha_1+\delta$)
+también. La variante tampoco cambia lo que vale reparar. Solo mueve $u_1$ un poco y ensancha
+el rango que necesita el grid de $w$ (por eso se hablaba de $W\approx100$).
+
+\paragraph{Algo útil para la tesis.} Esto también aclara la nota al asesor de la
+calibración (l.~757). El reparto entre $\alpha_1$ y $\delta$ es casi una normalización. Fija
+dónde ponemos el cero de $w$ en cada edad y solo importa a través de $u_w$. Se puede decir en
+una frase y deja de ser una elección incómoda.
+
+En la estimación $\alpha_1$ y $\delta$ sí se separan, porque $w$ se observa: $\alpha_1$ sale de
+cómo cambian los accidentes con la edad para un mismo $w$, y $\delta$ de la transición de $w$.
+Lo que no importa es cuál reparto usamos para \emph{generar} los datos.
+
+\section{La pregunta}
+
+Como esa robustez equivale a mover $u_1$ un 12\%, correrla cuesta un Monte Carlo completo
+(y con un grid más grande) y casi no informa. Las robusteces que sí ponen a prueba la
+identificación de la reparación no observada son las que mueven la información de la mezcla
+o de la variable excluida:
+
+\begin{enumerate}
+  \item[(a)] \textbf{Mezcla menos separada:} $\kappa$ más chico respecto a $\sigma_\eta$ (por
+  ejemplo, $\kappa=0.15$ con $\sigma_\eta=0.15$, en vez de $0.25$). Las densidades de
+  ``reparó'' y ``no reparó'' se enciman más, y es más difícil inferir $r$.
+  \item[(b)] \textbf{Menos variación en el precio de reparar:} regímenes
+  $\zeta\in\{-0.1,0,0.1\}$ en vez de $\pm0.3$. La variable excluida mueve menos la
+  probabilidad de reparar.
+  \item[(c)] \textbf{Sin utilidad del desgaste:} $u_w=0$. La reparación solo sirve para alargar
+  la vida y subir el precio de reventa, no para la comodidad.
+\end{enumerate}
+
+\noindent\textbf{Pregunta:} ¿qué hacemos con la sección de robustez?
+\begin{enumerate}
+  \item[\textbf{A.}] Quitar la robustez del reparto $\lambda$ y poner en la tesis una nota al pie
+  con el resultado de la sección 3. No implementar nada más por ahora.
+  \item[\textbf{B.}] Lo mismo que A, y además implementar algunas de (a), (b) o (c) como
+  robusteces. Cada una es un Monte Carlo completo en GPU. Dime cuáles.
+  \item[\textbf{C.}] Correr de todos modos la de $\lambda=1/2$, como confirmación numérica del
+  resultado.
+\end{enumerate}
+
+\noindent Mi recomendación es \textbf{B con (a) y (b)}. Son las que contestan la pregunta
+central de la tesis: cuánta información hace falta para recuperar una decisión que no se ve.
+La (c) es más bien sobre el canal económico de la reparación.
+
+\end{document}

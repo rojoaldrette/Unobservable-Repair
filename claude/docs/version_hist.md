@@ -5,6 +5,33 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v2.0: `claude/niu/final/`, modelo alineado con `docs/tex/tesis.tex` (2026-11-18)
+
+Copia limpia de `niu/gillingham/` y `niu/modelo_tesis/`. Las carpetas viejas quedan como el
+código que generó el MC de octubre. El detalle está en `claude/niu/final/docs/cambios_y_notas.md`.
+
+### Cambios
+- $T_s$ constante en la edad en los dos modelos (sin `tc_sell_inspect`): la tesis queda con
+  26 parámetros y Gillingham con 20.
+- Deriva del desgaste $w' = w + \delta_j - \kappa r + \eta$, con $\delta = \kappa\bar p = 0.075$ (antes
+  `delta - acc_age`). La economía verdadera es la misma; cambia el significado de $\hat\delta$.
+- Sin `u2` en el modelo de la tesis.
+- $R$: light brown en U (como antes); heavy brown constante en 16.6.
+- `modelo_tesis/inferencia.py` y `montecarlo.py`: nuevo `inferencia_reparacion_reps*.csv.gz`
+  con Pr(reparar) previa y posterior (diseños 2 y 3) por celda de observaciones reparables,
+  con θ verdadero y con cada θ̂. Prueba nueva en `tests.py`.
+- `correr_gpu.sh` por fases. Docs: `bases_datos.tex` (bases de datos y gráficas),
+  `robustez_reparto.tex` (el reparto α1/δ equivale a mover u1; robustez descartada).
+
+### Resultados
+- Pruebas y humo (MC y por_edad_mc) pasan en CPU. Falta el tamaño completo en GPU.
+
+### Pendientes
+- GPU: `verdad` → revisar `masa_borde_w` y la reparación en heavy brown → `mc` → `por_edad`.
+- Correcciones del texto de la tesis (lista en `cambios_y_notas.md`, sec. 2).
+
+---
+
 ## v1.9: manual reescrito y corredor para la supercomputadora (2026-10-06)
 
 Sin cambios en el modelo ni en los estimadores.
