@@ -270,11 +270,16 @@ aparece dos veces, quédate con el del archivo \texttt{\_faltantes}.
 \col{diseno\_1} & tesis & $r$ y el motivo de salida (cota superior)\\
 \col{diseno\_2} & tesis & el motivo de salida, no $r$\\
 \col{diseno\_3} & tesis & ni $r$ ni el motivo (como los datos reales)\\
-\col{gill\_parcial} & Gillingham & no ve $w$, $r$ ni el motivo (la verosimilitud del paper)\\
 \col{gill\_completa} & Gillingham & no ve $w$ ni $r$; sí el motivo\\
 \bottomrule
 \end{tabular}\end{adjustbox}
 \end{center}
+La verosimilitud ``parcial'' del paper (\col{gill\_parcial}: tampoco ve el motivo) ya no se
+corre por defecto. Con estos datos no identifica las preferencias: pone el chatarreo
+voluntario en cero y la combinación utilidad--precio de los usados queda plana (ver
+\texttt{docs/cambios\_y\_notas.md}, 19/11/2026). Se puede pedir con
+\texttt{montecarlo.py --gill\_infos parcial,completa}. Los ejemplos de abajo, del MC de
+octubre, todavía la incluyen.
 
 \subsection{\archivo{parametros\_reps*.csv} y \archivo{gill\_parametros\_reps*.csv}: la base principal}
 
@@ -329,7 +334,7 @@ Reparación & \col{delta\_j0, delta\_j1}, \col{kappa}, \col{sigma\_eta}, \col{si
 \end{tabular}\end{adjustbox}
 \end{center}
 Gillingham comparte 20 (todos menos \col{u\_w} y los 5 de reparación). Esos 20 son
-los que se comparan entre los cinco estimadores.
+los que se comparan entre los cuatro estimadores.
 
 \subsection{\archivo{resumen\_reps*.csv} y \archivo{gill\_resumen\_reps*.csv}: una fila por estimación}
 
@@ -404,7 +409,7 @@ reparación y distribución \emph{implicados} por cada estimador.
 \col{rep, diseno, arranque, error}: las estimaciones que no terminaron. Sirve para reportar
 cuántas réplicas hay por estimador.
 
-\subsection{\archivo{inferencia\_reparacion\_reps*.csv.gz}: qué tanto se infiere $r$ de cada coche}
+\subsection{\archivo{inferencia\_reparacion/rep<NNNN>.csv.gz}: qué tanto se infiere $r$ de cada coche}
 
 Este archivo responde la pregunta de la tesis observación por observación. Cada observación
 es un coche que un hogar tuvo en el año $k$ y que se \emph{podía} reparar (usado de edad
@@ -471,9 +476,14 @@ reparado. Si al año siguiente aparece con el desgaste más bajo (índice 5), ca
 reparó (95\%). Si aparece con el desgaste más alto (11), casi seguro no se reparó (0.2\%).
 Si su desgaste bajó un poco (7), el dato es ambiguo (47\%).
 
-\paragraph{Tamaño.} Unas decenas de miles de celdas por réplica y estimador. Por eso las
-celdas solo se guardan para las réplicas 0--99 (opción \texttt{--inferencia\_hasta}). Léelo
-con \texttt{readr::read\_csv}, que descomprime solo.
+\paragraph{Tamaño y archivos.} Unas decenas de miles de celdas por réplica y estimador
+(~1.6 MB comprimido por réplica). Por eso las celdas solo se guardan para las réplicas 0--99
+(opción \texttt{--inferencia\_hasta}), en un archivo por réplica dentro de la carpeta
+\texttt{inferencia\_reparacion/}. Para leerlas todas:
+\begin{Verbatim}
+inf <- list.files(file.path(mc, "inferencia_reparacion"), full.names = TRUE) |>
+         map_dfr(read_csv)
+\end{Verbatim}
 
 \subsection{\archivo{inferencia\_resumen\_reps*.csv}: la inferencia de $r$ en todas las réplicas}
 

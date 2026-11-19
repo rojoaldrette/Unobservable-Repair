@@ -8,9 +8,11 @@
 #
 # Uso (desde cualquier carpeta; conviene dentro de tmux):
 #
-#   bash claude/niu/final/correr_gpu.sh pruebas    # tests + humo (minutos)
+#   bash claude/niu/final/correr_gpu.sh pruebas    # tests + humo (minutos); borra antes montecarlo/smoke
 #   bash claude/niu/final/correr_gpu.sh verdad     # equilibrio verdadero (teoria/R_LB) + panel
-#   bash claude/niu/final/correr_gpu.sh mc         # MC: réplicas 0..REPS-1 en las dos GPUs
+#   bash claude/niu/final/correr_gpu.sh prueba     # 2 réplicas a tamaño completo en montecarlo/prueba
+#                                                  # (borra antes la prueba anterior)
+#   bash claude/niu/final/correr_gpu.sh mc         # MC: réplicas REP0..REPS-1 en las dos GPUs
 #   bash claude/niu/final/correr_gpu.sh faltantes  # re-estima las (rep, diseño) que fallaron
 #   bash claude/niu/final/correr_gpu.sh resumen    # resumen_mc.csv
 #   bash claude/niu/final/correr_gpu.sh por_edad   # equilibrio en cada theta estimado
@@ -32,6 +34,7 @@ TAG=${TAG:-base}
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$HERE/modelo_tesis"
+MC="$HERE/output/modelo_tesis/montecarlo"
 LOGS="$HERE/output/logs"
 mkdir -p "$LOGS"
 export PYTHONIOENCODING=utf-8
@@ -54,6 +57,7 @@ run_split() {
 
 case "${1:-}" in
     pruebas)
+        rm -rf "$MC/smoke"                     # los CSV se agregan: empezar de cero
         ( cd "$HERE/gillingham" && python -u tests.py ) && \
         ( cd "$SRC" && python -u tests.py ) && \
         ( cd "$SRC" && python -u montecarlo.py --smoke ) && \
@@ -63,7 +67,22 @@ case "${1:-}" in
         ( cd "$SRC" && CUDA_VISIBLE_DEVICES=0 python -u teoria.py --tag R_LB --guardar_panel -v ) \
             2>&1 | tee "$LOGS/teoria.log"
         ;;
-    mc)        run_split montecarlo.py ;;
+    prueba)
+        rm -rf "$MC/prueba"                    # los CSV se agregan: empezar de cero
+        TAG=prueba REPS=2 REP0=0 GPUS=2
+        run_split montecarlo.py
+        tail -n 4 "$LOGS"/montecarlo_0-0.log "$LOGS"/montecarlo_1-1.log
+        ;;
+    mc)
+        # Los CSV se agregan: si ya hay resultados en este TAG y se empieza en la réplica 0,
+        # se duplicarían.  Para retomar, usar REP0 (o SEGUIR=1 si se sabe lo que se hace).
+        if [[ $REP0 -eq 0 && -z "${SEGUIR:-}" ]] && ls "$MC/$TAG"/resumen_reps*.csv >/dev/null 2>&1; then
+            echo "Ya hay resultados en $MC/$TAG.  Para no duplicar: usa otro TAG, bórralos,"
+            echo "o retoma con REP0=<siguiente réplica> (ver instrucciones.md).  SEGUIR=1 lo fuerza."
+            exit 1
+        fi
+        run_split montecarlo.py
+        ;;
     faltantes) run_split montecarlo.py --solo_faltantes ;;
     resumen)   ( cd "$SRC" && python -u montecarlo.py --summarize --tag "$TAG" ) ;;
     por_edad)
@@ -74,10 +93,10 @@ case "${1:-}" in
     estado)
         nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv
         pgrep -af "montecarlo.py|por_edad_mc.py|teoria.py|estimar_panel.py" || echo "sin procesos"
-        cat "$HERE"/output/modelo_tesis/montecarlo/"$TAG"/resumen_reps*.csv 2>/dev/null \
+        cat "$MC/$TAG"/resumen_reps*.csv 2>/dev/null \
             | grep -c diseno | xargs echo "estimaciones terminadas (rep x diseño):"
         tail -qn 1 "$LOGS"/montecarlo_*.log 2>/dev/null
         df -h "$HERE/output" | tail -1
         ;;
-    *)  sed -n 9,22p "${BASH_SOURCE[0]}" ;;
+    *)  sed -n 9,25p "${BASH_SOURCE[0]}" ;;
 esac

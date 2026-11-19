@@ -5,6 +5,33 @@ abierto). Lo más reciente va arriba.
 
 ---
 
+## v2.3: sin Gillingham parcial; prueba y corrida protegidas contra duplicados (2026-11-19)
+
+### Cambios
+- `montecarlo.py --gill_infos` (default `completa`): el Gillingham parcial ya no se corre,
+  porque con estos datos no identifica las preferencias (v2.2, `niu/final/docs/cambios_y_notas.md`).
+- Celdas de inferencia de $r$: un archivo por réplica en `inferencia_reparacion/rep<NNNN>.csv.gz`
+  (antes un solo archivo de ~165 MB, por encima del límite de GitHub).
+- `correr_gpu.sh`: fase `prueba` (2 réplicas, borra la prueba anterior); `pruebas` borra
+  `montecarlo/smoke`; `mc` no arranca si ya hay resultados en el TAG (`SEGUIR=1` lo fuerza).
+- `instrucciones.md` reescrito con el flujo actual; `bases_datos.tex` actualizado.
+
+### Pendientes
+- En la workstation: `pruebas` → `prueba` → `REPS=1000 ... mc`.
+- Tesis: quitar "G. Parcial" de la tabla de estimadores (l. 785–786 y l. 793) y explicar
+  por qué no identifica.
+
+## v2.2: diagnóstico del Gillingham parcial (2026-11-19)
+
+Ver `claude/niu/final/docs/cambios_y_notas.md`: con estos datos la verosimilitud parcial pone
+el chatarreo voluntario en cero y la combinación utilidad–precio de los usados queda plana.
+
+## v2.1: instrucciones para la workstation (2026-11-18)
+
+`claude/niu/final/instrucciones.md`; resumen de inferencia (AUC, Brier) para todas las réplicas.
+
+---
+
 ## v2.0: `claude/niu/final/`, modelo alineado con `docs/tex/tesis.tex` (2026-11-18)
 
 Copia limpia de `niu/gillingham/` y `niu/modelo_tesis/`. Las carpetas viejas quedan como el

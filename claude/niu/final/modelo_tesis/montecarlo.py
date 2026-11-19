@@ -25,7 +25,9 @@ Uso (desde claude/niu/modelo_tesis/):
 Por réplica (semilla = rep), modelo_fin.md secs. 6-7:
 1. Simula el panel: N hogares por régimen, K años, 3 regímenes de R.
 2. Lanza en paralelo, en CPU, la estimación de Gillingham sobre el mismo panel sin w ni
-   reparación (niu/gillingham/estimar_panel.py; verosimilitudes "parcial" y "completa").
+   reparación (niu/gillingham/estimar_panel.py).  Por defecto solo la verosimilitud "completa"
+   (ve el motivo de salida); la "parcial" del paper no identifica las preferencias con estos
+   datos (docs/cambios_y_notas.md, 2026-11-19) y se pide con --gill_infos parcial,completa.
 3. En la GPU estima modelo_tesis con los diseños 1 (ve r y el motivo de salida), 2 (no ve r)
    y 3 (no ve r ni el motivo).  Arranque: la verdad; en la réplica --rep_perturbados, además
    --n_perturbados arranques perturbados (x0 + 0.1 |x0| N(0, 1)).
@@ -37,10 +39,10 @@ Salidas en claude/niu/output/modelo_tesis/montecarlo/<tag>/:
                                      estimado, se, ll, convergio
     resumen_reps<a>-<b>.csv          rep, estimador, ll, n_obs, n_celdas, convergio, n_eval, n_fail, cuerda,
                                      refact, newton, segundos, cond_B, P_rmse, reparacion_verdad, reparacion_est
-    gill_parametros_reps<a>-<b>.csv  lo mismo para Gillingham (estimador gill_parcial / gill_completa)
+    gill_parametros_reps<a>-<b>.csv  lo mismo para Gillingham (estimador gill_completa)
     gill_resumen_reps<a>-<b>.csv
     fallas_reps<a>-<b>.csv           rep, diseno, arranque, error (estimaciones perdidas)
-    inferencia_reparacion_reps<a>-<b>.csv.gz
+    inferencia_reparacion/rep<NNNN>.csv.gz   (un archivo por réplica)
                                      inferencia de r por celda de observaciones reparables
                                      (inferencia.py): rep, estimador (verdad, diseno_1/2/3),
                                      regimen, tipo, j, a, w, accidente, w_next, o, salida, n, n_r1,
@@ -120,7 +122,8 @@ def launch_gillingham(df, cfg, args, rep, outdir, bloque):
     to_gillingham(df, cfg).to_csv(path, index=False)
     cmd = [sys.executable, "-u", "estimar_panel.py", "--panel", path, "--outdir", outdir,
            "--rep", str(rep), "--bloque", bloque, "--a_max", str(cfg.a_max),
-           "--brands", ",".join(cfg.brands), "--types", ",".join(cfg.types), "--nocar", cfg.nocar]
+           "--brands", ",".join(cfg.brands), "--types", ",".join(cfg.types), "--nocar", cfg.nocar,
+           "--infos", args.gill_infos]
     if args.smoke:
         cmd += ["--lbfgs_iter", "20", "--bhhh_iter", "3"]
     return subprocess.Popen(cmd, cwd=GILL, env=dict(os.environ, JAX_PLATFORMS="cpu")), path
@@ -200,9 +203,11 @@ def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdi
         path = os.path.join(outdir, f"inferencia_resumen{bloque}.csv")
         resumen_inferencia(d).to_csv(path, mode="a", header=not os.path.exists(path), index=False)
         if rep < args.inferencia_hasta:
-            path = os.path.join(outdir, f"inferencia_reparacion{bloque}.csv.gz")
-            d.to_csv(path, mode="a", header=not os.path.exists(path), index=False,
-                     float_format="%.6g", compression="gzip")
+            # Un archivo por réplica (~1.6 MB): ninguno pasa el límite de GitHub y retomar no duplica
+            carpeta = os.path.join(outdir, "inferencia_reparacion")
+            os.makedirs(carpeta, exist_ok=True)
+            path = os.path.join(carpeta, f"rep{rep:04d}{'_faltantes' if args.solo_faltantes else ''}.csv.gz")
+            d.to_csv(path, index=False, float_format="%.6g", compression="gzip")
         if args.verbose:
             v = d[d.estimador == d.estimador.iloc[0]]
             print(f"  inferencia de r ({v.estimador.iloc[0]}): {v.n.sum()} obs. reparables, "
@@ -242,6 +247,9 @@ def parse():
     ap.add_argument("--K", type=int, default=4)
     ap.add_argument("--designs", default="1,2,3")
     ap.add_argument("--sin_gillingham", dest="gillingham", action="store_false")
+    ap.add_argument("--gill_infos", default="completa",
+                    help="verosimilitudes de Gillingham: completa (default) o parcial,completa.  La "
+                         "parcial no identifica con estos datos (docs/cambios_y_notas.md, 2026-11-19)")
     ap.add_argument("--rep_perturbados", type=int, default=0)
     ap.add_argument("--n_perturbados", type=int, default=2)
     ap.add_argument("--lbfgs_iter", type=int, default=300)

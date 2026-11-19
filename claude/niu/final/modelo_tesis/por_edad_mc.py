@@ -21,7 +21,7 @@ Uso (desde claude/niu/modelo_tesis/; tamaño completo en GPU):
 El MC guardó los θ̂ pero no los equilibrios.  Aquí, para cada (réplica, diseño), se arma θ̂
 con los valores naturales de parametros_reps*.csv y se resuelve el equilibrio de los 3
 regímenes con pasos de cuerda desde el verdadero (predictor z + dz/dx Δx, inversa del
-jacobiano verdadero).  Gillingham (gill_parcial, gill_completa) se resuelve en
+jacobiano verdadero).  Gillingham (los estimadores que haya en gill_parametros; por defecto gill_completa) se resuelve en
 niu/gillingham/por_edad_mc.py, en un proceso aparte en CPU, al mismo tiempo.
 
 Salidas en claude/niu/output/modelo_tesis/montecarlo/<tag>/ (se agregan filas; lo que ya
