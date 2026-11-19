@@ -24,6 +24,25 @@ desde `montecarlo.py`): escribe `inferencia_reparacion_reps*.csv.gz` con prior, 
 por celda, con θ verdadero y con cada θ̂ (descrito en `bases_datos.tex`). Prueba en `tests.py`:
 las tres probabilidades promedian la tasa real y el Brier ordena prior ≥ post_d3 ≥ post_d2.
 
+2026-11-19: **prueba en la workstation y diagnóstico del Gillingham parcial.** Diseños 1–3 y
+Gillingham completo convergen (~519 s por réplica → ~3 días para 1000). El Gillingham parcial
+no converge en ninguna réplica. No es un error del código. Diagnóstico en
+`analisis/diag_gill_panel.py` y `diag_gill_estim.py`; salidas en `output/diag/*.log`:
+- En su valor pseudo-verdadero, la verosimilitud parcial (mezcla accidente / chatarreo
+  voluntario) pone el chatarreo voluntario ≈ 0 en todas las edades. La salida total por edad
+  en nuestros datos sube casi como un logit, así que el componente de accidentes (logit en la
+  edad) la absorbe sola. Ejemplo: light brown 21–24 años, 70% de las salidas son voluntarias y
+  Gillingham las cuenta como accidentes.
+- Con el peso del chatarreo en cero, el margen vender/chatarrear ya no ancla los precios de
+  los usados a la chatarra. La dirección $\Delta u_\tau = \mu_\tau\Delta P$ de los usados queda
+  plana: exacta en heavy brown (eigenvalor ~1e-16) y casi en light brown y $\mu$ (error
+  estándar de $\mu$ ~1.3). Es una mezcla en la frontera.
+- Con datos de su propio modelo, también sin inspección, Gillingham parcial sí identifica.
+  En octubre identificaba porque el zig-zag de inspección obligaba a dejar chatarreo
+  voluntario.
+- Reporte: el sesgo de preferencias se mide con el Gillingham completo. Del parcial solo son
+  interpretables los parámetros de accidente y el hecho de que no identifica.
+
 2026-11-18: humo completo en CPU sin errores (`montecarlo.py --smoke` con diseños 1–3 y
 Gillingham, `por_edad_mc.py --smoke`). Para la GPU: `bash claude/niu/final/correr_gpu.sh
 <fase>` (pruebas, verdad, mc, faltantes, resumen, por_edad, estado).

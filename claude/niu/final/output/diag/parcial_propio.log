@@ -1,0 +1,74 @@
+parcial: 1183 celdas, N = 90000, 20 parámetros libres
+LL en la verdad: -155522.723  |g|max/N = 1.11e-02
+    L-BFGS   10: LL/N = -1.72798570, |g|max = 1.5e-03, evals = 13, 0 s
+    L-BFGS   20: LL/N = -1.72798086, |g|max = 9.1e-04, evals = 24, 0 s
+    L-BFGS   30: LL/N = -1.72797767, |g|max = 8.0e-04, evals = 34, 0 s
+    L-BFGS   40: LL/N = -1.72797503, |g|max = 3.0e-03, evals = 45, 1 s
+    L-BFGS   50: LL/N = -1.72797438, |g|max = 7.7e-04, evals = 55, 1 s
+    L-BFGS   60: LL/N = -1.72797362, |g|max = 9.7e-04, evals = 65, 1 s
+    L-BFGS   70: LL/N = -1.72797305, |g|max = 2.9e-04, evals = 76, 1 s
+    L-BFGS   80: LL/N = -1.72797274, |g|max = 6.4e-04, evals = 86, 1 s
+    L-BFGS   90: LL/N = -1.72797263, |g|max = 2.0e-04, evals = 97, 1 s
+    L-BFGS  100: LL/N = -1.72797241, |g|max = 1.3e-04, evals = 107, 1 s
+  L-BFGS: LL/N = -1.72797240, it = 101, CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH, 1.4 s
+    BHHH   0: LL/N = -1.72797240, g'B^-1g/N = 8.2e-06
+    BHHH   1: LL/N = -1.72796921, g'B^-1g/N = 1.7e-06
+    BHHH   2: LL/N = -1.72796836, g'B^-1g/N = 9.7e-10
+
+LL en θ̂: -155517.152 (Δ vs verdad = 5.571), convergió = True, BHHH iters = 2, evals = 111, fallas = 0, cond(B) = 2.94e+06, 2 s
+
+      parametro  verdad  estimado     se
+          mu_t0  0.1131    0.1087 0.0096
+          mu_t1  0.0941    0.0880 0.0086
+       u0_t0_j0  3.6490    3.5751 0.1773
+       u0_t0_j1  5.1535    5.0205 0.3097
+       u0_t1_j0  2.4042    2.3105 0.1424
+       u0_t1_j1  3.5823    3.3919 0.2646
+       u1_t0_j0 -0.1459   -0.1392 0.0095
+       u1_t0_j1 -0.2196   -0.2119 0.0139
+       u1_t1_j0 -0.0984   -0.0921 0.0079
+       u1_t1_j1 -0.1600   -0.1510 0.0121
+      tc_buy_t0  6.5944    6.7586 0.3550
+      tc_buy_t1  6.5457    6.7005 0.3506
+tc_buy_nocar_t0  1.7899    1.9183 0.3524
+tc_buy_nocar_t1  3.0816    3.2179 0.3484
+        tc_sell  0.9106    0.7713 0.3503
+     sigma_sell  0.3454    0.3364 0.0756
+     acc_int_j0 -5.6248   -5.5982 0.1224
+     acc_int_j1 -5.6728   -5.7465 0.1649
+     acc_age_j0  0.1804    0.1853 0.0143
+     acc_age_j1  0.2020    0.2100 0.0131
+
+en θ̂: g'B^-1g/N = 9.70e-10
+
+Eigenvalores más chicos de la información escalada (1 = sin correlación; ~0 = plano):
+  λ = 2.05e-04: u0_t0_j1 -0.51, u0_t1_j1 -0.41, u0_t0_j0 -0.34, u0_t1_j0 -0.30, mu_t0 -0.28, mu_t1 -0.26
+  λ = 5.56e-04: tc_sell +0.62, tc_buy_nocar_t0 -0.41, tc_buy_nocar_t1 -0.39, u0_t0_j1 -0.31, u0_t0_j0 -0.28, tc_buy_t1 -0.16
+  λ = 6.21e-03: u1_t1_j1 +0.48, u1_t0_j1 +0.39, acc_age_j1 +0.38, acc_int_j1 -0.35, u0_t0_j0 +0.33, u0_t1_j1 -0.29
+  λ = 1.08e-02: u0_t0_j1 +0.47, u0_t1_j0 -0.43, u0_t1_j1 -0.37, u1_t1_j0 +0.36, tc_sell +0.23, mu_t0 +0.21
+
+Correlaciones de los estimadores con |ρ| > 0.9:
+  tc_sell            tc_buy_nocar_t1    -0.998
+  tc_sell            tc_buy_nocar_t0    -0.998
+  tc_buy_nocar_t1    tc_buy_nocar_t0    +0.996
+  tc_sell            tc_buy_t1          -0.991
+  tc_sell            tc_buy_t0          -0.990
+  tc_buy_nocar_t1    tc_buy_t1          +0.990
+  tc_buy_nocar_t0    tc_buy_t1          +0.989
+  tc_buy_nocar_t1    tc_buy_t0          +0.989
+  tc_buy_nocar_t0    tc_buy_t0          +0.989
+  tc_buy_t1          tc_buy_t0          +0.981
+  u1_t1_j0           u0_t1_j0           -0.981
+  u1_t0_j0           u0_t0_j0           -0.979
+  u0_t1_j1           mu_t1              +0.975
+  u0_t0_j1           u0_t0_j0           +0.972
+  u0_t1_j1           u0_t1_j0           +0.968
+
+Perfil de la LL en la dirección más plana (t = paso en el parámetro que más carga):
+  t = -1.0: LL - LL(θ̂) = -101.4490
+  t = -0.5: LL - LL(θ̂) = -7.1303
+  t = -0.2: LL - LL(θ̂) = -0.3796
+  t = +0.0: LL - LL(θ̂) = +0.0000
+  t = +0.2: LL - LL(θ̂) = -0.3900
+  t = +0.5: LL - LL(θ̂) = -6.7547
+  t = +1.0: LL - LL(θ̂) = -81.2787
