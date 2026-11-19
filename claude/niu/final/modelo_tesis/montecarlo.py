@@ -44,7 +44,10 @@ Salidas en claude/niu/output/modelo_tesis/montecarlo/<tag>/:
                                      inferencia de r por celda de observaciones reparables
                                      (inferencia.py): rep, estimador (verdad, diseno_1/2/3),
                                      regimen, tipo, j, a, w, accidente, w_next, o, salida, n, n_r1,
-                                     prior, post_d2, post_d3
+                                     prior, post_d2, post_d3.  Solo rep < --inferencia_hasta (100)
+    inferencia_resumen_reps<a>-<b>.csv
+                                     todas las réplicas: rep, estimador, info (prior/post_d2/post_d3),
+                                     n, tasa_real, media, brier, auc
     con --solo_faltantes los archivos llevan el sufijo _faltantes (p. ej. resumen_reps0-49_faltantes.csv);
     el panel se vuelve a simular con la misma semilla (= rep) y Gillingham no se re-estima.
     resumen_mc.csv                   (--summarize) por estimador y parámetro: sesgo, sd, se mediano,
@@ -73,7 +76,7 @@ from equilibrio import solve_regimes, factor, equilibrium_objects, market_stats,
 from gen_dataset import simulate_panel, decode
 from ll_estim import (free_spec, pack, unpack, natural, labels, to_cells, cell_data, LLEval,
                       estimate, DESIGNS)
-from inferencia import celdas_reparables, posteriores
+from inferencia import celdas_reparables, posteriores, resumen as resumen_inferencia
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, "..", "output", "modelo_tesis"))
@@ -194,9 +197,12 @@ def una_replica(rep, cfg, th0, spec, zs_true, Jinvs_true, objs_true, args, outdi
     if inf:
         d = pd.concat(inf, ignore_index=True)
         d = d[["rep", "estimador"] + [c for c in d.columns if c not in ("rep", "estimador")]]
-        path = os.path.join(outdir, f"inferencia_reparacion{bloque}.csv.gz")
-        d.to_csv(path, mode="a", header=not os.path.exists(path), index=False,
-                 float_format="%.6g", compression="gzip")
+        path = os.path.join(outdir, f"inferencia_resumen{bloque}.csv")
+        resumen_inferencia(d).to_csv(path, mode="a", header=not os.path.exists(path), index=False)
+        if rep < args.inferencia_hasta:
+            path = os.path.join(outdir, f"inferencia_reparacion{bloque}.csv.gz")
+            d.to_csv(path, mode="a", header=not os.path.exists(path), index=False,
+                     float_format="%.6g", compression="gzip")
         if args.verbose:
             v = d[d.estimador == d.estimador.iloc[0]]
             print(f"  inferencia de r ({v.estimador.iloc[0]}): {v.n.sum()} obs. reparables, "
@@ -241,6 +247,8 @@ def parse():
     ap.add_argument("--lbfgs_iter", type=int, default=300)
     ap.add_argument("--bhhh_iter", type=int, default=30)
     ap.add_argument("--print_every", type=int, default=5)
+    ap.add_argument("--inferencia_hasta", type=int, default=100,
+                    help="celdas de inferencia de r solo para rep < este número (el resumen, para todas)")
     ap.add_argument("--desde", default="R_LB", help="tag de teoria/ con los equilibrios verdaderos")
     ap.add_argument("--tag", default="base")
     ap.add_argument("--summarize", action="store_true")

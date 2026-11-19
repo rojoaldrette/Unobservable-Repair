@@ -83,3 +83,27 @@ def posteriores(cells, zs, th, cfg):
         w_next=np.where(x_term, -1, w_next), o=o, salida=salida.astype(int),
         n=cells["n"].to_numpy(), n_r1=cells["n_r1"].to_numpy(),
         prior=p, post_d2=post2, post_d3=post3))
+
+
+def auc(p, pos, neg):
+    # Área bajo la curva ROC con pesos (celdas): Pr(p de un positivo > p de un negativo),
+    # empates cuentan 1/2
+    g = pd.DataFrame(dict(p=p, pos=pos, neg=neg)).groupby("p", sort=True)[["pos", "neg"]].sum()
+    neg_antes = g["neg"].cumsum() - g["neg"]
+    P, N = g["pos"].sum(), g["neg"].sum()
+    return float((g["pos"] * (neg_antes + 0.5 * g["neg"])).sum() / (P * N)) if P * N > 0 else np.nan
+
+
+def resumen(d):
+    # Una fila por (rep, estimador, info): tasa real, media, Brier y AUC (todas las réplicas)
+    out = []
+    for (rep, est), g in d.groupby(["rep", "estimador"], sort=False):
+        n, pos = g["n"].to_numpy(), g["n_r1"].to_numpy()
+        neg = n - pos
+        for info in ("prior", "post_d2", "post_d3"):
+            p = g[info].to_numpy()
+            out.append(dict(rep=rep, estimador=est, info=info, n=int(n.sum()), tasa_real=pos.sum() / n.sum(),
+                            media=(n * p).sum() / n.sum(),
+                            brier=(pos * (1 - p) ** 2 + neg * p ** 2).sum() / n.sum(),
+                            auc=auc(p, pos, neg)))
+    return pd.DataFrame(out)

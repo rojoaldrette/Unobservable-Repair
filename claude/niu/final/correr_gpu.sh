@@ -19,12 +19,14 @@
 # Revisar la salida de "verdad" ANTES de lanzar "mc": masa_borde_w < 0.005 y que haya
 # reparación razonable en las dos marcas (heavy brown tiene R constante = 16.6).
 #
-# Variables: REPS (50), GPUS (2), TAG (base).
+# Variables: REPS (50), REP0 (0), GPUS (2), TAG (base).  Réplicas REP0..REPS-1.
+# Instrucciones completas: claude/niu/final/instrucciones.md
 # _____________________________________________________________________________
 
 set -uo pipefail
 
-REPS=${REPS:-50}
+REPS=${REPS:-50}      # réplicas REP0..REPS-1
+REP0=${REP0:-0}
 GPUS=${GPUS:-2}
 TAG=${TAG:-base}
 
@@ -37,9 +39,10 @@ export PYTHONIOENCODING=utf-8
 run_split() {
     # $1 = script, $2 = argumentos extra; reparte 0..REPS-1 entre las GPUs y espera
     local script=$1 extra=${2:-}
-    local per=$(( (REPS + GPUS - 1) / GPUS ))
+    local tot=$(( REPS - REP0 ))
+    local per=$(( (tot + GPUS - 1) / GPUS ))
     for ((g = 0; g < GPUS; g++)); do
-        local a=$(( g * per )) b=$(( (g + 1) * per ))
+        local a=$(( REP0 + g * per )) b=$(( REP0 + (g + 1) * per ))
         (( b > REPS )) && b=$REPS
         (( a >= b )) && continue
         echo "GPU $g: $script --reps $a:$b $extra"
@@ -73,6 +76,8 @@ case "${1:-}" in
         pgrep -af "montecarlo.py|por_edad_mc.py|teoria.py|estimar_panel.py" || echo "sin procesos"
         cat "$HERE"/output/modelo_tesis/montecarlo/"$TAG"/resumen_reps*.csv 2>/dev/null \
             | grep -c diseno | xargs echo "estimaciones terminadas (rep x diseño):"
+        tail -qn 1 "$LOGS"/montecarlo_*.log 2>/dev/null
+        df -h "$HERE/output" | tail -1
         ;;
     *)  sed -n 9,22p "${BASH_SOURCE[0]}" ;;
 esac

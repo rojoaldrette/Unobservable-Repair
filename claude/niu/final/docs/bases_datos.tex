@@ -471,9 +471,33 @@ reparado. Si al año siguiente aparece con el desgaste más bajo (índice 5), ca
 reparó (95\%). Si aparece con el desgaste más alto (11), casi seguro no se reparó (0.2\%).
 Si su desgaste bajó un poco (7), el dato es ambiguo (47\%).
 
-\paragraph{Tamaño.} Unas decenas de miles de celdas por réplica y estimador. Las 50 réplicas
-son algunos millones de filas, en un archivo comprimido de algunos cientos de MB a lo más.
-Léelo con \texttt{readr::read\_csv}, que descomprime solo.
+\paragraph{Tamaño.} Unas decenas de miles de celdas por réplica y estimador. Por eso las
+celdas solo se guardan para las réplicas 0--99 (opción \texttt{--inferencia\_hasta}). Léelo
+con \texttt{readr::read\_csv}, que descomprime solo.
+
+\subsection{\archivo{inferencia\_resumen\_reps*.csv}: la inferencia de $r$ en todas las réplicas}
+
+Una fila por réplica $\times$ estimador $\times$ \col{info} (\col{prior}, \col{post\_d2},
+\col{post\_d3}), calculada a partir de las celdas:
+\col{n} (observaciones reparables), \col{tasa\_real}, \col{media} (probabilidad media; debe
+parecerse a la tasa real), \col{brier} (error cuadrático medio de la probabilidad; menos es
+mejor) y \col{auc} (área bajo la curva ROC: 0.5 es adivinar al azar, 1 es inferir $r$
+perfectamente). Ejemplo de la prueba de humo:
+\begin{center}\footnotesize
+\begin{adjustbox}{max width=\textwidth}\begin{tabular}{rllrrrrr}
+\toprule
+rep & estimador & info & n & tasa\_real & media & brier & auc\\
+\midrule
+0 & verdad & prior & 4413 & 0.1165 & 0.1094 & 0.0969 & 0.715\\
+0 & verdad & post\_d2 & 4413 & 0.1165 & 0.1115 & 0.0656 & 0.893\\
+0 & diseno\_2 & post\_d2 & 4413 & 0.1165 & 0.1269 & 0.0660 & 0.892\\
+0 & diseno\_3 & post\_d3 & 4413 & 0.1165 & 0.1250 & 0.0658 & 0.891\\
+\bottomrule
+\end{tabular}\end{adjustbox}
+\end{center}
+Ver el $w'$ sube el AUC de 0.71 a 0.89, y estimar $\theta$ en vez de conocerlo casi no lo
+baja. Con las 1000 réplicas, la distribución de \col{auc} por estimador es la figura central
+de la pregunta ``¿qué tanto se infiere la reparación?''.
 
 % ===========================================================================
 \section{Gráficas}
