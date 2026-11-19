@@ -1,21 +1,21 @@
 dispositivo: cuda:0 | W = 71 puntos de w, n = 3411 estados por tipo, 10230 incógnitas por régimen
   régimen 1 (zeta = +0.00)
-    Newton 0: max|F| = 2.95e+01  (5.3 s)
-    Newton 1: max|F| = 1.79e+01  (8.6 s)
-    Newton 2: max|F| = 1.31e+01  (9.0 s)
-    Newton 3: max|F| = 1.16e+01  (9.5 s)
-    Newton 4: max|F| = 1.06e+01  (9.9 s)
-    Newton 5: max|F| = 9.73e+00  (10.4 s)
-    Newton 6: max|F| = 8.80e+00  (10.8 s)
-    Newton 7: max|F| = 6.24e+00  (11.2 s)
-    Newton 8: max|F| = 4.53e+00  (11.7 s)
-    Newton 9: max|F| = 4.26e+00  (12.1 s)
-    Newton 10: max|F| = 2.52e+00  (12.6 s)
-    Newton 11: max|F| = 4.72e-01  (13.0 s)
-    Newton 12: max|F| = 9.14e-02  (13.5 s)
-    Newton 13: max|F| = 4.14e-03  (13.9 s)
-    Newton 14: max|F| = 7.02e-06  (14.3 s)
-    Newton 15: max|F| = 1.79e-11  (14.8 s)
+    Newton 0: max|F| = 2.95e+01  (5.6 s)
+    Newton 1: max|F| = 1.79e+01  (8.8 s)
+    Newton 2: max|F| = 1.31e+01  (9.3 s)
+    Newton 3: max|F| = 1.16e+01  (9.7 s)
+    Newton 4: max|F| = 1.06e+01  (10.2 s)
+    Newton 5: max|F| = 9.73e+00  (10.6 s)
+    Newton 6: max|F| = 8.80e+00  (11.1 s)
+    Newton 7: max|F| = 6.24e+00  (11.5 s)
+    Newton 8: max|F| = 4.53e+00  (11.9 s)
+    Newton 9: max|F| = 4.26e+00  (12.4 s)
+    Newton 10: max|F| = 2.52e+00  (12.8 s)
+    Newton 11: max|F| = 4.72e-01  (13.3 s)
+    Newton 12: max|F| = 9.14e-02  (13.7 s)
+    Newton 13: max|F| = 4.14e-03  (14.2 s)
+    Newton 14: max|F| = 7.02e-06  (14.6 s)
+    Newton 15: max|F| = 1.79e-11  (15.0 s)
   régimen 0 (zeta = -0.30)
     Newton 0: max|F| = 3.06e+00  (0.4 s)
     Newton 1: max|F| = 7.55e-01  (0.9 s)
@@ -30,7 +30,6 @@ dispositivo: cuda:0 | W = 71 puntos de w, n = 3411 estados por tipo, 10230 incó
     Newton 3: max|F| = 8.80e-04  (1.8 s)
     Newton 4: max|F| = 4.83e-08  (2.2 s)
     Newton 5: max|F| = 4.19e-13  (2.7 s)
-Gillingham exportado a /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/output/modelo_tesis/teoria/R_LB
 /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/modelo_tesis/teoria.py:86: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
   sin_coche=g.apply(lambda d: (d["h"] == n - 1).mean()),
 /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/modelo_tesis/teoria.py:87: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
@@ -44,9 +43,9 @@ Gillingham exportado a /home/colaboradorx/Documents/Unobservable-Repair/claude/n
 
 Resumen por régimen (y Gillingham):
    regimen  zeta  segundos  sin_coche  compra_nuevo  compra_usado  reparacion  chatarreo_endogeno  accidentes  edad_media  w_medio  masa_borde_w
-         0  -0.3    2.6551     0.3754        0.0335        0.2493      0.3779              0.0206      0.0262     10.3841  -0.4148        0.0032
-         1   0.0   16.5653     0.3880        0.0345        0.2512      0.2720              0.0176      0.0333      9.9446  -0.1176        0.0015
-         2   0.3    2.6545     0.3996        0.0358        0.2522      0.1620              0.0138      0.0417      9.4454   0.1824        0.0013
+         0  -0.3    2.6609     0.3754        0.0335        0.2493      0.3779              0.0206      0.0262     10.3841  -0.4148        0.0032
+         1   0.0   16.6862     0.3880        0.0345        0.2512      0.2720              0.0176      0.0333      9.9446  -0.1176        0.0015
+         2   0.3    2.6550     0.3996        0.0358        0.2522      0.1620              0.0138      0.0417      9.4454   0.1824        0.0013
 gillingham   NaN       NaN     0.3693        0.0355        0.2306         NaN              0.0203      0.0330      9.8685      NaN           NaN
 
 Por edad, régimen central contra Gillingham (marca 0 = light_brown, 1 = heavy_brown):

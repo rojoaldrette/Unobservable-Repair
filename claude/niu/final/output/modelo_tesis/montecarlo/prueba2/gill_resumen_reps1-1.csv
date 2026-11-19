@@ -1,0 +1,2 @@
+rep,estimador,ll,n_obs,n_celdas,convergio,n_eval,segundos,cond_B,sin_coche_est,compra_nuevo_est,compra_usado_est,chatarreo_endogeno_est,accidentes_est,edad_media_est
+1,gill_completa,-162954.98047944868,90000,1309,True,554,342.0923553146422,949974.5106794366,0.3871701930330429,0.03472111522772603,0.25050178909783866,0.01795013600889338,0.03387325247004337,9.971942592542709
