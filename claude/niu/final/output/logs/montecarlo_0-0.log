@@ -1,0 +1,11 @@
+dispositivo: cuda:0 | 26 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/output/modelo_tesis/teoria/R_LB
+verdad lista (21 s)
+  Gillingham [parcial]: LL = -162646.48, convergió = False, 301 s
+  Gillingham [completa]: LL = -163872.36, convergió = True, 168 s
+rep 0 [diseño 1]: LL = -379346.62, convergió = True, 191 evals, 166 s
+rep 0 [diseño 2]: LL = -361705.28, convergió = True, 326 evals, 161 s
+rep 0 [diseño 3]: LL = -358421.04, convergió = True, 237 evals, 136 s
+rep 0 lista (1863 s)
+[avance] 1/1 réplicas, 0.52 h transcurridas, ~0.00 h restantes (2026-11-19 00:19)
+listo: /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/output/modelo_tesis/montecarlo/prueba
