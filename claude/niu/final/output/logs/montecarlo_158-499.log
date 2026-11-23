@@ -1,0 +1,343 @@
+nohup: ignoring input
+dispositivo: cuda:0 | 26 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/output/modelo_tesis/teoria/R_LB
+verdad lista (20 s)
+rep 158 [diseño 1]: LL = -377591.07, convergió = True, 7 evals, 167 s
+  Gillingham [completa]: LL = -162812.91, convergió = True, 343 s
+rep 158 [diseño 2]: LL = -360496.21, convergió = True, 193 evals, 146 s
+rep 158 [diseño 3]: LL = -357345.24, convergió = True, 211 evals, 156 s
+rep 158 lista (563 s)
+  Gillingham [completa]: LL = -163295.47, convergió = True, 18 s
+rep 159 [diseño 1]: LL = -377371.86, convergió = True, 210 evals, 137 s
+rep 159 [diseño 2]: LL = -360156.79, convergió = True, 258 evals, 111 s
+rep 159 [diseño 3]: LL = -356858.78, convergió = True, 330 evals, 134 s
+rep 159 lista (389 s)
+  Gillingham [completa]: LL = -162652.60, convergió = True, 19 s
+rep 160 [diseño 1]: LL = -376742.71, convergió = True, 176 evals, 154 s
+rep 160 [diseño 2]: LL = -359822.93, convergió = True, 259 evals, 148 s
+rep 160 [diseño 3]: LL = -356633.11, convergió = True, 283 evals, 166 s
+rep 160 lista (476 s)
+  Gillingham [completa]: LL = -163126.10, convergió = True, 18 s
+rep 161 [diseño 1]: LL = -377452.44, convergió = True, 264 evals, 133 s
+rep 161 [diseño 2]: LL = -360184.94, convergió = True, 186 evals, 123 s
+rep 161 [diseño 3]: LL = -356807.70, convergió = True, 263 evals, 153 s
+rep 161 lista (418 s)
+  Gillingham [completa]: LL = -163285.63, convergió = True, 19 s
+rep 162 [diseño 1]: LL = -377156.00, convergió = True, 265 evals, 149 s
+rep 162 [diseño 2]: LL = -359946.84, convergió = True, 8 evals, 155 s
+rep 162 [diseño 3]: LL = -356771.74, convergió = True, 8 evals, 220 s
+rep 162 lista (532 s)
+[avance] 5/342 réplicas, 0.66 h transcurridas, ~44.51 h restantes (2026-11-22 14:13)
+  Gillingham [completa]: LL = -162417.52, convergió = True, 18 s
+rep 163 [diseño 1]: LL = -376655.99, convergió = True, 332 evals, 117 s
+rep 163 [diseño 2]: LL = -359394.66, convergió = True, 233 evals, 147 s
+rep 163 [diseño 3]: LL = -356107.78, convergió = True, 279 evals, 141 s
+rep 163 lista (413 s)
+  Gillingham [completa]: LL = -162489.29, convergió = True, 19 s
+rep 164 [diseño 1]: LL = -377065.73, convergió = True, 194 evals, 143 s
+rep 164 [diseño 2]: LL = -359833.21, convergió = True, 151 evals, 114 s
+rep 164 [diseño 3]: LL = -356696.07, convergió = True, 89 evals, 105 s
+rep 164 lista (369 s)
+  Gillingham [completa]: LL = -163298.14, convergió = True, 19 s
+rep 165 [diseño 1]: LL = -377513.74, convergió = True, 233 evals, 143 s
+rep 165 [diseño 2]: LL = -360297.40, convergió = True, 185 evals, 117 s
+rep 165 [diseño 3]: LL = -356988.45, convergió = True, 213 evals, 114 s
+rep 165 lista (382 s)
+  Gillingham [completa]: LL = -163020.40, convergió = True, 16 s
+rep 166 [diseño 1]: LL = -378141.46, convergió = True, 144 evals, 121 s
+rep 166 [diseño 2]: LL = -360971.84, convergió = True, 132 evals, 116 s
+rep 166 [diseño 3]: LL = -357834.29, convergió = True, 230 evals, 114 s
+rep 166 lista (359 s)
+  Gillingham [completa]: LL = -162993.00, convergió = True, 19 s
+rep 167 [diseño 1]: LL = -377200.45, convergió = True, 73 evals, 176 s
+rep 167 [diseño 2]: LL = -359956.01, convergió = True, 121 evals, 105 s
+rep 167 [diseño 3]: LL = -356779.81, convergió = True, 156 evals, 150 s
+rep 167 lista (438 s)
+[avance] 10/342 réplicas, 1.21 h transcurridas, ~40.02 h restantes (2026-11-22 14:46)
+  Gillingham [completa]: LL = -162633.51, convergió = True, 19 s
+rep 168 [diseño 1]: LL = -376381.62, convergió = True, 187 evals, 141 s
+rep 168 [diseño 2]: LL = -359024.04, convergió = True, 186 evals, 130 s
+rep 168 [diseño 3]: LL = -355921.95, convergió = True, 213 evals, 132 s
+rep 168 lista (410 s)
+  Gillingham [completa]: LL = -162782.13, convergió = True, 19 s
+rep 169 [diseño 1]: LL = -377270.62, convergió = True, 270 evals, 153 s
+rep 169 [diseño 2]: LL = -359972.10, convergió = True, 224 evals, 162 s
+rep 169 [diseño 3]: LL = -356831.94, convergió = True, 137 evals, 124 s
+rep 169 lista (447 s)
+  Gillingham [completa]: LL = -162765.23, convergió = True, 23 s
+rep 170 [diseño 1]: LL = -377699.94, convergió = True, 326 evals, 92 s
+rep 170 [diseño 2]: LL = -360433.49, convergió = True, 333 evals, 153 s
+rep 170 [diseño 3]: LL = -357287.68, convergió = True, 277 evals, 127 s
+rep 170 lista (381 s)
+  Gillingham [completa]: LL = -163242.07, convergió = True, 20 s
+rep 171 [diseño 1]: LL = -377254.99, convergió = True, 227 evals, 149 s
+rep 171 [diseño 2]: LL = -360073.35, convergió = True, 327 evals, 146 s
+rep 171 [diseño 3]: LL = -356633.16, convergió = True, 277 evals, 149 s
+rep 171 lista (451 s)
+  Gillingham [completa]: LL = -162868.09, convergió = True, 19 s
+rep 172 [diseño 1]: LL = -377360.18, convergió = True, 274 evals, 158 s
+rep 172 [diseño 2]: LL = -360006.37, convergió = True, 232 evals, 137 s
+rep 172 [diseño 3]: LL = -356837.68, convergió = True, 309 evals, 147 s
+rep 172 lista (451 s)
+[avance] 15/342 réplicas, 1.80 h transcurridas, ~39.24 h restantes (2026-11-22 15:22)
+  Gillingham [completa]: LL = -163227.83, convergió = True, 20 s
+rep 173 [diseño 1]: LL = -377908.84, convergió = True, 194 evals, 75 s
+rep 173 [diseño 2]: LL = -360646.66, convergió = True, 207 evals, 138 s
+rep 173 [diseño 3]: LL = -357511.21, convergió = True, 270 evals, 81 s
+rep 173 lista (302 s)
+  Gillingham [completa]: LL = -162508.90, convergió = True, 19 s
+rep 174 [diseño 1]: LL = -377058.90, convergió = True, 210 evals, 78 s
+rep 174 [diseño 2]: LL = -359901.40, convergió = True, 241 evals, 79 s
+rep 174 [diseño 3]: LL = -356673.56, convergió = True, 245 evals, 82 s
+rep 174 lista (247 s)
+  Gillingham [completa]: LL = -163400.22, convergió = True, 19 s
+rep 175 [diseño 1]: LL = -377858.72, convergió = True, 102 evals, 139 s
+rep 175 [diseño 2]: LL = -360869.41, convergió = True, 188 evals, 156 s
+rep 175 [diseño 3]: LL = -357551.99, convergió = True, 121 evals, 125 s
+rep 175 lista (428 s)
+rep 176 [diseño 1]: LL = -376447.66, convergió = True, 141 evals, 152 s
+rep 176 [diseño 2]: LL = -359444.63, convergió = True, 153 evals, 122 s
+  Gillingham [completa]: LL = -162608.39, convergió = True, 289 s
+rep 176 [diseño 3]: LL = -356199.41, convergió = True, 204 evals, 121 s
+rep 176 lista (409 s)
+  Gillingham [completa]: LL = -162660.77, convergió = True, 19 s
+rep 177 [diseño 1]: LL = -377498.29, convergió = True, 197 evals, 121 s
+rep 177 [diseño 2]: LL = -360105.33, convergió = True, 190 evals, 119 s
+rep 177 [diseño 3]: LL = -356901.13, convergió = True, 256 evals, 119 s
+rep 177 lista (367 s)
+[avance] 20/342 réplicas, 2.29 h transcurridas, ~36.82 h restantes (2026-11-22 15:51)
+  Gillingham [completa]: LL = -163036.21, convergió = True, 18 s
+rep 178 [diseño 1]: LL = -377762.16, convergió = True, 232 evals, 138 s
+rep 178 [diseño 2]: LL = -360309.23, convergió = True, 115 evals, 125 s
+rep 178 [diseño 3]: LL = -356916.51, convergió = True, 99 evals, 122 s
+rep 178 lista (395 s)
+  Gillingham [completa]: LL = -162085.57, convergió = True, 20 s
+rep 179 [diseño 1]: LL = -376597.85, convergió = True, 192 evals, 123 s
+rep 179 [diseño 2]: LL = -359142.82, convergió = True, 170 evals, 101 s
+rep 179 [diseño 3]: LL = -355855.15, convergió = True, 242 evals, 133 s
+rep 179 lista (366 s)
+  Gillingham [completa]: LL = -163115.50, convergió = True, 19 s
+rep 180 [diseño 1]: LL = -377789.25, convergió = True, 257 evals, 187 s
+rep 180 [diseño 2]: LL = -360490.10, convergió = True, 236 evals, 137 s
+rep 180 [diseño 3]: LL = -357302.78, convergió = True, 226 evals, 107 s
+rep 180 lista (441 s)
+  Gillingham [completa]: LL = -163034.15, convergió = True, 17 s
+rep 181 [diseño 1]: LL = -376882.67, convergió = True, 331 evals, 141 s
+rep 181 [diseño 2]: LL = -359758.88, convergió = True, 117 evals, 82 s
+rep 181 [diseño 3]: LL = -356541.52, convergió = True, 268 evals, 131 s
+rep 181 lista (363 s)
+  Gillingham [completa]: LL = -162866.78, convergió = True, 15 s
+rep 182 [diseño 1]: LL = -377239.77, convergió = True, 211 evals, 132 s
+rep 182 [diseño 2]: LL = -359780.95, convergió = True, 190 evals, 109 s
+rep 182 [diseño 3]: LL = -356548.23, convergió = True, 251 evals, 117 s
+rep 182 lista (368 s)
+[avance] 25/342 réplicas, 2.82 h transcurridas, ~35.80 h restantes (2026-11-22 16:23)
+  Gillingham [completa]: LL = -162817.11, convergió = False, 19 s
+rep 183 [diseño 1]: LL = -377628.33, convergió = True, 60 evals, 77 s
+rep 183 [diseño 2]: LL = -360097.54, convergió = True, 69 evals, 67 s
+rep 183 [diseño 3]: LL = -356749.42, convergió = True, 8 evals, 140 s
+rep 183 lista (293 s)
+  Gillingham [completa]: LL = -163443.51, convergió = True, 20 s
+rep 184 [diseño 1]: LL = -377238.02, convergió = True, 259 evals, 130 s
+rep 184 [diseño 2]: LL = -359904.22, convergió = True, 200 evals, 112 s
+rep 184 [diseño 3]: LL = -356617.57, convergió = True, 232 evals, 123 s
+rep 184 lista (374 s)
+  Gillingham [completa]: LL = -163084.34, convergió = True, 20 s
+rep 185 [diseño 1]: LL = -377665.96, convergió = True, 82 evals, 76 s
+rep 185 [diseño 2]: LL = -360303.02, convergió = True, 123 evals, 168 s
+rep 185 [diseño 3]: LL = -357123.45, convergió = True, 197 evals, 76 s
+rep 185 lista (327 s)
+  Gillingham [completa]: LL = -162837.60, convergió = True, 19 s
+rep 186 [diseño 1]: LL = -377976.50, convergió = True, 63 evals, 147 s
+rep 186 [diseño 2]: LL = -360636.71, convergió = True, 333 evals, 177 s
+rep 186 [diseño 3]: LL = -357233.26, convergió = True, 320 evals, 183 s
+rep 186 lista (515 s)
+  Gillingham [completa]: LL = -163822.17, convergió = True, 19 s
+rep 187 [diseño 1]: LL = -378671.81, convergió = True, 257 evals, 175 s
+rep 187 [diseño 2]: LL = -361573.49, convergió = True, 260 evals, 145 s
+rep 187 [diseño 3]: LL = -358310.47, convergió = True, 216 evals, 116 s
+rep 187 lista (445 s)
+[avance] 30/342 réplicas, 3.37 h transcurridas, ~35.01 h restantes (2026-11-22 16:56)
+  Gillingham [completa]: LL = -162809.60, convergió = True, 135 s
+rep 188 [diseño 1]: LL = -376803.24, convergió = True, 265 evals, 152 s
+rep 188 [diseño 2]: LL = -359656.42, convergió = True, 8 evals, 173 s
+rep 188 [diseño 3]: LL = -356487.81, convergió = True, 240 evals, 129 s
+rep 188 lista (464 s)
+  Gillingham [completa]: LL = -162705.64, convergió = True, 19 s
+rep 189 [diseño 1]: LL = -377216.19, convergió = True, 331 evals, 162 s
+rep 189 [diseño 2]: LL = -359814.34, convergió = True, 182 evals, 108 s
+rep 189 [diseño 3]: LL = -356478.92, convergió = True, 305 evals, 167 s
+rep 189 lista (446 s)
+  Gillingham [completa]: LL = -162505.99, convergió = True, 18 s
+rep 190 [diseño 1]: LL = -377956.41, convergió = True, 102 evals, 92 s
+rep 190 [diseño 2]: LL = -360462.68, convergió = True, 99 evals, 79 s
+rep 190 [diseño 3]: LL = -357301.89, convergió = True, 160 evals, 210 s
+rep 190 lista (389 s)
+  Gillingham [completa]: LL = -163561.61, convergió = True, 18 s
+rep 191 [diseño 1]: LL = -377554.80, convergió = True, 210 evals, 114 s
+rep 191 [diseño 2]: LL = -360370.46, convergió = True, 252 evals, 121 s
+rep 191 [diseño 3]: LL = -357089.67, convergió = True, 238 evals, 79 s
+rep 191 lista (322 s)
+  Gillingham [completa]: LL = -162954.52, convergió = True, 19 s
+rep 192 [diseño 1]: LL = -378002.03, convergió = True, 138 evals, 133 s
+rep 192 [diseño 2]: LL = -360552.22, convergió = True, 242 evals, 130 s
+rep 192 [diseño 3]: LL = -357345.71, convergió = True, 228 evals, 153 s
+rep 192 lista (424 s)
+[avance] 35/342 réplicas, 3.93 h transcurridas, ~34.51 h restantes (2026-11-22 17:30)
+  Gillingham [completa]: LL = -163492.88, convergió = True, 19 s
+rep 193 [diseño 1]: LL = -378094.20, convergió = True, 181 evals, 130 s
+rep 193 [diseño 2]: LL = -360816.66, convergió = True, 328 evals, 139 s
+rep 193 [diseño 3]: LL = -357520.18, convergió = True, 322 evals, 128 s
+rep 193 lista (405 s)
+  Gillingham [completa]: LL = -162888.20, convergió = True, 18 s
+rep 194 [diseño 1]: LL = -377308.56, convergió = True, 197 evals, 124 s
+rep 194 [diseño 2]: LL = -360124.66, convergió = True, 195 evals, 143 s
+rep 194 [diseño 3]: LL = -356889.83, convergió = True, 248 evals, 150 s
+rep 194 lista (426 s)
+  Gillingham [completa]: LL = -163308.09, convergió = True, 19 s
+rep 195 [diseño 1]: LL = -378006.08, convergió = True, 126 evals, 116 s
+rep 195 [diseño 2]: LL = -360845.20, convergió = True, 125 evals, 92 s
+rep 195 [diseño 3]: LL = -357516.52, convergió = True, 116 evals, 115 s
+rep 195 lista (331 s)
+  Gillingham [completa]: LL = -162956.32, convergió = True, 19 s
+rep 196 [diseño 1]: LL = -377914.83, convergió = True, 179 evals, 131 s
+rep 196 [diseño 2]: LL = -360632.53, convergió = True, 251 evals, 148 s
+rep 196 [diseño 3]: LL = -357415.73, convergió = True, 143 evals, 127 s
+rep 196 lista (415 s)
+  Gillingham [completa]: LL = -163072.99, convergió = True, 20 s
+rep 197 [diseño 1]: LL = -377244.12, convergió = True, 148 evals, 124 s
+rep 197 [diseño 2]: LL = -360054.43, convergió = True, 177 evals, 130 s
+rep 197 [diseño 3]: LL = -356893.93, convergió = True, 163 evals, 123 s
+rep 197 lista (386 s)
+[avance] 40/342 réplicas, 4.48 h transcurridas, ~33.82 h restantes (2026-11-22 18:02)
+  Gillingham [completa]: LL = -162210.39, convergió = True, 19 s
+rep 198 [diseño 1]: LL = -376501.25, convergió = True, 218 evals, 137 s
+rep 198 [diseño 2]: LL = -359248.44, convergió = True, 185 evals, 145 s
+rep 198 [diseño 3]: LL = -356024.07, convergió = True, 288 evals, 99 s
+rep 198 lista (389 s)
+  Gillingham [completa]: LL = -162659.67, convergió = True, 18 s
+rep 199 [diseño 1]: LL = -377011.81, convergió = True, 296 evals, 197 s
+rep 199 [diseño 2]: LL = -359790.97, convergió = True, 324 evals, 161 s
+rep 199 [diseño 3]: LL = -356510.93, convergió = True, 290 evals, 146 s
+rep 199 lista (512 s)
+  Gillingham [completa]: LL = -163164.40, convergió = True, 14 s
+rep 200 [diseño 1]: LL = -377138.81, convergió = True, 164 evals, 105 s
+rep 200 [diseño 2]: LL = -359851.29, convergió = True, 187 evals, 114 s
+rep 200 [diseño 3]: LL = -356888.39, convergió = True, 236 evals, 109 s
+rep 200 lista (338 s)
+  Gillingham [completa]: LL = -163212.81, convergió = True, 19 s
+rep 201 [diseño 1]: LL = -377918.94, convergió = True, 175 evals, 103 s
+rep 201 [diseño 2]: LL = -360548.62, convergió = True, 214 evals, 122 s
+rep 201 [diseño 3]: LL = -357384.36, convergió = True, 216 evals, 112 s
+rep 201 lista (346 s)
+  Gillingham [completa]: LL = -163714.13, convergió = True, 19 s
+rep 202 [diseño 1]: LL = -378888.81, convergió = True, 255 evals, 135 s
+rep 202 [diseño 2]: LL = -361594.50, convergió = True, 239 evals, 134 s
+rep 202 [diseño 3]: LL = -358528.93, convergió = True, 263 evals, 83 s
+rep 202 lista (360 s)
+[avance] 45/342 réplicas, 5.02 h transcurridas, ~33.13 h restantes (2026-11-22 18:35)
+  Gillingham [completa]: LL = -162750.17, convergió = True, 18 s
+rep 203 [diseño 1]: LL = -376911.13, convergió = True, 173 evals, 136 s
+rep 203 [diseño 2]: LL = -359656.79, convergió = True, 181 evals, 126 s
+rep 203 [diseño 3]: LL = -356362.29, convergió = True, 136 evals, 167 s
+rep 203 lista (438 s)
+  Gillingham [completa]: LL = -162919.58, convergió = True, 20 s
+rep 204 [diseño 1]: LL = -377740.07, convergió = True, 198 evals, 159 s
+rep 204 [diseño 2]: LL = -360353.32, convergió = True, 221 evals, 141 s
+rep 204 [diseño 3]: LL = -357337.43, convergió = True, 222 evals, 165 s
+rep 204 lista (473 s)
+  Gillingham [completa]: LL = -163353.64, convergió = True, 11 s
+rep 205 [diseño 1]: LL = -377553.10, convergió = True, 126 evals, 67 s
+rep 205 [diseño 2]: LL = -360331.84, convergió = True, 332 evals, 92 s
+rep 205 [diseño 3]: LL = -357054.97, convergió = True, 298 evals, 78 s
+rep 205 lista (247 s)
+  Gillingham [completa]: LL = -163029.73, convergió = False, 21 s
+rep 206 [diseño 1]: LL = -378125.38, convergió = True, 182 evals, 131 s
+rep 206 [diseño 2]: LL = -360952.36, convergió = True, 190 evals, 109 s
+rep 206 [diseño 3]: LL = -357918.08, convergió = True, 201 evals, 132 s
+rep 206 lista (381 s)
+  Gillingham [completa]: LL = -162970.62, convergió = True, 18 s
+rep 207 [diseño 1]: LL = -376967.63, convergió = True, 114 evals, 120 s
+rep 207 [diseño 2]: LL = -359920.66, convergió = True, 116 evals, 122 s
+rep 207 [diseño 3]: LL = -356753.29, convergió = True, 217 evals, 124 s
+rep 207 lista (374 s)
+[avance] 50/342 réplicas, 5.55 h transcurridas, ~32.42 h restantes (2026-11-22 19:07)
+  Gillingham [completa]: LL = -162839.39, convergió = True, 19 s
+rep 208 [diseño 1]: LL = -377079.65, convergió = True, 297 evals, 108 s
+rep 208 [diseño 2]: LL = -359615.36, convergió = True, 324 evals, 154 s
+rep 208 [diseño 3]: LL = -356419.99, convergió = True, 202 evals, 110 s
+rep 208 lista (381 s)
+  Gillingham [completa]: LL = -162556.92, convergió = True, 18 s
+rep 209 [diseño 1]: LL = -376783.75, convergió = True, 215 evals, 110 s
+rep 209 [diseño 2]: LL = -359533.36, convergió = True, 227 evals, 109 s
+rep 209 [diseño 3]: LL = -356282.87, convergió = True, 99 evals, 114 s
+rep 209 lista (342 s)
+  Gillingham [completa]: LL = -163291.45, convergió = True, 19 s
+rep 210 [diseño 1]: LL = -378039.14, convergió = True, 91 evals, 191 s
+rep 210 [diseño 2]: LL = -360742.42, convergió = True, 96 evals, 109 s
+rep 210 [diseño 3]: LL = -357388.84, convergió = True, 204 evals, 123 s
+rep 210 lista (432 s)
+  Gillingham [completa]: LL = -162715.57, convergió = True, 19 s
+rep 211 [diseño 1]: LL = -377588.59, convergió = True, 131 evals, 112 s
+rep 211 [diseño 2]: LL = -360143.33, convergió = True, 151 evals, 112 s
+rep 211 [diseño 3]: LL = -356912.47, convergió = True, 185 evals, 114 s
+rep 211 lista (347 s)
+rep 212 [diseño 1]: LL = -377353.30, convergió = True, 200 evals, 89 s
+rep 212 [diseño 2]: LL = -360103.60, convergió = True, 327 evals, 179 s
+  Gillingham [completa]: LL = -162869.98, convergió = True, 296 s
+rep 212 [diseño 3]: LL = -357008.67, convergió = True, 299 evals, 165 s
+rep 212 lista (448 s)
+[avance] 55/342 réplicas, 6.09 h transcurridas, ~31.79 h restantes (2026-11-22 19:39)
+  Gillingham [completa]: LL = -162370.26, convergió = True, 19 s
+rep 213 [diseño 1]: LL = -376099.17, convergió = True, 79 evals, 104 s
+rep 213 [diseño 2]: LL = -358937.45, convergió = True, 150 evals, 109 s
+rep 213 [diseño 3]: LL = -355801.14, convergió = True, 209 evals, 121 s
+rep 213 lista (342 s)
+  Gillingham [completa]: LL = -162486.93, convergió = True, 18 s
+rep 214 [diseño 1]: LL = -376737.79, convergió = True, 248 evals, 100 s
+rep 214 [diseño 2]: LL = -359185.44, convergió = True, 246 evals, 114 s
+rep 214 [diseño 3]: LL = -356053.69, convergió = True, 208 evals, 134 s
+rep 214 lista (357 s)
+  Gillingham [completa]: LL = -163362.17, convergió = True, 19 s
+rep 215 [diseño 1]: LL = -377047.99, convergió = True, 189 evals, 151 s
+rep 215 [diseño 2]: LL = -359790.08, convergió = True, 169 evals, 105 s
+rep 215 [diseño 3]: LL = -356386.61, convergió = True, 190 evals, 127 s
+rep 215 lista (391 s)
+  Gillingham [completa]: LL = -162611.06, convergió = True, 19 s
+rep 216 [diseño 1]: LL = -376369.69, convergió = True, 194 evals, 218 s
+rep 216 [diseño 2]: LL = -359228.79, convergió = True, 187 evals, 131 s
+rep 216 [diseño 3]: LL = -355875.21, convergió = True, 225 evals, 107 s
+rep 216 lista (465 s)
+  Gillingham [completa]: LL = -162963.90, convergió = False, 20 s
+rep 217 [diseño 1]: LL = -377684.19, convergió = True, 112 evals, 129 s
+rep 217 [diseño 2]: LL = -360382.65, convergió = True, 100 evals, 111 s
+rep 217 [diseño 3]: LL = -357055.85, convergió = True, 116 evals, 136 s
+rep 217 lista (383 s)
+[avance] 60/342 réplicas, 6.63 h transcurridas, ~31.16 h restantes (2026-11-22 20:11)
+  Gillingham [completa]: LL = -162711.84, convergió = True, 18 s
+rep 218 [diseño 1]: LL = -376789.75, convergió = True, 176 evals, 173 s
+rep 218 [diseño 2]: LL = -359578.22, convergió = True, 178 evals, 161 s
+rep 218 [diseño 3]: LL = -356404.17, convergió = True, 195 evals, 147 s
+rep 218 lista (489 s)
+  Gillingham [completa]: LL = -162416.21, convergió = True, 18 s
+rep 219 [diseño 1]: LL = -376943.20, convergió = True, 112 evals, 164 s
+rep 219 [diseño 2]: LL = -359656.09, convergió = True, 129 evals, 90 s
+rep 219 [diseño 3]: LL = -356490.32, convergió = True, 168 evals, 223 s
+rep 219 lista (485 s)
+  Gillingham [completa]: LL = -163488.74, convergió = True, 19 s
+rep 220 [diseño 1]: LL = -377389.47, convergió = True, 188 evals, 112 s
+rep 220 [diseño 2]: LL = -360168.62, convergió = True, 281 evals, 136 s
+rep 220 [diseño 3]: LL = -356864.73, convergió = True, 282 evals, 139 s
+rep 220 lista (395 s)
+  Gillingham [completa]: LL = -163036.69, convergió = True, 19 s
+rep 221 [diseño 1]: LL = -377567.30, convergió = True, 320 evals, 155 s
+rep 221 [diseño 2]: LL = -360267.91, convergió = True, 324 evals, 160 s
+rep 221 [diseño 3]: LL = -356950.27, convergió = True, 71 evals, 98 s
+rep 221 lista (420 s)
+  Gillingham [completa]: LL = -163187.51, convergió = True, 14 s
+rep 222 [diseño 1]: LL = -377362.01, convergió = True, 231 evals, 140 s
+rep 222 [diseño 2]: LL = -360300.09, convergió = True, 246 evals, 122 s
+rep 222 [diseño 3]: LL = -357144.24, convergió = True, 247 evals, 131 s
+rep 222 lista (401 s)
+[avance] 65/342 réplicas, 7.24 h transcurridas, ~30.85 h restantes (2026-11-22 20:48)
+  Gillingham [completa]: LL = -163435.84, convergió = True, 15 s
