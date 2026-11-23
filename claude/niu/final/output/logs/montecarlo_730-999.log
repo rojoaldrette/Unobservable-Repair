@@ -1,0 +1,27 @@
+nohup: ignoring input
+dispositivo: cuda:0 | 26 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+equilibrios verdaderos de /home/colaboradorx/Documents/Unobservable-Repair/claude/niu/final/output/modelo_tesis/teoria/R_LB
+verdad lista (20 s)
+  Gillingham [completa]: LL = -162734.77, convergió = True, 104 s
+rep 730 [diseño 1]: LL = -377175.09, convergió = True, 138 evals, 144 s
+rep 730 [diseño 2]: LL = -359788.77, convergió = True, 118 evals, 119 s
+rep 730 [diseño 3]: LL = -356372.96, convergió = True, 267 evals, 137 s
+rep 730 lista (477 s)
+  Gillingham [completa]: LL = -163163.53, convergió = True, 19 s
+rep 731 [diseño 1]: LL = -377631.07, convergió = True, 194 evals, 134 s
+rep 731 [diseño 2]: LL = -360552.82, convergió = True, 177 evals, 115 s
+rep 731 [diseño 3]: LL = -357375.83, convergió = True, 223 evals, 126 s
+rep 731 lista (383 s)
+  Gillingham [completa]: LL = -163108.52, convergió = True, 20 s
+rep 732 [diseño 1]: LL = -377567.18, convergió = True, 124 evals, 124 s
+rep 732 [diseño 2]: LL = -360118.35, convergió = True, 212 evals, 125 s
+rep 732 [diseño 3]: LL = -356976.07, convergió = True, 255 evals, 130 s
+rep 732 lista (387 s)
+  Gillingham [completa]: LL = -161936.64, convergió = True, 18 s
+rep 733 [diseño 1]: LL = -375800.88, convergió = True, 184 evals, 137 s
+rep 733 [diseño 2]: LL = -358481.52, convergió = True, 159 evals, 125 s
+rep 733 [diseño 3]: LL = -355167.73, convergió = True, 215 evals, 133 s
+rep 733 lista (404 s)
+  Gillingham [completa]: LL = -162291.14, convergió = True, 19 s
+rep 734 [diseño 1]: LL = -376696.51, convergió = True, 283 evals, 111 s
+rep 734 [diseño 2]: LL = -359242.90, convergió = True, 240 evals, 160 s
