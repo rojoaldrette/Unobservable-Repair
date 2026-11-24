@@ -1,0 +1,40 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\begin{minipage}{26.783cm}\fontsize{27}{33.5}\selectfont\raggedright 
+Para un estado $x=(j,a,w)$ \,---marca, edad y desgaste del coche---\, un hogar de
+tipo $\tau$ obtiene por usarlo
+\[ u_\tau(x)=u_{0,\tau j}+u_{1,\tau j}\,a+u_w\,w , \]
+y si con la decisión $d$ se queda con el coche $h=(i,b,y)$, su utilidad del año es
+\[ U_\tau(d)=u_\tau(h)-\mu_\tau\Big[\text{gastos}-\text{ingresos}\Big]. \]
+El valor de cada decisión suma el futuro: si el coche se avería pasa a la edad
+terminal $\bar a$; si sobrevive, envejece y su desgaste cambia,
+\[ v(x;d)=U_\tau(d)+\beta\Big[\,s(h)\,EV(i,\bar a)
+   +\big(1-s(h)\big)\!\int\! f(w'\mid h,r)\,EV(i,b{+}1,w')\,dw'\Big]. \]
+La ecuación de Bellman elige la mejor decisión, con choques $\epsilon$ de valor
+extremo:
+\[ V(x,\epsilon)=\max_{d\in C(x)}\Big\{v(x;d)+\epsilon(d)\Big\},\qquad
+   EV(x)=\mathbb{E}_\epsilon\Big[V(x,\epsilon)\Big]. \]
+\end{minipage}
+\end{document}

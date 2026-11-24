@@ -1,0 +1,55 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+\fontsize{20}{24.0}\selectfont
+\begin{tikzpicture}[
+  n/.style={draw=navy!45, fill=pale, rounded corners=4pt, align=center,
+            inner sep=4pt, minimum height=1.55cm, text width=#1},
+  n/.default=3.95cm,
+  oc/.style={draw=orange, fill=cream, text=orange, line width=1.4pt,
+             font=\bfseries},
+  e/.style={draw=muted, line width=1.1pt}]
+\node[n=11.5cm, fill=navy, draw=navy, text=white, font=\bfseries] (root) at (0,0)
+     {Hogar con coche $x=(j,a,w)$};
+\node[n=4.6cm] (des) at (-8.9,-2.7) {Deshacerse};
+\node[n=4.6cm] (man) at (0,-2.7) {Mantener};
+\node[n=4.6cm] (int) at (8.9,-2.7) {Intercambiar};
+\node[n] (v) at (-11.05,-5.4) {Vender\\[-2pt] $D=0$};
+\node[n] (c) at (-6.75,-5.4) {Chatarrizar\\[-2pt] $D=1$};
+\node[n,oc] (r1) at (-2.15,-5.4) {Reparar\\[-2pt] $r=1$};
+\node[n,oc] (r0) at (2.15,-5.4) {No reparar\\[-2pt] $r=0$};
+\node[n=8.3cm] (vc) at (8.9,-5.4) {Vende o chatarriza el suyo\\[-2pt]
+     y compra $h=(i,b,y)$};
+\node[n,oc] (r1b) at (6.75,-8.3) {Reparar\\[-2pt] $r=1$};
+\node[n,oc] (r0b) at (11.05,-8.3) {No reparar\\[-2pt] $r=0$};
+\foreach \p/\h in {root/des,root/man,root/int,des/v,des/c,man/r1,man/r0,
+                   int/vc,vc/r1b,vc/r0b}
+  \draw[e] (\p.south) -- ++(0,-0.4) -| (\h.north);
+\node[align=left, text width=13cm, anchor=west] at (-13.1,-8.3)
+  {\textcolor{orange}{\textbf{En naranja:}} lo que el econometrista no
+   observa. Los coches nuevos y los de la última edad no se reparan.};
+\end{tikzpicture}
+
+\end{document}

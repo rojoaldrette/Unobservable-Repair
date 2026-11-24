@@ -1,0 +1,36 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+\begin{minipage}{26.783cm}\fontsize{27}{33.5}\selectfont\raggedright 
+Si el coche sobrevive, su desgaste evoluciona como
+\[ w_{t+1}=m\big(j,\,\no{r_t},\,w_t\big)+\eta_{t+1},\qquad
+   \eta\sim N\big(0,\sigma_\eta^2\big), \]
+donde $\no{r_t}\in\{0,1\}$ es la decisión de reparar, que cuesta $R_{ja}$.
+
+\textbf{Probabilidad de avería:} $\;s(j,a,w)$, que crece con el desgaste. Al reparar,
+el hogar baja el desgaste de su coche y, con él, \textbf{cambia su probabilidad de
+avería} y su precio de reventa.
+\end{minipage}
+\end{document}

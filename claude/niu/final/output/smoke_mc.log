@@ -1,0 +1,75 @@
+dispositivo: cpu:0 | 26 parámetros libres | diseños (1, 2, 3) | Gillingham: True
+resolviendo los equilibrios verdaderos
+  régimen 1 (zeta = +0.00)
+    Newton 0: max|F| = 2.93e+01  (2.8 s)
+    Newton 1: max|F| = 1.79e+01  (4.0 s)
+    Newton 2: max|F| = 8.46e+00  (4.1 s)
+    Newton 3: max|F| = 4.19e+00  (4.2 s)
+    Newton 4: max|F| = 1.24e+00  (4.2 s)
+    Newton 5: max|F| = 7.73e-02  (4.3 s)
+    Newton 6: max|F| = 6.98e-04  (4.3 s)
+    Newton 7: max|F| = 2.69e-08  (4.4 s)
+    Newton 8: max|F| = 1.56e-13  (4.4 s)
+  régimen 0 (zeta = -0.30)
+    Newton 0: max|F| = 1.87e+00  (0.1 s)
+    Newton 1: max|F| = 1.69e-01  (0.1 s)
+    Newton 2: max|F| = 1.92e-03  (0.2 s)
+    Newton 3: max|F| = 2.54e-07  (0.2 s)
+    Newton 4: max|F| = 1.17e-13  (0.3 s)
+  régimen 2 (zeta = +0.30)
+    Newton 0: max|F| = 1.85e+00  (0.1 s)
+    Newton 1: max|F| = 1.81e-01  (0.1 s)
+    Newton 2: max|F| = 2.16e-03  (0.2 s)
+    Newton 3: max|F| = 3.98e-07  (0.7 s)
+    Newton 4: max|F| = 1.39e-13  (0.8 s)
+verdad lista (16 s)
+  rep 0 [diseño 1] arranque 0
+    L-BFGS   10: LL/N = -2.32852910, |g|max = 1.6e-02, evals = 12, refact = 18, 16 s
+    L-BFGS   20: LL/N = -2.32836625, |g|max = 3.2e-03, evals = 23, refact = 18, 17 s
+  L-BFGS: LL/N = -2.32836625, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 17.3 s
+    BHHH   0: LL/N = -2.32836625, g'B^-1g/N = 9.8e-04
+  Gillingham [completa]: LL = -14661.29, convergió = False, 38 s
+    BHHH   1: LL/N = -2.32825463, g'B^-1g/N = 6.1e-04
+    BHHH   2: LL/N = -2.32815139, g'B^-1g/N = 2.9e-04
+  rep 0 [diseño 1] arranque 1
+    L-BFGS   10: LL/N = -2.33304257, |g|max = 8.0e-02, evals = 15, refact = 12, 4 s
+    L-BFGS   20: LL/N = -2.32947505, |g|max = 2.4e-02, evals = 26, refact = 12, 4 s
+  L-BFGS: LL/N = -2.32947505, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 4.4 s
+    BHHH   0: LL/N = -2.32947505, g'B^-1g/N = 3.6e-03
+    BHHH   1: LL/N = -2.32880655, g'B^-1g/N = 1.7e-03
+    BHHH   2: LL/N = -2.32845274, g'B^-1g/N = 1.2e-03
+rep 0 [diseño 1]: LL = -27937.64, convergió = False, 36 evals, 50 s
+  rep 0 [diseño 2] arranque 0
+    L-BFGS   10: LL/N = -2.24571253, |g|max = 1.9e-02, evals = 12, refact = 16, 14 s
+    L-BFGS   20: LL/N = -2.24555216, |g|max = 3.6e-03, evals = 23, refact = 16, 15 s
+  L-BFGS: LL/N = -2.24555216, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 15.0 s
+    BHHH   0: LL/N = -2.24555216, g'B^-1g/N = 1.1e-03
+    BHHH   1: LL/N = -2.24542724, g'B^-1g/N = 4.9e-04
+    BHHH   2: LL/N = -2.24534229, g'B^-1g/N = 2.1e-03
+  rep 0 [diseño 2] arranque 1
+    L-BFGS   10: LL/N = -2.24850175, |g|max = 6.5e-02, evals = 13, refact = 3, 2 s
+    L-BFGS   20: LL/N = -2.24666306, |g|max = 2.2e-02, evals = 23, refact = 3, 2 s
+  L-BFGS: LL/N = -2.24666306, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 2.5 s
+    BHHH   0: LL/N = -2.24666306, g'B^-1g/N = 4.2e-03
+    BHHH   1: LL/N = -2.24633154, g'B^-1g/N = 2.3e-03
+    BHHH   2: LL/N = -2.24554747, g'B^-1g/N = 2.6e-03
+rep 0 [diseño 2]: LL = -26943.60, convergió = False, 33 evals, 33 s
+  rep 0 [diseño 3] arranque 0
+    L-BFGS   10: LL/N = -2.24072130, |g|max = 1.8e-02, evals = 12, refact = 15, 11 s
+    L-BFGS   20: LL/N = -2.24054148, |g|max = 9.3e-03, evals = 23, refact = 15, 12 s
+  L-BFGS: LL/N = -2.24054148, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 12.3 s
+    BHHH   0: LL/N = -2.24054148, g'B^-1g/N = 8.2e-04
+    BHHH   1: LL/N = -2.24035074, g'B^-1g/N = 8.8e-04
+    BHHH   2: LL/N = -2.24026291, g'B^-1g/N = 6.2e-04
+  rep 0 [diseño 3] arranque 1
+    L-BFGS   10: LL/N = -2.24385793, |g|max = 8.6e-02, evals = 13, refact = 3, 2 s
+    L-BFGS   20: LL/N = -2.24227277, |g|max = 1.1e-02, evals = 23, refact = 3, 3 s
+  L-BFGS: LL/N = -2.24227277, it = 20, STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT, 2.8 s
+    BHHH   0: LL/N = -2.24227277, g'B^-1g/N = 4.1e-03
+    BHHH   1: LL/N = -2.24166755, g'B^-1g/N = 3.0e-03
+    BHHH   2: LL/N = -2.24066834, g'B^-1g/N = 1.2e-03
+rep 0 [diseño 3]: LL = -26881.23, convergió = False, 30 evals, 22 s
+  inferencia de r (verdad): 4413 obs. reparables, tasa real 0.1165, media prior 0.1094, post_d2 0.1115, post_d3 0.1114
+rep 0 lista (165 s)
+[avance] 1/1 réplicas, 0.05 h transcurridas, ~0.00 h restantes (2026-11-19 01:24)
+listo: C:\Users\rorya\Desktop\COLMEX\TESIS\Tesis\tesis_final_1\claude\niu\final\output\modelo_tesis\montecarlo\smoke

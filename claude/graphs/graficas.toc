@@ -1,0 +1,38 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Cómo está organizada la carpeta y cómo regenerar todo}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Para pasarlas a la tesis}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Fuentes de datos y muestra}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Archivos que se leen}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Qué filas se usan}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Notación}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Tablas 1 y 2: parámetros y sus sesgos}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Qué parámetros van en cada tabla}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Cálculos}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Lectura}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Figura 3: estimados centrados en el valor verdadero}{7}{section.4}%
+\contentsline {paragraph}{Datos.}{8}{section*.5}%
+\contentsline {paragraph}{Cálculo.}{8}{section*.6}%
+\contentsline {paragraph}{Lectura.}{8}{section*.7}%
+\contentsline {section}{\numberline {5}Figura 4: precios estimados y verdaderos}{8}{section.5}%
+\contentsline {paragraph}{Datos.}{9}{section*.9}%
+\contentsline {paragraph}{Cómo se generó \texttt {por\_edad\_mc.csv}.}{9}{section*.10}%
+\contentsline {paragraph}{Cálculo de la figura.}{9}{section*.11}%
+\contentsline {paragraph}{Lectura.}{9}{section*.12}%
+\contentsline {section}{\numberline {6}Figura 5: distribución de la población}{10}{section.6}%
+\contentsline {paragraph}{Datos.}{10}{section*.14}%
+\contentsline {paragraph}{Cálculo.}{10}{section*.15}%
+\contentsline {paragraph}{Lectura.}{10}{section*.16}%
+\contentsline {section}{\numberline {7}Figura 6: probabilidad de reparar por edad y diseño}{11}{section.7}%
+\contentsline {paragraph}{Datos.}{11}{section*.18}%
+\contentsline {paragraph}{Cálculo.}{12}{section*.19}%
+\contentsline {paragraph}{Lectura.}{12}{section*.20}%
+\contentsline {section}{\numberline {8}Figura 7: lo que se observa y lo que no}{12}{section.8}%
+\contentsline {paragraph}{Datos.}{13}{section*.23}%
+\contentsline {paragraph}{Cálculo.}{13}{section*.24}%
+\contentsline {paragraph}{Lectura.}{14}{section*.25}%
+\contentsline {section}{\numberline {9}Figura 8: probabilidad de reparar según el desgaste}{14}{section.9}%
+\contentsline {paragraph}{Datos.}{14}{section*.27}%
+\contentsline {paragraph}{Cálculo.}{15}{section*.28}%
+\contentsline {paragraph}{Efecto de un cambio en el desgaste.}{15}{section*.29}%
+\contentsline {paragraph}{Lectura.}{15}{section*.30}%
+\contentsline {section}{\numberline {10}Decisiones que tomé y dudas para ti}{15}{section.10}%

@@ -1,0 +1,47 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+\definecolor{oscuro}{HTML}{A34A0E}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\newcommand{\nod}[1]{{\color{oscuro}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+\begin{minipage}{26.783cm}\fontsize{27}{33.5}\selectfont\raggedright 
+Para un estado $x=(j,a,w)$ \,---marca, edad y desgaste del coche---\, si con la
+decisión $d$ un hogar de tipo $\tau$ se queda con el coche $h=(i,b,y)$, su utilidad
+del año es
+\[ U_\tau(d)=u_\tau(h)-\mu_\tau\Big[\text{gastos}-\text{ingresos}\Big]. \]
+El valor de cada decisión suma el futuro: si el coche se avería pasa a la edad
+terminal $\bar a$; si sobrevive, envejece y su desgaste cambia,
+\[ \begin{aligned} v(x;d)=U_\tau(d)+\beta\Big[\,&s(h)\,EV(i,\bar a)\\
+   &+\big(1-s(h)\big)\!\int\! f(w'\mid h,r)\,EV(i,b{+}1,w')\,dw'\Big]. \end{aligned} \]
+Con choques $\epsilon(d)$ de valor extremo generalizado (GEV), la ecuación de Bellman
+\[ V(x,\epsilon)=\max_{d\in C(x)}\Big\{v(x;d)+\epsilon(d)\Big\},\qquad
+   EV(x)=\mathbb{E}_\epsilon\Big[V(x,\epsilon)\Big] \]
+da probabilidades de elección $\Pi(d\mid x;P,R)$ en forma cerrada.
+
+\textbf{Equilibrio.} Con esas probabilidades se suman demanda y oferta de cada
+usado; los precios $P$ vacían el mercado y la distribución $q$ es estacionaria:
+\[ \underbrace{D_{jaw}(P)}_{\text{demanda}}=\underbrace{S_{jaw}(P)}_{\text{oferta}}
+   \quad\forall\,(j,a,w),\qquad q=q\,M(P,R). \]
+\end{minipage}
+\end{document}

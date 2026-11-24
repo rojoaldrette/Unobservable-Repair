@@ -1,0 +1,42 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\begin{minipage}{26.783cm}\fontsize{27}{33.5}\selectfont\raggedright 
+Un hogar empieza en $x=(j,a,w)$; al año siguiente vemos qué decidió ($e$) y con qué
+coche quedó ($\delta'$). Su contribución a la verosimilitud suma los caminos que no
+vemos:
+\[ \begin{aligned} \ell(\theta)=\;&s(x)\,\Pi\big(\delta'\mid j,\bar a\big)\,\mathbf{1}[D{=}1]\\
+   &+\big(1-s(x)\big)\sum_{w'}\no{Z(w'\mid x)}\;\Pi\big(e,\delta'\mid j,a{+}1,w'\big). \end{aligned} \]
+La reparación no observada entra como una \textbf{mezcla} de las dos campanas:
+\[ \no{Z(w'\mid x)}=\sum_{r\in\{0,1\}}\Pi\big(r\mid x;\,P_m,R_m\big)\;
+   f\big(w'\mid x,r\big). \]
+Los pesos $\Pi(r\mid x)$ cambian con el precio de reparación $R_m$ de cada mercado;
+las densidades $f$, no.
+
+\textbf{Estimación por punto fijo anidado.} Para cada $\theta$ se resuelven la
+Bellman de cada tipo de hogar y los precios de equilibrio $P_m(\theta)$ de cada
+mercado, y se evalúa $LL(\theta)=\sum\log\ell(\theta)$, como en Rust (1987) y
+Gillingham et al.\ (2022).
+\end{minipage}
+\end{document}

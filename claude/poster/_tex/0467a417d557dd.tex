@@ -1,0 +1,57 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+\definecolor{navy}{HTML}{17243A}
+\definecolor{blue}{HTML}{2A5CAA}
+\definecolor{orange}{HTML}{D2691E}
+\definecolor{cream}{HTML}{FCEFE3}
+\definecolor{pale}{HTML}{EEF2F8}
+\definecolor{text}{HTML}{1E232B}
+\definecolor{muted}{HTML}{5F6873}
+\definecolor{rule}{HTML}{C8D0DA}
+\definecolor{sky}{HTML}{9DB9E3}
+\definecolor{redact}{HTML}{3C4552}
+
+\newcommand{\no}[1]{{\color{orange}#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\begin{document}
+\fontsize{20}{24.0}\selectfont
+\begin{tikzpicture}[
+  n/.style={draw=navy!45, fill=pale, rounded corners=4pt, align=center,
+            text width=3.3cm, inner sep=5pt, minimum height=1.5cm},
+  ob/.style={draw=navy, fill=navy, text=white},
+  oc/.style={draw=orange, fill=cream, text=orange, line width=1.4pt,
+             font=\bfseries},
+  e/.style={-{Stealth[length=9pt]}, draw=muted, line width=1.1pt},
+  lab/.style={font=\fontsize{17}{19}\selectfont, inner sep=2pt, text=text}]
+\node[n, ob] (h) at (0,0) {$x=(j,a,w)$\\[-1pt] se observa};
+\node[n] (acc) at (5.4,3.0) {avería};
+\node[n] (sob) at (5.4,-1.7) {sobrevive};
+\node[n, oc] (r1) at (11.3,0.2) {reparó};
+\node[n, oc] (r0) at (11.3,-3.6) {no reparó};
+\node[n, ob] (w) at (17.2,-1.7) {$(j,a{+}1,w')$\\[-1pt] se observa};
+\node[n, ob, text width=3.6cm] (d) at (22.5,1.2) {decisión $e$ y\\[-1pt]
+      coche $\delta'$};
+\draw[e] (h) -- node[lab, above left]{$s$} (acc);
+\draw[e] (h) -- node[lab, below left]{$1-s$} (sob);
+\draw[e] (sob) -- node[lab, above left]{$\Pi(r{=}1\mid h)$} (r1);
+\draw[e] (sob) -- node[lab, below left]{$\Pi(r{=}0\mid h)$} (r0);
+\draw[e] (r1) -- node[lab, above right]{$f(w'\mid h,1)$} (w);
+\draw[e] (r0) -- node[lab, below right]{$f(w'\mid h,0)$} (w);
+\draw[e] (w) -- node[lab, below right, pos=0.35]{$\Pi(e,\delta'\mid j,a{+}1,w')$} (d);
+\draw[e] (acc) -- node[lab, above, sloped]{$\Pi(\delta'\mid j,\bar a)$} (d);
+\begin{scope}[on background layer]
+  \node[draw=orange, line width=2.4pt, rounded corners=10pt, fill=cream!45,
+        inner xsep=0.45cm, inner ysep=0.5cm, fit=(r1)(r0)] (box) {};
+\end{scope}
+\node[below=2pt of box, text=orange, font=\bfseries] {mezcla $Z(w'\mid h)$};
+\end{tikzpicture}
+
+\end{document}
