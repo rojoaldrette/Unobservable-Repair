@@ -1,0 +1,35 @@
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4.5pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l r rr rr rr}
+\toprule
+ & & \multicolumn{2}{c}{Diseño 1} & \multicolumn{2}{c}{Diseño 2} & \multicolumn{2}{c}{Diseño 3}\\
+\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8}
+Parámetro & Verdad & Media & Sesgo \% & Media & Sesgo \% & Media & Sesgo \%\\
+\midrule
+\multicolumn{8}{l}{\textit{Preferencias}}\\
+$u_w$ & $-$0.200 & $-$0.201 & $-$0.3 & $-$0.201 & $-$0.5 & $-$0.201 & $-$0.6\\
+\addlinespace
+\multicolumn{8}{l}{\textit{Desgaste}}\\
+$\delta_{\text{LB}}$ & 0.075 & 0.075 & 0.0 & 0.075 & $-$0.1 & 0.075 & $-$0.2\\
+$\delta_{\text{HB}}$ & 0.075 & 0.075 & 0.0 & 0.075 & $-$0.1 & 0.075 & $-$0.1\\
+$\kappa$ & 0.250 & 0.250 & 0.0 & 0.250 & $-$0.1 & 0.250 & $-$0.1\\
+$\sigma_\eta$ & 0.150 & 0.150 & 0.0 & 0.150 & 0.0 & 0.150 & 0.0\\
+\addlinespace
+\multicolumn{8}{l}{\textit{Reparación}}\\
+$\sigma_r$ & 0.300 & 0.301 & 0.3 & 0.301 & 0.2 & 0.301 & 0.3\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Parámetros propios del modelo con reparación: estimados del Monte Carlo}
+\label{tab:mc-propios}
+\par\smallskip
+\begin{minipage}{\textwidth}\footnotesize
+\textit{Nota:} Gillingham no tiene estos parámetros. Media de $\hat\theta$ entre réplicas;
+sesgo \% $=100\,(\overline{\hat\theta}-\theta_0)/|\theta_0|$; en negritas, $|\text{sesgo}|\ge5\%$.
+La desviación estándar entre réplicas está en la figura 3 y en \texttt{resumen\_parametros.csv}.
+Réplicas: Diseño 1: 456, Diseño 2: 456, Diseño 3: 457.
+\end{minipage}
+\end{table}
