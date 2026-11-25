@@ -38,7 +38,7 @@ Todo está en \archivo{claude/graphs/}:
 \begin{itemize}
 \item \archivo{hacer_graficas.py}: el único script. Lee los resultados del Monte Carlo, calcula las
   estadísticas, dibuja las figuras, escribe las tablas y compila este documento.
-\item \archivo{figuras/}: las figuras en PDF vectorial (\archivo{fig3_dispersion.pdf}, \archivo{fig4_precios.pdf},
+\item \archivo{figuras/}: las figuras en PDF vectorial (\archivo{fig3a_dispersion_comunes.pdf}, \archivo{fig3b_dispersion_propios.pdf}, \archivo{fig4_precios.pdf},
   \archivo{fig5_poblacion.pdf}, \archivo{fig6_reparar_edad.pdf}, \archivo{fig7a_mezcla_observada.pdf},
   \archivo{fig7b_componentes.pdf}, \archivo{fig8_reparar_desgaste.pdf}). Están dibujadas con 6 pulgadas de
   ancho y letra de 10\,pt con \LaTeX{} (Computer Modern), para que al meterlas en la tesis a todo
@@ -186,11 +186,23 @@ que en los datos depende de $w$ y de la reparación.
 \setcounter{figure}{2}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figuras/fig3_dispersion}
-\caption{Distribución de los estimados alrededor del valor verdadero. El punto es la media entre
-réplicas y la barra $\pm$ una desviación estándar, ambas en \% de $|\theta_0|$; la línea vertical en 0
-es el valor verdadero. Las flechas marcan valores fuera de la escala.}
+\renewcommand{\thefigure}{3a}
+\includegraphics[width=\textwidth]{figuras/fig3a_dispersion_comunes}
+\caption{Parámetros que el modelo comparte con Gillingham: distribución de los estimados alrededor del
+valor verdadero. El punto es la media entre réplicas y la barra $\pm$ una desviación estándar, ambas en
+\% de $|\theta_0|$; la línea vertical en 0 es el valor verdadero. Las flechas marcan valores fuera de la
+escala.}
 \label{fig:dispersion}
+\end{figure}
+
+\addtocounter{figure}{-1}
+\begin{figure}[H]
+\renewcommand{\thefigure}{3b}
+\centering
+\includegraphics[width=\textwidth]{figuras/fig3b_dispersion_propios}
+\caption{Parámetros propios del modelo con reparación (solo los tres diseños). Mismas convenciones que
+la figura~\ref{fig:dispersion}.}
+\label{fig:dispersion-propios}
 \end{figure}
 
 \paragraph{Datos.} Las mismas réplicas y estadísticas que las tablas 1 y 2
@@ -200,8 +212,8 @@ es el valor verdadero. Las flechas marcan valores fuera de la escala.}
 desviación porcentual respecto al verdadero: el punto es el sesgo \%
 $100(\overline{\hat\theta}-\theta_0)/|\theta_0|$ y la barra va de
 $100(\overline{\hat\theta}-\theta_0-\text{DE})/|\theta_0|$ a $100(\overline{\hat\theta}-\theta_0+\text{DE})/|\theta_0|$.
-Así, ``centrado en el valor verdadero'' es la línea en 0. Panel A: los 20 parámetros comunes (cuatro
-estimadores); panel B: los 6 propios (tres diseños). El eje se corta en $\pm50\%$ para que se vean los
+Así, ``centrado en el valor verdadero'' es la línea en 0. Figura 3a: los 20 parámetros comunes (cuatro
+estimadores); figura 3b: los 6 propios (tres diseños), igual que las tablas 1 y 2. El eje se corta en $\pm50\%$ (3a) y $\pm10\%$ (3b) para que se vean los
 diseños; lo que se sale (el punto de $T_s$ de Gillingham, en \Gilltcsell\%, y parte de algunas barras
 de Gillingham) se marca con una flecha en el borde y su valor.
 
@@ -219,7 +231,7 @@ pseudo-verdaderos), no ruido.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figuras/fig4_precios}
-\caption{Precio promedio del coche usado por edad en el régimen base. Banda gris: equilibrio verdadero.
+\caption{Precio promedio del coche usado por edad en el régimen base. Banda guinda clara: equilibrio verdadero.
 Líneas: media entre réplicas del precio de equilibrio en $\hat\theta$; sombreado: percentiles
 2.5--97.5 entre réplicas (diseño 3 y Gillingham).}
 \label{fig:precios}
@@ -250,7 +262,7 @@ Gillingham: \archivo{gillingham/por_edad_mc.py} resuelve el equilibrio de \emph{
 (sin $w$, sin reparación, un solo mercado) en su $\hat\theta$ y guarda $P(j,a)$.
 
 \paragraph{Cálculo de la figura.} Por estimador y $(j,a)$: media de $\bar P(j,a)$ entre réplicas
-(línea) y percentiles 2.5 y 97.5 (sombra). La banda gris gruesa es la verdad; la línea negra delgada
+(línea) y percentiles 2.5 y 97.5 (sombra). La banda guinda clara y gruesa es la verdad; la línea guinda delgada
 dentro de ella marca el valor exacto. Un panel por marca.
 
 \paragraph{Lectura.} Los tres diseños quedan encima de la verdad (el mayor error en la media es de
@@ -290,9 +302,11 @@ son justo lo que determina $q(j,a)$. Su sesgo aparece en los precios (figura 4) 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figuras/fig6_reparar_edad}
-\caption{Probabilidad de reparar por edad, verdadera y en el equilibrio de cada diseño estimado. Filas:
-regímenes de precio de reparación; columnas: marcas. Sombreado: percentiles 2.5--97.5 del diseño 3.
-Nótese que la escala vertical cambia entre paneles.}
+\caption{Probabilidad de reparar por edad, verdadera y en el equilibrio de cada diseño estimado, con los
+tres regímenes de precio en el mismo eje. El color es el régimen (verde: barata; dorado: base; guinda:
+cara); dentro de cada color, el tono y el trazo distinguen el diseño (oscuro y continuo: diseño 1; medio
+y guiones: diseño 2; claro y puntos: diseño 3). La banda ancha y clara es la verdad. Paneles: marcas,
+con escala vertical distinta.}
 \label{fig:reparar-edad}
 \end{figure}
 
@@ -319,7 +333,7 @@ la verdad y en los estimados, así que no afecta la comparación. La figura 8 s�
 \paragraph{Lectura.} Los tres diseños recuperan la curva verdadera en todas las combinaciones. La forma
 (una U invertida en LB y decreciente en HB) viene de los precios de reparación: en LB los coches
 jóvenes tienen una prima en el precio de reparar. Al pasar de reparación barata a cara la probabilidad cae
-en todas las edades: es la variación que da la variable excluida. La banda del diseño 3 es más ancha
+en todas las edades: es la variación que da la variable excluida. La dispersión entre réplicas del diseño 3 (que la figura ya no sombrea, para no tapar los regímenes) es mayor
 en HB con reparación cara, donde casi nadie repara y hay pocas transiciones con las que separar la mezcla.
 
 %======================================================================
@@ -339,9 +353,9 @@ estado $x$ (light brown, edad 8, $w=0$) en los tres regímenes de precio de repa
 \renewcommand{\thefigure}{7b}
 \centering
 \includegraphics[width=\textwidth]{figuras/fig7b_componentes}
-\caption{La misma distribución separada según la decisión de reparar, que el econometrista no ve. Azul:
-coches que se repararon; naranja: los que no; línea negra: la suma, que es la curva de la
-figura~\ref{fig:mezcla}.}
+\caption{La misma distribución separada según la decisión de reparar, que el econometrista no ve. Verde:
+coches que se repararon, $\Pi(1\mid x)f(w'\mid x,1)$; dorado: los que no, $\Pi(0\mid x)f(w'\mid x,0)$;
+línea guinda: la suma, que es la curva de la figura~\ref{fig:mezcla}.}
 \label{fig:componentes}
 \end{figure}
 
@@ -369,7 +383,7 @@ $k_\tau(x)$ la probabilidad de quedarse el coche, $b_\tau(x)$ la de comprar el u
 cambian de coche y $M_\tau=\sum_{x'} q_\tau(x')\Pr_\tau(\text{trade}\mid x')$ la masa que cambia. Con esto:
 \begin{itemize}
 \item Figura~\ref{fig:mezcla}: $Z_m(w'\mid x)=\Pi_m(1\mid x)\,f(w'\mid x,1)+\Pi_m(0\mid x)\,f(w'\mid x,0)$, una curva por régimen.
-\item Figura~\ref{fig:componentes}: un panel por régimen con los dos sumandos por separado (áreas) y su suma (línea negra).
+\item Figura~\ref{fig:componentes}: un panel por régimen con los dos sumandos por separado (áreas) y su suma (línea guinda).
 \end{itemize}
 Las probabilidades que resultan son $\Pi(r{=}1\mid x)=\PiBarata$ (barata), \PiBase{} (base) y
 \PiCara{} (cara). El efecto de reparar no depende del régimen: las densidades $f(w'\mid x,r)$ son las mismas en los tres
@@ -442,8 +456,9 @@ en ningún nivel de desgaste.
   el que observa el motivo de salida (\texttt{gill\_completa}); la versión ``parcial'' del paper ya no se
   corre (no identifica las preferencias con estos datos). La tesis todavía menciona los dos en la tabla
   de estimadores.
-\item \textbf{Columnas de las tablas.} Puse Media y Sesgo \% por estimador para que la tabla 1 (cuatro
-  estimadores) quepa a lo ancho de la página con letra legible. La DE se ve en la figura 3; la DE, el RMSE,
+\item \textbf{Columnas de las tablas.} Por estimador van la Media (con estrellas de significancia de
+  $\overline{\hat\theta}/\text{DE}$ contra cero, normal a dos colas: $^{*}$ 10\%, $^{**}$ 5\%, $^{***}$ 1\%),
+  abajo entre paréntesis la DE entre réplicas en unidades del parámetro, y el Sesgo \%. El RMSE,
   el error estándar mediano y la cobertura están en el CSV. Si quieres alguna en la tabla, se agrega en
   la función \texttt{tabla} del script (para la tabla 1 convendría ponerla en horizontal).
 \item \textbf{Régimen de las figuras 4 y 5.} Uso el régimen base. Los otros dos se ven igual (los diseños

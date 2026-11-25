@@ -91,17 +91,25 @@ ANCHO = 6.0  # pulgadas; en el .tex se incluyen a \textwidth
 ESTS = ["gill_completa", "diseno_1", "diseno_2", "diseno_3"]
 NOMBRE = {"verdad": "Verdadero", "gill_completa": "Gillingham", "diseno_1": "Diseño 1",
           "diseno_2": "Diseño 2", "diseno_3": "Diseño 3"}
-COLOR = {"verdad": "#222222", "gill_completa": "#D2691E", "diseno_1": "#2A5CAA",
-         "diseno_2": "#2E9C8A", "diseno_3": "#8E4FB0"}
+# Paleta de la tesis ["#002F2A","#1E5B4F","#d6af6b","#a5712c","#9B2247","#611232"] y tonos:
+# verdes = diseños, dorado = Gillingham, guinda = verdad.
+COLOR = {"verdad": "#611232", "gill_completa": "#C29548", "diseno_1": "#002F2A",
+         "diseno_2": "#1E5B4F", "diseno_3": "#5E9C8A"}
 MARCA = {"gill_completa": "s", "diseno_1": "o", "diseno_2": "^", "diseno_3": "D"}
-LINEA = {"gill_completa": "-", "diseno_1": (0, (5, 2)), "diseno_2": (0, (2, 1.5)),
-         "diseno_3": "-"}
-BANDA_VERDAD = "#C9D2DE"
-REG = ["Reparación barata ($\\zeta=-0.3$)", "Base ($\\zeta=0$)", "Reparación cara ($\\zeta=0.3$)"]
+LINEA = {"gill_completa": "-", "diseno_1": "-", "diseno_2": (0, (5, 2)),
+         "diseno_3": (0, (1.5, 1.2))}
+BANDA_VERDAD = "#EBD3DB"
+REG = ["Reparación barata", "Reparación base", "Reparación cara"]
 REG_CORTO = ["Reparación barata", "Régimen base", "Reparación cara"]
 REG_MINI = ["Barata", "Base", "Cara"]
-REG_COLOR = ["#2A5CAA", "#555555", "#D2691E"]
+REG_COLOR = ["#1E5B4F", "#a5712c", "#9B2247"]
 REG_LINEA = ["-", (0, (5, 2)), (0, (1.5, 1.5))]
+# Figura 6: una familia de color por régimen; dentro de ella un tono por diseño (oscuro -> claro)
+REG_TONOS = [["#002F2A", "#1E5B4F", "#6FA595"],     # barata: verdes
+             ["#6B4718", "#a5712c", "#d6af6b"],     # base: dorados
+             ["#611232", "#9B2247", "#CF7F98"]]     # cara: guindas
+REG_BANDA = ["#D2E4DE", "#F3E6CC", "#F1D8E0"]
+GRIS_DISENO = {"diseno_1": "#333333", "diseno_2": "#777777", "diseno_3": "#AAAAAA"}
 MARCAS_COCHE = ["Light brown", "Heavy brown"]
 
 # Parámetros: etiqueta LaTeX y descripción (notación de tesis.tex, tabla tab:parametros)
@@ -197,12 +205,19 @@ def num(x, d=3):
     return s.replace("-", "$-$") if x < 0 else s
 
 
+def estrellas(media, de):
+    """Estrellas de z = media/DE contra cero (dos colas): * 10%, ** 5%, *** 1%."""
+    z = float(abs(media) / de) if de > 0 else np.inf
+    k = sum(int(z >= c) for c in (1.645, 1.960, 2.576))
+    return rf"$^{{{'*' * int(k)}}}$" if k else ""
+
+
 def tabla(stats, params, ests, archivo, titulo, etiq, nota):
     S = stats.set_index(["estimador", "parametro"])
     ncol = 2 + 2 * len(ests)
     cab1 = " & ".join([r"\multicolumn{2}{c}{" + NOMBRE[e] + "}" for e in ests])
     cmid = " ".join([rf"\cmidrule(lr){{{3 + 2 * k}-{4 + 2 * k}}}" for k in range(len(ests))])
-    cab2 = " & ".join(["Media & Sesgo \%"] * len(ests))
+    cab2 = " & ".join([r"Media & Sesgo \%"] * len(ests))
     filas, grupo = [], None
     for prm in params:
         if GRUPO[prm] != grupo:
@@ -212,15 +227,17 @@ def tabla(stats, params, ests, archivo, titulo, etiq, nota):
             filas.append(rf"\multicolumn{{{ncol}}}{{l}}{{\textit{{{grupo}}}}}\\")
         lab, _ = etiqueta(prm)
         v = S.loc[(ests[0], prm), "verdad"]
-        celdas = [lab, num(v, 3)]
+        celdas, celdas_de = [lab, num(v, 3)], ["", ""]
         for e in ests:
             r = S.loc[(e, prm)]
             sp = r.sesgo_pct
             sp_txt = num(sp, 1)
             if abs(sp) >= 5:
                 sp_txt = r"\textbf{" + sp_txt + "}"
-            celdas += [num(r.media, 3), sp_txt]
+            celdas += [num(r.media, 3) + estrellas(r.media, r.de), sp_txt]
+            celdas_de += ["(" + num(r.de, 3) + ")", ""]
         filas.append(" & ".join(celdas) + r"\\")
+        filas.append(" & ".join(celdas_de) + r"\\[1pt]")
     reps = ", ".join(f"{NOMBRE[e]}: {int(S.loc[(e, params[0]), 'n'])}" for e in ests)
     tex = rf"""\begin{{table}}[htbp]
 \centering
@@ -242,8 +259,10 @@ Parámetro & Verdad & {cab2}\\
 \par\smallskip
 \begin{{minipage}}{{\textwidth}}\footnotesize
 \textit{{Nota:}} {nota} Media de $\hat\theta$ entre réplicas;
-sesgo \% $=100\,(\overline{{\hat\theta}}-\theta_0)/|\theta_0|$; en negritas, $|\text{{sesgo}}|\ge5\%$.
-La desviación estándar entre réplicas está en la figura 3 y en \texttt{{resumen\_parametros.csv}}.
+entre paréntesis, su desviación estándar entre réplicas (en unidades del parámetro).
+Significancia de $\overline{{\hat\theta}}/\text{{DE}}$ contra cero (normal, dos colas):
+$^{{*}}p<0.10$, $^{{**}}p<0.05$, $^{{***}}p<0.01$.
+Sesgo \% $=100\,(\overline{{\hat\theta}}-\theta_0)/|\theta_0|$; en negritas, $|\text{{sesgo}}|\ge5\%$.
 Réplicas: {reps}.
 \end{{minipage}}
 \end{{table}}
@@ -254,15 +273,13 @@ Réplicas: {reps}.
 # ---------------------------------------------------------------- figura 3
 def fig_dispersion(stats):
     S = stats.set_index(["estimador", "parametro"])
-    LIM = 50.0
-    paneles = [("A. Parámetros que comparte con Gillingham", COMUNES, ESTS),
-               ("B. Parámetros propios del modelo con reparación", PROPIOS, ESTS[1:])]
-    alturas = [len(COMUNES), len(PROPIOS)]
-    H = 0.215 * sum(alturas) + 1.15
-    fig, axs = plt.subplots(2, 1, figsize=(ANCHO, H), sharex=True,
-                            gridspec_kw=dict(height_ratios=alturas, hspace=0.16))
-    fig.subplots_adjust(top=1 - 0.5 / H, bottom=0.55 / H)
-    for ax, (tit, params, ests) in zip(axs, paneles):
+    # una figura por grupo de parámetros (como las tablas 1 y 2); eje en ±LIM %
+    figuras = [("fig3a_dispersion_comunes.pdf", COMUNES, ESTS, 50.0),
+               ("fig3b_dispersion_propios.pdf", PROPIOS, ESTS[1:], 10.0)]
+    for archivo, params, ests, LIM in figuras:
+        H = 0.24 * len(params) + 1.0 + (0.3 if len(params) < 10 else 0)
+        fig, ax = plt.subplots(figsize=(ANCHO, H))
+        fig.subplots_adjust(top=1 - 0.45 / H, bottom=0.55 / H)
         n = len(ests)
         off = np.linspace(-0.27, 0.27, n) if n > 1 else [0]
         for i, prm in enumerate(params):
@@ -284,22 +301,21 @@ def fig_dispersion(stats):
                     xb = np.sign(m) * LIM
                     ax.plot(xb, yy, ">" if m > 0 else "<", color=COLOR[e], ms=5, zorder=4,
                             clip_on=False)
-                    ax.text(xb - np.sign(m) * 2.5, yy + 0.22, f"${m:.0f}\\%$", color="#333333",
+                    ax.text(xb - np.sign(m) * 0.05 * LIM, yy + 0.22, f"${m:.0f}\\%$", color="#333333",
                             fontsize=7.5, va="bottom", ha="left" if m < 0 else "right")
-        ax.axvline(0, color="#222222", lw=1.0, zorder=2)
+        ax.axvline(0, color=COLOR["verdad"], lw=1.0, zorder=2)
         ax.set_yticks(range(len(params)))
         ax.set_yticklabels([etiqueta(p)[0] for p in params[::-1]])
         ax.set_ylim(-0.6, len(params) - 0.4)
         ax.set_xlim(-LIM, LIM)
         ax.grid(axis="y", visible=False)
         ax.tick_params(axis="y", length=0)
-        ax.set_title(tit, loc="left", fontsize=10)
-    axs[-1].set_xlabel(r"Desviación respecto al valor verdadero, $100\,(\hat\theta-\theta_0)/|\theta_0|$ (\%)")
-    h = [Line2D([], [], color=COLOR[e], marker=MARCA[e], lw=1.6, ms=5, mec="white",
-                label=NOMBRE[e]) for e in ESTS]
-    fig.legend(handles=h, loc="upper center", ncol=4, bbox_to_anchor=(0.55, 1.0))
-    fig.savefig(FIG / "fig3_dispersion.pdf")
-    plt.close(fig)
+        ax.set_xlabel(r"Desviación respecto al valor verdadero, $100\,(\hat\theta-\theta_0)/|\theta_0|$ (\%)")
+        h = [Line2D([], [], color=COLOR[e], marker=MARCA[e], lw=1.6, ms=5, mec="white",
+                    label=NOMBRE[e]) for e in ests]
+        fig.legend(handles=h, loc="upper center", ncol=len(ests), bbox_to_anchor=(0.55, 1.0))
+        fig.savefig(FIG / archivo)
+        plt.close(fig)
 
 
 # ---------------------------------------------------------------- figuras 4 a 6
@@ -355,6 +371,36 @@ def fig_por_edad(pe, ge, col, gcol, archivo, ylabel, regimenes=(1,), ymin=None, 
     plt.close(fig)
 
 
+def fig_reparar_regimenes(pe, archivo="fig6_reparar_edad.pdf", amax=23):
+    """Figura 6: Pr(reparar | j, a), los tres regímenes en el mismo eje (un panel por marca).
+    Color = régimen (familia verde / dorada / guinda); tono y trazo = diseño; banda = verdad."""
+    fig, axs = plt.subplots(1, 2, figsize=(ANCHO, 3.0), sharex=True)
+    for j, ax in enumerate(axs):
+        for t in range(3):
+            d = pe[(pe.regimen == t) & (pe.j == j) & (pe.a <= amax)]
+            v = d[d.estimador == "verdad"].sort_values("a")
+            ax.plot(v.a, v.reparar, color=REG_BANDA[t], lw=6, solid_capstyle="round", zorder=1)
+            for k, e in enumerate(ESTS[1:]):
+                m = d[d.estimador == e].groupby("a").reparar.mean()
+                ax.plot(m.index, m, color=REG_TONOS[t][k], ls=LINEA[e], lw=1.2,
+                        marker=MARCA[e], ms=3, markevery=(k, 3), mec="white", mew=0.4,
+                        zorder=3)
+        ax.set_ylim(bottom=0)
+        ax.set_title(MARCAS_COCHE[j], loc="left", fontsize=9.5)
+        ax.set_xlabel("Edad del coche, $a$")
+    axs[0].set_ylabel(r"$\Pr(\text{reparar}\mid j,a)$")
+    # leyenda en dos renglones: régimen (color) y diseño (tono/trazo, en grises)
+    h_reg = [Line2D([], [], color=REG_TONOS[t][1], lw=5, label=REG[t]) for t in range(3)]
+    h_dis = [Line2D([], [], color="#BBBBBB", lw=6, label=NOMBRE["verdad"])]
+    h_dis += [Line2D([], [], color=GRIS_DISENO[e], ls=LINEA[e], marker=MARCA[e], ms=4, lw=1.2,
+                     label=NOMBRE[e]) for e in ESTS[1:]]
+    fig.tight_layout(rect=(0, 0, 1, 0.80))
+    fig.legend(handles=h_reg, loc="upper center", ncol=3, bbox_to_anchor=(0.5, 1.0))
+    fig.legend(handles=h_dis, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 0.92))
+    fig.savefig(FIG / archivo)
+    plt.close(fig)
+
+
 # ---------------------------------------------------------------- figuras 7 y 8 (modelo)
 def objetos_verdaderos():
     from params import Config, theta, regime_theta
@@ -374,7 +420,7 @@ def objetos_verdaderos():
             keep = split_states(o["keep"], cfg)[0]
             m = q @ o["trade"]
             hold = qa * keep + m * o["buy"][:n_act].reshape(J, A - 1, W)   # tenencias usadas
-            tipos.append(dict(f=f, hold=hold, rep=o["repair"], F=o["F"], s=o["s"]))
+            tipos.append(dict(f=f, hold=hold, q=qa, rep=o["repair"], F=o["F"], s=o["s"]))
         reg.append(tipos)
     return cfg, reg
 
@@ -399,36 +445,39 @@ def fig_mezcla(cfg, reg, j=0, d=8, w=0.0):
     xlo, xhi = w - 0.75, w + 0.6
     sel = (g >= xlo) & (g <= xhi)
     # (a) mezclas observadas
-    fig, ax = plt.subplots(figsize=(ANCHO, 2.7))
+    fig, ax = plt.subplots(figsize=(ANCHO, 2.9))
     for t, p in enumerate(pis):
         z = p * f1 + (1 - p) * f0
-        ax.plot(g[sel], z[sel], color=REG_COLOR[t], ls=REG_LINEA[t], lw=1.6,
-                label=f"{REG[t]}: $\\Pi(r{{=}}1\\mid x)={p:.2f}$")
+        ax.plot(g[sel], z[sel], color=REG_COLOR[t], ls=REG_LINEA[t], lw=1.6, label=REG[t])
     ax.axvline(w, color="#999999", lw=0.8, ls=":")
     ax.set_xlabel("Desgaste el año siguiente, $w'$")
     ax.set_ylabel("Densidad")
-    ax.legend(loc="upper left", fontsize=8.5)
+    ax.set_ylim(bottom=0)
+    fig.tight_layout(rect=(0, 0, 1, 0.88))       # la leyenda va arriba, fuera de los ejes
+    fig.legend(loc="upper center", ncol=3, bbox_to_anchor=(0.5, 1.0))
     fig.savefig(FIG / "fig7a_mezcla_observada.pdf")
     plt.close(fig)
     # (b) componentes reales
-    fig, axs = plt.subplots(1, 3, figsize=(ANCHO, 2.35), sharey=True)
+    C_REP, C_NOREP, C_MEZ = "#1E5B4F", "#d6af6b", "#611232"
+    fig, axs = plt.subplots(1, 3, figsize=(ANCHO, 2.6), sharey=True)
     for t, (ax, p) in enumerate(zip(axs, pis)):
         c1, c0 = p * f1, (1 - p) * f0
-        ax.fill_between(g[sel], c1[sel], color="#2A5CAA", alpha=0.35, lw=0, step=None)
-        ax.fill_between(g[sel], c0[sel], color="#D2691E", alpha=0.35, lw=0)
-        ax.plot(g[sel], c1[sel], color="#2A5CAA", lw=1.1)
-        ax.plot(g[sel], c0[sel], color="#D2691E", lw=1.1, ls=(0, (4, 1.5)))
-        ax.plot(g[sel], (c0 + c1)[sel], color="#222222", lw=1.0)
-        ax.set_title(f"{REG_MINI[t]}:$\\Pi(r{{=}}1\\mid x)={p:.2f}$", fontsize=9)
+        ax.fill_between(g[sel], c1[sel], color=C_REP, alpha=0.35, lw=0)
+        ax.fill_between(g[sel], c0[sel], color=C_NOREP, alpha=0.45, lw=0)
+        ax.plot(g[sel], c1[sel], color=C_REP, lw=1.1)
+        ax.plot(g[sel], c0[sel], color="#a5712c", lw=1.1, ls=(0, (4, 1.5)))
+        ax.plot(g[sel], (c0 + c1)[sel], color=C_MEZ, lw=1.1)
+        ax.set_title(REG_MINI[t], loc="left", fontsize=9.5)
         ax.set_xlabel("$w'$")
         ax.axvline(w, color="#999999", lw=0.8, ls=":")
+    tope = max(float(((1 - p) * f0 + p * f1)[sel].max()) for p in pis)
+    axs[0].set_ylim(0, 1.06 * tope)
     axs[0].set_ylabel("Densidad")
-    hnd = [Line2D([], [], color="#2A5CAA", lw=4, alpha=0.5, label=r"Reparó: $\Pi(1\mid x)\,f(w'\mid x,1)$"),
-           Line2D([], [], color="#D2691E", lw=4, alpha=0.5, label=r"No reparó: $\Pi(0\mid x)\,f(w'\mid x,0)$"),
-           Line2D([], [], color="#222222", lw=1.0, label="Mezcla observada")]
-    fig.legend(handles=hnd, loc="upper center", ncol=3, fontsize=8.5,
-               bbox_to_anchor=(0.5, 1.0 + 0.3 / 2.35))
-    fig.tight_layout()
+    hnd = [Line2D([], [], color=C_REP, lw=5, alpha=0.6, label="Reparó"),
+           Line2D([], [], color=C_NOREP, lw=5, alpha=0.8, label="No reparó"),
+           Line2D([], [], color=C_MEZ, lw=1.1, label="Mezcla observada")]
+    fig.tight_layout(rect=(0, 0, 1, 0.86))
+    fig.legend(handles=hnd, loc="upper center", ncol=3, bbox_to_anchor=(0.5, 1.0))
     fig.savefig(FIG / "fig7b_componentes.pdf")
     plt.close(fig)
     return pis, g[k]
@@ -464,9 +513,8 @@ def fig_rep_w(cfg, reg, d_fijo=8):
     axs[0].set_ylabel(r"$\Pr(\text{reparar}\mid w)$")
     axs[0].set_ylim(0, None)
     hnd, lab = axs[0].get_legend_handles_labels()
-    fig.legend(hnd, lab, loc="upper center", ncol=3, fontsize=8.5,
-               bbox_to_anchor=(0.5, 1.0 + 0.25 / 2.7))
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
+    fig.legend(hnd, lab, loc="upper center", ncol=3, bbox_to_anchor=(0.5, 1.0))
     fig.savefig(FIG / "fig8_reparar_desgaste.pdf")
     plt.close(fig)
     return pend
@@ -512,9 +560,7 @@ def main():
                  "Precio del usado (miles DKK)")
     fig_por_edad(pe, ge, "q", "q", "fig5_poblacion.pdf",
                  "Masa de hogares con el coche, $q(j,a)$", ymin=0)
-    fig_por_edad(pe, ge, "reparar", None, "fig6_reparar_edad.pdf",
-                 r"$\Pr(\text{reparar}\mid j,a)$", regimenes=(0, 1, 2), ymin=0,
-                 amax=23, ancho_banda=("diseno_3",))
+    fig_reparar_regimenes(pe)
 
     # errores de precio y q (para el texto)
     v = pe[(pe.estimador == "verdad") & (pe.regimen == 1)].set_index(["j", "a"])

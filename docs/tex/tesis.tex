@@ -802,42 +802,71 @@ Los tres diseños de nuestro modelo y el modelo de \textcite{Gillingham2022} se 
 
 \subsection{Estimación de parámetros estructurales por diseño}
 
-Los parámetros que compartimos con \textcite{Gillingham2022} se lograron estimar con un sesgo menor al 1\% en los diseños del 1 al 3. El diseño 3, al tener menos información observada, tiene desviación estándar más grande.
+Los parámetros que compartimos con \textcite{Gillingham2022} se lograron estimar con un sesgo menor al 1\% en los diseños del 1 al 3. El diseño 3, al tener menos información observada, tiene desviación estándar más grande. Mientras que el estimador de Gillingham logra recuperar únicamente el parámetro de correlación de deshechar $\sigma_D$ sin sesgo, pero a una alta desviación estándar. Los demás parámetros cuentan con sesgo y varianza considerable. 
 
+Los parámetros del efecto riqueza muestran una desviación negativa de alrededor del 40\%, es decir, el estimador de \textcite{Gillingham2022} calcula que los hogares tienen menor sensibilidad a los cambios de riqueza, esto se explica porque su modelo no puede explicar las diferencias entre los mercados con regimenes distintos de precios de reparación $R$, por lo que el error absorbe la mayoría del choque, encogiendo los parámetros hacia cero.
+
+La utilidad inicial de los coches están subestimadas, mientras que la desutilidad por edad está sobreestimada. Al no tener \textcite{Gillingham2022} el desgaste, la desutilidad traida por $u_w$ se le carga a la edad.
+
+En tanto a los costos de transacción, como muchos hogares conservan sus coches porque pueden repararlos y estas decisiones son distintas para cada régimen $m$, los costos de transacción absorben esta heterogeneidad en forma de fricciones. Por este motivo, presenta una gran desviación estándar, pues intentan ajustarse fuertemente hacia estas desviaciones.
+
+
+\input{tablas/tab_comunes}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figuras/fig3a_dispersion_comunes}
+\caption{}
+\label{fig:dispersion_comun}
+\end{figure}
+
+En tanto a los parámetros propios del modelo, el sesgo naturalmente aumenta en el diseño 3; sin embargo, el de mayor sesgo, el parámetro de desutilidad del desgaste $u_w$, tiene un sesgo de -0.6\% (figura\ref{tab:mc-propios}). Todos los parámetros se recuperan sin sesgo hasta un 1\% de confianza.
+
+\input{tablas/tab_propios}
 
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=\textwidth]{figuras/fig3b_dispersion_propios.pdf}
+\caption{}
+\label{fig:dispersion_propio}
+\end{figure}
+
+
+
+Los precios son resultados endógenos de ámbos modelos. Los modelos con reparación recuperan los precios verdaderos; sin embargo, los precios estimados de \textcite{Gillingham2022} subestiman los precios. Esto se debe a que la reparación mantiene alto el valor de los automóbiles en general, vemos en los coches HB que el precio se mantiene un poco a partir de la edad 15, dinámica que podemos observar en el mundo real con coches de larga vida util porque son fáciles de reparar (HB tiene costo de reparación fijo). Los parámetros que estima Gillingham parecen cargarle todo a la edad, lo que atribuye a que los precios que se racionalizan busquen ajustarse en este respecto. Sumado a esto, los modelos que siguen en el mercado tienen un desgaste muy bajo y sus dueños se esmeran por seguir reparándolo. 
+
+Con cada régimen observamos distintas dinámicas. Cuando la reparación es barata, más coches sobreviven en edad mediana al igual que valen más; sin embargo, en edades altas el patrón se invierte, pues con reparación cara hay menos coches viejos, lo que disminuye la oferta y aumenta su precio.
+
+\begin{figure}[H]
+\centering
 \includegraphics[width=\textwidth]{figuras/fig4_precios}
-\caption{Distribución estacionaria de coches por marca y edad en el régimen base: masa de hogares que
-empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:precios}.}
+\caption{}
 \label{fig:precios}
 \end{figure}
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figuras/fig3_dispersion}
+\includegraphics[width=\textwidth]{figuras/fig5_poblacion}
 \caption{Distribución estacionaria de coches por marca y edad en el régimen base: masa de hogares que
-empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:precios}.}
-\label{fig:dispersion}
+empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:poblacion}.}
+\label{fig:poblacion}
 \end{figure}
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figuras/fig6_reparar_edad}
-\caption{Distribución estacionaria de coches por marca y edad en el régimen base: masa de hogares que
-empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:precios}.}
-\label{fig:reparar}
+\caption{}
+\label{fig:reparar_edad}
 \end{figure}
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figuras/fig7a_mezcla_observada}
-\caption{Distribución estacionaria de coches por marca y edad en el régimen base: masa de hogares que
-empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:precios}.}
+\caption{}
 \label{fig:mezcla}
 \end{figure}
 
@@ -845,11 +874,19 @@ empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figuras/fig5_poblacion}
-\caption{Distribución estacionaria de coches por marca y edad en el régimen base: masa de hogares que
-empieza el año con un coche $(j,a)$. Mismas convenciones que la figura~\ref{fig:precios}.}
-\label{fig:poblacion}
+\includegraphics[width=\textwidth]{figuras/fig7b_componentes}
+\caption{}
+\label{fig:componentes}
 \end{figure}
+
+
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{figuras/fig8_reparar_desgaste}
+% \caption{}
+% \label{fig:rep_desgaste}
+% \end{figure}
+
 
 
 \subsection{Estimación de reparación no observada}

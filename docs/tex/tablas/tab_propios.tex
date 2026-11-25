@@ -10,16 +10,22 @@
 Parámetro & Verdad & Media & Sesgo \% & Media & Sesgo \% & Media & Sesgo \%\\
 \midrule
 \multicolumn{8}{l}{\textit{Preferencias}}\\
-$u_w$ & $-$0.200 & $-$0.201 & $-$0.3 & $-$0.201 & $-$0.5 & $-$0.201 & $-$0.6\\
+$u_w$ & $-$0.200 & $-$0.201$^{***}$ & $-$0.3 & $-$0.201$^{***}$ & $-$0.5 & $-$0.201$^{***}$ & $-$0.6\\
+ &  & (0.007) &  & (0.009) &  & (0.010) & \\[1pt]
 \addlinespace
 \multicolumn{8}{l}{\textit{Desgaste}}\\
-$\delta_{\text{LB}}$ & 0.075 & 0.075 & 0.0 & 0.075 & $-$0.1 & 0.075 & $-$0.2\\
-$\delta_{\text{HB}}$ & 0.075 & 0.075 & 0.0 & 0.075 & $-$0.1 & 0.075 & $-$0.1\\
-$\kappa$ & 0.250 & 0.250 & 0.0 & 0.250 & $-$0.1 & 0.250 & $-$0.1\\
-$\sigma_\eta$ & 0.150 & 0.150 & 0.0 & 0.150 & 0.0 & 0.150 & 0.0\\
+$\delta_{\text{LB}}$ & 0.075 & 0.075$^{***}$ & 0.0 & 0.075$^{***}$ & $-$0.1 & 0.075$^{***}$ & $-$0.2\\
+ &  & (0.001) &  & (0.001) &  & (0.001) & \\[1pt]
+$\delta_{\text{HB}}$ & 0.075 & 0.075$^{***}$ & 0.0 & 0.075$^{***}$ & $-$0.1 & 0.075$^{***}$ & $-$0.1\\
+ &  & (0.001) &  & (0.001) &  & (0.001) & \\[1pt]
+$\kappa$ & 0.250 & 0.250$^{***}$ & 0.0 & 0.250$^{***}$ & $-$0.1 & 0.250$^{***}$ & $-$0.1\\
+ &  & (0.001) &  & (0.002) &  & (0.002) & \\[1pt]
+$\sigma_\eta$ & 0.150 & 0.150$^{***}$ & 0.0 & 0.150$^{***}$ & 0.0 & 0.150$^{***}$ & 0.0\\
+ &  & (0.000) &  & (0.001) &  & (0.001) & \\[1pt]
 \addlinespace
 \multicolumn{8}{l}{\textit{Reparación}}\\
-$\sigma_r$ & 0.300 & 0.301 & 0.3 & 0.301 & 0.2 & 0.301 & 0.3\\
+$\sigma_r$ & 0.300 & 0.301$^{***}$ & 0.3 & 0.301$^{***}$ & 0.2 & 0.301$^{***}$ & 0.3\\
+ &  & (0.009) &  & (0.011) &  & (0.012) & \\[1pt]
 \bottomrule
 \end{tabular}
 \end{adjustbox}
@@ -27,9 +33,11 @@ $\sigma_r$ & 0.300 & 0.301 & 0.3 & 0.301 & 0.2 & 0.301 & 0.3\\
 \label{tab:mc-propios}
 \par\smallskip
 \begin{minipage}{\textwidth}\footnotesize
-\textit{Nota:} Gillingham no tiene estos parámetros. Media de $\hat\theta$ entre réplicas;
-sesgo \% $=100\,(\overline{\hat\theta}-\theta_0)/|\theta_0|$; en negritas, $|\text{sesgo}|\ge5\%$.
-La desviación estándar entre réplicas está en la figura 3 y en \texttt{resumen\_parametros.csv}.
-Réplicas: Diseño 1: 456, Diseño 2: 456, Diseño 3: 457.
+\textit{Nota:} El modelo de Gillingham no tiene estos parámetros. Media de $\hat\theta$ entre réplicas;
+entre paréntesis, su desviación estándar entre réplicas (en unidades del parámetro).
+Significancia de $\overline{\hat\theta}/\text{DE}$ contra cero (normal, dos colas):
+$^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$.
+Sesgo \% $=100\,(\overline{\hat\theta}-\theta_0)/|\theta_0|$; en negritas, $|\text{sesgo}|\ge5\%$.
+Réplicas: Diseño 1: 456, Diseño 2: 456, Diseño 3: 457. En la sección de preferencias, las unidades son utils.
 \end{minipage}
 \end{table}

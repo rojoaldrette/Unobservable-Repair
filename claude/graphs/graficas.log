@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.28)  22 NOV 2026 23:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.28)  24 NOV 2026 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -507,55 +507,65 @@ LaTeX Info: Redefining \% on input line 1.
 
 {c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2026/
 texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3]
-(./tablas/tab_comunes.tex) (./tablas/tab_propios.tex) [4] [5]
-<figuras/fig3_dispersion.pdf, id=154, 373.52927pt x 478.24329pt>
-File: figuras/fig3_dispersion.pdf Graphic file (type pdf)
-<use figuras/fig3_dispersion.pdf>
-Package pdftex.def Info: figuras/fig3_dispersion.pdf  used on input line 189.
-(pdftex.def)             Requested size: 345.0pt x 441.74783pt.
- [6] [7 <./figuras/fig3_dispersion.pdf>]
-<figuras/fig4_precios.pdf, id=238, 419.8766pt x 225.30173pt>
+(./tablas/tab_comunes.tex) (./tablas/tab_propios.tex) [4] [5] [6]
+<figuras/fig3a_dispersion_comunes.pdf, id=157, 373.52927pt x 410.30946pt>
+File: figuras/fig3a_dispersion_comunes.pdf Graphic file (type pdf)
+<use figuras/fig3a_dispersion_comunes.pdf>
+Package pdftex.def Info: figuras/fig3a_dispersion_comunes.pdf  used on input li
+ne 190.
+(pdftex.def)             Requested size: 345.0pt x 378.99814pt.
+ [7]
+<figuras/fig3b_dispersion_propios.pdf, id=164, 366.71048pt x 189.16327pt>
+File: figuras/fig3b_dispersion_propios.pdf Graphic file (type pdf)
+<use figuras/fig3b_dispersion_propios.pdf>
+Package pdftex.def Info: figuras/fig3b_dispersion_propios.pdf  used on input li
+ne 202.
+(pdftex.def)             Requested size: 345.0pt x 177.97221pt.
+ [8 <./figuras/fig3a_dispersion_comunes.pdf>]
+<figuras/fig4_precios.pdf, id=244, 419.8766pt x 225.30173pt>
 File: figuras/fig4_precios.pdf Graphic file (type pdf)
 <use figuras/fig4_precios.pdf>
-Package pdftex.def Info: figuras/fig4_precios.pdf  used on input line 221.
+Package pdftex.def Info: figuras/fig4_precios.pdf  used on input line 233.
 (pdftex.def)             Requested size: 345.0pt x 185.12334pt.
- [8 <./figuras/fig4_precios.pdf>]
+ [9 <./figuras/fig3b_dispersion_propios.pdf>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 232.
-<figuras/fig5_poblacion.pdf, id=268, 419.91928pt x 225.30173pt>
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 244.
+ [10 <./figuras/fig4_precios.pdf>]
+<figuras/fig5_poblacion.pdf, id=316, 419.91928pt x 225.30173pt>
 File: figuras/fig5_poblacion.pdf Graphic file (type pdf)
 <use figuras/fig5_poblacion.pdf>
-Package pdftex.def Info: figuras/fig5_poblacion.pdf  used on input line 267.
+Package pdftex.def Info: figuras/fig5_poblacion.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 185.10957pt.
- [9]
-<figuras/fig6_reparar_edad.pdf, id=279, 420.90018pt x 507.15474pt>
+ [11 <./figuras/fig5_poblacion.pdf>]
+<figuras/fig6_reparar_edad.pdf, id=355, 416.2752pt x 205.78883pt>
 File: figuras/fig6_reparar_edad.pdf Graphic file (type pdf)
 <use figuras/fig6_reparar_edad.pdf>
-Package pdftex.def Info: figuras/fig6_reparar_edad.pdf  used on input line 292.
+Package pdftex.def Info: figuras/fig6_reparar_edad.pdf  used on input line 304.
 
-(pdftex.def)             Requested size: 345.0pt x 415.72255pt.
- [10 <./figuras/fig5_poblacion.pdf>] [11 <./figuras/fig6_reparar_edad.pdf>]
-<figuras/fig7a_mezcla_observada.pdf, id=362, 372.0835pt x 183.03664pt>
+(pdftex.def)             Requested size: 345.0pt x 170.56288pt.
+
+[12 <./figuras/fig6_reparar_edad.pdf>]
+<figuras/fig7a_mezcla_observada.pdf, id=404, 416.2752pt x 198.56183pt>
 File: figuras/fig7a_mezcla_observada.pdf Graphic file (type pdf)
 <use figuras/fig7a_mezcla_observada.pdf>
 Package pdftex.def Info: figuras/fig7a_mezcla_observada.pdf  used on input line
- 331.
-(pdftex.def)             Requested size: 345.0pt x 169.72237pt.
-<figuras/fig7b_componentes.pdf, id=363, 418.25685pt x 180.74527pt>
+ 345.
+(pdftex.def)             Requested size: 345.0pt x 164.57297pt.
+<figuras/fig7b_componentes.pdf, id=405, 416.2752pt x 176.88083pt>
 File: figuras/fig7b_componentes.pdf Graphic file (type pdf)
 <use figuras/fig7b_componentes.pdf>
-Package pdftex.def Info: figuras/fig7b_componentes.pdf  used on input line 341.
+Package pdftex.def Info: figuras/fig7b_componentes.pdf  used on input line 355.
 
-(pdftex.def)             Requested size: 345.0pt x 149.0891pt.
- [12 <./figuras/fig7a_mezcla_observada.pdf>] [13 <./figuras/fig7b_componentes.p
+(pdftex.def)             Requested size: 345.0pt x 146.60321pt.
+ [13 <./figuras/fig7a_mezcla_observada.pdf>] [14 <./figuras/fig7b_componentes.p
 df>]
-<figuras/fig8_reparar_desgaste.pdf, id=467, 416.2752pt x 202.42625pt>
+<figuras/fig8_reparar_desgaste.pdf, id=474, 416.2752pt x 184.10782pt>
 File: figuras/fig8_reparar_desgaste.pdf Graphic file (type pdf)
 <use figuras/fig8_reparar_desgaste.pdf>
 Package pdftex.def Info: figuras/fig8_reparar_desgaste.pdf  used on input line 
-393.
-(pdftex.def)             Requested size: 345.0pt x 167.7759pt.
- [14 <./figuras/fig8_reparar_desgaste.pdf>] [15] [16] (./graficas.aux
+407.
+(pdftex.def)             Requested size: 345.0pt x 152.59312pt.
+ [15 <./figuras/fig8_reparar_desgaste.pdf>] [16] [17] (./graficas.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -567,13 +577,13 @@ Package rerunfilecheck Info: File `graficas.out' has not changed.
 (rerunfilecheck)             Checksum: 7CDF2551DFD7B18F4C2AE39C1940EA41;3808.
  ) 
 Here is how much of TeX's memory you used:
- 14718 strings out of 467099
- 236669 string characters out of 5412502
- 699479 words of memory out of 5000000
- 43758 multiletter control sequences out of 15000+600000
- 650771 words of font info for 98 fonts, out of 8000000 for 9000
+ 14728 strings out of 467099
+ 237177 string characters out of 5412502
+ 730925 words of memory out of 5000000
+ 43767 multiletter control sequences out of 15000+600000
+ 650458 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,13n,117p,422b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,13n,117p,599b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2026
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2026/texmf-di
@@ -603,14 +613,13 @@ ublic/cm-super/sfrm1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-s
 uper/sfrm1728.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti0
 800.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb><c
 :/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c:/texlive/
-2026/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb><c:/texlive/2026/texmf
--dist/fonts/type1/public/cm-super/sftt0900.pfb><c:/texlive/2026/texmf-dist/font
-s/type1/public/cm-super/sftt1000.pfb><c:/texlive/2026/texmf-dist/fonts/type1/pu
-blic/cm-super/sftt1200.pfb>
-Output written on graficas.pdf (16 pages, 1542739 bytes).
+2026/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb><c:/texlive/2026/texmf
+-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2026/texmf-dist/font
+s/type1/public/cm-super/sftt1200.pfb>
+Output written on graficas.pdf (17 pages, 1293349 bytes).
 PDF statistics:
- 683 PDF objects out of 1000 (max. 8388607)
- 542 compressed objects within 6 object streams
- 74 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 679 PDF objects out of 1000 (max. 8388607)
+ 537 compressed objects within 6 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
 
